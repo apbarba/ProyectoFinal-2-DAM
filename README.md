@@ -1,2 +1,2 @@
-# Backend_Galeria_de_arte
-Este repositorio tratará sobre el backend de la aplicación sobre  la galería de arte
+# Backend_Imagineria_Web
+Este repositorio tratará sobre el backend de la aplicación sobre  la web de imagineria
