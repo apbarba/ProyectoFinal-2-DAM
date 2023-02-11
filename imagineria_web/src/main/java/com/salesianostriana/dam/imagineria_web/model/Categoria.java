@@ -1,7 +1,6 @@
 package com.salesianostriana.dam.imagineria_web.model;
 
 import lombok.*;
-import org.w3c.dom.stylesheets.LinkStyle;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -27,5 +26,5 @@ public class Categoria {
 
     @ToString.Exclude
     @OneToMany(mappedBy = "categoria", fetch = FetchType.EAGER)
-    private List<Imagenes> imagenes = new ArrayList<>();
+    private List<Obras> imagenes = new ArrayList<>();
 }

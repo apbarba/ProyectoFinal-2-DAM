@@ -1,15 +1,18 @@
 package com.salesianostriana.dam.imagineria_web.repository;
 
 import com.salesianostriana.dam.imagineria_web.model.Imaginero;
+import com.salesianostriana.dam.imagineria_web.model.Obras;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface ImagineroRepository extends JpaRepository<Imaginero, Long> {
+public interface ObrasRepository extends JpaRepository<Obras, Long> {
 
-    Imaginero findByUsername(String username);
+    List<Obras> findByImaginero(Imaginero imaginero);
 
-    List<Imaginero> findByName(String name);
+    List<Obras> findByTitulo(String titulo);
+
+    List<Obras> findByEstado(String estado);
 }

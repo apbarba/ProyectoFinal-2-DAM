@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Data
 @Entity
@@ -13,16 +14,15 @@ import javax.persistence.Id;
 @Builder
 @Setter
 @Getter
-public class Cliente {
+public class Favoritos {
 
     @Id
     @GeneratedValue
     private Long id;
 
-    private String nameUser;
+    @ManyToOne
+    private Cliente cliente;
 
-    private String password;
-
-    private String emailUser;
-
+    @ManyToOne
+    private Obras obras;
 }

@@ -1,10 +1,10 @@
 package com.salesianostriana.dam.imagineria_web.model;
 
+import com.salesianostriana.dam.imagineria_web.model.dto.ObrasDTO.GetDtoObras;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -26,4 +26,7 @@ public class Imaginero {
     private String email;
 
     private String username;
+
+    @OneToMany
+    private List<Obras> obras;
 }

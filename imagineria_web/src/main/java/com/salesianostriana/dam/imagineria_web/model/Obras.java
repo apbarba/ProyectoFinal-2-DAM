@@ -2,10 +2,9 @@ package com.salesianostriana.dam.imagineria_web.model;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -14,7 +13,7 @@ import javax.persistence.ManyToMany;
 @Builder
 @Setter
 @Getter
-public class Imagenes {
+public class Obras {
 
     @Id
     @GeneratedValue
@@ -28,8 +27,18 @@ public class Imagenes {
 
     private String estado; //Finalizado, en proceso, comprado o en venta
 
+    private Date fecha;
+
+    private String estilo;
+
     @ManyToMany
     private Categoria categoria;
+
+    @ManyToOne
+    private Imaginero imaginero;
+
+    @OneToMany
+    private List<Comentarios> comentarios;
 
     public void eliminarCategoria(Categoria c) {
 
