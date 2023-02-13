@@ -20,6 +20,8 @@ public class GetDtoImaginero {
 
     private String password;
 
+    private String verifyPassword;
+
     private List<GetDtoObras> obras;
 
 

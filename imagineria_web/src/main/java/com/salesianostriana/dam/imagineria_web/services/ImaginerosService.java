@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -15,12 +16,12 @@ public class ImaginerosService {
 
     private final ImagineroRepository imagineroRepository;
 
-    public Imaginero findByUsername(String username){
+    public Optional<Imaginero> findByUsername(String username){
 
         return  imagineroRepository.findByUsername(username);
     }
 
-    public Optional<Imaginero> findById(Long id){
+    public Optional<Imaginero> findById(UUID id){
 
         return imagineroRepository.findById(id);
     }

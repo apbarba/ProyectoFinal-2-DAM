@@ -5,11 +5,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Repository
-public interface ImagineroRepository extends JpaRepository<Imaginero, Long> {
+public interface ImagineroRepository extends JpaRepository<Imaginero, UUID> {
 
-    Imaginero findByUsername(String username);
+    Optional<Imaginero> findByUsername(String username);
 
     List<Imaginero> findByName(String name);
 }
