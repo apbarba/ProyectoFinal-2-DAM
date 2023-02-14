@@ -2,7 +2,7 @@ package com.salesianostriana.dam.imagineria_web.security.jwt.refresh;
 
 import com.salesianostriana.dam.imagineria_web.model.Imaginero;
 import lombok.RequiredArgsConstructor;
-import lombok.Value;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;

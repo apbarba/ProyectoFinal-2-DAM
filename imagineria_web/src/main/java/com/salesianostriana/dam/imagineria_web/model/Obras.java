@@ -37,9 +37,6 @@ public class Obras {
     @ManyToOne
     private Imaginero imaginero;
 
-    @OneToMany
-    private List<Comentarios> comentarios;
-
     public void eliminarCategoria(Categoria c) {
 
         c.getImagenes().remove(this);

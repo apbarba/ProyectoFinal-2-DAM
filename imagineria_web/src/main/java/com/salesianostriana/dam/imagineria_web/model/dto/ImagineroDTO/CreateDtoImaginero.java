@@ -6,9 +6,10 @@ import lombok.*;
 import java.util.List;
 
 @Builder
-@RequiredArgsConstructor
 @Data
-public class GetDtoImaginero {
+@AllArgsConstructor
+@NoArgsConstructor
+public class CreateDtoImaginero {
 
     private Long id;
 
@@ -20,9 +21,9 @@ public class GetDtoImaginero {
 
     private String password;
 
-    private String verifyPassword;
+   // private String verifyPassword;
 
-    private List<GetDtoObras> obras;
+    //private List<GetDtoObras> obras;
 
 
 }
