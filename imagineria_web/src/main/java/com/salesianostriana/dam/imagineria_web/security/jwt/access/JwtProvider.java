@@ -50,7 +50,7 @@ public class JwtProvider {
 
         Imaginero imaginero = (Imaginero) authentication.getPrincipal();
 
-        return generateToken((Authentication) imaginero);
+        return generateToken(imaginero);
     }
 
     public String generateToken(Imaginero imaginero) {

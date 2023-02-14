@@ -27,7 +27,7 @@ public class ImaginerosService {
                 .username(getDtoImaginero.getUsername())
                 .password(passwordEncoder.encode(getDtoImaginero.getPassword()))
                 .email(getDtoImaginero.getEmail())
-                .name(getDtoImaginero.getName())
+                .fullname(getDtoImaginero.getName())
                 .rol(roles)
                 .build();
 
@@ -58,8 +58,7 @@ public class ImaginerosService {
 
         return imagineroRepository.findById(imaginero.getId())
                 .map(im ->{
-                    im.setName(imaginero.getName());
-                    im.setAvatar(imaginero.getAvatar());
+                    im.setFullname(imaginero.getFullname());
 
                     return imagineroRepository.save(im);
 

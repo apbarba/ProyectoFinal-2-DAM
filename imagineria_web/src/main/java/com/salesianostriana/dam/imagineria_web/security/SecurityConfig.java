@@ -59,10 +59,6 @@ public class SecurityConfig {
 
     }
 
-
-
-
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
@@ -77,7 +73,7 @@ public class SecurityConfig {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/note/**").hasRole("USER")
+                .antMatchers("/obras/**").hasRole("USER")
                 .antMatchers("/auth/register/admin").hasRole("ADMIN")
                 .anyRequest().authenticated();
 

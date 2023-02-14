@@ -1,6 +1,7 @@
 package com.salesianostriana.dam.imagineria_web.controller;
 
 import com.salesianostriana.dam.imagineria_web.model.Imaginero;
+import com.salesianostriana.dam.imagineria_web.model.dto.ImagineroDTO.ChangePasswordRequest;
 import com.salesianostriana.dam.imagineria_web.model.dto.ImagineroDTO.CreateDtoImaginero;
 import com.salesianostriana.dam.imagineria_web.model.dto.ImagineroDTO.ImagineroResponse;
 import com.salesianostriana.dam.imagineria_web.model.dto.JwtDto.JwtImagineroResponse;
@@ -17,10 +18,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
+
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -37,7 +43,7 @@ public class ImagineroController {
 
     //SOLAMENTE PARA PROBRAR SI FUNCIONA EL USUARIO
     @PostMapping("/auth/register")
-    public ResponseEntity<ImagineroResponse> createImagineroWithUserRole(@RequestBody CreateDtoImaginero getDtoImaginero){
+    public ResponseEntity<ImagineroResponse> createImagineroWithUserRole(@RequestBody CreateDtoImaginero getDtoImaginero) {
 
         Imaginero imaginero = imaginerosService.createImaginerWithUserRole(getDtoImaginero);
 
@@ -47,7 +53,7 @@ public class ImagineroController {
     }
 
     @PostMapping("/auth/register/admin")
-    public ResponseEntity<ImagineroResponse> createImagineroWithAdminRole(@RequestBody CreateDtoImaginero getDtoImaginero){
+    public ResponseEntity<ImagineroResponse> createImagineroWithAdminRole(@RequestBody CreateDtoImaginero getDtoImaginero) {
 
         Imaginero imaginero = imaginerosService.createImaginerWithUserRole(getDtoImaginero);
 
@@ -57,7 +63,7 @@ public class ImagineroController {
     }
 
     @PostMapping("auth/login")
-    public ResponseEntity<JwtImagineroResponse> login(@RequestBody LoginRequest loginRequest){
+    public ResponseEntity<JwtImagineroResponse> login(@RequestBody LoginRequest loginRequest) {
 
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -83,7 +89,7 @@ public class ImagineroController {
     }
 
     @PostMapping("/refrestoken")
-    public ResponseEntity<?> refreshToken(@RequestBody RefreshTokenRequest refreshTokenRequest){
+    public ResponseEntity<?> refreshToken(@RequestBody RefreshTokenRequest refreshTokenRequest) {
 
         String refreshToken = refreshTokenRequest.getRefreshToken();
 
@@ -107,5 +113,28 @@ public class ImagineroController {
                 }).orElseThrow(() -> new RefreshTokenException("Token no encontrado"));
     }
 
-    //@PutMapping("/user/")
+    @PutMapping("/user/changePassword")
+    public ResponseEntity<ImagineroResponse> changePassword(@RequestBody ChangePasswordRequest changePasswordRequest,
+                                                            @AuthenticationPrincipal Imaginero loggedUser) {
+
+        try {
+            if (imaginerosService.passwordMatch(loggedUser, changePasswordRequest.getOldPassword())) {
+                Optional<Imaginero> modified = imaginerosService.editPassword(
+                        loggedUser.getId(), changePasswordRequest.getNewPassword());
+
+                if (modified.isPresent())
+
+                    return ResponseEntity.ok(ImagineroResponse.fromImaginero(modified.get()));
+
+            } else {
+
+                throw new RuntimeException();
+            }
+        } catch (RuntimeException ex) {
+
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Password Data Error");
+        }
+
+        return null;
+    }
 }

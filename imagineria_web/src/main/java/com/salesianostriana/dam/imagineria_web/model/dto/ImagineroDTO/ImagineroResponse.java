@@ -32,7 +32,7 @@ public class ImagineroResponse {
                 .id(imaginero.getId().toString())
                 .username(imaginero.getUsername())
                 .email(imaginero.getEmail())
-                .name(imaginero.getName())
+                .name(imaginero.getFullname())
                 .createdAt(imaginero.getCreatAt())
                 .build();
     }

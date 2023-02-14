@@ -40,7 +40,7 @@ public class Imaginero implements UserDetails {
     @Column(columnDefinition = "uuid")
     private UUID id;
 
-    private String name;
+    private String fullname;
 
     private String password;
 
@@ -48,7 +48,7 @@ public class Imaginero implements UserDetails {
 
     private String username;
 
-    private String avatar;
+    private String verifyPassword;
 
     @OneToMany
     private List<Obras> obras;
@@ -84,21 +84,21 @@ public class Imaginero implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }
