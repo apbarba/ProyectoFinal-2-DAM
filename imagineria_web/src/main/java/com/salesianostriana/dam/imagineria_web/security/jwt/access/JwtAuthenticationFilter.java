@@ -1,9 +1,8 @@
 package com.salesianostriana.dam.imagineria_web.security.jwt.access;
 
-import com.salesianostriana.dam.imagineria_web.model.Imaginero;
-import com.salesianostriana.dam.imagineria_web.model.dto.ImagineroDTO.ImagineroResponse;
+import com.salesianostriana.dam.imagineria_web.model.User;
 import com.salesianostriana.dam.imagineria_web.security.errorHandling.JwtTokenException;
-import com.salesianostriana.dam.imagineria_web.services.ImaginerosService;
+import com.salesianostriana.dam.imagineria_web.services.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +28,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-    private final ImaginerosService imaginerosService;
+    private final UserService imaginerosService;
     private final JwtProvider jwtProvider;
 
     @Autowired
@@ -48,11 +47,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
                 UUID imagineroId = jwtProvider.getImagineroIdFromJwtToken(token);
 
-                Optional<Imaginero> result = imaginerosService.findById(imagineroId);
+                Optional<User> result = imaginerosService.findById(imagineroId);
 
                 if (result.isPresent()){
 
-                    Imaginero imaginero = result.get();
+                    User imaginero = result.get();
 
                     UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                             imaginero,

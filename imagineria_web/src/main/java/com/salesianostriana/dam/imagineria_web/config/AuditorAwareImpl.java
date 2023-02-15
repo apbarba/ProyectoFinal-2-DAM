@@ -1,14 +1,12 @@
 package com.salesianostriana.dam.imagineria_web.config;
 
-import com.salesianostriana.dam.imagineria_web.model.Imaginero;
-import org.springframework.context.annotation.Bean;
+import com.salesianostriana.dam.imagineria_web.model.User;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import java.awt.*;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -24,8 +22,8 @@ public class AuditorAwareImpl implements AuditorAware<String>{
 
 
         return Optional.ofNullable(authentication)
-                .map(auth -> (Imaginero) auth.getPrincipal())
-                .map(Imaginero::getId)
+                .map(auth -> (User) auth.getPrincipal())
+                .map(User::getId)
                 .map(UUID::toString);
     }
 }

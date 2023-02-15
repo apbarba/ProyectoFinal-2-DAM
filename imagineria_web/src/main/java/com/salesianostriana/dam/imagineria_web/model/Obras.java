@@ -4,7 +4,6 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 @Data
 @Entity
@@ -35,7 +34,7 @@ public class Obras {
     private Categoria categoria;
 
     @ManyToOne
-    private Imaginero imaginero;
+    private User imaginero;
 
     public void eliminarCategoria(Categoria c) {
 

@@ -1,6 +1,6 @@
 package com.salesianostriana.dam.imagineria_web.repository;
 
-import com.salesianostriana.dam.imagineria_web.model.Imaginero;
+import com.salesianostriana.dam.imagineria_web.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -9,9 +9,9 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface ImagineroRepository extends JpaRepository<Imaginero, UUID> {
+public interface UserRepository extends JpaRepository<User, UUID> {
 
-    Optional<Imaginero> findByUsername(String username);
+    Optional<User> findByUsername(String username);
 
-    List<Imaginero> findByName(String name);
+    List<User> findByName(String name);
 }

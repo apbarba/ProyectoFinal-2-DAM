@@ -1,6 +1,6 @@
 package com.salesianostriana.dam.imagineria_web.controller;
 
-import com.salesianostriana.dam.imagineria_web.model.Imaginero;
+import com.salesianostriana.dam.imagineria_web.model.User;
 import com.salesianostriana.dam.imagineria_web.model.Obras;
 import com.salesianostriana.dam.imagineria_web.repository.ObrasRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +21,7 @@ public class ObrasController {
     private final ObrasRepository obrasRepository;
 
     @GetMapping("/")
-    public ResponseEntity<List<Obras>> getAll(@AuthenticationPrincipal Imaginero imaginero){
+    public ResponseEntity<List<Obras>> getAll(@AuthenticationPrincipal User imaginero){
 
         return buildResponseOfAList(
                 obrasRepository.findByImaginero(imaginero));
@@ -31,8 +31,8 @@ public class ObrasController {
 
         if (obras.isEmpty())
 
-            return ResponseEntity.notFound()
-
+            return ResponseEntity
+                    .notFound()
                     .build();
         else
 
@@ -48,7 +48,7 @@ public class ObrasController {
     }
 
     @GetMapping("/author/{author}")
-    public ResponseEntity<List<Obras>> getByImaginero(@PathVariable Imaginero imaginero){
+    public ResponseEntity<List<Obras>> getByImaginero(@PathVariable User imaginero){
 
         return buildResponseOfAList(obrasRepository.findByImaginero(imaginero));
     }

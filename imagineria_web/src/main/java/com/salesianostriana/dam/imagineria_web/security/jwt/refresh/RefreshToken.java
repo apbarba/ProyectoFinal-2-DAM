@@ -1,11 +1,10 @@
 package com.salesianostriana.dam.imagineria_web.security.jwt.refresh;
 
-import com.salesianostriana.dam.imagineria_web.model.Imaginero;
+import com.salesianostriana.dam.imagineria_web.model.User;
 import lombok.*;
 import org.hibernate.annotations.NaturalId;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.time.Instant;
@@ -26,7 +25,7 @@ public class RefreshToken {
     @MapsId
     @OneToOne
     @JoinColumn(name = "user_id", columnDefinition = "uuid")
-    private Imaginero imaginero;
+    private User imaginero;
 
     @NaturalId
     @Column(nullable = false, unique = true)

@@ -1,6 +1,6 @@
 package com.salesianostriana.dam.imagineria_web.security.jwt.access;
 
-import com.salesianostriana.dam.imagineria_web.model.Imaginero;
+import com.salesianostriana.dam.imagineria_web.model.User;
 import com.salesianostriana.dam.imagineria_web.security.errorHandling.JwtTokenException;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
@@ -48,12 +48,12 @@ public class JwtProvider {
 
     public String generateToken(Authentication authentication) {
 
-        Imaginero imaginero = (Imaginero) authentication.getPrincipal();
+        User imaginero = (User) authentication.getPrincipal();
 
         return generateToken(imaginero);
     }
 
-    public String generateToken(Imaginero imaginero) {
+    public String generateToken(User imaginero) {
 
         Date tokenExpirationDateTime =
                 Date.from(

@@ -1,6 +1,6 @@
 package com.salesianostriana.dam.imagineria_web.model;
 
-public enum ImagineroRole {
+public enum UserRole {
 
     ADMIN, USER
 }

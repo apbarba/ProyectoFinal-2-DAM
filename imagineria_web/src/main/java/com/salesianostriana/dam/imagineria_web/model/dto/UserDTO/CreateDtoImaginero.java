@@ -1,9 +1,6 @@
-package com.salesianostriana.dam.imagineria_web.model.dto.ImagineroDTO;
+package com.salesianostriana.dam.imagineria_web.model.dto.UserDTO;
 
-import com.salesianostriana.dam.imagineria_web.model.dto.ObrasDTO.GetDtoObras;
 import lombok.*;
-
-import java.util.List;
 
 @Builder
 @Data

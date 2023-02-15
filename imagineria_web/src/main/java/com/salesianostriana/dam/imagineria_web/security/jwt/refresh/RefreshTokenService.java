@@ -1,6 +1,6 @@
 package com.salesianostriana.dam.imagineria_web.security.jwt.refresh;
 
-import com.salesianostriana.dam.imagineria_web.model.Imaginero;
+import com.salesianostriana.dam.imagineria_web.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -23,12 +23,14 @@ public class RefreshTokenService {
 
         return refreshTokenRepository.findByToken(token);
     }
-        public RefreshToken createRefreshToken(Imaginero imaginero) {
+        public RefreshToken createRefreshToken(User imaginero) {
 
             RefreshToken refreshToken = new RefreshToken();
 
             refreshToken.setImaginero(imaginero);
+
             refreshToken.setToken(UUID.randomUUID().toString());
+
             refreshToken.setExpiryDate(Instant.now().plusSeconds(durationInMinutes));
 
             refreshToken = refreshTokenRepository.save(refreshToken);
@@ -42,7 +44,7 @@ public class RefreshTokenService {
 
             refreshTokenRepository.delete(refreshToken);
 
-            throw new RefreshTokenException("Sesi´n expirada: " + ". Please, login again");
+            throw new RefreshTokenException("Sesión expirada: " + ". Por favor, inicie sesión de nuevo");
 
         }
 
@@ -51,7 +53,7 @@ public class RefreshTokenService {
     }
 
     @Transactional
-    public int deleteByImaginero(Imaginero imaginero){
+    public int deleteByImaginero(User imaginero){
 
         return refreshTokenRepository.deleteByImaginero(imaginero);
     }

@@ -1,8 +1,8 @@
 package com.salesianostriana.dam.imagineria_web.model;
 
-import com.salesianostriana.dam.imagineria_web.model.dto.ObrasDTO.GetDtoObras;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.NaturalId;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -23,7 +23,7 @@ import java.util.UUID;
 @Setter
 @Getter
 @Table(name = "imaginero_entity")
-public class Imaginero implements UserDetails {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(generator = "UUID")
@@ -46,6 +46,7 @@ public class Imaginero implements UserDetails {
 
     private String email;
 
+    @NaturalId
     private String username;
 
     private String verifyPassword;
@@ -66,7 +67,7 @@ public class Imaginero implements UserDetails {
     private boolean enabled = true;
 
     @ElementCollection(fetch = FetchType.EAGER)
-    private Set<ImagineroRole> rol;
+    private Set<UserRole> rol;
 
     @CreatedDate
     private LocalDateTime creatAt;
@@ -100,5 +101,17 @@ public class Imaginero implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    @Override
+    public String getPassword(){
+
+        return password;
+    }
+
+    @Override
+    public String getUsername(){
+
+        return username;
     }
 }

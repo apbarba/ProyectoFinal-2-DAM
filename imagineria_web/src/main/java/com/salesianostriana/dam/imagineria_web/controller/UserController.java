@@ -1,9 +1,9 @@
 package com.salesianostriana.dam.imagineria_web.controller;
 
-import com.salesianostriana.dam.imagineria_web.model.Imaginero;
-import com.salesianostriana.dam.imagineria_web.model.dto.ImagineroDTO.ChangePasswordRequest;
-import com.salesianostriana.dam.imagineria_web.model.dto.ImagineroDTO.CreateDtoImaginero;
-import com.salesianostriana.dam.imagineria_web.model.dto.ImagineroDTO.ImagineroResponse;
+import com.salesianostriana.dam.imagineria_web.model.User;
+import com.salesianostriana.dam.imagineria_web.model.dto.UserDTO.ChangePasswordRequest;
+import com.salesianostriana.dam.imagineria_web.model.dto.UserDTO.CreateDtoImaginero;
+import com.salesianostriana.dam.imagineria_web.model.dto.UserDTO.UserResponse;
 import com.salesianostriana.dam.imagineria_web.model.dto.JwtDto.JwtImagineroResponse;
 import com.salesianostriana.dam.imagineria_web.model.dto.LoginDto.LoginRequest;
 import com.salesianostriana.dam.imagineria_web.security.jwt.access.JwtProvider;
@@ -11,7 +11,7 @@ import com.salesianostriana.dam.imagineria_web.security.jwt.refresh.RefreshToken
 import com.salesianostriana.dam.imagineria_web.security.jwt.refresh.RefreshTokenException;
 import com.salesianostriana.dam.imagineria_web.security.jwt.refresh.RefreshTokenRequest;
 import com.salesianostriana.dam.imagineria_web.security.jwt.refresh.RefreshTokenService;
-import com.salesianostriana.dam.imagineria_web.services.ImaginerosService;
+import com.salesianostriana.dam.imagineria_web.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,9 +30,9 @@ import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
-public class ImagineroController {
+public class UserController {
 
-    private ImaginerosService imaginerosService;
+    private UserService userService;
 
     private final AuthenticationManager authenticationManager;
 
@@ -43,23 +43,23 @@ public class ImagineroController {
 
     //SOLAMENTE PARA PROBRAR SI FUNCIONA EL USUARIO
     @PostMapping("/auth/register")
-    public ResponseEntity<ImagineroResponse> createImagineroWithUserRole(@RequestBody CreateDtoImaginero getDtoImaginero) {
+    public ResponseEntity<UserResponse> createImagineroWithUserRole(@RequestBody CreateDtoImaginero getDtoImaginero) {
 
-        Imaginero imaginero = imaginerosService.createImaginerWithUserRole(getDtoImaginero);
+        User imaginero = userService.createImaginerWithUserRole(getDtoImaginero);
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(ImagineroResponse.fromImaginero(imaginero));
+                .body(UserResponse.fromUser(imaginero));
     }
 
     @PostMapping("/auth/register/admin")
-    public ResponseEntity<ImagineroResponse> createImagineroWithAdminRole(@RequestBody CreateDtoImaginero getDtoImaginero) {
+    public ResponseEntity<UserResponse> createImagineroWithAdminRole(@RequestBody CreateDtoImaginero getDtoImaginero) {
 
-        Imaginero imaginero = imaginerosService.createImaginerWithUserRole(getDtoImaginero);
+        User imaginero = userService.createImaginerWithUserRole(getDtoImaginero);
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(ImagineroResponse.fromImaginero(imaginero));
+                .body(UserResponse.fromUser(imaginero));
     }
 
     @PostMapping("auth/login")
@@ -76,7 +76,7 @@ public class ImagineroController {
 
         String token = jwtProvider.generateToken(authentication);
 
-        Imaginero imaginero = (Imaginero) authentication.getPrincipal();
+        User imaginero = (User) authentication.getPrincipal();
 
         refreshTokenService.deleteByImaginero(imaginero);
 
@@ -114,17 +114,17 @@ public class ImagineroController {
     }
 
     @PutMapping("/user/changePassword")
-    public ResponseEntity<ImagineroResponse> changePassword(@RequestBody ChangePasswordRequest changePasswordRequest,
-                                                            @AuthenticationPrincipal Imaginero loggedUser) {
+    public ResponseEntity<UserResponse> changePassword(@RequestBody ChangePasswordRequest changePasswordRequest,
+                                                       @AuthenticationPrincipal User loggedUser) {
 
         try {
-            if (imaginerosService.passwordMatch(loggedUser, changePasswordRequest.getOldPassword())) {
-                Optional<Imaginero> modified = imaginerosService.editPassword(
+            if (userService.passwordMatch(loggedUser, changePasswordRequest.getOldPassword())) {
+                Optional<User> modified = userService.editPassword(
                         loggedUser.getId(), changePasswordRequest.getNewPassword());
 
                 if (modified.isPresent())
 
-                    return ResponseEntity.ok(ImagineroResponse.fromImaginero(modified.get()));
+                    return ResponseEntity.ok(UserResponse.fromUser(modified.get()));
 
             } else {
 

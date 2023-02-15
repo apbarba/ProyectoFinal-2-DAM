@@ -1,12 +1,12 @@
-package com.salesianostriana.dam.imagineria_web.model.dto.ImagineroDTO;
+package com.salesianostriana.dam.imagineria_web.model.dto.UserDTO;
 
-import com.salesianostriana.dam.imagineria_web.model.Imaginero;
+import com.salesianostriana.dam.imagineria_web.model.User;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ConverteDtoImaginero {
 
-    public CreateDtoImaginero getDtoImaginero(Imaginero imaginero){
+    public CreateDtoImaginero getDtoImaginero(User imaginero){
 
         return CreateDtoImaginero.builder()
                 .name(imaginero.getFullname())
@@ -20,9 +20,9 @@ public class ConverteDtoImaginero {
                 .build();
     }
 
-    public Imaginero createImaginero(CreateDtoImaginero getDtoImaginero){
+    public User createImaginero(CreateDtoImaginero getDtoImaginero){
 
-        return Imaginero.builder()
+        return User.builder()
                 .fullname(getDtoImaginero.getName())
                 .email(getDtoImaginero.getEmail())
                 .password(getDtoImaginero.getPassword())

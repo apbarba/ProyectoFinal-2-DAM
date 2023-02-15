@@ -1,9 +1,9 @@
 package com.salesianostriana.dam.imagineria_web.services;
 
-import com.salesianostriana.dam.imagineria_web.model.Imaginero;
-import com.salesianostriana.dam.imagineria_web.model.ImagineroRole;
-import com.salesianostriana.dam.imagineria_web.model.dto.ImagineroDTO.CreateDtoImaginero;
-import com.salesianostriana.dam.imagineria_web.repository.ImagineroRepository;
+import com.salesianostriana.dam.imagineria_web.model.User;
+import com.salesianostriana.dam.imagineria_web.model.UserRole;
+import com.salesianostriana.dam.imagineria_web.model.dto.UserDTO.CreateDtoImaginero;
+import com.salesianostriana.dam.imagineria_web.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -15,15 +15,15 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class ImaginerosService {
+public class UserService {
 
-    private final ImagineroRepository imagineroRepository;
+    private final UserRepository imagineroRepository;
 
     private final PasswordEncoder passwordEncoder;
 
-    public Imaginero createImaginero(CreateDtoImaginero getDtoImaginero, EnumSet<ImagineroRole> roles){
+    public User createImaginero(CreateDtoImaginero getDtoImaginero, EnumSet<UserRole> roles){
 
-        Imaginero imaginero = Imaginero.builder()
+        User imaginero = User.builder()
                 .username(getDtoImaginero.getUsername())
                 .password(passwordEncoder.encode(getDtoImaginero.getPassword()))
                 .email(getDtoImaginero.getEmail())
@@ -34,27 +34,27 @@ public class ImaginerosService {
         return imagineroRepository.save(imaginero);
     }
 
-    public Imaginero createImaginerWithUserRole(CreateDtoImaginero getDtoImaginero){
+    public User createImaginerWithUserRole(CreateDtoImaginero getDtoImaginero){
 
-        return createImaginero(getDtoImaginero, EnumSet.of(ImagineroRole.USER));
+        return createImaginero(getDtoImaginero, EnumSet.of(UserRole.USER));
     }
 
-    public Imaginero createImaginerWithAdminRole(CreateDtoImaginero getDtoImaginero){
+    public User createImaginerWithAdminRole(CreateDtoImaginero getDtoImaginero){
 
-        return createImaginero(getDtoImaginero, EnumSet.of(ImagineroRole.ADMIN));
+        return createImaginero(getDtoImaginero, EnumSet.of(UserRole.ADMIN));
     }
 
-    public List<Imaginero> findAll(){
+    public List<User> findAll(){
 
         return imagineroRepository.findAll();
     }
 
-    public Optional<Imaginero> findByUsername(String username){
+    public Optional<User> findByUsername(String username){
 
         return  imagineroRepository.findByUsername(username);
     }
 
-    public Optional<Imaginero> edit(Imaginero imaginero){
+    public Optional<User> edit(User imaginero){
 
         return imagineroRepository.findById(imaginero.getId())
                 .map(im ->{
@@ -65,7 +65,7 @@ public class ImaginerosService {
                 }).or(() -> Optional.empty());
     }
 
-    public Optional<Imaginero> editPassword(UUID imagineroId, String newPassword){
+    public Optional<User> editPassword(UUID imagineroId, String newPassword){
 
         return imagineroRepository.findById(imagineroId)
                 .map(im -> {
@@ -77,7 +77,7 @@ public class ImaginerosService {
                 }).or(() -> Optional.empty());
     }
 
-    public Optional<Imaginero> editEmail(Imaginero imaginero){
+    public Optional<User> editEmail(User imaginero){
 
         return imagineroRepository.findById(imaginero.getId())
                 .map(im -> {
@@ -95,27 +95,27 @@ public class ImaginerosService {
             imagineroRepository.deleteById(id);
     }
 
-    public void delete(Imaginero imaginero){
+    public void delete(User imaginero){
 
         deleteById(imaginero.getId());
     }
 
-    public boolean passwordMatch(Imaginero imaginero, String clearPassword){
+    public boolean passwordMatch(User imaginero, String clearPassword){
 
         return passwordEncoder.matches(clearPassword, imaginero.getPassword());
     }
 
-    public Optional<Imaginero> findById(UUID id){
+    public Optional<User> findById(UUID id){
 
         return imagineroRepository.findById(id);
     }
 
-    public List<Imaginero> findByName(String name){
+    public List<User> findByName(String name){
 
         return imagineroRepository.findByName(name);
     }
 
-    public Imaginero save(Imaginero imaginero){
+    public User save(User imaginero){
 
         return imagineroRepository.save(imaginero);
     }

@@ -2,6 +2,8 @@ package com.salesianostriana.dam.imagineria_web.security;
 
 import com.salesianostriana.dam.imagineria_web.security.jwt.access.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -35,11 +37,15 @@ public class SecurityConfig {
 
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
+
         AuthenticationManagerBuilder authenticationManagerBuilder =
+
                 http.getSharedObject(AuthenticationManagerBuilder.class);
 
         AuthenticationManager authenticationManager =
+
                 authenticationManagerBuilder.authenticationProvider(authenticationProvider())
+
                         .build();
 
         return authenticationManager;
@@ -49,10 +55,13 @@ public class SecurityConfig {
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
+
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
 
         authenticationProvider.setUserDetailsService(userDetailsService);
+
         authenticationProvider.setPasswordEncoder(passwordEncoder);
+
         authenticationProvider.setHideUserNotFoundExceptions(false);
 
         return authenticationProvider;
@@ -65,17 +74,17 @@ public class SecurityConfig {
         http
                 .cors(Customizer.withDefaults())
                 .csrf().disable()
-                .exceptionHandling()
-                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
-                .accessDeniedHandler(jwtAccessDeniedHandler)
+                        .exceptionHandling()
+                                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                                .accessDeniedHandler(jwtAccessDeniedHandler)
                 .and()
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                                .sessionManagement()
+                                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .authorizeRequests()
-                .antMatchers("/obras/**").hasRole("USER")
-                .antMatchers("/auth/register/admin").hasRole("ADMIN")
-                .anyRequest().authenticated();
+                                .authorizeRequests()
+                                .antMatchers("/obras/**").hasRole("USER")
+                                .antMatchers("/auth/register/admin").hasRole("ADMIN")
+                                .anyRequest().authenticated();
 
 
 

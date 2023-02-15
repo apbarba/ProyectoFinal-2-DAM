@@ -1,4 +1,4 @@
-package com.salesianostriana.dam.imagineria_web.model.dto.ImagineroDTO;
+package com.salesianostriana.dam.imagineria_web.model.dto.UserDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

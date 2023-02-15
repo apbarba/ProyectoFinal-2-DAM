@@ -1,7 +1,7 @@
-package com.salesianostriana.dam.imagineria_web.model.dto.ImagineroDTO;
+package com.salesianostriana.dam.imagineria_web.model.dto.UserDTO;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.salesianostriana.dam.imagineria_web.model.Imaginero;
+import com.salesianostriana.dam.imagineria_web.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-public class ImagineroResponse {
+public class UserResponse {
 
     protected String id;
 
@@ -21,18 +21,18 @@ public class ImagineroResponse {
 
     protected String email;
 
-    protected String name;
+    protected String fullname;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss")
     protected LocalDateTime createdAt;
 
-    public static ImagineroResponse fromImaginero(Imaginero imaginero){
+    public static UserResponse fromUser(User imaginero){
 
-        return ImagineroResponse.builder()
+        return UserResponse.builder()
                 .id(imaginero.getId().toString())
                 .username(imaginero.getUsername())
                 .email(imaginero.getEmail())
-                .name(imaginero.getFullname())
+                .fullname(imaginero.getFullname())
                 .createdAt(imaginero.getCreatAt())
                 .build();
     }

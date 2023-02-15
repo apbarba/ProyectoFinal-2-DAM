@@ -1,13 +1,13 @@
 
-services:
+#services:
 
-  db:
-    image: 'postgres:14-alpine'
-    container_name: db
-    restart: always
-    environment:
-      - POSTGRES_DB=imagineria_web
-      - POSTGRES_USER=admin
-      - POSTGRES_PASSWORD=1234
-    ports:
-      - "5555:5432"
+ # db:
+  #  image: 'postgres:14-alpine'
+   # container_name: db
+    #restart: always
+    #environment:
+     # - POSTGRES_DB=imagineria_web
+      #- POSTGRES_USER=admin
+      #- POSTGRES_PASSWORD=1234
+    #ports:
+     # - "5555:5432"
