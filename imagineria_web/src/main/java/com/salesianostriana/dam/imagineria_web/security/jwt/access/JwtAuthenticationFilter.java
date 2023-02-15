@@ -28,7 +28,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-    private final UserService imaginerosService;
+    private final UserService userService;
     private final JwtProvider jwtProvider;
 
     @Autowired
@@ -36,53 +36,51 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private HandlerExceptionResolver resolver;
 
 
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
         String token = getJwtTokenFromRequest(request);
 
-        try{
+        try {
+            if (StringUtils.hasText(token) && jwtProvider.validateToken(token)) {
+                UUID userId = jwtProvider.getUserIdFromJwtToken(token);
 
-            if (StringUtils.hasText(token) && jwtProvider.validateToken(token)){
+                Optional<User> result = userService.findById(userId);
 
-                UUID imagineroId = jwtProvider.getImagineroIdFromJwtToken(token);
+                if (result.isPresent()) {
+                    User user = result.get();
 
-                Optional<User> result = imaginerosService.findById(imagineroId);
+                    UsernamePasswordAuthenticationToken authentication =
+                            new UsernamePasswordAuthenticationToken(
+                                    user,
+                                    null,
+                                    user.getAuthorities()
+                            );
 
-                if (result.isPresent()){
+                    authentication.setDetails(new WebAuthenticationDetails(request));
 
-                    User imaginero = result.get();
-
-                    UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-                            imaginero,
-                            null,
-                            imaginero.getAuthorities()
-                    );
-
-                    authenticationToken.setDetails(new WebAuthenticationDetails(request));
-
-                    SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+                    SecurityContextHolder.getContext().setAuthentication(authentication);
                 }
+
             }
 
             filterChain.doFilter(request, response);
-        }catch (JwtTokenException exception){
 
-            log.info("La autorización ha sido errónea por el token: " + exception.getMessage());;
-
-            resolver.resolveException(request, response, null, exception);
+        } catch (JwtTokenException ex) {
+            log.info("Authentication error using token JWT: " + ex.getMessage());
+            resolver.resolveException(request, response, null, ex);
         }
+
+
+
     }
 
-    private String getJwtTokenFromRequest(HttpServletRequest request){
-
+    private String getJwtTokenFromRequest(HttpServletRequest request) {
         String bearerToken = request.getHeader(JwtProvider.TOKEN_HEADER);
-
-        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(JwtProvider.TOKEN_PREFIX)){
-
+        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(JwtProvider.TOKEN_PREFIX)) {
             return bearerToken.substring(JwtProvider.TOKEN_PREFIX.length());
         }
-
         return null;
     }
 }

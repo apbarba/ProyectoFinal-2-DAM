@@ -9,7 +9,7 @@ public class ConverteDtoImaginero {
     public CreateDtoImaginero getDtoImaginero(User imaginero){
 
         return CreateDtoImaginero.builder()
-                .name(imaginero.getFullname())
+                .name(imaginero.getName())
                 .email(imaginero.getEmail())
                 .password(imaginero.getPassword())
                 .username(imaginero.getUsername())
@@ -23,7 +23,7 @@ public class ConverteDtoImaginero {
     public User createImaginero(CreateDtoImaginero getDtoImaginero){
 
         return User.builder()
-                .fullname(getDtoImaginero.getName())
+                .name(getDtoImaginero.getName())
                 .email(getDtoImaginero.getEmail())
                 .password(getDtoImaginero.getPassword())
                 .username(getDtoImaginero.getUsername())

@@ -4,6 +4,7 @@ import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.NaturalId;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,6 +22,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 @Setter
+@EntityListeners(AuditingEntityListener.class)
 @Getter
 @Table(name = "imaginero_entity")
 public class User implements UserDetails {
@@ -40,8 +42,7 @@ public class User implements UserDetails {
     @Column(columnDefinition = "uuid")
     private UUID id;
 
-    private String fullname;
-
+    private String name;
     private String password;
 
     private String email;
@@ -70,7 +71,7 @@ public class User implements UserDetails {
     private Set<UserRole> rol;
 
     @CreatedDate
-    private LocalDateTime creatAt;
+    private LocalDateTime createdAt;
 
     @Builder.Default
     private LocalDateTime lastPasswordChangeAt = LocalDateTime.now();

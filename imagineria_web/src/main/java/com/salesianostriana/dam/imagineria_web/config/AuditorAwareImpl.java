@@ -10,20 +10,17 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import java.util.Optional;
 import java.util.UUID;
 
-@Configuration
-@EnableJpaAuditing(auditorAwareRef = "auditorAware")
-public class AuditorAwareImpl implements AuditorAware<String>{
+public class AuditorAwareImpl implements AuditorAware<String> {
 
     @Override
-    public Optional<String> getCurrentAuditor(){
-
+    public Optional<String> getCurrentAuditor() {
         Authentication authentication =
                 SecurityContextHolder.getContext().getAuthentication();
-
 
         return Optional.ofNullable(authentication)
                 .map(auth -> (User) auth.getPrincipal())
                 .map(User::getId)
                 .map(UUID::toString);
+
     }
 }

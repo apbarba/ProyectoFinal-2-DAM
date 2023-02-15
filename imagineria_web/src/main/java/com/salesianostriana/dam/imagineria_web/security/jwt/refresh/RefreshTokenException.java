@@ -4,7 +4,7 @@ import com.salesianostriana.dam.imagineria_web.security.errorHandling.JwtTokenEx
 
 public class RefreshTokenException extends JwtTokenException {
 
-    public RefreshTokenException(String mensaje){
-        super(mensaje);
+    public RefreshTokenException(String msg) {
+        super(msg);
     }
 }

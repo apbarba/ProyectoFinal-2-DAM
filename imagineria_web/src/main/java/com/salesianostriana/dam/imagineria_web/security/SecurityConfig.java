@@ -37,15 +37,11 @@ public class SecurityConfig {
 
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
-
         AuthenticationManagerBuilder authenticationManagerBuilder =
-
                 http.getSharedObject(AuthenticationManagerBuilder.class);
 
         AuthenticationManager authenticationManager =
-
                 authenticationManagerBuilder.authenticationProvider(authenticationProvider())
-
                         .build();
 
         return authenticationManager;
@@ -55,18 +51,19 @@ public class SecurityConfig {
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
-
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
 
         authenticationProvider.setUserDetailsService(userDetailsService);
-
         authenticationProvider.setPasswordEncoder(passwordEncoder);
-
         authenticationProvider.setHideUserNotFoundExceptions(false);
 
         return authenticationProvider;
 
     }
+
+
+
+
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -74,17 +71,17 @@ public class SecurityConfig {
         http
                 .cors(Customizer.withDefaults())
                 .csrf().disable()
-                        .exceptionHandling()
-                                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
-                                .accessDeniedHandler(jwtAccessDeniedHandler)
+                .exceptionHandling()
+                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                .accessDeniedHandler(jwtAccessDeniedHandler)
                 .and()
-                                .sessionManagement()
-                                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                                .authorizeRequests()
-                                .antMatchers("/obras/**").hasRole("USER")
-                                .antMatchers("/auth/register/admin").hasRole("ADMIN")
-                                .anyRequest().authenticated();
+                .authorizeRequests()
+                .antMatchers("/note/**").hasRole("USER")
+                .antMatchers("/auth/register/admin").hasRole("ADMIN")
+                .anyRequest().authenticated();
 
 
 
@@ -100,4 +97,5 @@ public class SecurityConfig {
     public WebSecurityCustomizer webSecurityCustomizer() {
         return (web -> web.ignoring().antMatchers("/h2-console/**", "/auth/register", "/auth/login", "/refreshtoken"));
     }
+
 }

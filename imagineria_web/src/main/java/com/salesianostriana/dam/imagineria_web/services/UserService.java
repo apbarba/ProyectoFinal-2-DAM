@@ -27,19 +27,19 @@ public class UserService {
                 .username(getDtoImaginero.getUsername())
                 .password(passwordEncoder.encode(getDtoImaginero.getPassword()))
                 .email(getDtoImaginero.getEmail())
-                .fullname(getDtoImaginero.getName())
+                .name(getDtoImaginero.getName())
                 .rol(roles)
                 .build();
 
         return imagineroRepository.save(imaginero);
     }
 
-    public User createImaginerWithUserRole(CreateDtoImaginero getDtoImaginero){
+    public User createImagineroWithUserRole(CreateDtoImaginero getDtoImaginero){
 
         return createImaginero(getDtoImaginero, EnumSet.of(UserRole.USER));
     }
 
-    public User createImaginerWithAdminRole(CreateDtoImaginero getDtoImaginero){
+    public User createImagineroWithAdminRole(CreateDtoImaginero getDtoImaginero){
 
         return createImaginero(getDtoImaginero, EnumSet.of(UserRole.ADMIN));
     }
@@ -58,7 +58,7 @@ public class UserService {
 
         return imagineroRepository.findById(imaginero.getId())
                 .map(im ->{
-                    im.setFullname(imaginero.getFullname());
+                    im.setName(imaginero.getName());
 
                     return imagineroRepository.save(im);
 

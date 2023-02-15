@@ -8,7 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 public class CreateDtoImaginero {
 
-    private Long id;
+
 
     private String username;
 

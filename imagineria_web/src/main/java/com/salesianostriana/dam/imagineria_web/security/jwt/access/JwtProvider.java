@@ -22,18 +22,18 @@ import java.util.UUID;
 public class JwtProvider {
 
     public static final String TOKEN_TYPE = "JWT";
-
-    public static final String TOKEN_HEADER = "Authorizacion";
-
-    public static final String TOKEN_PREFIX = "Bearer";
+    public static final String TOKEN_HEADER = "Authorization";
+    public static final String TOKEN_PREFIX = "Bearer ";
 
     @Value("${jwt.secret}")
     private String jwtSecret;
 
     @Value("${jwt.duration}")
+    //private int jwtLifeInDays;
     private int jwtLifeInMinutes;
 
     private JwtParser jwtParser;
+
     private SecretKey secretKey;
 
     @PostConstruct
@@ -46,19 +46,21 @@ public class JwtProvider {
                 .build();
     }
 
+
     public String generateToken(Authentication authentication) {
 
-        User imaginero = (User) authentication.getPrincipal();
+        User user = (User) authentication.getPrincipal();
 
-        return generateToken(imaginero);
+        return generateToken(user);
+
     }
 
-    public String generateToken(User imaginero) {
-
+    public String generateToken(User user) {
         Date tokenExpirationDateTime =
                 Date.from(
                         LocalDateTime
                                 .now()
+                                //.plusDays(jwtLifeInDays)
                                 .plusMinutes(jwtLifeInMinutes)
                                 .atZone(ZoneId.systemDefault())
                                 .toInstant()
@@ -66,34 +68,35 @@ public class JwtProvider {
 
         return Jwts.builder()
                 .setHeaderParam("typ", TOKEN_TYPE)
-                .setSubject(imaginero.getId().toString())
+                .setSubject(user.getId().toString())
                 .setIssuedAt(new Date())
                 .setExpiration(tokenExpirationDateTime)
                 .signWith(secretKey)
                 .compact();
+
     }
 
-    public UUID getImagineroIdFromJwtToken(String token){
 
+    public UUID getUserIdFromJwtToken(String token) {
         return UUID.fromString(
-                jwtParser.parseClaimsJwt(token).getBody().getSubject()
+                jwtParser.parseClaimsJws(token).getBody().getSubject()
         );
-
     }
 
-    public boolean validateToken(String token){
 
-        try{
-            jwtParser.parseClaimsJwt(token);
+    public boolean validateToken(String token) {
 
+        try {
+            jwtParser.parseClaimsJws(token);
             return true;
-        }catch (SignatureException | MalformedJwtException | ExpiredJwtException | UnsupportedJwtException | IllegalArgumentException ex){
-
-            log.info("Hay un error con el token: " + ex.getMessage());
-
+        } catch (SignatureException | MalformedJwtException | ExpiredJwtException | UnsupportedJwtException | IllegalArgumentException ex) {
+            log.info("Error con el token: " + ex.getMessage());
             throw new JwtTokenException(ex.getMessage());
         }
+        //return false;
+
     }
+
 
 
 }

@@ -19,42 +19,41 @@ public class RefreshTokenService {
     @Value("${jwt.refresh.duration}")
     private int durationInMinutes;
 
-    public Optional<RefreshToken> findByToken(String token) {
 
+    public Optional<RefreshToken> findByToken(String token) {
         return refreshTokenRepository.findByToken(token);
     }
-        public RefreshToken createRefreshToken(User imaginero) {
 
-            RefreshToken refreshToken = new RefreshToken();
+    public RefreshToken createRefreshToken(User user) {
+        RefreshToken refreshToken = new RefreshToken();
 
-            refreshToken.setImaginero(imaginero);
+        refreshToken.setUser(user);
+        refreshToken.setToken(UUID.randomUUID().toString());
+        refreshToken.setExpiryDate(Instant.now().plusSeconds(durationInMinutes * 60));
 
-            refreshToken.setToken(UUID.randomUUID().toString());
+        refreshToken = refreshTokenRepository.save(refreshToken);
 
-            refreshToken.setExpiryDate(Instant.now().plusSeconds(durationInMinutes));
 
-            refreshToken = refreshTokenRepository.save(refreshToken);
+        return refreshToken;
+    }
 
-            return refreshToken;
-        }
 
-        public RefreshToken verify(RefreshToken refreshToken){
+    public RefreshToken verify(RefreshToken refreshToken) {
 
-        if (refreshToken.getExpiryDate().compareTo(Instant.now()) < 0){
-
+        if (refreshToken.getExpiryDate().compareTo(Instant.now()) < 0) {
+            // Token de refresco caducado. Lo eliminamos y lanzamos excepción
             refreshTokenRepository.delete(refreshToken);
-
-            throw new RefreshTokenException("Sesión expirada: " + ". Por favor, inicie sesión de nuevo");
-
+            throw new RefreshTokenException("Expired refresh token: " + refreshToken.getToken() + ". Please, login again");
         }
 
         return refreshToken;
 
+
     }
 
     @Transactional
-    public int deleteByImaginero(User imaginero){
-
-        return refreshTokenRepository.deleteByImaginero(imaginero);
+    public int deleteByUser(User user) {
+        return refreshTokenRepository.deleteByUser(user);
     }
+
 }

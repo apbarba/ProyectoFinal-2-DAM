@@ -32,7 +32,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserController {
 
-    private UserService userService;
+    private final  UserService userService;
 
     private final AuthenticationManager authenticationManager;
 
@@ -45,7 +45,7 @@ public class UserController {
     @PostMapping("/auth/register")
     public ResponseEntity<UserResponse> createImagineroWithUserRole(@RequestBody CreateDtoImaginero getDtoImaginero) {
 
-        User imaginero = userService.createImaginerWithUserRole(getDtoImaginero);
+        User imaginero = userService.createImagineroWithUserRole(getDtoImaginero);
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
@@ -55,7 +55,7 @@ public class UserController {
     @PostMapping("/auth/register/admin")
     public ResponseEntity<UserResponse> createImagineroWithAdminRole(@RequestBody CreateDtoImaginero getDtoImaginero) {
 
-        User imaginero = userService.createImaginerWithUserRole(getDtoImaginero);
+        User imaginero = userService.createImagineroWithUserRole(getDtoImaginero);
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
@@ -78,7 +78,7 @@ public class UserController {
 
         User imaginero = (User) authentication.getPrincipal();
 
-        refreshTokenService.deleteByImaginero(imaginero);
+        refreshTokenService.deleteByUser(imaginero);
 
         RefreshToken refreshToken = refreshTokenService.createRefreshToken(imaginero);
 
@@ -95,12 +95,12 @@ public class UserController {
 
         return refreshTokenService.findByToken(refreshToken)
                 .map(refreshTokenService::verify)
-                .map(RefreshToken::getImaginero)
+                .map(RefreshToken::getUser)
                 .map(imaginero -> {
 
                     String token = jwtProvider.generateToken(imaginero);
 
-                    refreshTokenService.deleteByImaginero(imaginero);
+                    refreshTokenService.deleteByUser(imaginero);
                     RefreshToken refreshToken1 = refreshTokenService.createRefreshToken(imaginero);
 
                     return ResponseEntity

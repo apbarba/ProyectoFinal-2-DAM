@@ -25,7 +25,7 @@ public class RefreshToken {
     @MapsId
     @OneToOne
     @JoinColumn(name = "user_id", columnDefinition = "uuid")
-    private User imaginero;
+    private User user;
 
     @NaturalId
     @Column(nullable = false, unique = true)

@@ -22,6 +22,8 @@ public class Obras {
 
     private double precio;
 
+    private String titulo;
+
     private String img;
 
     private String estado; //Finalizado, en proceso, comprado o en venta
@@ -30,7 +32,7 @@ public class Obras {
 
     private String estilo;
 
-    @ManyToMany
+    @ManyToOne
     private Categoria categoria;
 
     @ManyToOne

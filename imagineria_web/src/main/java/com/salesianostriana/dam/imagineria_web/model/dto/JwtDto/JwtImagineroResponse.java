@@ -22,7 +22,7 @@ public class JwtImagineroResponse extends UserResponse {
         id = userResponse.getId();
         username = userResponse.getUsername();
         email = userResponse.getEmail();
-        fullname = userResponse.getFullname();
+        name = userResponse.getName();
         createdAt = userResponse.getCreatedAt();
     }
 
