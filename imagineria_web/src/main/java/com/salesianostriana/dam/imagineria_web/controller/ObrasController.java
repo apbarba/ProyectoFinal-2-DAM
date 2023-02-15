@@ -3,6 +3,7 @@ package com.salesianostriana.dam.imagineria_web.controller;
 import com.salesianostriana.dam.imagineria_web.model.User;
 import com.salesianostriana.dam.imagineria_web.model.Obras;
 import com.salesianostriana.dam.imagineria_web.repository.ObrasRepository;
+import com.salesianostriana.dam.imagineria_web.services.ObrasService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -20,11 +21,13 @@ public class ObrasController {
 
     private final ObrasRepository obrasRepository;
 
+    private final ObrasService obrasService;
+
     @GetMapping("/")
     public ResponseEntity<List<Obras>> getAll(@AuthenticationPrincipal User imaginero){
 
         return buildResponseOfAList(
-                obrasRepository.findByImaginero(imaginero));
+                obrasService.findByImaginero(imaginero));
     }
 
     private ResponseEntity<List<Obras>> buildResponseOfAList(List<Obras> obras){
@@ -40,21 +43,20 @@ public class ObrasController {
                     .ok(obras);
     }
 
-    @GetMapping("/id")
-    public ResponseEntity<Obras> getById(@PathVariable Long id){
+    @GetMapping("/{id}")
+    public Obras getById(@PathVariable Long id){
 
-        return ResponseEntity
-                .of(obrasRepository.findById(id));
+        return obrasService.findById(id);
     }
 
     @GetMapping("/author/{author}")
     public ResponseEntity<List<Obras>> getByImaginero(@PathVariable User imaginero){
 
-        return buildResponseOfAList(obrasRepository.findByImaginero(imaginero));
+        return buildResponseOfAList(obrasService.findByImaginero(imaginero));
     }
 
     @PostMapping("/")
-    public ResponseEntity<Obras> createNewNote(@RequestBody Obras obras) {
+    public ResponseEntity<Obras> createNewObras(@RequestBody Obras obras) {
 
         Obras created = obrasRepository.save(obras);
 
@@ -71,25 +73,15 @@ public class ObrasController {
 
     @PreAuthorize("@obrasRepository.findById(#id).orElse(new com.salesianostriana.dam.model.Obras()).author == authentication.principal.getId().toString()")
     @PutMapping("/{id}")
-    public ResponseEntity<Obras> edit(@PathVariable Long id, @RequestBody Obras edited) {
+    public Obras edit(@PathVariable Long id, @RequestBody Obras edited) {
 
-        return ResponseEntity.of(
-                obrasRepository.findById(id)
-                        .map(obras -> {
-                            obras.setPrecio(edited.getPrecio());
-                            obras.setName(edited.getName());
-                            obras.setImg(edited.getImg());
-                            obras.setEstilo(edited.getEstilo());
-                            obras.setFecha(edited.getFecha());
-                            obras.setCategoria(edited.getCategoria());
-                            return obrasRepository.save(obras);
-                        }));
+        return obrasService.edit(id, edited);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id){
 
-        obrasRepository.deleteById(id);
+        obrasService.delete(id);
 
         return ResponseEntity
                 .noContent()

@@ -1,5 +1,7 @@
 package com.salesianostriana.dam.imagineria_web.services;
 
+import com.salesianostriana.dam.imagineria_web.exception.EmptyObrasListException;
+import com.salesianostriana.dam.imagineria_web.exception.ObrasNotFoundException;
 import com.salesianostriana.dam.imagineria_web.model.User;
 import com.salesianostriana.dam.imagineria_web.model.Obras;
 import com.salesianostriana.dam.imagineria_web.repository.ObrasRepository;
@@ -17,12 +19,20 @@ public class ObrasService {
 
     public List<Obras> findByImaginero(User imaginero){
 
-        return obrasRepository.findByImaginero(imaginero);
+        List<Obras> obras = obrasRepository.findByImaginero(imaginero);
+
+        if (obras.isEmpty()){
+
+            throw new EmptyObrasListException();
+        }
+
+        return obras;
     }
 
-    public Optional<Obras> findById(Long id){
+    public Obras findById(Long id){
 
-        return obrasRepository.findById(id);
+        return obrasRepository.findById(id)
+                .orElseThrow(() -> new ObrasNotFoundException(id));
     }
 
     public List<Obras> findByTitulo(String titulo){
@@ -40,8 +50,39 @@ public class ObrasService {
         return obrasRepository.save(obras);
     }
 
-    public void delete(Obras obras){
+    public void delete(Long id){
 
-        obrasRepository.delete(obras);
+        if (obrasRepository.existsById(id))
+            obrasRepository.deleteById(id);
+    }
+
+    public List<Obras> findAll(){
+
+        List<Obras> obras = obrasRepository.findAll();
+
+        if (obras.isEmpty()){
+
+            throw new EmptyObrasListException();
+        }
+
+        return obras;
+    }
+
+    public Obras edit(Long id, Obras edit){
+
+        return obrasRepository.findById(id)
+                .map(obras -> {
+                    obras.setTitulo(edit.getTitulo());
+                    obras.setEstado(edit.getEstado());
+                    obras.setPrecio(edit.getPrecio());
+                    obras.setFecha(edit.getFecha());
+                    obras.setCategoria(edit.getCategoria());
+                    obras.setName(edit.getName());
+                    obras.setImg(edit.getImg());
+                    obras.setImaginero(edit.getImaginero());
+
+                    return obrasRepository.save(obras);
+                })
+                .orElseThrow(() -> new ObrasNotFoundException());
     }
 }

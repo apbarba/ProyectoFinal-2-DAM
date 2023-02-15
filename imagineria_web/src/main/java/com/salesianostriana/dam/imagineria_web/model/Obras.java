@@ -3,6 +3,7 @@ package com.salesianostriana.dam.imagineria_web.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -31,6 +32,9 @@ public class Obras {
     private Date fecha;
 
     private String estilo;
+
+    @Builder.Default
+    private LocalDateTime createdAt = LocalDateTime.now();
 
     @ManyToOne
     private Categoria categoria;
