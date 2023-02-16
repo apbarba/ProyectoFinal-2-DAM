@@ -1,9 +1,10 @@
 package com.salesianostriana.dam.imagineria_web.model;
 
-import com.salesianostriana.dam.imagineria_web.model.dto.Imaginero;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -30,7 +31,8 @@ public class Obras {
 
     private String estado; //Finalizado, en proceso, comprado o en venta
 
-    private Date fecha;
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
+    private LocalDate fecha;
 
     private String estilo;
 

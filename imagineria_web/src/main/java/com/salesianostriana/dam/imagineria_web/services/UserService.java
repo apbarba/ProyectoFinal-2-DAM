@@ -4,7 +4,7 @@ import com.salesianostriana.dam.imagineria_web.exception.EmptyUserListException;
 import com.salesianostriana.dam.imagineria_web.exception.UserNotFoundException;
 import com.salesianostriana.dam.imagineria_web.model.User;
 import com.salesianostriana.dam.imagineria_web.model.UserRole;
-import com.salesianostriana.dam.imagineria_web.model.dto.UserDTO.CreateDtoImaginero;
+import com.salesianostriana.dam.imagineria_web.model.dto.UserDTO.CreateDtoUser;
 import com.salesianostriana.dam.imagineria_web.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -23,7 +23,7 @@ public class UserService {
 
     private final PasswordEncoder passwordEncoder;
 
-    public User createImaginero(CreateDtoImaginero getDtoImaginero, EnumSet<UserRole> roles){
+    public User createImaginero(CreateDtoUser getDtoImaginero, EnumSet<UserRole> roles){
 
         User imaginero = User.builder()
                 .username(getDtoImaginero.getUsername())
@@ -36,12 +36,12 @@ public class UserService {
         return imagineroRepository.save(imaginero);
     }
 
-    public User createImagineroWithUserRole(CreateDtoImaginero getDtoImaginero){
+    public User createImagineroWithUserRole(CreateDtoUser getDtoImaginero){
 
         return createImaginero(getDtoImaginero, EnumSet.of(UserRole.USER));
     }
 
-    public User createImagineroWithAdminRole(CreateDtoImaginero getDtoImaginero){
+    public User createImagineroWithAdminRole(CreateDtoUser getDtoImaginero){
 
         return createImaginero(getDtoImaginero, EnumSet.of(UserRole.ADMIN));
     }
@@ -76,7 +76,7 @@ public class UserService {
                 }).orElseThrow(() -> new UserNotFoundException("No se ha encontrado el usuario con este id"));
     }
 
-    public Optional<User> editPassword(UUID imagineroId, String newPassword){
+    public Optional<User> changePassword(UUID imagineroId, String newPassword){
 
         return imagineroRepository.findById(imagineroId)
                 .map(im -> {
@@ -137,4 +137,13 @@ public class UserService {
         return imagineroRepository.save(imaginero);
     }
 
+    public boolean userExists(String username) {
+
+        return imagineroRepository.existsByUsername(username);
+    }
+
+    public boolean emailExists(String email){
+
+        return imagineroRepository.existsByEmail(email);
+    }
 }

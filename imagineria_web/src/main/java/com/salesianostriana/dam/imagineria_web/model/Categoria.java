@@ -19,7 +19,7 @@ public class Categoria {
     @GeneratedValue
     private Long id;
 
-    private String nombreCategoria;
+    private String nombre;
 
     @Column(length = 1000)
     private String descripcion;

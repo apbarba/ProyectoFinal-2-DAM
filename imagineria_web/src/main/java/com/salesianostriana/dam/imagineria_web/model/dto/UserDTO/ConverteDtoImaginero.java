@@ -6,9 +6,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class ConverteDtoImaginero {
 
-    public CreateDtoImaginero getDtoImaginero(User imaginero){
+    public CreateDtoUser getDtoImaginero(User imaginero){
 
-        return CreateDtoImaginero.builder()
+        return CreateDtoUser.builder()
                 .name(imaginero.getName())
                 .email(imaginero.getEmail())
                 .password(imaginero.getPassword())
@@ -20,7 +20,7 @@ public class ConverteDtoImaginero {
                 .build();
     }
 
-    public User createImaginero(CreateDtoImaginero getDtoImaginero){
+    public User createImaginero(CreateDtoUser getDtoImaginero){
 
         return User.builder()
                 .name(getDtoImaginero.getName())

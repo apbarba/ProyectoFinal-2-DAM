@@ -1,4 +1,4 @@
-package com.salesianostriana.dam.imagineria_web.model.dto;
+package com.salesianostriana.dam.imagineria_web.model;
 
 import com.salesianostriana.dam.imagineria_web.model.Obras;
 import lombok.*;
@@ -27,7 +27,7 @@ public class Imaginero {
 
     private int edad;
 
-    private int localidad;
+    private String localidad;
 
     @OneToMany
     private List<Obras> obras;

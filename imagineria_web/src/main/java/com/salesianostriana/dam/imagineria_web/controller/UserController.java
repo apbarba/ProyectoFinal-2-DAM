@@ -2,7 +2,8 @@ package com.salesianostriana.dam.imagineria_web.controller;
 
 import com.salesianostriana.dam.imagineria_web.model.User;
 import com.salesianostriana.dam.imagineria_web.model.dto.UserDTO.ChangePasswordRequest;
-import com.salesianostriana.dam.imagineria_web.model.dto.UserDTO.CreateDtoImaginero;
+import com.salesianostriana.dam.imagineria_web.model.dto.UserDTO.CreateDtoUser;
+import com.salesianostriana.dam.imagineria_web.model.dto.UserDTO.EditDtoUser;
 import com.salesianostriana.dam.imagineria_web.model.dto.UserDTO.UserResponse;
 import com.salesianostriana.dam.imagineria_web.model.dto.JwtDto.JwtImagineroResponse;
 import com.salesianostriana.dam.imagineria_web.model.dto.LoginDto.LoginRequest;
@@ -23,8 +24,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-import org.yaml.snakeyaml.events.Event;
 
+import javax.validation.Valid;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -44,7 +45,7 @@ public class UserController {
 
     //SOLAMENTE PARA PROBRAR SI FUNCIONA EL USUARIO
     @PostMapping("/auth/register")
-    public ResponseEntity<UserResponse> createImagineroWithUserRole(@RequestBody CreateDtoImaginero getDtoImaginero) {
+    public ResponseEntity<UserResponse> createImagineroWithUserRole(@RequestBody CreateDtoUser getDtoImaginero) {
 
         User imaginero = userService.createImagineroWithUserRole(getDtoImaginero);
 
@@ -54,7 +55,7 @@ public class UserController {
     }
 
     @PostMapping("/auth/register/admin")
-    public ResponseEntity<UserResponse> createImagineroWithAdminRole(@RequestBody CreateDtoImaginero getDtoImaginero) {
+    public ResponseEntity<UserResponse> createImagineroWithAdminRole(@Valid @RequestBody CreateDtoUser getDtoImaginero) {
 
         User imaginero = userService.createImagineroWithAdminRole(getDtoImaginero);
 
@@ -115,12 +116,12 @@ public class UserController {
     }
 
     @PutMapping("/user/changePassword")
-    public ResponseEntity<UserResponse> changePassword(@RequestBody ChangePasswordRequest changePasswordRequest,
+    public ResponseEntity<UserResponse> changePassword(@Valid @RequestBody ChangePasswordRequest changePasswordRequest,
                                                        @AuthenticationPrincipal User loggedUser) {
 
         try {
             if (userService.passwordMatch(loggedUser, changePasswordRequest.getOldPassword())) {
-                Optional<User> modified = userService.editPassword(
+                Optional<User> modified = userService.changePassword(
                         loggedUser.getId(), changePasswordRequest.getNewPassword());
 
                 if (modified.isPresent())
