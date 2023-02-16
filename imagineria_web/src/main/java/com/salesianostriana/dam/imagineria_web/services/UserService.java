@@ -119,4 +119,6 @@ public class UserService {
 
         return imagineroRepository.save(imaginero);
     }
+
+    //Vamos a implementar los errores aquí
 }
