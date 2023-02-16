@@ -1,5 +1,6 @@
 package com.salesianostriana.dam.imagineria_web.model;
 
+import com.salesianostriana.dam.imagineria_web.model.dto.Imaginero;
 import lombok.*;
 
 import javax.persistence.*;
@@ -40,11 +41,11 @@ public class Obras {
     private Categoria categoria;
 
     @ManyToOne
-    private User imaginero;
+    private Imaginero imaginero;
 
     public void eliminarCategoria(Categoria c) {
 
-        c.getImagenes().remove(this);
+        c.getObras().remove(this);
 
         categoria = null;
     }

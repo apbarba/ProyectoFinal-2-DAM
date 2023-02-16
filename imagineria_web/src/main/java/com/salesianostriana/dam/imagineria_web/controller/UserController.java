@@ -6,6 +6,7 @@ import com.salesianostriana.dam.imagineria_web.model.dto.UserDTO.CreateDtoImagin
 import com.salesianostriana.dam.imagineria_web.model.dto.UserDTO.UserResponse;
 import com.salesianostriana.dam.imagineria_web.model.dto.JwtDto.JwtImagineroResponse;
 import com.salesianostriana.dam.imagineria_web.model.dto.LoginDto.LoginRequest;
+import com.salesianostriana.dam.imagineria_web.repository.ObrasRepository;
 import com.salesianostriana.dam.imagineria_web.security.jwt.access.JwtProvider;
 import com.salesianostriana.dam.imagineria_web.security.jwt.refresh.RefreshToken;
 import com.salesianostriana.dam.imagineria_web.security.jwt.refresh.RefreshTokenException;
@@ -20,13 +21,12 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import org.yaml.snakeyaml.events.Event;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -39,6 +39,7 @@ public class UserController {
     private final JwtProvider jwtProvider;
 
     private final RefreshTokenService refreshTokenService;
+    private final ObrasRepository obrasRepository;
 
 
     //SOLAMENTE PARA PROBRAR SI FUNCIONA EL USUARIO
@@ -55,7 +56,7 @@ public class UserController {
     @PostMapping("/auth/register/admin")
     public ResponseEntity<UserResponse> createImagineroWithAdminRole(@RequestBody CreateDtoImaginero getDtoImaginero) {
 
-        User imaginero = userService.createImagineroWithUserRole(getDtoImaginero);
+        User imaginero = userService.createImagineroWithAdminRole(getDtoImaginero);
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
@@ -137,4 +138,12 @@ public class UserController {
 
         return null;
     }
+
+//    @DeleteMapping("/user/{id}")
+//    public ResponseEntity<?> delete(@PathVariable User user){
+//
+//        userService.delete(user.getId());
+//
+//
+//    }
 }

@@ -24,10 +24,9 @@ public class ObrasController {
     private final ObrasService obrasService;
 
     @GetMapping("/")
-    public ResponseEntity<List<Obras>> getAll(@AuthenticationPrincipal User imaginero){
+    public List<Obras> getAll(){
 
-        return buildResponseOfAList(
-                obrasService.findByImaginero(imaginero));
+        return obrasService.findAll();
     }
 
     private ResponseEntity<List<Obras>> buildResponseOfAList(List<Obras> obras){
@@ -58,7 +57,7 @@ public class ObrasController {
     @PostMapping("/")
     public ResponseEntity<Obras> createNewObras(@RequestBody Obras obras) {
 
-        Obras created = obrasRepository.save(obras);
+        Obras created = obrasService.save(obras);
 
         URI createdURI = ServletUriComponentsBuilder
                 .fromCurrentRequest()

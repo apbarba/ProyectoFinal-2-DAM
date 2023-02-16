@@ -1,5 +1,7 @@
 package com.salesianostriana.dam.imagineria_web.services;
 
+import com.salesianostriana.dam.imagineria_web.exception.EmptyUserListException;
+import com.salesianostriana.dam.imagineria_web.exception.UserNotFoundException;
 import com.salesianostriana.dam.imagineria_web.model.User;
 import com.salesianostriana.dam.imagineria_web.model.UserRole;
 import com.salesianostriana.dam.imagineria_web.model.dto.UserDTO.CreateDtoImaginero;
@@ -46,7 +48,14 @@ public class UserService {
 
     public List<User> findAll(){
 
-        return imagineroRepository.findAll();
+        List<User> users = imagineroRepository.findAll();
+
+        if (users.isEmpty()){
+
+            throw new EmptyUserListException();
+        }
+
+        return users;
     }
 
     public Optional<User> findByUsername(String username){
@@ -54,15 +63,17 @@ public class UserService {
         return  imagineroRepository.findByUsername(username);
     }
 
-    public Optional<User> edit(User imaginero){
+    public User edit(User imaginero){
 
         return imagineroRepository.findById(imaginero.getId())
                 .map(im ->{
                     im.setName(imaginero.getName());
+                    im.setUsername(im.getUsername());
+                    im.setObras(im.getObras());
 
                     return imagineroRepository.save(im);
 
-                }).or(() -> Optional.empty());
+                }).orElseThrow(() -> new UserNotFoundException("No se ha encontrado el usuario con este id"));
     }
 
     public Optional<User> editPassword(UUID imagineroId, String newPassword){
@@ -110,6 +121,12 @@ public class UserService {
         return imagineroRepository.findById(id);
     }
 
+//    public User findById(UUID id){
+//
+//        return imagineroRepository.findById(id)
+//                .orElseThrow(() -> new UserNotFoundException(id));
+//    }
+
     public List<User> findByName(String name){
 
         return imagineroRepository.findByName(name);
@@ -120,5 +137,4 @@ public class UserService {
         return imagineroRepository.save(imaginero);
     }
 
-    //Vamos a implementar los errores aquí
 }

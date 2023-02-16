@@ -3,7 +3,9 @@ package com.salesianostriana.dam.imagineria_web.error;
 import com.salesianostriana.dam.imagineria_web.error.model.impl.ApiErrorImpl;
 import com.salesianostriana.dam.imagineria_web.error.model.impl.ApiValidationSubError;
 import com.salesianostriana.dam.imagineria_web.exception.EmptyObrasListException;
+import com.salesianostriana.dam.imagineria_web.exception.EmptyUserListException;
 import com.salesianostriana.dam.imagineria_web.exception.ObrasNotFoundException;
+import com.salesianostriana.dam.imagineria_web.exception.UserNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.ObjectError;
@@ -19,11 +21,6 @@ import java.util.stream.Collectors;
 @RestControllerAdvice
 public class GlobalRestControllerAdvice /*extends ResponseEntityExceptionHandler*/ {
 
-    /*@Override
-    protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        return buildApiError(ex.getMessage(), request, status);
-    }*/
-
 
     @ExceptionHandler({ObrasNotFoundException.class, EmptyObrasListException.class})
     public ResponseEntity<?> handleNotFoundException(EntityNotFoundException exception, WebRequest request) {
@@ -31,20 +28,11 @@ public class GlobalRestControllerAdvice /*extends ResponseEntityExceptionHandler
         return buildApiError(exception.getMessage(), request, HttpStatus.NOT_FOUND);
     }
 
-    /*@Override
-    protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        return buildApiError("Error on marshalling / unmarshalling of a JSON object: " + ex.getMessage(), request, status);
+    @ExceptionHandler({UserNotFoundException.class, EmptyUserListException.class})
+    public ResponseEntity<?> handlerMotFoundExceptionUser(EntityNotFoundException exception, WebRequest request){
 
-    }*/
-
-
-    /*@Override
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        //return super.handleMethodArgumentNotValid(ex, headers, status, request);
-        return buildApiErrorWithSubErrors("Validation error. Please check the sublist.", request, status, ex.getAllErrors());
-    }*/
-
-
+        return buildApiError(exception.getMessage(), request, HttpStatus.NOT_FOUND);
+    }
 
     private final ResponseEntity<Object> buildApiError(String message, WebRequest request, HttpStatus status) {
         return ResponseEntity

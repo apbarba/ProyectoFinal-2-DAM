@@ -2,9 +2,9 @@ package com.salesianostriana.dam.imagineria_web.exception;
 
 import javax.persistence.EntityNotFoundException;
 
-public class EmptyImagineroListException extends EntityNotFoundException {
+public class EmptyUserListException extends EntityNotFoundException {
 
-    public EmptyImagineroListException(){
+    public EmptyUserListException(){
 
         super("No se han encontrado los imagineros");
     }
