@@ -4,6 +4,7 @@ import com.salesianostriana.dam.imagineria_web.exception.EmptyObrasListException
 import com.salesianostriana.dam.imagineria_web.exception.ObrasNotFoundException;
 import com.salesianostriana.dam.imagineria_web.model.User;
 import com.salesianostriana.dam.imagineria_web.model.Obras;
+import com.salesianostriana.dam.imagineria_web.model.dto.ObrasDTO.EditDtoObras;
 import com.salesianostriana.dam.imagineria_web.repository.ObrasRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -45,9 +46,9 @@ public class ObrasService {
         return obrasRepository.findByEstado(estado);
     }
 
-    public Obras save(Obras obras){
+    public Obras save(EditDtoObras obras){
 
-        return obrasRepository.save(obras);
+        return obrasRepository.save(EditDtoObras.toObras(obras));
     }
 
     public void delete(Long id){
@@ -68,18 +69,17 @@ public class ObrasService {
         return obras;
     }
 
-    public Obras edit(Long id, Obras edit){
+    public Obras edit(Long id, EditDtoObras edit){
 
         return obrasRepository.findById(id)
                 .map(obras -> {
                     obras.setTitulo(edit.getTitulo());
                     obras.setEstado(edit.getEstado());
                     obras.setPrecio(edit.getPrecio());
-                    obras.setFecha(edit.getFecha());
-                    obras.setCategoria(edit.getCategoria());
+                   // obras.setCategoria(edit.getCategoria());
                     obras.setName(edit.getName());
                     obras.setImg(edit.getImg());
-                    obras.setImaginero(edit.getImaginero());
+                   // obras.setImaginero(edit.getImaginero());
 
                     return obrasRepository.save(obras);
                 })

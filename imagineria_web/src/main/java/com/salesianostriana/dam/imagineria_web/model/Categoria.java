@@ -25,6 +25,6 @@ public class Categoria {
     private String descripcion;
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "categoria", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "categoria", fetch = FetchType.LAZY)
     private List<Obras> obras = new ArrayList<>();
 }

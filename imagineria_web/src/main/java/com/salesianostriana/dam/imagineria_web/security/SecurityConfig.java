@@ -79,8 +79,8 @@ public class SecurityConfig {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/note/**").hasRole("USER")
-                .antMatchers("/auth/register/admin").hasRole("ADMIN")
+                .antMatchers("/obras/**").hasRole("USER")
+                .antMatchers("/auth/register/admin", "/obras/").hasRole("ADMIN")
                 .anyRequest().authenticated();
 
 
@@ -95,7 +95,7 @@ public class SecurityConfig {
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web -> web.ignoring().antMatchers("/h2-console/**", "/auth/register", "/auth/login", "/refreshtoken"));
+        return (web -> web.ignoring().antMatchers("/h2-console/**", "/auth/register", "/auth/login", "/refreshtoken", "/obras/", "/obras/{id}"));
     }
 
 }

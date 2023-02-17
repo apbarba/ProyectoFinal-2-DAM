@@ -19,6 +19,6 @@ public class ChangePasswordRequest {
     @NotEmpty(message = "{userChange.newPassword.notempty}")
     private String newPassword;
 
-    @NotEmpty(message = "{userChange.verifyNewPassword}")
+    @NotEmpty(message = "{userChange.verifyNewPassword.notempty}")
     private String verifyNewPassword;
 }

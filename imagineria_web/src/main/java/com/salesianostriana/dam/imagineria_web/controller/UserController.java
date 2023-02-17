@@ -45,7 +45,7 @@ public class UserController {
 
     //SOLAMENTE PARA PROBRAR SI FUNCIONA EL USUARIO
     @PostMapping("/auth/register")
-    public ResponseEntity<UserResponse> createImagineroWithUserRole(@RequestBody CreateDtoUser getDtoImaginero) {
+    public ResponseEntity<UserResponse> createImagineroWithUserRole(@Valid @RequestBody CreateDtoUser getDtoImaginero) { //@Valid
 
         User imaginero = userService.createImagineroWithUserRole(getDtoImaginero);
 
@@ -116,7 +116,7 @@ public class UserController {
     }
 
     @PutMapping("/user/changePassword")
-    public ResponseEntity<UserResponse> changePassword(@Valid @RequestBody ChangePasswordRequest changePasswordRequest,
+    public ResponseEntity<UserResponse> changePassword(@RequestBody ChangePasswordRequest changePasswordRequest,
                                                        @AuthenticationPrincipal User loggedUser) {
 
         try {

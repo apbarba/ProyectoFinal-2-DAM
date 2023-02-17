@@ -2,6 +2,7 @@ package com.salesianostriana.dam.imagineria_web.controller;
 
 import com.salesianostriana.dam.imagineria_web.model.User;
 import com.salesianostriana.dam.imagineria_web.model.Obras;
+import com.salesianostriana.dam.imagineria_web.model.dto.ObrasDTO.EditDtoObras;
 import com.salesianostriana.dam.imagineria_web.repository.ObrasRepository;
 import com.salesianostriana.dam.imagineria_web.services.ObrasService;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +12,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -18,8 +20,6 @@ import java.util.List;
 @RequestMapping("/obras")
 @RequiredArgsConstructor
 public class ObrasController {
-
-    private final ObrasRepository obrasRepository;
 
     private final ObrasService obrasService;
 
@@ -55,7 +55,7 @@ public class ObrasController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<Obras> createNewObras(@RequestBody Obras obras) {
+    public ResponseEntity<Obras> createNewObras(@Valid @RequestBody EditDtoObras obras) {
 
         Obras created = obrasService.save(obras);
 
@@ -72,7 +72,7 @@ public class ObrasController {
 
     @PreAuthorize("@obrasRepository.findById(#id).orElse(new com.salesianostriana.dam.model.Obras()).author == authentication.principal.getId().toString()")
     @PutMapping("/{id}")
-    public Obras edit(@PathVariable Long id, @RequestBody Obras edited) {
+    public Obras edit(@PathVariable Long id, @Valid @RequestBody EditDtoObras edited) {
 
         return obrasService.edit(id, edited);
     }

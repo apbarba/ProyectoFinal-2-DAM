@@ -20,8 +20,8 @@ public class Favoritos {
     @GeneratedValue
     private Long id;
 
-//    @ManyToOne
-//    private Cliente cliente;
+    @ManyToOne
+    private User cliente;
 
     @ManyToOne
     private Obras obras;

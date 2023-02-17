@@ -1,6 +1,7 @@
 package com.salesianostriana.dam.imagineria_web.model.dto.UserDTO;
 
 import com.salesianostriana.dam.imagineria_web.model.Obras;
+import com.salesianostriana.dam.imagineria_web.model.dto.ObrasDTO.EditDtoObras;
 import com.salesianostriana.dam.imagineria_web.validation.annotation.StrongPassword;
 import com.salesianostriana.dam.imagineria_web.validation.annotation.UniqueEmail;
 import com.salesianostriana.dam.imagineria_web.validation.annotation.UniqueUsername;
@@ -34,8 +35,8 @@ public class CreateDtoUser {
     @NotEmpty(message = "{user.verifyPassword.notempty}")
     private String verifyPassword;
 
-    @NotBlank(message = "{user.obras.list.blank}")
-    private List<Obras> obras;
+    //@NotBlank(message = "{user.obras.list.blank}"
+    //private List<EditDtoObras> obras;
 
 
 }
