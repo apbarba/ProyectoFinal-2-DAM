@@ -1,5 +1,6 @@
 package com.salesianostriana.dam.imagineria_web.controller;
 
+import com.salesianostriana.dam.imagineria_web.model.Imaginero;
 import com.salesianostriana.dam.imagineria_web.model.User;
 import com.salesianostriana.dam.imagineria_web.model.Obras;
 import com.salesianostriana.dam.imagineria_web.model.dto.ObrasDTO.EditDtoObras;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/obras")
@@ -43,13 +45,13 @@ public class ObrasController {
     }
 
     @GetMapping("/{id}")
-    public Obras getById(@PathVariable Long id){
+    public Obras getById(@PathVariable UUID id){
 
         return obrasService.findById(id);
     }
 
-    @GetMapping("/author/{author}")
-    public ResponseEntity<List<Obras>> getByImaginero(@PathVariable User imaginero){
+    @GetMapping("/author/{imaginero}")
+    public ResponseEntity<List<Obras>> getByImaginero(@PathVariable Imaginero imaginero){
 
         return buildResponseOfAList(obrasService.findByImaginero(imaginero));
     }
@@ -72,13 +74,13 @@ public class ObrasController {
 
     @PreAuthorize("@obrasRepository.findById(#id).orElse(new com.salesianostriana.dam.model.Obras()).author == authentication.principal.getId().toString()")
     @PutMapping("/{id}")
-    public Obras edit(@PathVariable Long id, @Valid @RequestBody EditDtoObras edited) {
+    public Obras edit(@PathVariable UUID id, @Valid @RequestBody EditDtoObras edited) {
 
         return obrasService.edit(id, edited);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id){
+    public ResponseEntity<?> delete(@PathVariable UUID id){
 
         obrasService.delete(id);
 

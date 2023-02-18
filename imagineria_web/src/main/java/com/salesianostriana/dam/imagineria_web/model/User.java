@@ -49,8 +49,8 @@ public class User implements UserDetails {
 
     private String verifyPassword;
 
-    @OneToMany
-    private List<Obras> obras;
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<Favoritos> favoritos;
 
     @Builder.Default
     private boolean accountNonExpired = true;

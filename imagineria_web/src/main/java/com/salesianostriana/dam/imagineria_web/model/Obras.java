@@ -1,12 +1,14 @@
 package com.salesianostriana.dam.imagineria_web.model;
 
 import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.UUID;
 
 @Data
 @Entity
@@ -15,11 +17,23 @@ import java.util.Date;
 @Builder
 @Setter
 @Getter
+@Table(name = "obras")
 public class Obras {
 
     @Id
     @GeneratedValue
-    private Long id;
+    @GenericGenerator(
+            name = "UUID",
+            strategy = "org.hibernate.id.UUIDGenerator",
+            parameters = {
+                    @org.hibernate.annotations.Parameter(
+                            name = "uuid_gen_strategy_class",
+                            value = "org.hibernate.id.uuid.CustomVersionOneStrategy"
+                    )
+            }
+    )
+    @Column(columnDefinition = "uuid", name = "obras_id")
+    private UUID id;
 
     private String name;
 
@@ -39,10 +53,10 @@ public class Obras {
     @Builder.Default
     private LocalDateTime createdAt = LocalDateTime.now();
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Categoria categoria;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Imaginero imaginero;
 
     public void eliminarCategoria(Categoria c) {

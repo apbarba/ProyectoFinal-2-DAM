@@ -70,7 +70,6 @@ public class UserService {
                 .map(im ->{
                     im.setName(imaginero.getName());
                     im.setUsername(im.getUsername());
-                    im.setObras(im.getObras());
 
                     return imagineroRepository.save(im);
 

@@ -2,6 +2,7 @@ package com.salesianostriana.dam.imagineria_web.services;
 
 import com.salesianostriana.dam.imagineria_web.exception.EmptyObrasListException;
 import com.salesianostriana.dam.imagineria_web.exception.ObrasNotFoundException;
+import com.salesianostriana.dam.imagineria_web.model.Imaginero;
 import com.salesianostriana.dam.imagineria_web.model.User;
 import com.salesianostriana.dam.imagineria_web.model.Obras;
 import com.salesianostriana.dam.imagineria_web.model.dto.ObrasDTO.EditDtoObras;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -18,7 +20,7 @@ public class ObrasService {
 
     private final ObrasRepository obrasRepository;
 
-    public List<Obras> findByImaginero(User imaginero){
+    public List<Obras> findByImaginero(Imaginero imaginero){
 
         List<Obras> obras = obrasRepository.findByImaginero(imaginero);
 
@@ -30,7 +32,7 @@ public class ObrasService {
         return obras;
     }
 
-    public Obras findById(Long id){
+    public Obras findById(UUID id){
 
         return obrasRepository.findById(id)
                 .orElseThrow(() -> new ObrasNotFoundException(id));
@@ -51,7 +53,7 @@ public class ObrasService {
         return obrasRepository.save(EditDtoObras.toObras(obras));
     }
 
-    public void delete(Long id){
+    public void delete(UUID id){
 
         if (obrasRepository.existsById(id))
             obrasRepository.deleteById(id);
@@ -69,7 +71,7 @@ public class ObrasService {
         return obras;
     }
 
-    public Obras edit(Long id, EditDtoObras edit){
+    public Obras edit(UUID id, EditDtoObras edit){
 
         return obrasRepository.findById(id)
                 .map(obras -> {

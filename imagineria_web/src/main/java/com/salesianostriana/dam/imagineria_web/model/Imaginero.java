@@ -3,25 +3,35 @@ package com.salesianostriana.dam.imagineria_web.model;
 import com.salesianostriana.dam.imagineria_web.model.Obras;
 import lombok.*;
 import net.bytebuddy.agent.builder.AgentBuilder;
+import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
+import java.util.UUID;
 
 @Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Setter
 @Getter
+@Builder
 public class Imaginero {
 
     @Id
     @GeneratedValue
-    private Long id;
+    @GenericGenerator(
+            name = "UUID",
+            strategy = "org.hibernate.id.UUIDGenerator",
+            parameters = {
+                    @org.hibernate.annotations.Parameter(
+                            name = "uuid_gen_strategy_class",
+                            value = "org.hibernate.id.uuid.CustomVersionOneStrategy"
+                    )
+            }
+    )
+    @Column(columnDefinition = "uuid", name = "imaginero_id")
+    private UUID id;
 
     private String name;
 
@@ -29,6 +39,6 @@ public class Imaginero {
 
     private String localidad;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     private List<Obras> obras;
 }

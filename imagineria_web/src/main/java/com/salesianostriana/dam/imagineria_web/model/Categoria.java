@@ -1,10 +1,12 @@
 package com.salesianostriana.dam.imagineria_web.model;
 
 import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Data
 @Entity
@@ -16,8 +18,19 @@ import java.util.List;
 public class Categoria {
 
     @Id
-    @GeneratedValue
-    private Long id;
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+            name = "UUID",
+            strategy = "org.hibernate.id.UUIDGenerator",
+            parameters = {
+                    @org.hibernate.annotations.Parameter(
+                            name = "uuid_gen_strategy_class",
+                            value = "org.hibernate.id.uuid.CustomVersionOneStrategy"
+                    )
+            }
+    )
+    @Column(columnDefinition = "uuid", name = "categoria_id")
+    private UUID id;
 
     private String nombre;
 
@@ -25,6 +38,7 @@ public class Categoria {
     private String descripcion;
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "categoria", fetch = FetchType.LAZY)
+    @Builder.Default
+    @OneToMany(fetch = FetchType.LAZY)
     private List<Obras> obras = new ArrayList<>();
 }
