@@ -10,7 +10,13 @@ import com.salesianostriana.dam.imagineria_web.model.dto.ImagineroDto.EditDtoIma
 import com.salesianostriana.dam.imagineria_web.model.dto.ImagineroDto.GetDtoImaginero;
 import com.salesianostriana.dam.imagineria_web.model.dto.ObrasDTO.EditDtoObras;
 import com.salesianostriana.dam.imagineria_web.repository.ImagineroRepository;
+import com.salesianostriana.dam.imagineria_web.search.spec.ImagineroSearch.ImagineroSpecificationBuilder;
+import com.salesianostriana.dam.imagineria_web.search.spec.ObrasSearch.ObrasSpecificationBuilder;
+import com.salesianostriana.dam.imagineria_web.search.util.SearchCriteria;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -73,5 +79,16 @@ public class ImaginerosService {
 
         if (imagineroRepository.existsById(id))
             imagineroRepository.deleteById(id);
+    }
+
+    public Page<Imaginero> search(List<SearchCriteria> params, Pageable pageable) {
+
+        ImagineroSpecificationBuilder imagineroSpecificationBuilder =
+
+                new ImagineroSpecificationBuilder(params);
+
+        Specification<Imaginero> spec =  imagineroSpecificationBuilder.build();
+
+        return imagineroRepository.findAll(spec, pageable);
     }
 }

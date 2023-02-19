@@ -7,7 +7,13 @@ import com.salesianostriana.dam.imagineria_web.exception.ObrasNotFoundException;
 import com.salesianostriana.dam.imagineria_web.model.Favoritos;
 import com.salesianostriana.dam.imagineria_web.model.Obras;
 import com.salesianostriana.dam.imagineria_web.repository.FavoritosRepository;
+import com.salesianostriana.dam.imagineria_web.search.spec.FavoritosSearch.FavoritosSpecificationBuilder;
+import com.salesianostriana.dam.imagineria_web.search.spec.ObrasSearch.ObrasSpecificationBuilder;
+import com.salesianostriana.dam.imagineria_web.search.util.SearchCriteria;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -48,5 +54,16 @@ public class FavoritosService {
     public Favoritos guardarFav(Favoritos favoritos){
 
         return favoritosRepository.save(favoritos);
+    }
+
+    public Page<Favoritos> search(List<SearchCriteria> params, Pageable pageable) {
+
+        FavoritosSpecificationBuilder favSpecificationBuilder =
+
+                new FavoritosSpecificationBuilder(params);
+
+        Specification<Favoritos> spec =  favSpecificationBuilder.build();
+
+        return favoritosRepository.findAll(spec, pageable);
     }
 }

@@ -3,10 +3,17 @@ package com.salesianostriana.dam.imagineria_web.services;
 import com.salesianostriana.dam.imagineria_web.exception.CategoriaNotFoundException;
 import com.salesianostriana.dam.imagineria_web.exception.EmptyCategoriaException;
 import com.salesianostriana.dam.imagineria_web.model.Categoria;
+import com.salesianostriana.dam.imagineria_web.model.Obras;
 import com.salesianostriana.dam.imagineria_web.model.dto.CategoriaDTO.EditDtoCategoria;
 import com.salesianostriana.dam.imagineria_web.model.dto.CategoriaDTO.GetDtoCategoria;
 import com.salesianostriana.dam.imagineria_web.repository.CategoriaRepository;
+import com.salesianostriana.dam.imagineria_web.search.spec.CategoriaSearch.CategoriaSpecificationBuilder;
+import com.salesianostriana.dam.imagineria_web.search.spec.ObrasSearch.ObrasSpecificationBuilder;
+import com.salesianostriana.dam.imagineria_web.search.util.SearchCriteria;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -69,6 +76,17 @@ public class CategoriaService {
 
         if (categoriaRepository.existsById(id))
             categoriaRepository.deleteById(id);
+    }
+
+    public Page<Categoria> search(List<SearchCriteria> params, Pageable pageable) {
+
+        CategoriaSpecificationBuilder categoriaSpecificationBuilder =
+
+                new CategoriaSpecificationBuilder(params);
+
+        Specification<Categoria> spec =  categoriaSpecificationBuilder.build();
+
+        return categoriaRepository.findAll(spec, pageable);
     }
 
 

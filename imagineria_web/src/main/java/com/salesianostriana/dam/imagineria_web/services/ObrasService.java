@@ -7,7 +7,12 @@ import com.salesianostriana.dam.imagineria_web.model.User;
 import com.salesianostriana.dam.imagineria_web.model.Obras;
 import com.salesianostriana.dam.imagineria_web.model.dto.ObrasDTO.EditDtoObras;
 import com.salesianostriana.dam.imagineria_web.repository.ObrasRepository;
+import com.salesianostriana.dam.imagineria_web.search.spec.ObrasSearch.ObrasSpecificationBuilder;
+import com.salesianostriana.dam.imagineria_web.search.util.SearchCriteria;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -86,5 +91,16 @@ public class ObrasService {
                     return obrasRepository.save(obras);
                 })
                 .orElseThrow(() -> new ObrasNotFoundException());
+    }
+
+    public Page<Obras> search(List<SearchCriteria> params, Pageable pageable) {
+
+        ObrasSpecificationBuilder obrasSpecificationBuilder =
+
+                new ObrasSpecificationBuilder(params);
+
+        Specification<Obras> spec =  obrasSpecificationBuilder.build();
+
+        return obrasRepository.findAll(spec, pageable);
     }
 }
