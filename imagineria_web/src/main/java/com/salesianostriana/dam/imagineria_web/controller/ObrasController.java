@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
@@ -94,7 +95,24 @@ public class ObrasController {
 
     }
 
-    @PreAuthorize("@obrasRepository.findById(#id).orElse(new com.salesianostriana.dam.model.Obras()).author == authentication.principal.getId().toString()")
+   // @PostMapping("/")
+  //  public ResponseEntity<Obras> createNewObras(@Valid @RequestPart("obras") EditDtoObras obras,
+    //                                            @RequestPart("file")MultipartFile file) {
+
+      //  Obras created = obrasService.save(obras, file);
+
+        //URI createdURI = ServletUriComponentsBuilder
+          //      .fromCurrentRequest()
+            //    .path("/{id}")
+              //  .buildAndExpand(created.getId()).toUri();
+
+      //  return ResponseEntity
+        //        .created(createdURI)
+          //      .body(created);
+
+   // }
+
+   // @PreAuthorize("@obrasRepository.findById(#id).orElse(new com.salesianostriana.dam.model.Obras()).author == authentication.principal.getId().toString()")
     @PutMapping("/{id}")
     public Obras edit(@PathVariable UUID id, @Valid @RequestBody EditDtoObras edited) {
 

@@ -2,10 +2,12 @@ package com.salesianostriana.dam.imagineria_web.services;
 
 import com.salesianostriana.dam.imagineria_web.exception.EmptyObrasListException;
 import com.salesianostriana.dam.imagineria_web.exception.ObrasNotFoundException;
+import com.salesianostriana.dam.imagineria_web.files.service.StorageService;
 import com.salesianostriana.dam.imagineria_web.model.Imaginero;
 import com.salesianostriana.dam.imagineria_web.model.User;
 import com.salesianostriana.dam.imagineria_web.model.Obras;
 import com.salesianostriana.dam.imagineria_web.model.dto.ObrasDTO.EditDtoObras;
+import com.salesianostriana.dam.imagineria_web.model.dto.ObrasDTO.GetDtoObras;
 import com.salesianostriana.dam.imagineria_web.repository.ObrasRepository;
 import com.salesianostriana.dam.imagineria_web.search.spec.ObrasSearch.ObrasSpecificationBuilder;
 import com.salesianostriana.dam.imagineria_web.search.util.SearchCriteria;
@@ -14,7 +16,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -24,6 +28,8 @@ import java.util.UUID;
 public class ObrasService {
 
     private final ObrasRepository obrasRepository;
+
+    private final StorageService storageService;
 
     public List<Obras> findByImaginero(Imaginero imaginero){
 
@@ -103,4 +109,19 @@ public class ObrasService {
 
         return obrasRepository.findAll(spec, pageable);
     }
+
+    @Transactional
+    public Obras save(EditDtoObras getDtoObras, MultipartFile file) {
+
+        String filename = storageService.store(file);
+
+        Obras obras = obrasRepository.save(
+
+                Obras.builder()
+                        .img(filename)
+                        .build()
+        );
+        return obras;
+    }
+
 }

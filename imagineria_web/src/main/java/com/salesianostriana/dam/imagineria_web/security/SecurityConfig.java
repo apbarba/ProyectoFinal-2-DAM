@@ -79,7 +79,9 @@ public class SecurityConfig {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/obras/**").hasRole("USER")
+                .antMatchers("/obras/**",
+                        "/imaginero/**",
+                        "/favoritos/**").hasRole("USER")
                 .antMatchers("/auth/register/admin",
                         "/obras/",
                         "/imaginero/",
