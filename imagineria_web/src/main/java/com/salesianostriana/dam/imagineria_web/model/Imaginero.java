@@ -1,5 +1,9 @@
 package com.salesianostriana.dam.imagineria_web.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerator;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.salesianostriana.dam.imagineria_web.model.Obras;
 import lombok.*;
 import net.bytebuddy.agent.builder.AgentBuilder;
@@ -16,6 +20,8 @@ import java.util.UUID;
 @Setter
 @Getter
 @Builder
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "obras"})
 public class Imaginero {
 
     @Id
@@ -39,6 +45,6 @@ public class Imaginero {
 
     private String localidad;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "imaginero", fetch = FetchType.LAZY)
     private List<Obras> obras;
 }

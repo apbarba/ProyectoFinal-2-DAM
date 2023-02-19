@@ -90,7 +90,8 @@ public class SecurityConfig {
                         "/favoritos/{id}",
                         "/categoria/",
                         "/categoria/{id}",
-                        "/categoria/author/{categoria_nombre}").hasRole("ADMIN")
+                        "/categoria/author/{categoria_nombre}",
+                        "/obras/{id}").hasRole("ADMIN")
                 .anyRequest().authenticated();
 
 
@@ -105,7 +106,7 @@ public class SecurityConfig {
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web -> web.ignoring().antMatchers("/h2-console/**", "/auth/register", "/auth/login", "/refreshtoken", "/obras/", "/obras/{id}," +
+        return (web -> web.ignoring().antMatchers("/h2-console/**", "/auth/register", "/auth/login", "/refreshtoken", "/obras/", "/obras/{id}" +
                 "/imaginero/", "/author/{imaginero_name}", "/imaginero/{id}"));
     }
 

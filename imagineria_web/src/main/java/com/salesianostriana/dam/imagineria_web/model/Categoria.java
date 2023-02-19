@@ -39,6 +39,6 @@ public class Categoria {
 
     @ToString.Exclude
     @Builder.Default
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "categoria",cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Obras> obras = new ArrayList<>();
 }

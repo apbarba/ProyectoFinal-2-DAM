@@ -1,5 +1,7 @@
 package com.salesianostriana.dam.imagineria_web.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -45,7 +47,7 @@ public class Obras {
 
     private String estado; //Finalizado, en proceso, comprado o en venta
 
-    @DateTimeFormat(pattern = "yyyy/MM/dd")
+   // @DateTimeFormat(pattern = "yyyy/MM/dd")
     private LocalDate fecha;
 
     private String estilo;
@@ -54,9 +56,14 @@ public class Obras {
     private LocalDateTime createdAt = LocalDateTime.now();
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "categoria_id")
+    @JsonIgnoreProperties("obras")
+    @JsonBackReference
     private Categoria categoria;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "imaginero_id")
+    @JsonIgnoreProperties("obras")
     private Imaginero imaginero;
 
     public void eliminarCategoria(Categoria c) {
