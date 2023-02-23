@@ -1,5 +1,6 @@
 package com.salesianostriana.dam.imagineria_web.controller;
 
+import com.salesianostriana.dam.imagineria_web.model.Obras;
 import com.salesianostriana.dam.imagineria_web.model.User;
 import com.salesianostriana.dam.imagineria_web.model.dto.UserDTO.ChangePasswordRequest;
 import com.salesianostriana.dam.imagineria_web.model.dto.UserDTO.CreateDtoUser;
@@ -26,6 +27,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -114,6 +116,46 @@ public class UserController {
 
                 }).orElseThrow(() -> new RefreshTokenException("Token no encontrado"));
     }
+
+    @PostMapping("/{userId}/favoritos/{obraId}")
+    public  ResponseEntity<?> agregarObraFav(@PathVariable UUID userId, @PathVariable UUID obraId){
+
+        userService.agregarObraListaFav(userId, obraId);
+
+        return ResponseEntity
+                .ok()
+                .build();
+    }
+
+  /*  @GetMapping("/{userId}/favoritos")
+    public ResponseEntity<List<Obras>> getListFav(@PathVariable UUID userId){
+
+        List<Obras> obrasFav = userService.getListFav(userId);
+
+        return ResponseEntity
+                .ok(obrasFav);
+
+    }*/
+  /*  @GetMapping("/{userId}/favoritosWithUsuario")
+    public ResponseEntity<User> getUserWithFavoritos(@PathVariable UUID userId) {
+
+        User user = userService.getUserWithFavoritos(userId);
+
+        return ResponseEntity.ok(user);
+    }*/
+
+  /*  @DeleteMapping("/{userId}/favoritos/{obraId}")
+    public ResponseEntity<?> deleteFavObra(@PathVariable("userId") UUID userId,
+                                           @PathVariable("obraId")UUID obraId){
+
+        userService.deleteFavObra(userId, obraId);
+
+        return ResponseEntity
+                .noContent()
+                .build();
+    }
+    */
+
 
     @PutMapping("/user/changePassword")
     public ResponseEntity<UserResponse> changePassword(@RequestBody ChangePasswordRequest changePasswordRequest,

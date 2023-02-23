@@ -16,10 +16,10 @@ import javax.validation.constraints.NotEmpty;
 @Data
 public class EditDtoImaginero {
 
-    @Min(value = 0, message = "{imagineroEdit.edad.notempty}")
+    @Min(value = 0, message = "{imaginero.edad.notempty}")
     private int edad;
 
-    @NotEmpty(message = "{imagineroEdit.localidad.blank}")
+    @NotEmpty(message = "{imagineroEdit.localidad.notempty}")
     private String localidad;
 
 

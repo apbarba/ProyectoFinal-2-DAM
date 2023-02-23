@@ -13,9 +13,9 @@ import javax.validation.constraints.NotEmpty;
 @Data
 public class EditDtoCategoria {
 
-    @NotEmpty(message = "{categoriaEdit.nombre.notempty}")
+    @NotEmpty(message = "{categoria.nombre.notempty}")
     private String nombre;
 
-    @NotEmpty(message = "{categoriaEdit.descripcion.notempty}")
+    @NotEmpty(message = "{categoria.descripcion.notempty}")
     private String descripcion;
 }

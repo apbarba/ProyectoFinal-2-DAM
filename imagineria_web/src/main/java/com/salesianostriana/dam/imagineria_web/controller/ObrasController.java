@@ -112,6 +112,16 @@ public class ObrasController {
 
    // }
 
+  /*  @PostMapping("/{obraId/favoritos}")
+    public ResponseEntity<Void> checkFavorite(@PathVariable UUID id, @AuthenticationPrincipal User user){
+
+        obrasService.checkFavorite(id, user);
+
+        return ResponseEntity
+                .ok()
+                .build();
+    }*/
+
    // @PreAuthorize("@obrasRepository.findById(#id).orElse(new com.salesianostriana.dam.model.Obras()).author == authentication.principal.getId().toString()")
     @PutMapping("/{id}")
     public Obras edit(@PathVariable UUID id, @Valid @RequestBody EditDtoObras edited) {

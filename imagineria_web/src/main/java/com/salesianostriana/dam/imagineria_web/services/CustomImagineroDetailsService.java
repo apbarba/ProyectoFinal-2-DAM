@@ -1,6 +1,6 @@
 package com.salesianostriana.dam.imagineria_web.services;
 
-import com.salesianostriana.dam.imagineria_web.exception.UserNotFoundException;
+import com.salesianostriana.dam.imagineria_web.exception.UserException.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

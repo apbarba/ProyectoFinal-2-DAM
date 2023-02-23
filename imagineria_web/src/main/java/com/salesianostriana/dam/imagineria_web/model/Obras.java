@@ -66,12 +66,26 @@ public class Obras {
     @JsonIgnoreProperties("obras")
     private Imaginero imaginero;
 
+   // @ManyToOne
+   // @JoinColumn(name = "user_id")
+   // private User user;
+
     public void eliminarCategoria(Categoria c) {
 
         c.getObras().remove(this);
 
         categoria = null;
     }
+
+//    public void addUser(User u){
+//        this.user = u;
+//        u.getFavoritos().add(this);
+//    }
+
+//    public void removeUser(User u){
+//        this.user = null;
+//        u.getFavoritos().remove(this);
+//    }
 
 
 }

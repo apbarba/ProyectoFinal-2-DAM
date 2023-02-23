@@ -1,17 +1,12 @@
 package com.salesianostriana.dam.imagineria_web.services;
 
-import com.salesianostriana.dam.imagineria_web.exception.EmptyImagineroException;
-import com.salesianostriana.dam.imagineria_web.exception.EmptyObrasListException;
-import com.salesianostriana.dam.imagineria_web.exception.ImagineroNotFoundException;
-import com.salesianostriana.dam.imagineria_web.exception.ObrasNotFoundException;
+import com.salesianostriana.dam.imagineria_web.exception.ImaginerosException.EmptyImagineroException;
+import com.salesianostriana.dam.imagineria_web.exception.ImaginerosException.ImagineroNotFoundException;
 import com.salesianostriana.dam.imagineria_web.model.Imaginero;
-import com.salesianostriana.dam.imagineria_web.model.Obras;
 import com.salesianostriana.dam.imagineria_web.model.dto.ImagineroDto.EditDtoImaginero;
 import com.salesianostriana.dam.imagineria_web.model.dto.ImagineroDto.GetDtoImaginero;
-import com.salesianostriana.dam.imagineria_web.model.dto.ObrasDTO.EditDtoObras;
 import com.salesianostriana.dam.imagineria_web.repository.ImagineroRepository;
 import com.salesianostriana.dam.imagineria_web.search.spec.ImagineroSearch.ImagineroSpecificationBuilder;
-import com.salesianostriana.dam.imagineria_web.search.spec.ObrasSearch.ObrasSpecificationBuilder;
 import com.salesianostriana.dam.imagineria_web.search.util.SearchCriteria;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

@@ -1,4 +1,4 @@
-package com.salesianostriana.dam.imagineria_web.exception;
+package com.salesianostriana.dam.imagineria_web.exception.CategoriaException;
 
 import javax.persistence.EntityNotFoundException;
 

@@ -17,7 +17,7 @@ public class GetDtoImaginero {
     @NotEmpty(message = "{imagineroGet.name.notempty}")
     private String name;
 
-   @Min(value = 0 , message = "{imagineroGet.edad.blank}")
+   @Min(value = 0 , message = "{imaginero.edad.min}")
     private int edad;
 
     private String localidad;

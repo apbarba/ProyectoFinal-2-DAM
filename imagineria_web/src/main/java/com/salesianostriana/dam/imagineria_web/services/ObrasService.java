@@ -1,14 +1,15 @@
 package com.salesianostriana.dam.imagineria_web.services;
 
-import com.salesianostriana.dam.imagineria_web.exception.EmptyObrasListException;
-import com.salesianostriana.dam.imagineria_web.exception.ObrasNotFoundException;
+import com.salesianostriana.dam.imagineria_web.exception.ObrasException.EmptyObrasListException;
+import com.salesianostriana.dam.imagineria_web.exception.ObrasException.ObrasNotFoundException;
+import com.salesianostriana.dam.imagineria_web.exception.UserException.UserNotFoundException;
 import com.salesianostriana.dam.imagineria_web.files.service.StorageService;
 import com.salesianostriana.dam.imagineria_web.model.Imaginero;
-import com.salesianostriana.dam.imagineria_web.model.User;
 import com.salesianostriana.dam.imagineria_web.model.Obras;
+import com.salesianostriana.dam.imagineria_web.model.User;
 import com.salesianostriana.dam.imagineria_web.model.dto.ObrasDTO.EditDtoObras;
-import com.salesianostriana.dam.imagineria_web.model.dto.ObrasDTO.GetDtoObras;
 import com.salesianostriana.dam.imagineria_web.repository.ObrasRepository;
+import com.salesianostriana.dam.imagineria_web.repository.UserRepository;
 import com.salesianostriana.dam.imagineria_web.search.spec.ObrasSearch.ObrasSpecificationBuilder;
 import com.salesianostriana.dam.imagineria_web.search.util.SearchCriteria;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -31,11 +31,11 @@ public class ObrasService {
 
     private final StorageService storageService;
 
-    public List<Obras> findByImaginero(Imaginero imaginero){
+    public List<Obras> findByImaginero(Imaginero imaginero) {
 
         List<Obras> obras = obrasRepository.findByImaginero(imaginero);
 
-        if (obras.isEmpty()){
+        if (obras.isEmpty()) {
 
             throw new EmptyObrasListException();
         }
@@ -43,38 +43,38 @@ public class ObrasService {
         return obras;
     }
 
-    public Obras findById(UUID id){
+    public Obras findById(UUID id) {
 
         return obrasRepository.findById(id)
                 .orElseThrow(() -> new ObrasNotFoundException(id));
     }
 
-    public List<Obras> findByTitulo(String titulo){
+    public List<Obras> findByTitulo(String titulo) {
 
         return obrasRepository.findByTitulo(titulo);
     }
 
-    public List<Obras> findByEstado(String estado){
+    public List<Obras> findByEstado(String estado) {
 
         return obrasRepository.findByEstado(estado);
     }
 
-    public Obras save(EditDtoObras obras){
+    public Obras save(EditDtoObras obras) {
 
         return obrasRepository.save(EditDtoObras.toObras(obras));
     }
 
-    public void delete(UUID id){
+    public void delete(UUID id) {
 
         if (obrasRepository.existsById(id))
             obrasRepository.deleteById(id);
     }
 
-    public List<Obras> findAll(){
+    public List<Obras> findAll() {
 
         List<Obras> obras = obrasRepository.findAll();
 
-        if (obras.isEmpty()){
+        if (obras.isEmpty()) {
 
             throw new EmptyObrasListException();
         }
@@ -82,17 +82,17 @@ public class ObrasService {
         return obras;
     }
 
-    public Obras edit(UUID id, EditDtoObras edit){
+    public Obras edit(UUID id, EditDtoObras edit) {
 
         return obrasRepository.findById(id)
                 .map(obras -> {
                     obras.setTitulo(edit.getTitulo());
                     obras.setEstado(edit.getEstado());
                     obras.setPrecio(edit.getPrecio());
-                   // obras.setCategoria(edit.getCategoria());
+                    // obras.setCategoria(edit.getCategoria());
                     obras.setName(edit.getName());
                     obras.setImg(edit.getImg());
-                   // obras.setImaginero(edit.getImaginero());
+                    // obras.setImaginero(edit.getImaginero());
 
                     return obrasRepository.save(obras);
                 })
@@ -105,7 +105,7 @@ public class ObrasService {
 
                 new ObrasSpecificationBuilder(params);
 
-        Specification<Obras> spec =  obrasSpecificationBuilder.build();
+        Specification<Obras> spec = obrasSpecificationBuilder.build();
 
         return obrasRepository.findAll(spec, pageable);
     }
@@ -123,5 +123,14 @@ public class ObrasService {
         );
         return obras;
     }
-
 }
+
+  /*  public void checkFavorite(UUID obrasId, User user){
+
+        Obras obras = obrasRepository.findById(obrasId)
+                .orElseThrow(() -> new ObrasNotFoundException(obrasId));
+
+        obras.addUser(user);
+        obrasRepository.save(obras);
+    }
+}*/

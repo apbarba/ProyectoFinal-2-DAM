@@ -1,14 +1,12 @@
 package com.salesianostriana.dam.imagineria_web.services;
 
-import com.salesianostriana.dam.imagineria_web.exception.CategoriaNotFoundException;
-import com.salesianostriana.dam.imagineria_web.exception.EmptyCategoriaException;
+import com.salesianostriana.dam.imagineria_web.exception.CategoriaException.CategoriaNotFoundException;
+import com.salesianostriana.dam.imagineria_web.exception.CategoriaException.EmptyCategoriaException;
 import com.salesianostriana.dam.imagineria_web.model.Categoria;
-import com.salesianostriana.dam.imagineria_web.model.Obras;
 import com.salesianostriana.dam.imagineria_web.model.dto.CategoriaDTO.EditDtoCategoria;
 import com.salesianostriana.dam.imagineria_web.model.dto.CategoriaDTO.GetDtoCategoria;
 import com.salesianostriana.dam.imagineria_web.repository.CategoriaRepository;
 import com.salesianostriana.dam.imagineria_web.search.spec.CategoriaSearch.CategoriaSpecificationBuilder;
-import com.salesianostriana.dam.imagineria_web.search.spec.ObrasSearch.ObrasSpecificationBuilder;
 import com.salesianostriana.dam.imagineria_web.search.util.SearchCriteria;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

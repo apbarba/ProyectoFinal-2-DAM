@@ -1,16 +1,20 @@
 package com.salesianostriana.dam.imagineria_web.services;
 
-import com.salesianostriana.dam.imagineria_web.exception.EmptyUserListException;
-import com.salesianostriana.dam.imagineria_web.exception.UserNotFoundException;
+import com.salesianostriana.dam.imagineria_web.exception.ObrasException.ObrasNotFoundException;
+import com.salesianostriana.dam.imagineria_web.exception.UserException.EmptyUserListException;
+import com.salesianostriana.dam.imagineria_web.exception.UserException.UserNotFavException;
+import com.salesianostriana.dam.imagineria_web.exception.UserException.UserNotFoundException;
+import com.salesianostriana.dam.imagineria_web.model.Obras;
 import com.salesianostriana.dam.imagineria_web.model.User;
 import com.salesianostriana.dam.imagineria_web.model.UserRole;
 import com.salesianostriana.dam.imagineria_web.model.dto.UserDTO.CreateDtoUser;
+import com.salesianostriana.dam.imagineria_web.repository.ObrasRepository;
 import com.salesianostriana.dam.imagineria_web.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.validation.constraints.NotEmpty;
+import javax.transaction.Transactional;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Optional;
@@ -23,6 +27,8 @@ public class UserService {
     private final UserRepository imagineroRepository;
 
     private final PasswordEncoder passwordEncoder;
+
+    private final ObrasRepository obrasRepository;
 
     public User createImaginero(CreateDtoUser getDtoImaginero, EnumSet<UserRole> roles){
 
@@ -146,4 +152,56 @@ public class UserService {
 
         return imagineroRepository.existsByEmail(email);
     }
+
+
+    @Transactional
+    public void agregarObraListaFav(UUID obrasId, UUID userId){
+
+        Obras obras = obrasRepository.findById(obrasId)
+                .orElseThrow(() -> new ObrasNotFoundException(obrasId));
+
+        User user = imagineroRepository.findById(userId)
+                .orElseThrow(() -> new UserNotFoundException(userId));
+
+    //    obras.addUser(user);
+        imagineroRepository.save(user);
+    }
+
+  //  public List<Obras> getListFav(UUID userId){
+
+   //     User user = imagineroRepository.findById(userId)
+     //           .orElseThrow(() -> new UserNotFoundException(userId));
+
+       // return user.getFavoritos();
+   // }
+
+  /*  public User getUserWithFavoritos(UUID userId) {
+        return imagineroRepository.findByIdWithFavoritos(userId)
+                .orElseThrow(() -> new UserNotFoundException(userId));
+    }*/
+
+ /*   public void deleteFavObra(UUID userId, UUID obraId){
+
+        User user = imagineroRepository.findById(userId)
+                .orElseThrow(() -> new UserNotFoundException(userId));
+
+        List<Obras> favoritos = user.getFavoritos();
+
+        if (favoritos == null || favoritos.isEmpty()){
+
+            throw new UserNotFavException(userId);
+        }
+
+        if (favoritos.removeIf(obras -> obras.getId().equals(obraId))){
+
+            imagineroRepository.actualizarFavList(userId, favoritos);
+            imagineroRepository.deleteFavObra(obraId);
+
+        }else {
+
+            throw new ObrasNotFoundException(obraId, userId);
+
+        }
+    }*/
+
 }

@@ -2,10 +2,10 @@ package com.salesianostriana.dam.imagineria_web.error;
 
 import com.salesianostriana.dam.imagineria_web.error.model.impl.ApiErrorImpl;
 import com.salesianostriana.dam.imagineria_web.error.model.impl.ApiValidationSubError;
-import com.salesianostriana.dam.imagineria_web.exception.EmptyObrasListException;
-import com.salesianostriana.dam.imagineria_web.exception.EmptyUserListException;
-import com.salesianostriana.dam.imagineria_web.exception.ObrasNotFoundException;
-import com.salesianostriana.dam.imagineria_web.exception.UserNotFoundException;
+import com.salesianostriana.dam.imagineria_web.exception.ObrasException.EmptyObrasListException;
+import com.salesianostriana.dam.imagineria_web.exception.UserException.EmptyUserListException;
+import com.salesianostriana.dam.imagineria_web.exception.ObrasException.ObrasNotFoundException;
+import com.salesianostriana.dam.imagineria_web.exception.UserException.UserNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.ObjectError;

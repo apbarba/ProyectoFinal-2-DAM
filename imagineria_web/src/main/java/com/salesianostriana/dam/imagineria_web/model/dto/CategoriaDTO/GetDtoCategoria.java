@@ -17,10 +17,10 @@ import javax.validation.constraints.NotEmpty;
 @Data
 public class GetDtoCategoria {
 
-    @NotEmpty(message = "{cagetoriaGet.name.notempty}")
+    @NotEmpty(message = "{cagetoria.name.notempty}")
     private String nombre;
 
-    @NotEmpty(message = "{categoriaGet.descripcion.notempty}")
+    @NotEmpty(message = "{categoria.descripcion.notempty}")
     private String descripcion;
 
     public static Categoria toCategoria(GetDtoCategoria edit){
