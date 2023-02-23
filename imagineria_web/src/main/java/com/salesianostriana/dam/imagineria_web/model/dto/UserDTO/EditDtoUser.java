@@ -14,9 +14,9 @@ import javax.validation.constraints.NotEmpty;
 @Builder
 public class EditDtoUser {
 
-    @NotEmpty(message = "{userEdit.name.notemty}")
+    @NotEmpty(message = "{userDto.name.notemty}")
     private String name;
 
-    @NotBlank(message = "{userEdit.username.notempty}")
+    @NotBlank(message = "{createUser.username.notempty}")
     private String username;
 }

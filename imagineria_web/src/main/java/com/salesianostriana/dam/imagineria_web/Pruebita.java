@@ -2,6 +2,7 @@ package com.salesianostriana.dam.imagineria_web;
 
 import com.salesianostriana.dam.imagineria_web.model.User;
 import com.salesianostriana.dam.imagineria_web.model.UserRole;
+import com.salesianostriana.dam.imagineria_web.model.dto.UserDTO.CreateDtoUser;
 import com.salesianostriana.dam.imagineria_web.services.ObrasService;
 import com.salesianostriana.dam.imagineria_web.services.UserService;
 import lombok.RequiredArgsConstructor;

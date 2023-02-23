@@ -13,12 +13,12 @@ import javax.validation.constraints.NotEmpty;
 @Builder
 public class ChangePasswordRequest {
 
-    @NotEmpty(message = "{userChange.oldPassword.notempty}")
+    @NotEmpty(message = "{userDto.oldPassword.notempty}")
     private String oldPassword;
 
-    @NotEmpty(message = "{userChange.newPassword.notempty}")
+    @NotEmpty(message = "{userDto.newPassword.notempty}")
     private String newPassword;
 
-    @NotEmpty(message = "{userChange.verifyNewPassword.notempty}")
+    @NotEmpty(message = "{userDto.verifyNewPassword.notempty}")
     private String verifyNewPassword;
 }
