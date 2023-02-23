@@ -8,6 +8,13 @@ import com.salesianostriana.dam.imagineria_web.model.dto.ObrasDTO.EditDtoObras;
 import com.salesianostriana.dam.imagineria_web.search.util.SearchCriteria;
 import com.salesianostriana.dam.imagineria_web.search.util.SearchCriteriaExtractor;
 import com.salesianostriana.dam.imagineria_web.services.ImaginerosService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -35,7 +42,57 @@ public class ImagineroController {
 
   //      return imaginerosService.findAll();
  //   }
-
+  @Operation(summary = "Obtiene todos los imagineros")
+  @ApiResponses(value = {
+          @ApiResponse(responseCode = "200",
+                  description = "Se han encontrado todas los imagineros correctamente",
+                  content = {@Content(mediaType = "application/json",
+                          array = @ArraySchema(schema = @Schema(implementation = Obras.class)),
+                          examples = {@ExampleObject(
+                                  value = """
+                                              {
+                                                  "content": [
+                                                      {
+                                                          "id": "c0a8000d-8665-1750-8186-6587bb010001",
+                                                          "name": "Antonio Eslava Rubio",
+                                                          "edad": 1,
+                                                          "localidad": "Sumberbakti"
+                                                      },
+                                                      {
+                                                          "id": "c0a8000d-8665-1750-8186-6587bb010002",
+                                                          "name": "Juan de Mesa",
+                                                          "edad": 2,
+                                                          "localidad": "Zhaxirabdain"
+                                                      },
+                                                      {
+                                                          "id": "c0a8000d-8665-1750-8186-6587bb010003",
+                                                          "name": "Pedro Roldán",
+                                                          "edad": 3,
+                                                          "localidad": "Topola"
+                                                      },
+                                                      {
+                                                          "id": "c0a8000d-8665-1750-8186-6587bb010004",
+                                                          "name": "Luisa Roldán",
+                                                          "edad": 4,
+                                                          "localidad": "Santa Rita Aplaya"
+                                                      },
+                                                      {
+                                                          "id": "c0a8000d-8665-1750-8186-6587bb010005",
+                                                          "name": "Luis Álvarez Duarte",
+                                                          "edad": 5,
+                                                          "localidad": "Kašperské Hory"
+                                                      }
+                                                  }                                    
+                                          """
+                          )}
+                  )}),
+          @ApiResponse(responseCode = "404",
+                  description = "No se ha encontrado ninguna obra",
+                  content = @Content),
+          @ApiResponse(responseCode = "401",
+                  description = "No estás loggeado",
+                  content = @Content)
+  })
     @GetMapping("/")
     public ResponseEntity<Page<Imaginero>> searchImaginero(@RequestParam(value = "search", defaultValue = "")
                                                    String search, @PageableDefault(size = 5, page = 0) Pageable pageable){

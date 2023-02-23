@@ -266,7 +266,13 @@ public class ObrasController {
                                                             "estado": "Adquirida",
                                                             "fecha": "2022-10-07",
                                                             "estilo": "Barroca",
-                                                            "createdAt": null                                                                              
+                                                            "createdAt": null,
+                                                            "imaginero": {
+                                                                "id": "c0a8000d-8665-1750-8186-6587bb010001",
+                                                                "name": "Antonio Eslava Rubio",
+                                                                "edad": 1,
+                                                                "localidad": "Sumberbakti"
+                                                            }                                                                              
                                             """
                             )}
                     )}),
