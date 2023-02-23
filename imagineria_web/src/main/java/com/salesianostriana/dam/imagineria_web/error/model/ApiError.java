@@ -1,74 +1,43 @@
 package com.salesianostriana.dam.imagineria_web.error.model;
 
-import com.salesianostriana.dam.imagineria_web.error.model.impl.ApiErrorImpl;
-import com.salesianostriana.dam.imagineria_web.error.model.impl.ApiValidationSubError;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.validation.ObjectError;
-
-import java.text.Collator;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
-public interface ApiError {
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class ApiError {
 
-    HttpStatus getStatus();
+    private HttpStatus estado;
+    private int codigo;
+    private String mensaje;
+    private String ruta;
 
-    int getStatusCode();
+    @Builder.Default
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss")
+    private LocalDateTime fecha = LocalDateTime.now();
 
-    String getMessage();
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private List<ApiSubError> subErrores;
 
-    String getPath();
-
-    LocalDateTime getDate();
-    List<ApiSubError> getSubErrors();
-
-
-    static ApiError fromErrorAttributes(Map<String, Object> defaultErrorAttributesMap) {
-
-        int statusCode = -1;
-
-        HttpStatus status = null;
-
-        if (defaultErrorAttributesMap.containsKey("status")) {
-
-            if (defaultErrorAttributesMap.get("status") instanceof Integer) {
-
-                statusCode = ((Integer) defaultErrorAttributesMap.get("status")).intValue();
-
-                status = HttpStatus.valueOf(statusCode);
-
-            } else if (defaultErrorAttributesMap.get("status") instanceof String) {
-
-                status = HttpStatus.valueOf((String) defaultErrorAttributesMap.get("status"));
-
-                statusCode = status.value();
-            }
-        }
-
-
-        ApiErrorImpl result =
-                ApiErrorImpl.builder()
-                        .status(status)
-                        .statusCode(statusCode)
-                        .message((String) defaultErrorAttributesMap.getOrDefault("message", "No message available"))
-                        .path((String) defaultErrorAttributesMap.getOrDefault("path", "No path available"))
-                        .build();
-
-        if (defaultErrorAttributesMap.containsKey("errors")) {
-
-            List<ObjectError> errors = (List<ObjectError>) defaultErrorAttributesMap.get("errors");
-
-            List<ApiSubError> subErrors = errors.stream()
-                    .map(ApiValidationSubError::fromObjectError)
-                    .collect(Collectors.toList());
-
-            result.setSubErrors(subErrors);
-
-        }
-
-        return result;
+    public ApiError(HttpStatus estado, String mensaje, String ruta) {
+        this.estado = estado;
+        this.codigo = estado.value();
+        this.mensaje = mensaje;
+        this.fecha = LocalDateTime.now();
+        this.ruta = ruta;
     }
 
+    public ApiError(HttpStatus estado, String mensaje, String ruta, List<ApiSubError> subErrores) {
+        this(estado, mensaje, ruta);
+        this.subErrores = subErrores;
+    }
 }

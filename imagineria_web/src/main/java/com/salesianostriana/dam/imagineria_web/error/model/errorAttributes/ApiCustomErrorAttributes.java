@@ -7,24 +7,33 @@ import org.springframework.boot.web.error.ErrorAttributeOptions;
 import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.WebRequest;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
-@Order(value = Ordered.HIGHEST_PRECEDENCE)
-@Component
-@RequiredArgsConstructor
-public class ApiCustomErrorAttributes extends DefaultErrorAttributes {
 
-    private final ObjectMapper objectMapper;
+@Component
+public class ApiCustomErrorAttributes extends DefaultErrorAttributes {
 
     @Override
     public Map<String, Object> getErrorAttributes(WebRequest webRequest, ErrorAttributeOptions options) {
-
-        Map<String,Object> defaultErrorAttributes = super.getErrorAttributes(webRequest, options);
-
-        ApiError apiError = ApiError.fromErrorAttributes(defaultErrorAttributes);
-
-        return objectMapper.convertValue(apiError, Map.class);
-    }}
+        Map<String, Object> errorAttributes = super.getErrorAttributes(webRequest, options);
+        Map<String,Object> result =  Map.of(
+                "estado",errorAttributes.get("status"),
+                "codigo", HttpStatus.valueOf((int) errorAttributes.get("status")).name(),
+                "fecha", LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")),
+                "ruta", errorAttributes.get("path")
+        );
+        if (errorAttributes.containsKey("message")) {
+            result.put("mensaje", errorAttributes.get("message"));
+        }
+        if (errorAttributes.containsKey("errors")) {
+            result.put("subErrores", errorAttributes.get("errors"));
+        }
+        return result;
+    }
+}
