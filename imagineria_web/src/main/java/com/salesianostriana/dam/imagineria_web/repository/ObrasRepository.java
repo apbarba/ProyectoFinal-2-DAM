@@ -13,7 +13,7 @@ import java.util.UUID;
 @Repository
 public interface ObrasRepository extends JpaRepository<Obras, UUID>, JpaSpecificationExecutor<Obras> {
 
-    List<Obras> findByImaginero(Imaginero imaginero);
+    //List<Obras> findByImaginero(Imaginero imaginero);
 
     List<Obras> findByTitulo(String titulo);
 

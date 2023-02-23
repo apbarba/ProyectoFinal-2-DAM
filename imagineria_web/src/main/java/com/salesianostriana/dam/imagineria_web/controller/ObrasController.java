@@ -73,11 +73,11 @@ public class ObrasController {
         return obrasService.findById(id);
     }
 
-    @GetMapping("/author/{imaginero}")
-    public ResponseEntity<List<Obras>> getByImaginero(@PathVariable Imaginero imaginero){
+   // @GetMapping("/author/{imaginero}")
+    //public ResponseEntity<List<Obras>> getByImaginero(@PathVariable Imaginero imaginero){
 
-        return buildResponseOfAList(obrasService.findByImaginero(imaginero));
-    }
+    //    return buildResponseOfAList(obrasService.findByImaginero(imaginero));
+ //   }
 
     @PostMapping("/")
     public ResponseEntity<Obras> createNewObras(@Valid @RequestBody EditDtoObras obras) {

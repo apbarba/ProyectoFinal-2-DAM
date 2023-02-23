@@ -55,23 +55,23 @@ public class Obras {
     @Builder.Default
     private LocalDateTime createdAt = LocalDateTime.now();
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "categoria_id")
-    @JsonIgnoreProperties("obras")
-    @JsonBackReference
-    private Categoria categoria;
+    //@ManyToOne(fetch = FetchType.LAZY)
+    //@JoinColumn(name = "categoria_id")
+    //@JsonIgnoreProperties("obras")
+    //@JsonBackReference
+    //private Categoria categoria;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "imaginero_id")
-    @JsonIgnoreProperties("obras")
-    private Imaginero imaginero;
+    //@ManyToOne(fetch = FetchType.LAZY)
+    //@JoinColumn(name = "imaginero_id")
+   // @JsonIgnoreProperties("obras")
+   // private Imaginero imaginero;
 
-    public void eliminarCategoria(Categoria c) {
+    //public void eliminarCategoria(Categoria c) {
 
-        c.getObras().remove(this);
+     //   c.getObras().remove(this);
 
-        categoria = null;
-    }
+     //   categoria = null;
+   // }
 
 
 }
