@@ -14,6 +14,12 @@ import com.salesianostriana.dam.imagineria_web.security.jwt.refresh.RefreshToken
 import com.salesianostriana.dam.imagineria_web.security.jwt.refresh.RefreshTokenRequest;
 import com.salesianostriana.dam.imagineria_web.security.jwt.refresh.RefreshTokenService;
 import com.salesianostriana.dam.imagineria_web.services.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,8 +48,29 @@ public class UserController {
     private final RefreshTokenService refreshTokenService;
     private final ObrasRepository obrasRepository;
 
-
-    //SOLAMENTE PARA PROBRAR SI FUNCIONA EL USUARIO
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201",
+                    description = "Se muestra correctamente el perfil de usuario",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = JwtImagineroResponse.class),
+                            examples = {@ExampleObject(
+                                    value = """
+                                            {
+                                                "id": "c0a8000d-867f-1abe-8186-7fc3eb3d0001",
+                                                "username": "apbarba2",
+                                                "email": "barba.loana22@triana.salesianos.edu",
+                                                "name": "Ana Admin",
+                                                "createdAt": "23/02/2023 20:33:11"
+                                            }
+                                            """
+                            )})}),
+            @ApiResponse(responseCode = "401",
+                    description = "No tienes permiso para realizar esta opcion",
+                    content = @Content),
+            @ApiResponse(responseCode = "403",
+                    description = "Token expirado o no tienes acceso",
+                    content = @Content),
+    })
     @PostMapping("/auth/register")
     public ResponseEntity<UserResponse> createImagineroWithUserRole(@Valid @RequestBody CreateDtoUser getDtoImaginero) { //@Valid
 
@@ -53,7 +80,29 @@ public class UserController {
                 .status(HttpStatus.CREATED)
                 .body(UserResponse.fromUser(imaginero));
     }
-
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201",
+                    description = "Se muestra correctamente el perfil de usuario",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = JwtImagineroResponse.class),
+                            examples = {@ExampleObject(
+                                    value = """
+                                            {
+                                                "id": "c0a8000d-867f-1abe-8186-7fc4f4790002",
+                                                "username": "apbarba",
+                                                "email": "pilarbarba03@gmail.com",
+                                                "name": "Ana Pilar",
+                                                "createdAt": "23/02/2023 20:34:19"
+                                            }
+                                            """
+                            )})}),
+            @ApiResponse(responseCode = "401",
+                    description = "No tienes permiso para realizar esta opcion",
+                    content = @Content),
+            @ApiResponse(responseCode = "403",
+                    description = "Token expirado o no tienes acceso",
+                    content = @Content),
+    })
     @PostMapping("/auth/register/admin")
     public ResponseEntity<UserResponse> createImagineroWithAdminRole(@Valid @RequestBody CreateDtoUser getDtoImaginero) {
 
@@ -63,7 +112,30 @@ public class UserController {
                 .status(HttpStatus.CREATED)
                 .body(UserResponse.fromUser(imaginero));
     }
-
+    @Operation(summary = "Método para loguear a un usuario ya registrado")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201",
+                    description = "Usuario logueado correctamente",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = LoginRequest.class),
+                            examples = {@ExampleObject(
+                                    value = """
+                                            {
+                                                "id": "c0a8000d-867f-1abe-8186-7fbac7930000",
+                                                "username": "anabarba",
+                                                "email": "gigante@gmail.com",
+                                                "name": "ana",
+                                                "createdAt": "23/02/2023 20:23:12",
+                                                "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjMGE4MDAwZC04NjdmLTFhYmUtODE4Ni03ZmJhYzc5MzAwMDAiLCJpYXQiOjE2NzcxODA3NzcsImV4cCI6MTE1NTc5NzExMTd9.rSXl-GDsBYbcvKUUpcDDzh8vPHWt4LdyLklWL58gms9aU09ogxriutiqhg0GewwgvOexzCDKzDecX66EWG_pig",
+                                                "refreshToken": "3568912a-144a-4cea-a82a-079fa82fd2e4"
+                                            }
+                                             """
+                            )}
+                    )}),
+            @ApiResponse(responseCode = "401",
+                    description = "No existe, registrate",
+                    content = @Content)
+    })
     @PostMapping("auth/login")
     public ResponseEntity<JwtImagineroResponse> login(@RequestBody LoginRequest loginRequest) {
 
@@ -90,31 +162,31 @@ public class UserController {
 
     }
 
-    @PostMapping("/refrestoken")
-    public ResponseEntity<?> refreshToken(@RequestBody RefreshTokenRequest refreshTokenRequest) {
-
-        String refreshToken = refreshTokenRequest.getRefreshToken();
-
-        return refreshTokenService.findByToken(refreshToken)
-                .map(refreshTokenService::verify)
-                .map(RefreshToken::getUser)
-                .map(imaginero -> {
-
-                    String token = jwtProvider.generateToken(imaginero);
-
-                    refreshTokenService.deleteByUser(imaginero);
-                    RefreshToken refreshToken1 = refreshTokenService.createRefreshToken(imaginero);
-
-                    return ResponseEntity
-                            .status(HttpStatus.CREATED)
-                            .body(JwtImagineroResponse.builder()
-                                    .token(token)
-                                    .refreshToken(refreshToken1.getToken())
-                                    .build());
-
-                }).orElseThrow(() -> new RefreshTokenException("Token no encontrado"));
-    }
-
+    @Operation(summary = "Modificación de la contraseña vieja por moderna")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201",
+                    description = "{Modificación con éxito",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ChangePasswordRequest.class),
+                            examples = {@ExampleObject(
+                                    value = """
+                                         {
+                                            "id": "c0a8000d-867f-1abe-8186-7fbac7930000",
+                                            "username": "anabarba",
+                                            "email": "gigante@gmail.com",
+                                            "name": "ana",
+                                            "createdAt": "23/02/2023 20:23:12"
+                                        }
+                                           """
+                            )}
+                    )}),
+            @ApiResponse(responseCode = "401",
+                    description = "No estas logeado",
+                    content = @Content),
+            @ApiResponse(responseCode = "400",
+                    description = "Los datos son incorrectos",
+                    content = @Content)
+    })
     @PutMapping("/user/changePassword")
     public ResponseEntity<UserResponse> changePassword(@RequestBody ChangePasswordRequest changePasswordRequest,
                                                        @AuthenticationPrincipal User loggedUser) {
@@ -139,12 +211,42 @@ public class UserController {
 
         return null;
     }
+    @Operation(summary = "Usuario eliminado")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204",
+                    description = "El usuario ha sido eliminado correctamente",
+                    content = {}),
+            @ApiResponse(responseCode = "404",
+                    description = "No se han encontrado el usuario en la base de datos",
+                    content = @Content),
+            @ApiResponse(responseCode = "401",
+                    description = "No se está loggeado",
+                    content = @Content),
+    })
+    @DeleteMapping("/user/{id}")
+    public ResponseEntity<?> delete(@PathVariable User user){
 
-//    @DeleteMapping("/user/{id}")
-//    public ResponseEntity<?> delete(@PathVariable User user){
-//
-//        userService.delete(user.getId());
-//
-//
-//    }
+        userService.delete(user);
+
+        return ResponseEntity
+                .noContent()
+                .build();
+    }
+    @Operation(summary = "Detalles del usuario activo")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Los detalles del usuario se muestran correctamente",
+                    content = {
+                            @Content(mediaType = "application/json",
+                                    schema = @Schema(implementation = UserResponse.class))
+                    }),
+            @ApiResponse(responseCode = "401",
+                    description = "No se está loggeado",
+                    content = @Content),
+    })
+    @GetMapping("/me")
+    public UserResponse profile(@AuthenticationPrincipal User user){
+
+        return UserResponse.fromUser(user);
+    }
 }

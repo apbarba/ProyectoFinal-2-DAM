@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
@@ -81,7 +82,8 @@ public class SecurityConfig {
                 .authorizeRequests()
                 .antMatchers("/obras/**",
                         "/imaginero/**",
-                        "/favoritos/**").hasRole("USER")
+                        "/favoritos/**",
+                        "/me").hasRole("USER")
                 .antMatchers("/auth/register/admin",
                         "/obras/",
                         "/imaginero/",
@@ -93,7 +95,9 @@ public class SecurityConfig {
                         "/categoria/",
                         "/categoria/{id}",
                         "/categoria/author/{categoria_nombre}",
-                        "/obras/{id}").hasRole("ADMIN")
+                        "/obras/{id}",
+                        "/me").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET, "/obras/{id}").hasRole("ADMIN")
                 .anyRequest().authenticated();
 
 
