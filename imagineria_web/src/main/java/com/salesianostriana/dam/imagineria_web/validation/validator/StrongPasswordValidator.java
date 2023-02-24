@@ -47,8 +47,6 @@ public class StrongPasswordValidator implements ConstraintValidator<StrongPasswo
         if (alpha) {
             rules.add(new CharacterRule(EnglishCharacterData.Alphabetical, 1));
 
-            // Solamente aplicamos estas reglas sobre caracteres alfabéticos
-            // si alpha == true
 
             if (upper)
                 rules.add(new CharacterRule(EnglishCharacterData.UpperCase, 1));

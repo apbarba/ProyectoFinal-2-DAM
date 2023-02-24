@@ -220,7 +220,7 @@ public class ObrasController {
     })
     @GetMapping("/")
     public ResponseEntity<Page<Obras>> searchObras(@RequestParam(value = "search", defaultValue = "")
-                                                   String search, @PageableDefault(size = 10, page = 0)Pageable pageable){
+                                                   String search, @PageableDefault(size = 52, page = 0)Pageable pageable){
 
         List<SearchCriteria> params = SearchCriteriaExtractor.extractSearchCriteriaList(search);
 
@@ -352,7 +352,7 @@ public class ObrasController {
    // }
    @Operation(summary = "Modifica los datos de las obras")
    @ApiResponses(value = {
-           @ApiResponse(responseCode = "200", description = "Imaginero creado correctamente",
+           @ApiResponse(responseCode = "200", description = "Categoria modificada correctamente",
                    content = {@Content(mediaType = "application/json",
                            schema = @Schema(implementation = Obras.class),
                            examples = {@ExampleObject(
@@ -387,7 +387,7 @@ public class ObrasController {
                     description = "ELa obra ha sido eliminada correctamente",
                     content = {}),
             @ApiResponse(responseCode = "404",
-                    description = "No se han encontrado la obra  en la base de datos",
+                    description = "No se han encontrado la obra",
                     content = @Content),
             @ApiResponse(responseCode = "401",
                     description = "No se le está permitido realizar esta opcion",
