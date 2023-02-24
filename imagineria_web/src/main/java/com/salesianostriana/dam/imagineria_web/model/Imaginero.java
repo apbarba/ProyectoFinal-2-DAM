@@ -45,6 +45,6 @@ public class Imaginero {
 
     private String localidad;
 
-    @OneToMany(mappedBy = "imaginero", fetch = FetchType.LAZY)
-    private List<Obras> obras;
+  //  @OneToMany(mappedBy = "imaginero", fetch = FetchType.LAZY)
+  //  private List<Obras> obras;
 }

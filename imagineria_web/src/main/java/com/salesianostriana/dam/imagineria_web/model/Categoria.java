@@ -37,8 +37,8 @@ public class Categoria {
     @Column(length = 1000)
     private String descripcion;
 
-    @ToString.Exclude
-    @Builder.Default
-    @OneToMany(mappedBy = "categoria",cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<Obras> obras = new ArrayList<>();
+    //  @ToString.Exclude
+    // @Builder.Default
+    // @OneToMany(mappedBy = "categoria",cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
+    // private List<Obras> obras = new ArrayList<>();
 }

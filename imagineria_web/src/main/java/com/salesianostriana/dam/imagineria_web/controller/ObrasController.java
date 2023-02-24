@@ -290,6 +290,7 @@ public class ObrasController {
 
         return obrasService.findById(id);
     }
+
     @Operation(summary = "Crea una nueva obra")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Obrac reada",
@@ -315,7 +316,7 @@ public class ObrasController {
             @ApiResponse(responseCode = "400", description = "Datos erróneos",
                     content = @Content),
             @ApiResponse(responseCode = "401", description = "No está autorizado para realizar esta petición",
-            content = @Content)
+                    content = @Content)
     })
     @PostMapping("/")
     public ResponseEntity<Obras> createNewObras(@Valid @RequestBody EditDtoObras obras) {
@@ -351,7 +352,7 @@ public class ObrasController {
    // }
    @Operation(summary = "Modifica los datos de las obras")
    @ApiResponses(value = {
-           @ApiResponse(responseCode = "200", description = "Kg modificados correctamente",
+           @ApiResponse(responseCode = "200", description = "Imaginero creado correctamente",
                    content = {@Content(mediaType = "application/json",
                            schema = @Schema(implementation = Obras.class),
                            examples = {@ExampleObject(
@@ -389,7 +390,7 @@ public class ObrasController {
                     description = "No se han encontrado la obra  en la base de datos",
                     content = @Content),
             @ApiResponse(responseCode = "401",
-                    description = "No se está loggeado",
+                    description = "No se le está permitido realizar esta opcion",
                     content = @Content),
     })
     @DeleteMapping("/{id}")
