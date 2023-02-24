@@ -61,11 +61,6 @@ public class SecurityConfig {
         return authenticationProvider;
 
     }
-
-
-
-
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
@@ -99,6 +94,7 @@ public class SecurityConfig {
                         "/categoria/author/{categoria_nombre}",
                         "/obras/{id}",
                         "/categoria/**",
+
                         "/me").hasRole("ADMIN")
                 .antMatchers(HttpMethod.GET, "/obras/{id}").hasRole("ADMIN")
                 .anyRequest().authenticated();
@@ -116,7 +112,10 @@ public class SecurityConfig {
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
         return (web -> web.ignoring().antMatchers("/h2-console/**", "/auth/register", "/auth/login", "/obras/", "/obras/{id}" +
-                "/imaginero/", "/author/{imaginero_name}", "/imaginero/{id}"));
+                "/imaginero/", "/author/{imaginero_name}", "/imaginero/{id}",  "/v3/api-docs/**",
+                "/swagger-ui/**",
+                "/swagger-ui.html",
+                "/swagger-resources/**"));
     }
 
 }

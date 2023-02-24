@@ -36,10 +36,10 @@ public class Favoritos {
     @ManyToOne(fetch = FetchType.LAZY)
     private Obras obras;
 
-    public void addUsuario(User u){
+  /*  public void addUsuario(User u){
 
         this.user = u;
         u.getFavoritos().add(this);
 
-    }
+    }*/
 }

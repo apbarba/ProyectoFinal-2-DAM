@@ -5,6 +5,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.NaturalId;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -49,8 +50,13 @@ public class User implements UserDetails {
 
     private String verifyPassword;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    private List<Favoritos> favoritos;
+    @ManyToMany(fetch = FetchType.LAZY)
+ /*   @JoinTable(
+            name = "favoritos",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "obra_id", referencedColumnName = "id")
+    )*/
+    private List<Obras> favoritos;
 
     @Builder.Default
     private boolean accountNonExpired = true;

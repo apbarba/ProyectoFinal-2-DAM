@@ -73,5 +73,21 @@ public class Obras {
      //   categoria = null;
    // }
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
+
+    public void addUser(User u){
+
+        this.user = u;
+        user.getFavoritos().add(this);
+
+    }
+
+    public void removeUser(User u){
+
+        this.user = null;
+        user.getFavoritos().remove(this);
+    }
+
 
 }
