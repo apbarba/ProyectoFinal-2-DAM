@@ -357,8 +357,17 @@ public class ObrasController {
                            examples = {@ExampleObject(
                                    value = """
                                                 {
-                                                    
-                                                }
+                                                    {
+                                                    "id": "0a281c47-4073-4cd6-b5ce-f43b989ccfcc",
+                                                    "name": "Lágrimas de Humildad",
+                                                    "precio": 12000.0,
+                                                    "titulo": "Santísima de las Lágrimas",
+                                                    "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfM9A8DoBZuJYIdOJ8IA-YWhbFcAwC4dAQ4eUxSLEI&s",
+                                                    "estado": "Finalizada",
+                                                    "fecha": null,
+                                                    "estilo": null,
+                                                    "createdAt": "2023-02-23T21:46:09.7526577",
+                                                } 
                                             """
                            )}
                    )}),
