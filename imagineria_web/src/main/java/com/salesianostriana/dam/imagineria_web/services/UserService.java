@@ -166,7 +166,7 @@ public class UserService {
         return imagineroRepository.save(user);
     }
 
-    //HACE LO MISMO QUE EL FIND DE ABAJO
+    //HACE LO MISMO QUE EL FIND DE ABAJO PERO SIN EL ENTITYFRAPH
     public List<Obras> getFavoritos(UUID userId) {
 
         User user = imagineroRepository.findById(userId)

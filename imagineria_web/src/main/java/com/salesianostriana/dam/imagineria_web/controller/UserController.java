@@ -252,20 +252,134 @@ public class UserController {
 
         return UserResponse.fromUser(user);
     }
-
+    @Operation(summary = "Se añade una obra a la lista de favoritos")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Se ha añadido correctamente la obra a la lista de favoritos",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = User.class),
+                            examples = {@ExampleObject(
+                                    value = """
+                                            {
+                                                "id": "ac1af001-868a-165e-8186-8a7669930000",
+                                                "name": "ana",
+                                                "password": "{bcrypt}$2a$10$OKT97urWJqSWUnKJgGtjuu2GnuASVpDZpAKZRQc3tlIr417S05WLm",
+                                                "email": "gigante@gmail.com",
+                                                "username": "anabarba",
+                                                "verifyPassword": null,
+                                                "favoritos": [
+                                                    {
+                                                        "id": "0528bac8-b04b-11ed-afa1-0242ac120002",
+                                                        "name": "Esperanza Macarena",
+                                                        "precio": 12000.0,
+                                                        "titulo": "Esperanza Macarena de Madrid",
+                                                        "img": "https://pbs.twimg.com/profile_images/3107512731/770c233907a6270047b9826b2abac100_400x400.jpeg",
+                                                        "estado": "Adquirida",
+                                                        "fecha": "2022-10-07",
+                                                        "estilo": "Barroca",
+                                                        "createdAt": null,
+                                            }
+                                            """
+                            )})}),
+            @ApiResponse(responseCode = "401",
+                    description = "No tienes permiso para realizar esta opcion",
+                    content = @Content),
+            @ApiResponse(responseCode = "403",
+                    description = "Token expirado o no tienes acceso",
+                    content = @Content),
+    })
     @PostMapping("user/{userId}/favoritos/{obraId}")
     public User addFavorito(@PathVariable UUID userId,
                             @PathVariable UUID obraId){
 
         return userService.addFavorito(userId, obraId);
     }
-
+    @Operation(summary = "Se obtiene los detalles de la lista de favoritos del usuario")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Obras encontrada",
+                    content = {@Content(mediaType = "aplication/json",
+                            schema = @Schema(implementation = User.class),
+                            examples = {@ExampleObject(
+                                    value = """
+                                                {
+                                                     "id": "0528bac8-b04b-11ed-afa1-0242ac120002",
+                                                     "name": "Esperanza Macarena",
+                                                     "precio": 12000.0,
+                                                     "titulo": "Esperanza Macarena de Madrid",
+                                                     "img": "https://pbs.twimg.com/profile_images/3107512731/770c233907a6270047b9826b2abac100_400x400.jpeg",
+                                                     "estado": "Adquirida",
+                                                     "fecha": "2022-10-07",
+                                                     "estilo": "Barroca",
+                                                     "createdAt": null,
+                                                     "user": {
+                                                                "id": "ac1af001-868a-165e-8186-8a7669930000",
+                                                                "name": "ana",
+                                                                "password": "{bcrypt}$2a$10$OKT97urWJqSWUnKJgGtjuu2GnuASVpDZpAKZRQc3tlIr417S05WLm",
+                                                                "email": "gigante@gmail.com",
+                                                                "username": "anabarba",
+                                                                "verifyPassword": null,
+                                                            }    
+                                                }                                                                              
+                                            """
+                            )}
+                    )}),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Usuario inexistente",
+                    content = @Content),
+            @ApiResponse(
+                    responseCode = "401",
+                    description = "No está loggeado",
+                    content = @Content)
+    })
     @GetMapping("user/{id}/favoritos")
     public List<Obras> getAllFavoritos(@PathVariable UUID id){
 
      return userService.getFavoritos(id);
     }
 
+    @Operation(summary = "Se obtiene la lista de obras favoritas del usuario logeado")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Obras encontradas",
+                    content = {@Content(mediaType = "aplication/json",
+                            schema = @Schema(implementation = User.class),
+                            examples = {@ExampleObject(
+                                    value = """
+                                                {
+                                                     "id": "0528bac8-b04b-11ed-afa1-0242ac120002",
+                                                     "name": "Esperanza Macarena",
+                                                     "precio": 12000.0,
+                                                     "titulo": "Esperanza Macarena de Madrid",
+                                                     "img": "https://pbs.twimg.com/profile_images/3107512731/770c233907a6270047b9826b2abac100_400x400.jpeg",
+                                                     "estado": "Adquirida",
+                                                     "fecha": "2022-10-07",
+                                                     "estilo": "Barroca",
+                                                     "createdAt": null,
+                                                     "user": {
+                                                                "id": "ac1af001-868a-165e-8186-8a7669930000",
+                                                                "name": "ana",
+                                                                "password": "{bcrypt}$2a$10$OKT97urWJqSWUnKJgGtjuu2GnuASVpDZpAKZRQc3tlIr417S05WLm",
+                                                                "email": "gigante@gmail.com",
+                                                                "username": "anabarba",
+                                                                "verifyPassword": null,
+                                                            }    
+                                                }                                                                          
+                                            """
+                            )}
+                    )}),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Usuario inexistente",
+                    content = @Content),
+            @ApiResponse(
+                    responseCode = "401",
+                    description = "No está loggeado",
+                    content = @Content)
+    })
     @GetMapping("user/{userId}/favorited")
     public ResponseEntity<User> getUserWithFavoritedObras(@PathVariable UUID userId) {
 
@@ -274,6 +388,18 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
+    @Operation(summary = "Se elimina una obra favorita de la lista")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204",
+                    description = "Se eliminó correctamente la obra fav",
+                    content = {}),
+            @ApiResponse(responseCode = "404",
+                    description = "No se han encontrado el usuario o la obra",
+                    content = @Content),
+            @ApiResponse(responseCode = "401",
+                    description = "No se está loggeado",
+                    content = @Content),
+    })
     @DeleteMapping("user/{userId}/favoritos/{obraId}")
     public ResponseEntity<?> removeFav(@PathVariable UUID userId,
                                        @PathVariable UUID obraId){
