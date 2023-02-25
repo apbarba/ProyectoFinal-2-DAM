@@ -1,10 +1,13 @@
 package com.salesianostriana.dam.imagineria_web.services;
 
 import com.salesianostriana.dam.imagineria_web.exception.EmptyUserListException;
+import com.salesianostriana.dam.imagineria_web.exception.ObrasNotFoundException;
 import com.salesianostriana.dam.imagineria_web.exception.UserNotFoundException;
+import com.salesianostriana.dam.imagineria_web.model.Obras;
 import com.salesianostriana.dam.imagineria_web.model.User;
 import com.salesianostriana.dam.imagineria_web.model.UserRole;
 import com.salesianostriana.dam.imagineria_web.model.dto.UserDTO.CreateDtoUser;
+import com.salesianostriana.dam.imagineria_web.repository.ObrasRepository;
 import com.salesianostriana.dam.imagineria_web.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -21,6 +24,8 @@ import java.util.UUID;
 public class UserService {
 
     private final UserRepository imagineroRepository;
+
+    private final ObrasRepository obrasRepository;
 
     private final PasswordEncoder passwordEncoder;
 
@@ -145,5 +150,44 @@ public class UserService {
     public boolean emailExists(String email){
 
         return imagineroRepository.existsByEmail(email);
+    }
+
+    public User addFavorito(UUID userId, UUID obraId){
+
+        User user = imagineroRepository.findById(userId)
+                .orElseThrow(() -> new UserNotFoundException(userId));
+
+        Obras obras = obrasRepository.findById(obraId)
+                .orElseThrow(() -> new ObrasNotFoundException(obraId));
+
+        obras.addUser(user);
+        obrasRepository.save(obras);
+
+        return imagineroRepository.save(user);
+    }
+
+    //HACE LO MISMO QUE EL FIND DE ABAJO
+    public List<Obras> getFavoritos(UUID userId) {
+
+        User user = imagineroRepository.findById(userId)
+                .orElseThrow(() -> new UserNotFoundException(userId));
+
+        return user.getFavoritos();
+    }
+
+    //SE BUSCA A UN USUARIO POR ID Y SE MUESTRA SU LISTA DE OBRAS FAV
+    public User findUserWithFavoritedObras(UUID userId) {
+
+        return imagineroRepository.findByIdWithFavoritos(userId);
+    }
+
+    public void removeFavObra(UUID userId, UUID obraId){
+
+        User user = imagineroRepository.findById(userId)
+                .orElseThrow(() -> new UserNotFoundException(userId));
+
+        user.getFavoritos().removeIf(obras -> obras.getId().equals(obraId));
+
+        imagineroRepository.save(user);
     }
 }

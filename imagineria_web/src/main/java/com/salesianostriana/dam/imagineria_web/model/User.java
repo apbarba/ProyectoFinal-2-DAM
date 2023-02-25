@@ -1,5 +1,6 @@
 package com.salesianostriana.dam.imagineria_web.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.NaturalId;
@@ -23,6 +24,10 @@ import java.util.*;
 @EntityListeners(AuditingEntityListener.class)
 @Getter
 @Table(name = "imaginero_entity")
+@NamedEntityGraph(
+        name = "user.favoritos",
+        attributeNodes = @NamedAttributeNode("favoritos")
+)
 public class User implements UserDetails {
 
     @Id
@@ -51,12 +56,7 @@ public class User implements UserDetails {
     private String verifyPassword;
 
     @ManyToMany(fetch = FetchType.LAZY)
- /*   @JoinTable(
-            name = "favoritos",
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "obra_id", referencedColumnName = "id")
-    )*/
-    private List<Obras> favoritos;
+    private List<Obras> favoritos = new ArrayList<>();
 
     @Builder.Default
     private boolean accountNonExpired = true;

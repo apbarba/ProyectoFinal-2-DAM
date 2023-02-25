@@ -1,5 +1,6 @@
 package com.salesianostriana.dam.imagineria_web.controller;
 
+import com.salesianostriana.dam.imagineria_web.model.Obras;
 import com.salesianostriana.dam.imagineria_web.model.User;
 import com.salesianostriana.dam.imagineria_web.model.dto.UserDTO.ChangePasswordRequest;
 import com.salesianostriana.dam.imagineria_web.model.dto.UserDTO.CreateDtoUser;
@@ -31,7 +32,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.persistence.Access;
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -248,5 +251,37 @@ public class UserController {
     public UserResponse profile(@AuthenticationPrincipal User user){
 
         return UserResponse.fromUser(user);
+    }
+
+    @PostMapping("user/{userId}/favoritos/{obraId}")
+    public User addFavorito(@PathVariable UUID userId,
+                            @PathVariable UUID obraId){
+
+        return userService.addFavorito(userId, obraId);
+    }
+
+    @GetMapping("user/{id}/favoritos")
+    public List<Obras> getAllFavoritos(@PathVariable UUID id){
+
+     return userService.getFavoritos(id);
+    }
+
+    @GetMapping("user/{userId}/favorited")
+    public ResponseEntity<User> getUserWithFavoritedObras(@PathVariable UUID userId) {
+
+        User user = userService.findUserWithFavoritedObras(userId);
+
+        return ResponseEntity.ok(user);
+    }
+
+    @DeleteMapping("user/{userId}/favoritos/{obraId}")
+    public ResponseEntity<?> removeFav(@PathVariable UUID userId,
+                                       @PathVariable UUID obraId){
+
+        userService.removeFavObra(userId, obraId);
+
+        return ResponseEntity
+                .noContent()
+                .build();
     }
 }

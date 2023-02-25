@@ -1,12 +1,12 @@
 package com.salesianostriana.dam.imagineria_web.services;
 
-import com.salesianostriana.dam.imagineria_web.exception.EmptyFavoritosException;
-import com.salesianostriana.dam.imagineria_web.exception.EmptyObrasListException;
-import com.salesianostriana.dam.imagineria_web.exception.FavoritosNotFoundException;
-import com.salesianostriana.dam.imagineria_web.exception.ObrasNotFoundException;
+import com.salesianostriana.dam.imagineria_web.exception.*;
 import com.salesianostriana.dam.imagineria_web.model.Favoritos;
 import com.salesianostriana.dam.imagineria_web.model.Obras;
+import com.salesianostriana.dam.imagineria_web.model.User;
 import com.salesianostriana.dam.imagineria_web.repository.FavoritosRepository;
+import com.salesianostriana.dam.imagineria_web.repository.ObrasRepository;
+import com.salesianostriana.dam.imagineria_web.repository.UserRepository;
 import com.salesianostriana.dam.imagineria_web.search.spec.FavoritosSearch.FavoritosSpecificationBuilder;
 import com.salesianostriana.dam.imagineria_web.search.spec.ObrasSearch.ObrasSpecificationBuilder;
 import com.salesianostriana.dam.imagineria_web.search.util.SearchCriteria;
@@ -23,47 +23,24 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class FavoritosService {
 
-    private final FavoritosRepository favoritosRepository;
+    private final ObrasRepository obrasRepository;
+    private final UserRepository userRepository;
 
-    public Favoritos findById(UUID id){
+    public void marcarComoFavorita(UUID userId, UUID obraId) {
 
-        return favoritosRepository.findById(id)
-                .orElseThrow(() -> new FavoritosNotFoundException(id));
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new UserNotFoundException(userId));
+
+        Obras obra = obrasRepository.findById(obraId)
+                .orElseThrow(() -> new ObrasNotFoundException(obraId));
+
+        obra.addUser(user);
+
+        obrasRepository.save(obra);
     }
 
-    public List<Favoritos> findAll(){
 
-        List<Favoritos> favoritos = favoritosRepository.findAll();
 
-        if (favoritos.isEmpty()){
 
-            throw new EmptyFavoritosException();
-        }
 
-        return favoritos;
-    }
-
-    public void delete(UUID id){
-
-        if (favoritosRepository.existsById(id)){
-
-            throw new FavoritosNotFoundException(id);
-        }
-    }
-
-    public Favoritos guardarFav(Favoritos favoritos){
-
-        return favoritosRepository.save(favoritos);
-    }
-
-    public Page<Favoritos> search(List<SearchCriteria> params, Pageable pageable) {
-
-        FavoritosSpecificationBuilder favSpecificationBuilder =
-
-                new FavoritosSpecificationBuilder(params);
-
-        Specification<Favoritos> spec =  favSpecificationBuilder.build();
-
-        return favoritosRepository.findAll(spec, pageable);
-    }
 }
