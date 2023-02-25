@@ -35,7 +35,7 @@ En la carpeta principal nos encontramos diferentes elementos a tener en cuenta:
   probar todas sus funcionalidades.
 
 ## Dificultades o Errores duante el proceso
-- Se ha queriodo implementar la gestión de favoritos entre la relación de Obras y usuarios, el cual tenemos los siguientes endpoint: Un usuario logeado marca como favorito a una obra existente, la obra marcada se añade a la lista de favoritos que tiene un usuario, un usuario puede ver todas sus obras  favoritas, el usuario elimina un favorito por lo tanto la lista se actualiza. [**EN PROCESO**]
+- Se ha queriodo implementar la gestión de favoritos entre la relación de Obras y usuarios, el cual tenemos los siguientes endpoint: Un usuario logeado marca como favorito a una obra existente, la obra marcada se añade a la lista de favoritos que tiene un usuario, un usuario puede ver todas sus obras  favoritas, el usuario elimina un favorito por lo tanto la lista se actualiza. [**ACTUALIZACIÓN 25/02/23**] -> Se han realizado correctamente los endpoints, ya funcionan
 - El endpoint de la subida de fichero en el endpoint de creación de una obra, porta algunos errores ya que ni se me sube la imagen y no encuentra el controllador de FileController. [**EN PROCESO**]
 
 ## Dificultades con el Fronted
