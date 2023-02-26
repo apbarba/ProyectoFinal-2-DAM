@@ -7,26 +7,22 @@ import org.hibernate.validator.constraints.URL;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
 
-@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
-@RequiredArgsConstructor
-@Data
-public class GetDtoObras {
-
-    private UUID id;
+@Builder
+public class CreateDtoObras {
 
     @NotEmpty(message = "{obrasEdit.name.notempty}")
     private String nombre;
 
-    @NotEmpty(message = "{obraCreate.estilo.notempty}")
     private String estilo;
 
-    @NotEmpty(message = "{obraCreate.fecha.notempty}")
+    @NotEmpty(message = "{obrasEdit.titulo.notempty}")
+    private String titulo;
+
     private LocalDate fecha;
 
     @PositivePrice(message = "{obrasEdit.precio.unique}")
@@ -38,15 +34,4 @@ public class GetDtoObras {
 
     @URL(message = "{obrasEdit.img.notempty}")
     private String img;
-
-    public GetDtoObras(UUID id, String nombre, String estilo, LocalDate fecha, double precio, String estado, String img) {
-        this.id = id;
-        this.nombre = nombre;
-        this.estilo = estilo;
-        this.fecha = fecha;
-        this.precio = precio;
-        this.estado = estado;
-        this.img = img;
-    }
-
 }

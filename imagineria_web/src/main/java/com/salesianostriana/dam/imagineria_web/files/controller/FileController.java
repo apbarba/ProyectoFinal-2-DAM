@@ -34,7 +34,6 @@ public class FileController {
         return ResponseEntity
 
                 .status(HttpStatus.CREATED)
-
                 .body(result);
     }
 

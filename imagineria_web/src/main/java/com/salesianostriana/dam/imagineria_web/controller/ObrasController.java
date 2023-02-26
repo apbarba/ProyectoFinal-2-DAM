@@ -3,7 +3,10 @@ package com.salesianostriana.dam.imagineria_web.controller;
 import com.salesianostriana.dam.imagineria_web.model.Imaginero;
 import com.salesianostriana.dam.imagineria_web.model.User;
 import com.salesianostriana.dam.imagineria_web.model.Obras;
+import com.salesianostriana.dam.imagineria_web.model.dto.ObrasDTO.ConverterDtoObras;
+import com.salesianostriana.dam.imagineria_web.model.dto.ObrasDTO.CreateDtoObras;
 import com.salesianostriana.dam.imagineria_web.model.dto.ObrasDTO.EditDtoObras;
+import com.salesianostriana.dam.imagineria_web.model.dto.ObrasDTO.GetDtoObras;
 import com.salesianostriana.dam.imagineria_web.repository.ObrasRepository;
 import com.salesianostriana.dam.imagineria_web.search.util.SearchCriteria;
 import com.salesianostriana.dam.imagineria_web.search.util.SearchCriteriaExtractor;
@@ -37,6 +40,8 @@ import java.util.UUID;
 public class ObrasController {
 
     private final ObrasService obrasService;
+
+    private final ConverterDtoObras converterDtoObras;
     //@GetMapping("/")
     //public List<Obras> getAll(){
         //return obrasService.findAll();
@@ -333,6 +338,8 @@ public class ObrasController {
                 .body(created);
 
     }
+
+
 
    // @PostMapping("/")
   //  public ResponseEntity<Obras> createNewObras(@Valid @RequestPart("obras") EditDtoObras obras,
