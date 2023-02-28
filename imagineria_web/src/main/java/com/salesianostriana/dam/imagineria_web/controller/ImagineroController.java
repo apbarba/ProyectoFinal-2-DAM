@@ -113,6 +113,18 @@ public class ImagineroController {
                 .ok(result);
     }
 
+    private ResponseEntity<List<Imaginero>> buildResponseOfAList(List<Imaginero> imagineros){
+
+        if (imagineros.isEmpty())
+
+            return ResponseEntity
+                    .notFound()
+                    .build();
+        else
+
+            return ResponseEntity
+                    .ok(imagineros);
+    }
     @Operation(summary = "Se obtiene los detalles del imaginero por su id")
     @ApiResponses(value = {
             @ApiResponse(

@@ -47,8 +47,4 @@ public class Imaginero {
 
     @OneToMany(mappedBy = "imaginero", fetch = FetchType.LAZY)
     private List<Obras> obras;
-
-    public List<Obras> getObras() {
-        return this.obras;
-    }
 }

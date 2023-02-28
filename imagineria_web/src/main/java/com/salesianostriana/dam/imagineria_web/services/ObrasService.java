@@ -3,12 +3,14 @@ package com.salesianostriana.dam.imagineria_web.services;
 import com.salesianostriana.dam.imagineria_web.exception.EmptyObrasListException;
 import com.salesianostriana.dam.imagineria_web.exception.ObrasNotFoundException;
 import com.salesianostriana.dam.imagineria_web.files.service.StorageService;
+import com.salesianostriana.dam.imagineria_web.model.Categoria;
 import com.salesianostriana.dam.imagineria_web.model.Imaginero;
 import com.salesianostriana.dam.imagineria_web.model.User;
 import com.salesianostriana.dam.imagineria_web.model.Obras;
 import com.salesianostriana.dam.imagineria_web.model.dto.ObrasDTO.CreateDtoObras;
 import com.salesianostriana.dam.imagineria_web.model.dto.ObrasDTO.EditDtoObras;
 import com.salesianostriana.dam.imagineria_web.model.dto.ObrasDTO.GetDtoObras;
+import com.salesianostriana.dam.imagineria_web.repository.CategoriaRepository;
 import com.salesianostriana.dam.imagineria_web.repository.ImagineroRepository;
 import com.salesianostriana.dam.imagineria_web.repository.ObrasRepository;
 import com.salesianostriana.dam.imagineria_web.search.spec.ObrasSearch.ObrasSpecificationBuilder;
@@ -34,8 +36,19 @@ public class ObrasService {
     private final ImagineroRepository imagineroRepository;
 
     private final StorageService storageService;
+    private final CategoriaRepository categoriaRepository;
 
+    //  public List<Obras> findByImaginero(Imaginero imaginero){
 
+       // List<Obras> obras = obrasRepository.findByImaginero(imaginero);
+
+       // if (obras.isEmpty()){
+
+     //       throw new EmptyObrasListException();
+     //   }
+
+     //   return obras;
+   // }
 
     public Obras findById(UUID id){
 
@@ -59,22 +72,23 @@ public class ObrasService {
     }
 
     @Transactional
-    public Obras save2(CreateDtoObras createDtoObras, MultipartFile file){
+    public Obras save2(CreateDtoObras createDtoObras/*, MultipartFile file*/){
 
-        String filename = storageService.store(file);
+        //String filename = storageService.store(file);
 
-        Imaginero imaginero = imagineroRepository.getReferenceById(createDtoObras.getImaginero().getId());
-
+      //  Imaginero imaginero = imagineroRepository.getReferenceById(createDtoObras.getImaginero().getId());
+        Optional<Categoria> categoria = categoriaRepository.findById(createDtoObras.getCategoria());
         Obras obras = obrasRepository.save(
                 Obras.builder()
-                        .name(createDtoObras.getNombre())
+                        .name(createDtoObras.getName())
                         .titulo(createDtoObras.getTitulo())
                         .estado(createDtoObras.getEstado())
                         .estilo(createDtoObras.getEstilo())
                         .fecha(createDtoObras.getFecha())
-                        .img(filename)
-                        .imaginero(imaginero)
-                        .nombreImaginero(imaginero.getName())
+                        .img(createDtoObras.getImg())
+                        .categoria(categoria.get())
+                       // .imaginero(imaginero)
+                       // .nombreImaginero(imaginero.getName())
                         .build()
         );
 

@@ -1,5 +1,6 @@
 package com.salesianostriana.dam.imagineria_web.model.dto.ObrasDTO;
 
+import com.salesianostriana.dam.imagineria_web.model.Categoria;
 import com.salesianostriana.dam.imagineria_web.model.Imaginero;
 import com.salesianostriana.dam.imagineria_web.validation.annotation.PositivePrice;
 import lombok.*;
@@ -8,6 +9,7 @@ import org.hibernate.validator.constraints.URL;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
+import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,7 +19,7 @@ import java.time.LocalDate;
 public class CreateDtoObras {
 
     @NotEmpty(message = "{obrasEdit.name.notempty}")
-    private String nombre;
+    private String name;
 
     private String estilo;
 
@@ -37,5 +39,7 @@ public class CreateDtoObras {
     private String img;
 
     private Imaginero imaginero;
+
+    private UUID categoria;
 
 }

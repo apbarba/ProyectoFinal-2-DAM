@@ -91,5 +91,8 @@ public class Obras {
         user.getFavoritos().remove(this);
     }
 
-
+    public void addCategoriaToObra(Categoria c) {
+        this.categoria=c;
+        c.getObras().add(this);
+    }
 }

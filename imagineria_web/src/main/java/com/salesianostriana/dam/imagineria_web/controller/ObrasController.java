@@ -325,9 +325,9 @@ public class ObrasController {
                     content = @Content)
     })
     @PostMapping("/")
-    public ResponseEntity<GetDtoObras> createNewObras(@Valid @RequestBody EditDtoObras obras) {
+    public ResponseEntity<GetDtoObras> createNewObras(@Valid @RequestBody CreateDtoObras obras) {
 
-        Obras created = obrasService.save(obras);
+        Obras created = obrasService.save2(obras);
 
         URI createdURI = ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -341,51 +341,18 @@ public class ObrasController {
     }
 
 
-    @Operation(summary = "Crea una nueva obra")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Obra creada",
-                    content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Obras.class),
-                            examples = {@ExampleObject(
-                                    value = """
-                                                {
-                                                    "id": "637d0612-6824-40b8-8044-baca60a47969",
-                                                    "name": "San Juan de la cruz",
-                                                    "precio": 0.0,
-                                                    "titulo": "San Juan de la Cruz",
-                                                    "img": "huerto_412467.jpg",
-                                                    "estado": "Adquirida",
-                                                    "fecha": "2022-10-07",
-                                                    "estilo": "Barroco",
-                                                    "createdAt": "2023-02-28T19:20:12.470301",
-                                                    "imaginero": {
-                                                        "id": "c0a8000d-8665-1750-8186-6587bb010010",
-                                                        "name": "Francisco Antonio Gijón",
-                                                        "edad": 10,
-                                                        "localidad": "Verdun"
-                                                    },
-                                                    "nombreImaginero": "Francisco Antonio Gijón",
-                                                    "user": null
-                                                } 
-                                            """
-                            )}
-                    )}),
-            @ApiResponse(responseCode = "400", description = "Datos erróneos",
-                    content = @Content),
-            @ApiResponse(responseCode = "401", description = "No está autorizado para realizar esta petición",
-                    content = @Content)
-    })
-    @PostMapping("/new")
-    public ResponseEntity<Obras> createNewObras(@RequestPart("obras") CreateDtoObras create,
-                                                @RequestPart("file")MultipartFile file) {
 
-        Obras obras = obrasService.save2(create, file);
-
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(obras);
-
-    }
+//    @PostMapping("/new")
+//    public ResponseEntity<Obras> createNewObras(@RequestPart("obras") CreateDtoObras create,
+//                                                @RequestPart("file")MultipartFile file) {
+//
+//        Obras obras = obrasService.save2(create, file);
+//
+//        return ResponseEntity
+//                .status(HttpStatus.CREATED)
+//                .body(obras);
+//
+//    }
    @Operation(summary = "Modifica los datos de las obras")
    @ApiResponses(value = {
            @ApiResponse(responseCode = "200", description = "Categoria modificada correctamente",

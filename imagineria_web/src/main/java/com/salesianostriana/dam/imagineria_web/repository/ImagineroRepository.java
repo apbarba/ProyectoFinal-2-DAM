@@ -18,4 +18,5 @@ public interface ImagineroRepository extends JpaRepository<Imaginero, UUID>, Jpa
     //SE ME MUESTRA AL IMAGINERO CON LA LISTA DE OBRAS
     @Query("SELECT i FROM Imaginero i LEFT JOIN FETCH i.obras WHERE i.id = ?1")
     public Optional<Imaginero> findByIdWithObras(UUID id);
+
 }
