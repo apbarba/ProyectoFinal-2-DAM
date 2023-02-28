@@ -36,7 +36,8 @@ En la carpeta principal nos encontramos diferentes elementos a tener en cuenta:
 
 ## Dificultades o Errores duante el proceso
 - Se ha queriodo implementar la gestión de favoritos entre la relación de Obras y usuarios, el cual tenemos los siguientes endpoint: Un usuario logeado marca como favorito a una obra existente, la obra marcada se añade a la lista de favoritos que tiene un usuario, un usuario puede ver todas sus obras  favoritas, el usuario elimina un favorito por lo tanto la lista se actualiza. [**ACTUALIZACIÓN 25/02/23**] -> Se han realizado correctamente los endpoints, ya funcionan
-- El endpoint de la subida de fichero en el endpoint de creación de una obra, porta algunos errores ya que ni se me sube la imagen y no encuentra el controllador de FileController. [**EN PROCESO**]
+- El endpoint de la subida de fichero en el endpoint de creación de una obra, porta algunos errores ya que no encuentra el fichero Json que le estoy pasando.
+[**ACTUALIZACIÓN 28/02/2023 18:23:23**] -> Ya se crea una obra con la subida de nuestro fichero Json y donde aparece el imaginero que lo ha realizado
 
 ## Dificultades con el Fronted
 - Las relaciones entre imaginero , categorias con obras se ha tenido que comentar por problemas de la creacion de una obra en el fronte, pero en la gestión del backend va todo perfecto, sin errores ni dificultades existente. [**ACTUALIZACIÓN 28/02/2023 13:43:00**] -> Se ha arreglado las relaciones del backend para que funcione el Post de obras correctamente en el fronte
