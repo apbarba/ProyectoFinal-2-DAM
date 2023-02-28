@@ -39,7 +39,7 @@ En la carpeta principal nos encontramos diferentes elementos a tener en cuenta:
 - El endpoint de la subida de fichero en el endpoint de creación de una obra, porta algunos errores ya que ni se me sube la imagen y no encuentra el controllador de FileController. [**EN PROCESO**]
 
 ## Dificultades con el Fronted
-- Las relaciones entre imaginero , categorias con obras se ha tenido que comentar por problemas de la creacion de una obra en el fronte, pero en la gestión del backend va todo perfecto, sin errores ni dificultades existente. [**EN PROCESO**]
+- Las relaciones entre imaginero , categorias con obras se ha tenido que comentar por problemas de la creacion de una obra en el fronte, pero en la gestión del backend va todo perfecto, sin errores ni dificultades existente. [**ACTUALIZACIÓN 28/02/2023 13:43:00**] -> Se ha arreglado las relaciones del backend para que funcione el Post de obras correctamente en el fronte
 
 ## Nuevas Tecnologias
 - **Seguridad**: Se ha implementado seguridad en la que se porta de dos roles, "ADMIN" y "ROLE", en las que cada una cuentan con endpoints propios y que solo se pueden gestionar si el usuario logeado tiene su respectivo rol
