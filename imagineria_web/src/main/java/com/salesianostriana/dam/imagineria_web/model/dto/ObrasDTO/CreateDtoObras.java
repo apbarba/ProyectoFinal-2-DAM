@@ -1,5 +1,6 @@
 package com.salesianostriana.dam.imagineria_web.model.dto.ObrasDTO;
 
+import com.salesianostriana.dam.imagineria_web.model.Imaginero;
 import com.salesianostriana.dam.imagineria_web.validation.annotation.PositivePrice;
 import lombok.*;
 import org.hibernate.validator.constraints.URL;
@@ -34,4 +35,7 @@ public class CreateDtoObras {
 
     @URL(message = "{obrasEdit.img.notempty}")
     private String img;
+
+    private Imaginero imaginero;
+
 }

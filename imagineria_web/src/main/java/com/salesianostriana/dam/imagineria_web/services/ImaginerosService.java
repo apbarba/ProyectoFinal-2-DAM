@@ -1,15 +1,18 @@
 package com.salesianostriana.dam.imagineria_web.services;
 
-import com.salesianostriana.dam.imagineria_web.exception.EmptyImagineroException;
-import com.salesianostriana.dam.imagineria_web.exception.EmptyObrasListException;
-import com.salesianostriana.dam.imagineria_web.exception.ImagineroNotFoundException;
-import com.salesianostriana.dam.imagineria_web.exception.ObrasNotFoundException;
+import com.salesianostriana.dam.imagineria_web.exception.*;
+import com.salesianostriana.dam.imagineria_web.files.service.StorageService;
 import com.salesianostriana.dam.imagineria_web.model.Imaginero;
 import com.salesianostriana.dam.imagineria_web.model.Obras;
+import com.salesianostriana.dam.imagineria_web.model.User;
+import com.salesianostriana.dam.imagineria_web.model.dto.ImagineroDto.ConverterDtoImaginero;
+import com.salesianostriana.dam.imagineria_web.model.dto.ImagineroDto.CreateDtoImaginero;
 import com.salesianostriana.dam.imagineria_web.model.dto.ImagineroDto.EditDtoImaginero;
 import com.salesianostriana.dam.imagineria_web.model.dto.ImagineroDto.GetDtoImaginero;
 import com.salesianostriana.dam.imagineria_web.model.dto.ObrasDTO.EditDtoObras;
 import com.salesianostriana.dam.imagineria_web.repository.ImagineroRepository;
+import com.salesianostriana.dam.imagineria_web.repository.ObrasRepository;
+import com.salesianostriana.dam.imagineria_web.repository.UserRepository;
 import com.salesianostriana.dam.imagineria_web.search.spec.ImagineroSearch.ImagineroSpecificationBuilder;
 import com.salesianostriana.dam.imagineria_web.search.spec.ObrasSearch.ObrasSpecificationBuilder;
 import com.salesianostriana.dam.imagineria_web.search.util.SearchCriteria;
@@ -18,8 +21,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -27,6 +33,11 @@ import java.util.UUID;
 public class ImaginerosService {
 
     private final ImagineroRepository imagineroRepository;
+    private final UserRepository userRepository;
+    private final StorageService storageService;
+    private final ConverterDtoImaginero converterDtoImaginero;
+    private final ObrasRepository obrasRepository;
+
 
     public Imaginero findById(UUID id){
 
@@ -45,6 +56,35 @@ public class ImaginerosService {
 
         return imaginero;
     }
+
+ /*   public Imaginero save(CreateDtoImaginero imaginero, MultipartFile file, User user){
+
+        Optional<User> user1 = userRepository.findById(user.getId());
+
+        if (user1.isEmpty()){
+
+            throw new UserNotFoundException(user.getId().toString());
+        }else {
+
+            String uri = storageService.store(file);
+
+            Imaginero imaginero1 = converterDtoImaginero.createImaginero(imaginero, uri);
+
+            List<Obras> obras = new ArrayList<>();
+
+            for (Obras obras1 : imaginero.getObras()){
+
+                Obras obras2 = obrasRepository.findById(obras1.getId()).get();
+
+                obras.add(obras2);
+            }
+
+            imaginero1.getObras().addAll(obras);
+
+            return imagineroRepository.save(imaginero1);
+        }
+
+    }*/
 
     public Imaginero save(GetDtoImaginero imaginero){
 

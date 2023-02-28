@@ -66,6 +66,8 @@ public class Obras {
     @JsonIgnoreProperties("obras")
     private Imaginero imaginero;
 
+    private String nombreImaginero;
+
     //public void eliminarCategoria(Categoria c) {
 
      //   c.getObras().remove(this);

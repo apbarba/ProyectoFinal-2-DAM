@@ -342,22 +342,17 @@ public class ObrasController {
 
 
 
-   // @PostMapping("/")
-  //  public ResponseEntity<Obras> createNewObras(@Valid @RequestPart("obras") EditDtoObras obras,
-    //                                            @RequestPart("file")MultipartFile file) {
+    @PostMapping("/new")
+    public ResponseEntity<Obras> createNewObras(@RequestPart("obras") CreateDtoObras create,
+                                                @RequestPart("file")MultipartFile file) {
 
-      //  Obras created = obrasService.save(obras, file);
+        Obras obras = obrasService.save2(create, file);
 
-        //URI createdURI = ServletUriComponentsBuilder
-          //      .fromCurrentRequest()
-            //    .path("/{id}")
-              //  .buildAndExpand(created.getId()).toUri();
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(obras);
 
-      //  return ResponseEntity
-        //        .created(createdURI)
-          //      .body(created);
-
-   // }
+    }
    @Operation(summary = "Modifica los datos de las obras")
    @ApiResponses(value = {
            @ApiResponse(responseCode = "200", description = "Categoria modificada correctamente",

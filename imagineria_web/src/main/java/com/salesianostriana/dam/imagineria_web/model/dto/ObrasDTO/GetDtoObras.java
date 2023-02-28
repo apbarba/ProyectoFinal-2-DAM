@@ -1,5 +1,6 @@
 package com.salesianostriana.dam.imagineria_web.model.dto.ObrasDTO;
 
+import com.salesianostriana.dam.imagineria_web.model.dto.ImagineroDto.GetDtoImaginero;
 import com.salesianostriana.dam.imagineria_web.validation.annotation.PositivePrice;
 import lombok.*;
 import org.hibernate.validator.constraints.URL;

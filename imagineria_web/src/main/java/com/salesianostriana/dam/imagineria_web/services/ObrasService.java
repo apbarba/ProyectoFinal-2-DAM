@@ -6,8 +6,10 @@ import com.salesianostriana.dam.imagineria_web.files.service.StorageService;
 import com.salesianostriana.dam.imagineria_web.model.Imaginero;
 import com.salesianostriana.dam.imagineria_web.model.User;
 import com.salesianostriana.dam.imagineria_web.model.Obras;
+import com.salesianostriana.dam.imagineria_web.model.dto.ObrasDTO.CreateDtoObras;
 import com.salesianostriana.dam.imagineria_web.model.dto.ObrasDTO.EditDtoObras;
 import com.salesianostriana.dam.imagineria_web.model.dto.ObrasDTO.GetDtoObras;
+import com.salesianostriana.dam.imagineria_web.repository.ImagineroRepository;
 import com.salesianostriana.dam.imagineria_web.repository.ObrasRepository;
 import com.salesianostriana.dam.imagineria_web.search.spec.ObrasSearch.ObrasSpecificationBuilder;
 import com.salesianostriana.dam.imagineria_web.search.util.SearchCriteria;
@@ -28,6 +30,8 @@ import java.util.UUID;
 public class ObrasService {
 
     private final ObrasRepository obrasRepository;
+
+    private final ImagineroRepository imagineroRepository;
 
     private final StorageService storageService;
 
@@ -62,6 +66,29 @@ public class ObrasService {
     public Obras save(EditDtoObras obras){
 
         return obrasRepository.save(EditDtoObras.toObras(obras));
+    }
+
+    @Transactional
+    public Obras save2(CreateDtoObras createDtoObras, MultipartFile file){
+
+        String filename = storageService.store(file);
+
+        Imaginero imaginero = imagineroRepository.getReferenceById(createDtoObras.getImaginero().getId());
+
+        Obras obras = obrasRepository.save(
+                Obras.builder()
+                        .name(createDtoObras.getNombre())
+                        .titulo(createDtoObras.getTitulo())
+                        .estado(createDtoObras.getEstado())
+                        .estilo(createDtoObras.getEstilo())
+                        .fecha(createDtoObras.getFecha())
+                        .img(filename)
+                        .imaginero(imaginero)
+                        .nombreImaginero(imaginero.getName())
+                        .build()
+        );
+
+        return obras;
     }
 
     public void delete(UUID id){
