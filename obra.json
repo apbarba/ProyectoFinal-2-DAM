@@ -1,0 +1,13 @@
+{
+  "nombre": "San Juan de la cruz",
+  "precio": 12000.0,
+  "titulo": "San Juan de la Cruz",
+  "img": "URL",
+  "estado": "Adquirida",
+  "fecha": "2022-10-07",
+  "estilo": "Barroco",
+  "imaginero": {
+    "id": "c0a8000d-8665-1750-8186-6587bb010010",
+    "nombre": "Nombre del imaginero"
+  }
+}
