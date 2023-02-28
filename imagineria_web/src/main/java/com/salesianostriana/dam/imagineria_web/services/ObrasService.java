@@ -35,17 +35,7 @@ public class ObrasService {
 
     private final StorageService storageService;
 
-  //  public List<Obras> findByImaginero(Imaginero imaginero){
 
-       // List<Obras> obras = obrasRepository.findByImaginero(imaginero);
-
-       // if (obras.isEmpty()){
-
-     //       throw new EmptyObrasListException();
-     //   }
-
-     //   return obras;
-   // }
 
     public Obras findById(UUID id){
 

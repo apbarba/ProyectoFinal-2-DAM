@@ -23,6 +23,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.swing.text.html.Option;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -131,4 +132,10 @@ public class ImaginerosService {
 
         return imagineroRepository.findAll(spec, pageable);
     }
+
+    public Optional<Imaginero> findByObras(UUID id){
+
+        return imagineroRepository.findByIdWithObras(id);
+    }
+
 }

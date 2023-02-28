@@ -28,6 +28,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -112,18 +113,6 @@ public class ImagineroController {
                 .ok(result);
     }
 
-    private ResponseEntity<List<Imaginero>> buildResponseOfAList(List<Imaginero> imagineros){
-
-        if (imagineros.isEmpty())
-
-            return ResponseEntity
-                    .notFound()
-                    .build();
-        else
-
-            return ResponseEntity
-                    .ok(imagineros);
-    }
     @Operation(summary = "Se obtiene los detalles del imaginero por su id")
     @ApiResponses(value = {
             @ApiResponse(
@@ -152,9 +141,21 @@ public class ImagineroController {
                     content = @Content)
     })
     @GetMapping("/{id}")
-    public Imaginero getById(@PathVariable UUID id){
+    public ResponseEntity<Imaginero> findById(@PathVariable(value = "id")UUID id){
 
-        return imaginerosService.findById(id);
+        Optional<Imaginero> imaginero = imaginerosService.findByObras(id);
+
+        if (!imaginero.isPresent()){
+
+            return ResponseEntity
+                    .notFound()
+                    .build();
+        }else {
+
+            return ResponseEntity
+                    .ok(imaginero.get());
+        }
+
     }
 
     @Operation(summary = "Crea un nuevo imaginero")
