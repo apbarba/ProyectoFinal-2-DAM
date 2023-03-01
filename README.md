@@ -33,6 +33,8 @@ En la carpeta principal nos encontramos diferentes elementos a tener en cuenta:
 - **src**: Es la carpeta donde se aloja todo el código fuente utilizado en el desarrollo de la aplicación.
 - **imagineria_web.postman_collection.json**: Es una colección de Postman, que podremos importar en dicho programa, y que nos permitirá acceder a los distintos endpoints de la API para
   probar todas sus funcionalidades.
+- En nuestra colección de Postman ya está preterminado nuestro usuario Admin, aunque se puede crear también, también hay que describir que hay que utilizar el token del usuario que se ha loggeado para que se puedan utilizar las peticiones.
+
 
 ## Dificultades o Errores duante el proceso
 - Se ha queriodo implementar la gestión de favoritos entre la relación de Obras y usuarios, el cual tenemos los siguientes endpoint: Un usuario logeado marca como favorito a una obra existente, la obra marcada se añade a la lista de favoritos que tiene un usuario, un usuario puede ver todas sus obras  favoritas, el usuario elimina un favorito por lo tanto la lista se actualiza. [**ACTUALIZACIÓN 25/02/23**] -> Se han realizado correctamente los endpoints, ya funcionan
@@ -71,7 +73,39 @@ En la carpeta principal nos encontramos diferentes elementos a tener en cuenta:
 - **GET: http://localhost:8080/categoria/{id}**: Obtiene la información de una categoria, buscada por su ID.
 
 ### User:
-- **POST: http://localhost:8080/auth/register/admin**: Obtiene el listado completo de categorias.
-- **PUT: http://localhost:8080/user/changedPassword{id}**: Modifica una categoria, buscada por su ID.
-- **DELETE: http://localhost:8080/categoria/{id}**: Borra una categoria, buscada por su ID.
+- **POST: http://localhost:8080/auth/register/admin**: Se crea un usuario admin.
+- **PUT: http://localhost:8080/user/changedPassword{id}**: Modifica la contraseña del usuario logeado, buscada por su ID.
+- **DELETE: http://localhost:8080/delete/{id}**: Borra al usuario logeado por su ID.
 - **GET: http://localhost:8080/me/{id}**: Obtiene la información del usuario logeado.
+
+## Rutas disponible de USER:
+### Obras
+- **GET: http://localhost:8080/obras/**: Obtiene el listado completo de tipos de obras.
+- **GET: http://localhost:8080/obras/{id}**: Obtiene la información de una obra, buscada por su ID.
+
+### Categoria:
+- **GET: http://localhost:8080/categoria/**: Obtiene el listado completo de categorias.
+- **GET: http://localhost:8080/categoria/{id}**: Obtiene la información de una categoria, buscada por su ID.
+
+### Imaginero:
+- **GET: http://localhost:8080/imaginero/**: Obtiene el listado completo de imagineros.
+- **GET: http://localhost:8080/imaginero/{id}**: Obtiene la información de un imaginero, buscada por su ID.
+
+### User:
+- **POST: http://localhost:8080/auth/register**: Se crea un usuario admin.
+- **PUT: http://localhost:8080/user/changedPassword{id}**: Modifica la contraseña del usuario logeado, buscada por su ID.
+- **GET: http://localhost:8080/me/{id}**: Obtiene la información del usuario logeado.
+- **POST: http://localhost:8080/user/{userId}/favoritos/{obrasId}**: A raíd del is del usuario logeado y del id de la obra que quiere marcar como favorita, se añade a la lista de favoritos.
+- **GET: http://localhost:8080/user/{id}/favoritos**: Se obtiene la lista de favoritos del usuario logeado.
+- **GET: http://localhost:8080/user/{id}/favorited**: Se obtiene la lista de favforitos del usuario logeado(EntityGraph).
+- **DELETE: http://localhost:8080/user/{userId}/favoritos/{obraId}**: Se borra con el id del usuario logeado y con el id de la obra que se quiere eliminar, de la lista de favoritos.
+
+
+
+
+
+
+
+
+
+
