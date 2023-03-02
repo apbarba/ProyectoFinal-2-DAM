@@ -100,6 +100,9 @@ En la carpeta principal nos encontramos diferentes elementos a tener en cuenta:
 - **GET: http://localhost:8080/user/{id}/favorited**: Se obtiene la lista de favforitos del usuario logeado(EntityGraph).
 - **DELETE: http://localhost:8080/user/{userId}/favoritos/{obraId}**: Se borra con el id del usuario logeado y con el id de la obra que se quiere eliminar, de la lista de favoritos.
 
+## Datos
+- El método de obras/new que tenemos en nuestro controller, está comentado, pero se puede descomentar para probar su funcionamiento
+
 
 
 
