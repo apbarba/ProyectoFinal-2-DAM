@@ -43,6 +43,7 @@ public class ObrasController {
     private final ObrasService obrasService;
 
     private final ConverterDtoObras converterDtoObras;
+    private final GetDtoObras getDtoObras;
     //@GetMapping("/")
     //public List<Obras> getAll(){
         //return obrasService.findAll();

@@ -40,6 +40,8 @@ public class GetDtoObras {
     @URL(message = "{obrasEdit.img.notempty}")
     private String img;
 
+    private List<GetDtoImaginero> dtoImagineros;
+
     public GetDtoObras(UUID id, String nombre, String estilo, LocalDate fecha, double precio, String estado, String img) {
         this.id = id;
         this.nombre = nombre;

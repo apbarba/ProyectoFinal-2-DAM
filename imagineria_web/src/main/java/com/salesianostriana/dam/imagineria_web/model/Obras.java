@@ -63,17 +63,10 @@ public class Obras {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "imaginero_id")
-    @JsonIgnoreProperties("obras")
+   // @JsonIgnoreProperties("obras")
     private Imaginero imaginero;
 
     private String nombreImaginero;
-
-    //public void eliminarCategoria(Categoria c) {
-
-     //   c.getObras().remove(this);
-
-     //   categoria = null;
-   // }
 
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
