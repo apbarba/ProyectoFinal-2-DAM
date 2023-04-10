@@ -1,15 +1,12 @@
 package com.salesianostriana.dam.imagineria_web.controller;
 
-import com.salesianostriana.dam.imagineria_web.model.Imaginero;
-import com.salesianostriana.dam.imagineria_web.model.User;
+
 import com.salesianostriana.dam.imagineria_web.model.Obras;
 import com.salesianostriana.dam.imagineria_web.model.dto.ObrasDTO.ConverterDtoObras;
 import com.salesianostriana.dam.imagineria_web.model.dto.ObrasDTO.CreateDtoObras;
 import com.salesianostriana.dam.imagineria_web.model.dto.ObrasDTO.EditDtoObras;
 import com.salesianostriana.dam.imagineria_web.model.dto.ObrasDTO.GetDtoObras;
-import com.salesianostriana.dam.imagineria_web.repository.ObrasRepository;
-import com.salesianostriana.dam.imagineria_web.search.util.SearchCriteria;
-import com.salesianostriana.dam.imagineria_web.search.util.SearchCriteriaExtractor;
+import com.salesianostriana.dam.imagineria_web.page.PaginationOrders;
 import com.salesianostriana.dam.imagineria_web.services.ObrasService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -24,15 +21,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.net.URI;
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -43,11 +39,9 @@ public class ObrasController {
     private final ObrasService obrasService;
 
     private final ConverterDtoObras converterDtoObras;
-    private final GetDtoObras getDtoObras;
-    //@GetMapping("/")
-    //public List<Obras> getAll(){
-        //return obrasService.findAll();
- //   }
+
+    private final PaginationOrders paginationOrders;
+
     @Operation(summary = "Obtiene todas las obras")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",
@@ -226,36 +220,19 @@ public class ObrasController {
             content = @Content)
     })
     @GetMapping("/")
-    public ResponseEntity<Page<Obras>> searchObras(@RequestParam(value = "search", defaultValue = "")
-                                                   String search, @PageableDefault(size = 52, page = 0)Pageable pageable){
+    public ResponseEntity<Page<GetDtoObras>> searchObras(@RequestParam(value = "search", defaultValue = "")
+                                                   String search, @PageableDefault(size = 10, page = 0)Pageable pageable,
+                                                         @NotNull HttpServletRequest request){
 
-        List<SearchCriteria> params = SearchCriteriaExtractor.extractSearchCriteriaList(search);
+        Page<GetDtoObras> pageObras = obrasService.findAllObras(pageable);
+        UriComponentsBuilder uriComponentsBuilder = UriComponentsBuilder.fromHttpUrl(request.getRequestURL().toString());
 
-        Page<Obras> result = obrasService.search(params, pageable);
-
-        if (result.isEmpty()){
-
-            return ResponseEntity
-                    .notFound()
-                    .build();
-        }
-
-        return  ResponseEntity
-                .ok(result);
+        return ResponseEntity
+                .ok()
+                .header("link", paginationOrders.createLinkHeader(pageObras, uriComponentsBuilder))
+                .body(pageObras);
     }
 
-    private ResponseEntity<List<Obras>> buildResponseOfAList(List<Obras> obras){
-
-        if (obras.isEmpty())
-
-            return ResponseEntity
-                    .notFound()
-                    .build();
-        else
-
-            return ResponseEntity
-                    .ok(obras);
-    }
     @Operation(summary = "Se obtiene los detalles de la obra por su id")
     @ApiResponses(value = {
             @ApiResponse(
@@ -293,9 +270,9 @@ public class ObrasController {
                     content = @Content)
     })
     @GetMapping("/{id}")
-    public Obras getById(@PathVariable UUID id){
+    public GetDtoObras getById(@PathVariable UUID id){
 
-        return obrasService.findById(id);
+        return converterDtoObras.obrasToObras(obrasService.findById(id));
     }
 
     @Operation(summary = "Crea una nueva obra")
@@ -381,9 +358,9 @@ public class ObrasController {
             @ApiResponse(responseCode = "401", description = "No está autorizado para realizar esta opción")
    })
     @PutMapping("/{id}")
-    public Obras edit(@PathVariable UUID id, @Valid @RequestBody EditDtoObras edited) {
+    public GetDtoObras edit(@PathVariable UUID id, @Valid @RequestBody EditDtoObras edited) {
 
-        return obrasService.edit(id, edited);
+        return converterDtoObras.obrasToObras(obrasService.edit(id, edited));
     }
     @Operation(summary = "Obra eliminada")
     @ApiResponses(value = {

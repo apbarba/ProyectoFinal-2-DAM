@@ -2,9 +2,12 @@ package com.salesianostriana.dam.imagineria_web.controller;
 
 import com.salesianostriana.dam.imagineria_web.model.Imaginero;
 import com.salesianostriana.dam.imagineria_web.model.Obras;
+import com.salesianostriana.dam.imagineria_web.model.dto.ImagineroDto.ConverterDtoImaginero;
+import com.salesianostriana.dam.imagineria_web.model.dto.ImagineroDto.CreateDtoImaginero;
 import com.salesianostriana.dam.imagineria_web.model.dto.ImagineroDto.EditDtoImaginero;
 import com.salesianostriana.dam.imagineria_web.model.dto.ImagineroDto.GetDtoImaginero;
 import com.salesianostriana.dam.imagineria_web.model.dto.ObrasDTO.EditDtoObras;
+import com.salesianostriana.dam.imagineria_web.page.PaginationOrders;
 import com.salesianostriana.dam.imagineria_web.search.util.SearchCriteria;
 import com.salesianostriana.dam.imagineria_web.search.util.SearchCriteriaExtractor;
 import com.salesianostriana.dam.imagineria_web.services.ImaginerosService;
@@ -24,8 +27,11 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
@@ -38,11 +44,11 @@ public class ImagineroController {
 
     private final ImaginerosService imaginerosService;
 
-  //  @GetMapping("/")
-  //  public List<Imaginero> getAll(){
+    private final PaginationOrders paginationOrders;
 
-  //      return imaginerosService.findAll();
- //   }
+    private final ConverterDtoImaginero converterDtoImaginero;
+
+
   @Operation(summary = "Obtiene todos los imagineros")
   @ApiResponses(value = {
           @ApiResponse(responseCode = "200",
@@ -95,22 +101,17 @@ public class ImagineroController {
                   content = @Content)
   })
     @GetMapping("/")
-    public ResponseEntity<Page<Imaginero>> searchImaginero(@RequestParam(value = "search", defaultValue = "")
-                                                   String search, @PageableDefault(size = 5, page = 0) Pageable pageable){
+    public ResponseEntity<Page<GetDtoImaginero>> searchImaginero(@RequestParam(value = "search", defaultValue = "")
+                                                                String search, @PageableDefault(size = 5, page = 0) Pageable pageable,
+                                                                 @NotNull HttpServletRequest request){
 
-        List<SearchCriteria> params = SearchCriteriaExtractor.extractSearchCriteriaList(search);
+        Page<GetDtoImaginero> pageImagineros = imaginerosService.findAllImagineros(pageable);
+        UriComponentsBuilder uriComponentsBuilder = UriComponentsBuilder.fromHttpUrl(request.getRequestURL().toString());
 
-        Page<Imaginero> result = imaginerosService.search(params, pageable);
-
-        if (result.isEmpty()){
-
-            return ResponseEntity
-                    .notFound()
-                    .build();
-        }
-
-        return  ResponseEntity
-                .ok(result);
+        return ResponseEntity
+                .ok()
+                .header("link", paginationOrders.createLinkHeader(pageImagineros, uriComponentsBuilder))
+                .body(pageImagineros);
     }
 
     private ResponseEntity<List<Imaginero>> buildResponseOfAList(List<Imaginero> imagineros){
@@ -153,20 +154,9 @@ public class ImagineroController {
                     content = @Content)
     })
     @GetMapping("/{id}")
-    public ResponseEntity<Imaginero> findById(@PathVariable(value = "id")UUID id){
+    public GetDtoImaginero findById(@PathVariable(value = "id")UUID id){
 
-        Optional<Imaginero> imaginero = imaginerosService.findByObras(id);
-
-        if (!imaginero.isPresent()){
-
-            return ResponseEntity
-                    .notFound()
-                    .build();
-        }else {
-
-            return ResponseEntity
-                    .ok(imaginero.get());
-        }
+        return converterDtoImaginero.imagineroToImaginero(imaginerosService.findById(id));
 
     }
 
@@ -192,9 +182,9 @@ public class ImagineroController {
                     content = @Content)
     })
     @PostMapping("/")
-    public ResponseEntity<Imaginero> createNewImaginero(@Valid @RequestBody GetDtoImaginero imaginero) {
+    public ResponseEntity<GetDtoImaginero> createNewImaginero(@Valid @RequestBody CreateDtoImaginero imaginero) {
 
-        Imaginero created = imaginerosService.save(imaginero);
+        GetDtoImaginero created = imaginerosService.save(imaginero);
 
         URI createdURI = ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -227,9 +217,9 @@ public class ImagineroController {
             @ApiResponse(responseCode = "401", description = "No está autorizado para realizar esta opción")
     })
     @PutMapping("/{id}")
-    public Imaginero edit(@PathVariable UUID id, @Valid @RequestBody EditDtoImaginero edited) {
+    public GetDtoImaginero edit(@PathVariable UUID id, @Valid @RequestBody EditDtoImaginero edited) {
 
-        return imaginerosService.edit(id, edited);
+        return converterDtoImaginero.imagineroToImaginero(imaginerosService.edit(id, edited));
     }
 
     @Operation(summary = "Se elimina a un imaginero, pero no se eliminan sus oobras")

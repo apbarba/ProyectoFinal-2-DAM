@@ -10,8 +10,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class ConverterDtoImaginero {
 
-    private final ConverterDtoObras converterDtoObras;
-    public Imaginero createImaginero(CreateDtoImaginero createDtoImaginero, String uri){
+    public Imaginero createImaginero(CreateDtoImaginero createDtoImaginero){
 
         return Imaginero.builder()
                 .name(createDtoImaginero.getName())
@@ -19,17 +18,17 @@ public class ConverterDtoImaginero {
                 .localidad(createDtoImaginero.getLocalidad())
                 .build();
     }
-    /*public GetDtoImaginero getDtoImaginero(Imaginero i){
+    public GetDtoImaginero imagineroToImaginero(Imaginero i){
 
         return GetDtoImaginero.builder()
                 .id(i.getId())
                 .name(i.getName())
                 .edad(i.getEdad())
                 .localidad(i.getLocalidad())
-                .obras(i.getObras().stream()
+             /*   .obras(i.getObras().stream()
                         .map(converterDtoObras::getDtoObras)
-                        .toList())
+                        .toList())*/
                 .build();
-    }*/
+    }
 
 }

@@ -2,6 +2,7 @@ package com.salesianostriana.dam.imagineria_web.controller;
 
 import com.salesianostriana.dam.imagineria_web.model.Categoria;
 import com.salesianostriana.dam.imagineria_web.model.Obras;
+import com.salesianostriana.dam.imagineria_web.model.dto.CategoriaDTO.CreateDtoCategoria;
 import com.salesianostriana.dam.imagineria_web.model.dto.CategoriaDTO.EditDtoCategoria;
 import com.salesianostriana.dam.imagineria_web.model.dto.CategoriaDTO.GetDtoCategoria;
 import com.salesianostriana.dam.imagineria_web.search.util.SearchCriteria;
@@ -183,9 +184,9 @@ public class CategoriaController {
                     content = @Content)
     })
     @PostMapping("/")
-    public ResponseEntity<Categoria> createNewCategoria(@Valid @RequestBody GetDtoCategoria categoria) {
+    public ResponseEntity<GetDtoCategoria> createNewCategoria(@Valid @RequestBody CreateDtoCategoria categoria) {
 
-        Categoria created = categoriaService.save(categoria);
+        GetDtoCategoria created = categoriaService.save(categoria);
 
         URI createdURI = ServletUriComponentsBuilder
                 .fromCurrentRequest()

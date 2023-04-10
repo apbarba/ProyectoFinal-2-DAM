@@ -4,6 +4,8 @@ import com.salesianostriana.dam.imagineria_web.exception.CategoriaNotFoundExcept
 import com.salesianostriana.dam.imagineria_web.exception.EmptyCategoriaException;
 import com.salesianostriana.dam.imagineria_web.model.Categoria;
 import com.salesianostriana.dam.imagineria_web.model.Obras;
+import com.salesianostriana.dam.imagineria_web.model.dto.CategoriaDTO.ConverterDtoCategoria;
+import com.salesianostriana.dam.imagineria_web.model.dto.CategoriaDTO.CreateDtoCategoria;
 import com.salesianostriana.dam.imagineria_web.model.dto.CategoriaDTO.EditDtoCategoria;
 import com.salesianostriana.dam.imagineria_web.model.dto.CategoriaDTO.GetDtoCategoria;
 import com.salesianostriana.dam.imagineria_web.repository.CategoriaRepository;
@@ -25,6 +27,8 @@ public class CategoriaService {
 
     private final CategoriaRepository categoriaRepository;
 
+    private final ConverterDtoCategoria converterDtoCategoria;
+
     public Categoria findById(UUID id){
 
         return categoriaRepository.findById(id)
@@ -43,9 +47,12 @@ public class CategoriaService {
         return categoria;
     }
 
-    public Categoria save(GetDtoCategoria categoria){
+    public GetDtoCategoria save(CreateDtoCategoria create){
 
-        return categoriaRepository.save(GetDtoCategoria.toCategoria(categoria));
+        Categoria categoria = converterDtoCategoria.createDtoCategoria(create);
+        categoriaRepository.save(categoria);
+
+        return converterDtoCategoria.categoriaToCategoria(categoria);
     }
 
     public List<Categoria> findAll(){

@@ -7,6 +7,7 @@ import com.salesianostriana.dam.imagineria_web.model.Categoria;
 import com.salesianostriana.dam.imagineria_web.model.Imaginero;
 import com.salesianostriana.dam.imagineria_web.model.User;
 import com.salesianostriana.dam.imagineria_web.model.Obras;
+import com.salesianostriana.dam.imagineria_web.model.dto.ObrasDTO.ConverterDtoObras;
 import com.salesianostriana.dam.imagineria_web.model.dto.ObrasDTO.CreateDtoObras;
 import com.salesianostriana.dam.imagineria_web.model.dto.ObrasDTO.EditDtoObras;
 import com.salesianostriana.dam.imagineria_web.model.dto.ObrasDTO.GetDtoObras;
@@ -37,6 +38,7 @@ public class ObrasService {
 
     private final StorageService storageService;
     private final CategoriaRepository categoriaRepository;
+    private final ConverterDtoObras converterDtoObras;
 
     //  public List<Obras> findByImaginero(Imaginero imaginero){
 
@@ -66,9 +68,13 @@ public class ObrasService {
         return obrasRepository.findByEstado(estado);
     }
 
-    public Obras save(EditDtoObras obras){
+    public GetDtoObras save(CreateDtoObras create){
 
-        return obrasRepository.save(EditDtoObras.toObras(obras));
+        Obras obras = converterDtoObras.createObra(create);
+        obrasRepository.save(obras);
+
+        return converterDtoObras.obrasToObras(obras);
+
     }
 
     @Transactional
@@ -153,6 +159,18 @@ public class ObrasService {
                         .build()
         );
         return obras;
+    }
+
+    public Page<GetDtoObras> findAllObras(Pageable pageable){
+
+        Page<Obras> obras = obrasRepository.findAll(pageable);
+
+        if (obras.isEmpty()){
+            throw new EmptyObrasListException();
+
+        }else {
+            return obras.map(converterDtoObras::obrasToObras);
+        }
     }
 
 }

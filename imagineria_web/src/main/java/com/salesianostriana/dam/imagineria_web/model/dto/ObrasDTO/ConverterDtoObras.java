@@ -8,7 +8,7 @@ import java.util.Locale;
 @Component
 public class ConverterDtoObras {
 
-    public GetDtoObras getDtoObras(Obras obras){
+    public GetDtoObras obrasToObras(Obras obras){
 
         return GetDtoObras.builder()
                 .id(obras.getId())
@@ -21,10 +21,10 @@ public class ConverterDtoObras {
                 .build();
     }
 
-    public Obras createObra(GetDtoObras getDtoObras){
+    public Obras createObra(CreateDtoObras getDtoObras){
 
         return Obras.builder()
-                .name(getDtoObras.getNombre())
+                .name(getDtoObras.getName())
                 .img(getDtoObras.getImg())
                 .estado(getDtoObras.getEstado())
                 .estilo(getDtoObras.getEstilo())

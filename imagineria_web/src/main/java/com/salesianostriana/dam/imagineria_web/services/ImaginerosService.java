@@ -86,9 +86,25 @@ public class ImaginerosService {
 
     }*/
 
-    public Imaginero save(GetDtoImaginero imaginero){
+    public GetDtoImaginero save(CreateDtoImaginero create){
 
-        return imagineroRepository.save(GetDtoImaginero.toImaginero(imaginero));
+        Imaginero imaginero = converterDtoImaginero.createImaginero(create);
+        imagineroRepository.save(imaginero);
+
+        return converterDtoImaginero.imagineroToImaginero(imaginero);
+
+    }
+
+    public Page<GetDtoImaginero> findAllImagineros(Pageable pageable){
+
+        Page<Imaginero> imaginero = imagineroRepository.findAll(pageable);
+
+        if (imaginero.isEmpty()){
+            throw new EmptyImagineroException();
+
+        }else {
+            return imaginero.map(converterDtoImaginero::imagineroToImaginero);
+        }
     }
 
     public List<Imaginero> findAll(){

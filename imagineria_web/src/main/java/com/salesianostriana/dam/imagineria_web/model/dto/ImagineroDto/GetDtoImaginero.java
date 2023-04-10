@@ -1,34 +1,32 @@
 package com.salesianostriana.dam.imagineria_web.model.dto.ImagineroDto;
 
 import com.salesianostriana.dam.imagineria_web.model.Imaginero;
+import com.salesianostriana.dam.imagineria_web.model.dto.ObrasDTO.GetDtoObras;
 import lombok.*;
+import org.w3c.dom.stylesheets.LinkStyle;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import java.util.List;
 import java.util.UUID;
 
 
 @Getter
 @Setter
-@RequiredArgsConstructor
-@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class GetDtoImaginero {
 
-    @NotEmpty(message = "{imagineroGet.name.notempty}")
+    private UUID id;
+
     private String name;
 
-    @Min(value = 0 , message = "{imagineroGet.edad.blank}")
     private int edad;
 
     private String localidad;
 
-    public static Imaginero toImaginero(GetDtoImaginero edit){
+    private List<GetDtoObras> obras;
 
-        return Imaginero.builder()
-                .edad(edit.getEdad())
-                .localidad(edit.getLocalidad())
-                .name(edit.getName())
-                .build();
-    }
 }
