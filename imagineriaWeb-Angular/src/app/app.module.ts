@@ -12,6 +12,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
 import { CookieService } from "ngx-cookie-service";
 import { MaterialImportsModule } from './material-imports/material-imports.module';
+import { ObrasComponent } from './obras/obras.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { MaterialImportsModule } from './material-imports/material-imports.modul
     LoginComponent,
     HomeComponent,
     ProfileComponent,
-    RegisterComponent
+    RegisterComponent,
+    ObrasComponent
   ],
   imports: [
     AppRoutingModule,
