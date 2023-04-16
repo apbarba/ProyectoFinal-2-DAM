@@ -14,13 +14,19 @@ export class AuthService {
 
   login(username: string, password: string): Observable<any> {
     return this.http.post(`${environment.apiUrl}/auth/login`, {
-      username: username,
-      password: password
+      username,
+      password
     });
   }
 
-  register(user: any): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/auth/register`, user);
+  register(name: string, username: string, email: string, password: string, verifyPassword: string): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/auth/register`, {
+      name,
+      username,
+      email,
+      password,
+      verifyPassword
+    });
   }
 
   setToken(token: string) {
