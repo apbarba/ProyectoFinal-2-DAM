@@ -13,8 +13,7 @@ export class LoginComponent {
   constructor(public userService: AuthService, private router: Router) { }
   
   login() {
-    const user = { email: this.username, password: this.password };
-    this.userService.login(user).subscribe(data => {
+    this.userService.login(this.username, this.password).subscribe(data => {
       this.userService.setToken(data.token);
       this.router.navigateByUrl("/")
     });

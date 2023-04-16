@@ -10,13 +10,15 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class AuthService {
 
-  constructor(private http: HttpClient, private router: Router, private cookies: CookieService) {}
+  constructor(private http: HttpClient, private router: Router, private cookies: CookieService) { }
 
+  login(username: string, password: string): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/auth/login`, {
+      username: username,
+      password: password
+    });
+  }
 
-  login(user: any): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/auth/login`, user);
-    }
- 
   register(user: any): Observable<any> {
     return this.http.post(`${environment.apiUrl}/auth/register`, user);
   }
@@ -24,6 +26,7 @@ export class AuthService {
   setToken(token: string) {
     this.cookies.set("token", token);
   }
+
   getToken() {
     return this.cookies.get("token");
   }
@@ -31,8 +34,9 @@ export class AuthService {
   getUser() {
     return this.http.get(`${environment.apiUrl}me`);
   }
+
   getUserLogged() {
     const token = this.getToken();
   }
-  
+
 }
