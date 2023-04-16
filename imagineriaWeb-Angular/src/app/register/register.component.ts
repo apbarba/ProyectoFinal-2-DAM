@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import { Router } from "@angular/router";
 import { AuthService } from "../services/auth.service";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
   selector: "app-register",
@@ -9,7 +10,6 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
   styleUrls: ["./register.component.css"],
 })
 export class RegisterComponent {
-
   loginForm = this.fb.group({
     name: ['', Validators.required],
     username: ['', Validators.required],
@@ -18,7 +18,7 @@ export class RegisterComponent {
     verifyPassword: ['', [Validators.required]]
   })
 
-  constructor(private fb: FormBuilder, private userService: AuthService, private router: Router) { }
+  constructor(private fb: FormBuilder, private userService: AuthService, private router: Router, private snackBar: MatSnackBar) { }
 
   register() {
     if (!this.loginForm.controls.name.value || 
@@ -40,7 +40,10 @@ export class RegisterComponent {
       this.router.navigateByUrl("/")
       },
         error => {
-          console.log(error);
+          this.snackBar.open(error.error.mensaje, 'close', {
+            duration: 5000, 
+            verticalPosition: 'top'
+          })
         }
       );
   }
