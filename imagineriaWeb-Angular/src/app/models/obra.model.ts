@@ -6,4 +6,5 @@ export interface Obra {
     img: string;
     nombre: string;
     precio: number;
+    titulo: string;
 }

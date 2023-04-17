@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ObrasService } from '../services/obras.service';
-import { Obra } from '../models/obra.model';
+import { ObrasService } from '../../services/obras.service';
+import { Obra } from '../../models/obra.model';
 
 @Component({
   selector: 'app-obras',
@@ -10,7 +10,7 @@ import { Obra } from '../models/obra.model';
 export class ObrasComponent implements OnInit {
 
   obras: Obra[] = [];
-
+  
   constructor(private obrasService: ObrasService){}
   
   ngOnInit(): void {
@@ -18,5 +18,6 @@ export class ObrasComponent implements OnInit {
     this.obras = data.content as Obra[];
    });
   }
+
   
 }
