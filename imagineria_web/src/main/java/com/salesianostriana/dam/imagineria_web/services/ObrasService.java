@@ -92,6 +92,7 @@ public class ObrasService {
                         .estilo(createDtoObras.getEstilo())
                         .fecha(createDtoObras.getFecha())
                         .img(createDtoObras.getImg())
+                        .precio(createDtoObras.getPrecio())
                         .categoria(categoria.get())
                        // .imaginero(imaginero)
                        // .nombreImaginero(imaginero.getName())
