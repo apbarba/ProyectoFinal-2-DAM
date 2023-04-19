@@ -5,7 +5,11 @@
     <mat-card-content>
       <p><strong>Edad:</strong> {{ imagineros.edad }}</p>
       <p><strong>Localidad:</strong> {{ imagineros.localidad }}</p>
+      <p><strong>Id:</strong>{{ imagineros.id }}</p>
     </mat-card-content>
     <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="editar(imagineros.id)">Editar</button>
     </mat-card-actions>
   </mat-card>
+
+  

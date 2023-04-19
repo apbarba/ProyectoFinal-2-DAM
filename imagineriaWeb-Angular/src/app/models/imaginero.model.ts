@@ -4,6 +4,6 @@ export interface Imaginero{
     name: string;
     edad: number;
     localidad: string;
-    obras: null;
+    obras: any;
     
 }

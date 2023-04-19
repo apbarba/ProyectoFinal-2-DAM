@@ -46,6 +46,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatCheckboxModule,
     MatButtonModule,
     MatInputModule,
+    MatCardModule,
     MatAutocompleteModule,
     MatDatepickerModule,
     MatFormFieldModule,
