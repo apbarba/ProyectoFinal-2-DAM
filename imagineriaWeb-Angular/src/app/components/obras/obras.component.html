@@ -3,10 +3,10 @@
 
 <mat-card *ngFor="let obra of obras">
     <mat-card-header>
-      <mat-card-title>{{ obra.nombre }}</mat-card-title>
+      <mat-card-title>{{ obra.name }}</mat-card-title>
       <mat-card-subtitle>{{ obra.fecha }}</mat-card-subtitle>
     </mat-card-header>
-    <img mat-card-image [src]="obra.img" alt="{{ obra.nombre }}">
+    <img mat-card-image [src]="obra.img" alt="{{ obra.name }}">
     <mat-card-content>
       <p><strong>Estado:</strong> {{ obra.estado }}</p>
       <p><strong>Estilo:</strong> {{ obra.estilo }}</p>

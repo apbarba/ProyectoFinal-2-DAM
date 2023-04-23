@@ -11,15 +11,19 @@ export class ObrasService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  getAllObras(){
-    const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhYzE2ZDAwMS04NzhlLTEyMGItODE4Ny04ZTcyMTg2MzAwMDAiLCJpYXQiOjE2ODE3MjIzMTYsImV4cCI6MTE1NjI1MTYyNTZ9.YFCYaGV6C9nN2sFIJGxyS4lZBdjNbA2CUuXJ5Uexm-6rq05iUL_OtWLiRfvpJLPW_fdZQBiUFThXNm5UwCwl3g';
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`)
-    return this.http.get(`${environment.apiUrl}/obras/`, { headers });
+  getAllObras() {
+    return this.http.get(`${environment.apiUrl}/obras/`);
   }
 
-  createObra(obra: Obra){
-    const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhYzE2ZDAwMS04NzhlLTEyMGItODE4Ny04ZTcyMTg2MzAwMDAiLCJpYXQiOjE2ODE3MjIzMTYsImV4cCI6MTE1NjI1MTYyNTZ9.YFCYaGV6C9nN2sFIJGxyS4lZBdjNbA2CUuXJ5Uexm-6rq05iUL_OtWLiRfvpJLPW_fdZQBiUFThXNm5UwCwl3g';
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`)
-    return this.http.post(`${environment.apiUrl}/obras/`, obra, { headers });
+  createObra(obra: Obra) {
+    console.log(obra);
+    return this.http.post(`${environment.apiUrl}/obras/`, {
+      "precio": obra.precio,
+      "name": obra.name,
+      "titulo": obra.titulo,
+      "estado": obra.estado,
+      "estilo": obra.estilo,
+      "categoria": obra.categoria
+    });
   }
 }

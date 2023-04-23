@@ -1,24 +1,69 @@
-<form (ngSubmit)="agregarObra()">
-    <label for="titulo">Título</label>
-    <input type="text" id="titulo" [(ngModel)]="nuevaObra.titulo" name="titulo" required>
-  
-    <label for="nombre">Nombre</label>
-    <input type="text" id="nombre" [(ngModel)]="nuevaObra.nombre" name="nombre" required>
-  
-    <label for="estilo">Estilo</label>
-    <input type="text" id="estilo" [(ngModel)]="nuevaObra.estilo" name="estilo" required>
-  
-    <label for="estado">Estado</label>
-    <input type="text" id="estado" [(ngModel)]="nuevaObra.estado" name="estado" required>
-  
-    <label for="fecha">Fecha</label>
-    <input type="text" id="fecha" [(ngModel)]="nuevaObra.fecha" name="fecha" required>
-  
-    <label for="img">Imagen</label>
-    <input type="text" id="img" [(ngModel)]="nuevaObra.img" name="img" required>
-  
-    <label for="precio">Precio</label>
-    <input type="number" id="precio" [(ngModel)]="nuevaObra.precio" name="precio" required>
-  
-    <button type="submit">Agregar Obra</button>
-  </form>
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Nueva Obra</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+    
+        <form #editForm="ngForm" (ngSubmit)="agregarObra()">
+
+          <p>
+        <mat-form-field>
+          <input matInput placeholder="Titulo" name="titulo" [(ngModel)]="nuevaObra.titulo" required>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field>
+          <input matInput placeholder="Nombre" name="nombre" [(ngModel)]="nuevaObra.name" required>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field>
+          <input matInput placeholder="Estilo" name="estilo" [(ngModel)]="nuevaObra.estilo" required>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field>
+          <input matInput placeholder="Estado" name="estado" [(ngModel)]="nuevaObra.estado" required>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field>
+          <input matInput placeholder="Fecha" name="fecha" [(ngModel)]="nuevaObra.fecha" required>
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field>
+          <input matInput placeholder="Img" name="img" [(ngModel)]="nuevaObra.img">
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field>
+          <input matInput placeholder="Precio" name="precio" [(ngModel)]="nuevaObra.precio" required>
+        </mat-form-field>
+      </p>
+
+
+      <mat-form-field appearance="fill">
+        <mat-label>Cateroria</mat-label>
+        <mat-select [(ngModel)]="nuevaObra.categoria" name="categoria">
+          <mat-option *ngFor="let c of categorias" [value]="c.id">
+            {{c.nombre}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      
+      <div>
+        <button mat-raised-button color="primary" type="submit">Crear</button>
+        <button mat-raised-button routerLink="/obras">Cancelar</button>
+      </div>
+     
+    </form>
+    </mat-card-content>
+  </mat-card>
