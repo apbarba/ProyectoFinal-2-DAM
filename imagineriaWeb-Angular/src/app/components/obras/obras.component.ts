@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ObrasService } from '../../services/obras.service';
 import { Obra } from '../../models/obra.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-obras',
@@ -11,7 +12,7 @@ export class ObrasComponent implements OnInit {
 
   obras: Obra[] = [];
   
-  constructor(private obrasService: ObrasService){}
+  constructor(private obrasService: ObrasService, private router: Router){}
   
   ngOnInit(): void {
    this.obrasService.getAllObras().subscribe((data: any) => {
@@ -19,5 +20,8 @@ export class ObrasComponent implements OnInit {
    });
   }
 
+  editar(id: string) {
+    this.router.navigate(['/obras/editar', id]);
+  }
   
 }

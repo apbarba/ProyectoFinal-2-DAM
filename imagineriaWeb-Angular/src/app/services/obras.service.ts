@@ -26,4 +26,20 @@ export class ObrasService {
       "categoria": obra.categoria
     });
   }
+
+  editObra(id: string, name: string, precio: number, titulo: string, estado: string, estilo: string, img: string){
+    const body = {
+      name: name,
+      precio: precio,
+      titulo: titulo,
+      estado:estado,
+      estilo: estilo,
+      img: img
+    };
+    return this.http.put(`${environment.apiUrl}/obras/${id}`, body);
+  }
+
+  getObraById(id: string) {
+    return this.http.get(`${environment.apiUrl}/obras/${id}`);
+  }
 }

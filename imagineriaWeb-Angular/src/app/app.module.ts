@@ -20,8 +20,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormEditImagineroComponent } from './components/form-edit-imaginero/form-edit-imaginero.component';
+import { FormEditImagineroComponent } from './components/imaginero/form-edit-imaginero/form-edit-imaginero.component';
 import { TokenInterceptor } from './interceptors/token.interceptor';
+import { FormEditObrasComponent } from './components/form-edit-obras/form-edit-obras.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
     FormCreateObraComponent,
     ImagineroComponent,
     FormCreateImagineroComponent,
-    FormEditImagineroComponent
+    FormEditImagineroComponent,
+    FormEditObrasComponent
   ],
   imports: [
     AppRoutingModule,

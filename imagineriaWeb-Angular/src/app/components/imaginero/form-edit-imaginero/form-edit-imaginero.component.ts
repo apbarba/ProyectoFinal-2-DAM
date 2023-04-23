@@ -37,7 +37,7 @@ export class FormEditImagineroComponent implements OnInit{
 
   submitForm(form: NgForm) {
     const id = this.imaginero.id;
-    const { name, edad, localidad } = form.value;
+    const { edad, localidad } = form.value;
     this.imagineroService.editImaginero(id, edad, localidad).subscribe(() => {
       this.router.navigate(['/imagineros']);
     });

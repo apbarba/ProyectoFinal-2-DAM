@@ -8,7 +8,8 @@ import { RegisterComponent } from './components/register/register.component';
 import { ObrasComponent } from './components/obras/obras.component';
 import { FormCreateObraComponent } from './components/obras/form-create-obra/form-create-obra.component';
 import { ImagineroComponent } from './components/imaginero/imaginero.component';
-import { FormEditImagineroComponent } from './components/form-edit-imaginero/form-edit-imaginero.component';
+import { FormEditImagineroComponent } from './components/imaginero/form-edit-imaginero/form-edit-imaginero.component';
+import { FormEditObrasComponent } from './components/form-edit-obras/form-edit-obras.component';
 
 const routes: Routes = [
   
@@ -18,7 +19,8 @@ const routes: Routes = [
   { path: "obras", component: ObrasComponent, pathMatch: "full" },
   { path: 'agregar-obra', component: FormCreateObraComponent },
   { path: 'imagineros', component: ImagineroComponent},
-  {path: 'imaginero/editar/:id', component: FormEditImagineroComponent}
+  {path: 'imaginero/editar/:id', component: FormEditImagineroComponent},
+  {path: 'obras/editar/:id', component: FormEditObrasComponent}
   
 ];
 
