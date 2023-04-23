@@ -36,8 +36,7 @@ export class RegisterComponent {
         this.loginForm.controls.password.value,
         this.loginForm.controls.verifyPassword.value
       ).subscribe(data => {
-        this.userService.setToken(data.token);
-      this.router.navigateByUrl("/")
+        this.router.navigateByUrl("/login")
       },
         error => {
           this.snackBar.open(error.error.mensaje, 'close', {

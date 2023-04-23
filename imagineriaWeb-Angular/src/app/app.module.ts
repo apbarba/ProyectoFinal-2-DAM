@@ -21,6 +21,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormEditImagineroComponent } from './components/form-edit-imaginero/form-edit-imaginero.component';
+import { TokenInterceptor } from './interceptors/token.interceptor';
 
 
 @NgModule({
@@ -49,7 +50,11 @@ import { FormEditImagineroComponent } from './components/form-edit-imaginero/for
     ReactiveFormsModule,
     MaterialImportsModule
   ],
-  providers: [CookieService],
+  providers: [CookieService, {
+    provide: HTTP_INTERCEPTORS, 
+    useClass: TokenInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
