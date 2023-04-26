@@ -4,7 +4,7 @@ export interface Obra {
     fecha: string;
     id: string;
     img: string;
-    name: string;
+    nombre: string;
     precio: number;
     titulo: string;
     categoria: string;

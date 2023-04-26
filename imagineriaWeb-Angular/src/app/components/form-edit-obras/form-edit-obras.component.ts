@@ -13,7 +13,7 @@ export class FormEditObrasComponent implements OnInit{
 
   obra: Obra = {
     id: '',
-    name: '',
+    nombre: '',
     precio: 0,
     titulo: '',
     estado: '',
@@ -39,8 +39,8 @@ export class FormEditObrasComponent implements OnInit{
 
   submitForm(form: NgForm){
     const id = this.obra.id;
-    const {name, precio, titulo, estado, estilo, img } = form.value;
-    this.obrasService.editObra(id, name, precio, titulo, estado, estilo, img).subscribe(() => {
+    const {nombre, precio, titulo, estado, estilo, img } = form.value;
+    this.obrasService.editObra(id, nombre, precio, titulo, estado, estilo, img).subscribe(() => {
       this.router.navigate(['/obras']);
     })
   }

@@ -16,6 +16,7 @@ export class ObrasComponent implements OnInit {
   
   ngOnInit(): void {
    this.obrasService.getAllObras().subscribe((data: any) => {
+    console.log(data);
     this.obras = data.content as Obra[];
    });
   }

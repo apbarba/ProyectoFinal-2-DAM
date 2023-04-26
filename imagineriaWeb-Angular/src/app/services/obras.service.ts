@@ -19,7 +19,7 @@ export class ObrasService {
     console.log(obra);
     return this.http.post(`${environment.apiUrl}/obras/`, {
       "precio": obra.precio,
-      "name": obra.name,
+      "name": obra.nombre,
       "titulo": obra.titulo,
       "estado": obra.estado,
       "estilo": obra.estilo,
@@ -27,9 +27,9 @@ export class ObrasService {
     });
   }
 
-  editObra(id: string, name: string, precio: number, titulo: string, estado: string, estilo: string, img: string){
+  editObra(id: string, nombre: string, precio: number, titulo: string, estado: string, estilo: string, img: string){
     const body = {
-      name: name,
+      nombre: nombre,
       precio: precio,
       titulo: titulo,
       estado:estado,

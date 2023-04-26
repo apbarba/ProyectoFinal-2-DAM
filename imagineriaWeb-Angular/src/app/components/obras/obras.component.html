@@ -6,15 +6,16 @@
   <mat-grid-tile *ngFor="let obra of obras">
     <mat-card>
       <mat-card-header>
-        <mat-card-title>{{ obra.name }}</mat-card-title>
+        <mat-card-title>{{ obra.nombre }}</mat-card-title>
         <mat-card-subtitle>{{ obra.fecha }}</mat-card-subtitle>
       </mat-card-header>
-      <img mat-card-image [src]="obra.img" alt="{{ obra.name }}">
       <mat-card-content>
-        <p><strong>Estado:</strong> {{ obra.name }}</p>
+        <p><strong>Nombre:</strong> {{ obra.nombre }}</p>
         <p><strong>Estado:</strong> {{ obra.estado }}</p>
         <p><strong>Estilo:</strong> {{ obra.estilo }}</p>
         <p><strong>Precio:</strong> {{ obra.precio | currency }}</p>
+        <mat-card-title>{{ obra.nombre }}</mat-card-title>
+
       </mat-card-content>
       <mat-card-actions>
         <button mat-raised-button color="primary" (click)="editar(obra.id)">Editar</button>
@@ -22,3 +23,4 @@
     </mat-card>
   </mat-grid-tile>
 </mat-grid-list>
+
