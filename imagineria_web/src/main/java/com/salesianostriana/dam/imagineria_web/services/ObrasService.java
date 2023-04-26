@@ -128,7 +128,7 @@ public class ObrasService {
                     obras.setEstado(edit.getEstado());
                     obras.setPrecio(edit.getPrecio());
                    // obras.setCategoria(edit.getCategoria());
-                    obras.setName(edit.getName());
+                    obras.setName(edit.getNombre());
                     obras.setImg(edit.getImg());
                    // obras.setImaginero(edit.getImaginero());
 
