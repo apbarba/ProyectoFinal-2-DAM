@@ -42,4 +42,8 @@ export class ObrasService {
   getObraById(id: string) {
     return this.http.get(`${environment.apiUrl}/obras/${id}`);
   }
+
+  deleteObra(id: string) {
+    return this.http.delete(`${environment.apiUrl}/obras/${id}`);
+  }
 }

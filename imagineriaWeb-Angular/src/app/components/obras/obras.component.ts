@@ -24,5 +24,13 @@ export class ObrasComponent implements OnInit {
   editar(id: string) {
     this.router.navigate(['/obras/editar', id]);
   }
+
+  eliminar(id: string) {
+    if (confirm('¿Está seguro de eliminar esta obra?')) {
+      this.obrasService.deleteObra(id).subscribe(() => {
+        this.ngOnInit();
+      });
+    }
+  }
   
 }

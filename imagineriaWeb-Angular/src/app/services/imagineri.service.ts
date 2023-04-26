@@ -34,4 +34,8 @@ export class ImagineriService {
   getImagineroById(id: string) {
     return this.http.get(`${environment.apiUrl}/imaginero/${id}`);
   }
+
+  deleteImaginero(id: string) {
+    return this.http.delete(`${environment.apiUrl}/imaginero/${id}`);
+  }
 }
