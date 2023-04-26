@@ -24,4 +24,8 @@ export class ImagineroComponent implements OnInit {
     this.router.navigate(['/imaginero/editar', id]);
   }
 
+  create(){
+    this.router.navigate(['/imaginero/create'])
+  }
+
 }
