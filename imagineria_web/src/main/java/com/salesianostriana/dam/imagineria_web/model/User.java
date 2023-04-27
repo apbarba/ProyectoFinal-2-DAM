@@ -55,6 +55,8 @@ public class User implements UserDetails {
 
     private String verifyPassword;
 
+    private String avatar;
+
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Obras> favoritos = new ArrayList<>();
 

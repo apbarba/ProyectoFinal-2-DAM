@@ -103,7 +103,7 @@ public class ImagineroController {
   })
     @GetMapping("/")
     public ResponseEntity<Page<GetDtoImaginero>> searchImaginero(@RequestParam(value = "search", defaultValue = "")
-                                                                String search, @PageableDefault(size = 5, page = 0) Pageable pageable,
+                                                                String search, @PageableDefault(size = 20, page = 0) Pageable pageable,
                                                                  @NotNull HttpServletRequest request){
 
         Page<GetDtoImaginero> pageImagineros = imaginerosService.findAllImagineros(pageable);
