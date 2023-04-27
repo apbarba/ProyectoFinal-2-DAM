@@ -24,10 +24,6 @@ export class ImagineroComponent implements OnInit {
     this.router.navigate(['/imaginero/editar', id]);
   }
 
-  create(){
-    this.router.navigate(['/imaginero/create'])
-  }
-
   eliminar(id: string) {
     if (confirm('¿Está seguro de eliminar este imaginero?')) {
       this.imagineroService.deleteImaginero(id).subscribe(() => {

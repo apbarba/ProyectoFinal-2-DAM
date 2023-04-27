@@ -26,7 +26,7 @@ export class LoginComponent {
       this.loginForm.controls.password.value
     ).subscribe(data => {
       this.userService.setToken(data.token);
-      this.router.navigateByUrl("/")
+      this.router.navigateByUrl("/home")
     });
   }
 }

@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "../../services/auth.service";
+import { Router } from "@angular/router";
+import { User } from "src/app/models/user.model";
 
 @Component({
   selector: "app-home",
@@ -7,8 +9,11 @@ import { AuthService } from "../../services/auth.service";
   styleUrls: ["./home.component.css"],
 })
 export class HomeComponent implements OnInit {
+
+  user: User | null = null;
+  isUserLoggedIn = false;
  
-  constructor(public userService: AuthService) {}
+  constructor(public userService: AuthService, private authService: AuthService, private router: Router) {}
   
   ngOnInit() {
     this.getUserLogged();
@@ -21,5 +26,9 @@ export class HomeComponent implements OnInit {
       console.log(user);
    
     });
+  }
+
+  isLoggedIn() {
+    return localStorage.getItem('authToken') !== null;
   }
 }

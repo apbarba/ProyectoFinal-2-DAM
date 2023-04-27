@@ -1,3 +1,17 @@
+<mat-toolbar color="primary">
+  <span>Proyecto Final</span>
+  <button mat-button routerLink="/obras">Obras</button>
+  <button mat-button routerLink="/imagineros">Imagineros</button>
+  <span class="spacer"></span> 
+  <ng-container>
+    <button mat-button routerLink="/perfil">Perfil</button>
+  </ng-container>
+</mat-toolbar>
+
+
+
+<a routerLink="/imaginero/create">Nuevo Imaginero</a>
+
 <mat-grid-list cols="3" rowHeight="300px">
   <mat-grid-tile *ngFor="let imagineros of imagineros">
     <mat-card>
@@ -11,7 +25,6 @@
       </mat-card-content>
       <mat-card-actions>
         <button mat-raised-button color="primary" (click)="editar(imagineros.id)">Editar</button>
-        <button mat-raised-button color="primary" (click)="create()">Crear</button>
         <button mat-raised-button color="warn" (click)="eliminar(imagineros.id)">Eliminar</button>
       </mat-card-actions>
     </mat-card>

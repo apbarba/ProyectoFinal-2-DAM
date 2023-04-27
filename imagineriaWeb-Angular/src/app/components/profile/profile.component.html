@@ -1,0 +1,29 @@
+
+<mat-toolbar color="primary">
+    <span>Proyecto Final</span>
+    <button mat-button routerLink="/obras">Obras</button>
+    <button mat-button routerLink="/imagineros">Imagineros</button>
+    <span class="spacer"></span> 
+    <ng-container *ngIf="!isLoggedIn">
+      <button mat-button routerLink="/register">Register</button>
+      <button mat-button routerLink="/login">Login</button>
+    </ng-container>
+  </mat-toolbar>
+
+  <div class="center-container">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <mat-card-title>Editar Perfil</mat-card-title>
+      </mat-card-header>
+      <mat-card-content fxLayoutAlign="center">
+        <button mat-raised-button (click)="onLogout()">Cerrar sesión</button>
+      </mat-card-content>
+      <mat-card-content fxLayoutAlign="center">
+        <button mat-raised-button>Mis favoritos</button>
+    </mat-card-content>
+      <mat-card-content fxLayoutAlign="center">
+        <button mat-raised-button>Cambiar Contraseña</button>
+    </mat-card-content>
+    </mat-card>
+  </div>
+ 

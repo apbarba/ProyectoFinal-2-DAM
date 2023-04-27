@@ -1,12 +1,9 @@
-export class User {
+export interface User {
 
     email: string;
     token?: string;
     refreshToken?: string;
-
-    constructor( email: string, token: string, refreshToke: string){
-        this.email = email;
-        this.token = token;
-        this.refreshToken = refreshToke;
-    }
+    id: string;
+    username: string
+    avatar: string
 }
