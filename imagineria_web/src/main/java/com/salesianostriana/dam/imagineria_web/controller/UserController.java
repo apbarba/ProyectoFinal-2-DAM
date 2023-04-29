@@ -40,6 +40,7 @@ import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin("#")
 public class UserController {
 
     private final  UserService userService;
