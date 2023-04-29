@@ -12,5 +12,21 @@ export class CategoriaService {
 
   getAllCategorias() {
     return this.http.get(`${environment.apiUrl}/categoria/`);
-  }   
+  }
+  
+  editCategoria(id: string, nombre: string, descripcion: string){
+    const body = {
+      nombre: nombre,
+      descripcion: descripcion
+    };
+    return this.http.put(`${environment.apiUrl}/categoria/${id}`, body);
+  }
+
+  getCategoriaById(id: string) {
+    return this.http.get(`${environment.apiUrl}/categoria/${id}`);
+  }
+
+  deleteCategoria(id: string) {
+    return this.http.delete(`${environment.apiUrl}/categoria/${id}`);
+  }
 }

@@ -11,7 +11,9 @@ import { ImagineroComponent } from './components/imaginero/imaginero.component';
 import { FormEditImagineroComponent } from './components/imaginero/form-edit-imaginero/form-edit-imaginero.component';
 import { FormEditObrasComponent } from './components/obras/form-edit-obras/form-edit-obras.component';
 import { FormCreateImagineroComponent } from './components/imaginero/form-create-imaginero/form-create-imaginero.component';
-import { EditPasswordComponent } from './components/edit-password/edit-password.component';
+import { EditPasswordComponent } from './components/profile/edit-password/edit-password.component';
+import { CategoriaComponent } from './components/categoria/categoria.component';
+import { FormEditCategoriaComponent } from './components/categoria/form-edit-categoria/form-edit-categoria.component';
 
 const routes: Routes = [
   { path: "", redirectTo: "/login", pathMatch: "full" },
@@ -26,7 +28,9 @@ const routes: Routes = [
   { path: 'imaginero/editar/:id', component: FormEditImagineroComponent},
   { path: 'obras/editar/:id', component: FormEditObrasComponent },
   { path: 'perfil', component: ProfileComponent},
-  { path: 'edit-password', component: EditPasswordComponent}
+  { path: 'edit-password', component: EditPasswordComponent},
+  { path: 'categorias', component: CategoriaComponent},
+  { path: 'categoria/editar/:id', component: FormEditCategoriaComponent}
 ];
 
 @NgModule({
