@@ -84,5 +84,18 @@ export class AuthService {
     this.currentUserSubject.next(emptyUser);
   }
 
+  changePassword(oldPassword: string, newPassword: string, verifyNewPassword: string, user: User): Observable<any> {
+    const changePasswordRequest = {
+      oldPassword,
+      newPassword,
+      verifyNewPassword
+    };
+    return this.http.put(`${environment.apiUrl}/user/changePassword`, changePasswordRequest, {
+      headers: {
+        Authorization: `Bearer ${user.token}`
+      }
+    });
+  }
+
 
 }

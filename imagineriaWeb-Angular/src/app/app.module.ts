@@ -23,6 +23,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormEditImagineroComponent } from './components/imaginero/form-edit-imaginero/form-edit-imaginero.component';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { FormEditObrasComponent } from './components/obras/form-edit-obras/form-edit-obras.component';
+import { EditPasswordComponent } from './components/edit-password/edit-password.component';
+
+
 
 
 @NgModule({
@@ -37,7 +40,8 @@ import { FormEditObrasComponent } from './components/obras/form-edit-obras/form-
     ImagineroComponent,
     FormCreateImagineroComponent,
     FormEditImagineroComponent,
-    FormEditObrasComponent
+    FormEditObrasComponent,
+    EditPasswordComponent
   ],
   imports: [
     AppRoutingModule,

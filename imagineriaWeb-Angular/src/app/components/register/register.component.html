@@ -1,5 +1,7 @@
-<mat-card>
-  <mat-card-title>Login</mat-card-title>
+<body>
+  <div class="bg-image"></div>
+  <div class="login-card">
+  <mat-card-title>Registro</mat-card-title>
   <mat-card-content>
     <form [formGroup]="loginForm" (ngSubmit)="register()">
       
@@ -36,8 +38,10 @@
 
       <div class="button">
         <button type="submit" mat-button>Registro</button>
+        <button mat-button routerLink="/login">Atrás</button>
       </div>
 
     </form>
   </mat-card-content>
-</mat-card>
+  </div>
+</body>
