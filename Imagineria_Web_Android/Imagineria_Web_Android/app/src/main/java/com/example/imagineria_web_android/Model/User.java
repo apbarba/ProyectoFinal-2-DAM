@@ -1,61 +1,41 @@
 package com.example.imagineria_web_android.Model;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.Instant;
+import java.util.UUID;
 
 public class User {
 
-    private String name;
-    private String password;
-    private String email;
+    private UUID id;
     private String username;
-    private String verifyPassword;
+    private String email;
+    private String name;
+    private Instant createdAt;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
+    public User(UUID id, String username, String email, String name, Instant createdAt) {
+        this.id = id;
+        this.username = username;
         this.email = email;
+        this.name = name;
+        this.createdAt = createdAt;
+    }
+
+    public UUID getId() {
+        return id;
     }
 
     public String getUsername() {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public String getEmail() {
+        return email;
     }
 
-    public String getVerifyPassword() {
-        return verifyPassword;
+    public String getName() {
+        return name;
     }
 
-    public void setVerifyPassword(String verifyPassword) {
-        this.verifyPassword = verifyPassword;
-    }
-
-    public User(String name, String password, String email, String username, String verifyPassword) {
-        this.name = name;
-        this.password = password;
-        this.email = email;
-        this.username = username;
-        this.verifyPassword = verifyPassword;
+    public Instant getCreatedAt() {
+        return createdAt;
     }
 }
