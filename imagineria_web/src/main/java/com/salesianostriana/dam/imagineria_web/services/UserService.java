@@ -14,10 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotEmpty;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -153,18 +150,23 @@ public class UserService {
         return imagineroRepository.existsByEmail(email);
     }
 
-    public User addFavorito(UUID userId, UUID obraId){
-
+    public User addFavorito(UUID userId, UUID obraId) {
         User user = imagineroRepository.findById(userId)
                 .orElseThrow(() -> new UserNotFoundException(userId));
 
-        Obras obras = obrasRepository.findById(obraId)
+        Obras obra = obrasRepository.findById(obraId)
                 .orElseThrow(() -> new ObrasNotFoundException(obraId));
 
-        obras.addUser(user);
-        obrasRepository.save(obras);
+        List<Obras> favoritos = user.getFavoritos();
+        if (favoritos == null) {
+            favoritos = new ArrayList<>();
+        }
+        favoritos.add(obra);
+        user.setFavoritos(favoritos);
 
-        return imagineroRepository.save(user);
+        imagineroRepository.save(user);
+
+        return user;
     }
 
     //HACE LO MISMO QUE EL FIND DE ABAJO PERO SIN EL ENTITYFRAPH

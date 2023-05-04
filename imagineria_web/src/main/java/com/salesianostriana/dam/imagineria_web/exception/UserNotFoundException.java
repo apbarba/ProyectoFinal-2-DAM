@@ -12,6 +12,6 @@ public class UserNotFoundException extends AuthenticationException {
     }
 
     public UserNotFoundException(UUID id){
-        super(String.format("No se ha encontrado al usuario con el is en específico"));
+        super(String.format("No se ha encontrado al usuario con el id en específico"));
     }
 }
