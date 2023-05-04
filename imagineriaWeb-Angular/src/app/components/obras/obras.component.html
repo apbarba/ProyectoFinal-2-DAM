@@ -31,8 +31,13 @@
       <mat-card-actions>
         <button mat-raised-button color="primary" (click)="editar(obra.id)">Editar</button>
         <button mat-raised-button color="warn" (click)="eliminar(obra.id)">Eliminar</button>
+        <button mat-icon-button (click)="toggleFavorito(obra)">
+          <mat-icon>{{ obra.favorito ? 'favorite' : 'favorite_border' }}</mat-icon>
+        </button>
       </mat-card-actions>
     </mat-card>
   </mat-grid-tile>
 </mat-grid-list>
+
+
 

@@ -8,4 +8,6 @@ export interface Obra {
     precio: number;
     titulo: string;
     categoria: string;
+    favorito: boolean;
+    name: string
 }

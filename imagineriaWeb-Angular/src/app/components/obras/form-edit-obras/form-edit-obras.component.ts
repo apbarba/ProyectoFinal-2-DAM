@@ -20,7 +20,9 @@ export class FormEditObrasComponent implements OnInit{
     estilo: '',
     img: '',
     fecha: '',
-    categoria: ''
+    categoria: '',
+    favorito: false,
+    name: ''
   }
 
   constructor(

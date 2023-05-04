@@ -23,7 +23,9 @@ export class FormCreateObraComponent implements OnInit {
     img: '',
     nombre: '',
     precio: 0,
-    categoria: ''
+    categoria: '',
+    favorito: false,
+    name: ''
   };
 
   constructor(private obrasService: ObrasService, private categoriaService: CategoriaService, private router: Router, private snackBar: MatSnackBar){}

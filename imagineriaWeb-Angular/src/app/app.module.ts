@@ -26,6 +26,7 @@ import { FormEditObrasComponent } from './components/obras/form-edit-obras/form-
 import { EditPasswordComponent } from './components/profile/edit-password/edit-password.component';
 import { CategoriaComponent } from './components/categoria/categoria.component';
 import { FormEditCategoriaComponent } from './components/categoria/form-edit-categoria/form-edit-categoria.component';
+import { ListFavComponent } from './components/profile/list-fav/list-fav.component';
 
 
 
@@ -45,7 +46,8 @@ import { FormEditCategoriaComponent } from './components/categoria/form-edit-cat
     FormEditObrasComponent,
     EditPasswordComponent,
     CategoriaComponent,
-    FormEditCategoriaComponent
+    FormEditCategoriaComponent,
+    ListFavComponent
   ],
   imports: [
     AppRoutingModule,

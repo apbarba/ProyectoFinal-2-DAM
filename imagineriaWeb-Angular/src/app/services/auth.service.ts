@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, map, switchMap, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/enviroments';
 import { CookieService } from 'ngx-cookie-service';
 import { User } from '../models/user.model';
+import { Obra } from '../models/obra.model';
 
 @Injectable({
   providedIn: 'root',
@@ -97,5 +98,26 @@ export class AuthService {
     });
   }
 
+  addFavorito(userId: string, obraId: string): Observable<User> {
+    return this.http.post<User>(`${environment.apiUrl}/user/${userId}/favoritos/${obraId}`, {});
+  }
+ 
+  public getUserId(): Observable<string> {
+    return this.currentUser.pipe(
+      map((user: { id: any; }) => user.id)
+    );
+  }
+
+  getFavoritos(userId: string): Observable<Obra[]> {
+    return this.http.get<Obra[]>(`${environment.apiUrl}/user/${userId}/favoritos`);
+  }
+
+  getFavoritosUsuarioActual(): Observable<Obra[]> {
+    return this.currentUser.pipe(
+      switchMap((user: User) => {
+        return this.http.get<Obra[]>(`${environment.apiUrl}/user/${user.id}/favoritos`);
+      })
+    );
+  }
 
 }

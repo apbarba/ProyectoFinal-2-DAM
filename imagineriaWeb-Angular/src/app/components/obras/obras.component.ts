@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ObrasService } from '../../services/obras.service';
 import { Obra } from '../../models/obra.model';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-obras',
@@ -12,7 +14,7 @@ export class ObrasComponent implements OnInit {
 
   obras: Obra[] = [];
   
-  constructor(private obrasService: ObrasService, private router: Router){}
+  constructor(private obrasService: ObrasService, private router: Router, private authService: AuthService){}
   
   ngOnInit(): void {
    this.obrasService.getAllObras().subscribe((data: any) => {
@@ -31,6 +33,25 @@ export class ObrasComponent implements OnInit {
         this.ngOnInit();
       });
     }
+  }
+
+  toggleFavorito(obra: any) {
+    obra.favorito = !obra.favorito;
+    if (obra.favorito) {
+      this.authService.getUserId().subscribe(userId => {
+        this.authService.addFavorito(userId, obra.id).subscribe(data => {
+          console.log(data);
+        }, error => {
+          console.log(error);
+        });
+      });
+    }
+  }
+
+  cargarFavoritos() {
+    this.authService.getFavoritosUsuarioActual().subscribe(obras => {
+      this.obras = obras;
+    });
   }
   
 }

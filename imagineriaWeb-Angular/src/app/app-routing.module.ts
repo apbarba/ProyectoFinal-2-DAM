@@ -14,6 +14,7 @@ import { FormCreateImagineroComponent } from './components/imaginero/form-create
 import { EditPasswordComponent } from './components/profile/edit-password/edit-password.component';
 import { CategoriaComponent } from './components/categoria/categoria.component';
 import { FormEditCategoriaComponent } from './components/categoria/form-edit-categoria/form-edit-categoria.component';
+import { ListFavComponent } from './components/profile/list-fav/list-fav.component';
 
 const routes: Routes = [
   { path: "", redirectTo: "/login", pathMatch: "full" },
@@ -30,7 +31,8 @@ const routes: Routes = [
   { path: 'perfil', component: ProfileComponent},
   { path: 'edit-password', component: EditPasswordComponent},
   { path: 'categorias', component: CategoriaComponent},
-  { path: 'categoria/editar/:id', component: FormEditCategoriaComponent}
+  { path: 'categoria/editar/:id', component: FormEditCategoriaComponent},
+  { path: 'favoritos', component: ListFavComponent}
 ];
 
 @NgModule({
