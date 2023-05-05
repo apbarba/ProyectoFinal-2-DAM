@@ -9,5 +9,5 @@ export interface Obra {
     titulo: string;
     categoria: string;
     favorito: boolean;
-    name: string
+    name: string,
 }

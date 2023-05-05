@@ -53,5 +53,14 @@ export class ObrasComponent implements OnInit {
       this.obras = obras;
     });
   }
+
+  eliminarFavorito(obra: any){
+    this.authService.getUserId().subscribe(userId => {
+      this.authService.deleteFavoritos(userId, obra.id).subscribe(data => {
+        console.log(data)
+        this.ngOnInit()
+      })
+    })
+  }
   
 }

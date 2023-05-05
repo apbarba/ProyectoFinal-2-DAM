@@ -120,4 +120,8 @@ export class AuthService {
     );
   }
 
+  deleteFavoritos(userId: string, obraId: string):Observable<Obra[]>{
+    return this.http.delete<Obra[]>(`${environment.apiUrl}/user/${userId}/favoritos/${obraId}`);
+  }
+
 }
