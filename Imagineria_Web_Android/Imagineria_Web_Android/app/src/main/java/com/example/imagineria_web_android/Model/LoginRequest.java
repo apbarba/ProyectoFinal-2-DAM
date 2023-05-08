@@ -1,14 +1,9 @@
-package com.example.imagineria_web_android.Auth;
+package com.example.imagineria_web_android.Model;
 
 public class LoginRequest {
 
     private String username;
     private String password;
-
-    public LoginRequest(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
 
     public String getUsername() {
         return username;
@@ -23,6 +18,11 @@ public class LoginRequest {
     }
 
     public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public LoginRequest(String username, String password) {
+        this.username = username;
         this.password = password;
     }
 }

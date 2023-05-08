@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:padding="15dp"
-    tools:context=".Register">
+    tools:context=".Activity.Register">
 
 
     <com.google.android.material.textfield.TextInputLayout

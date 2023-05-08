@@ -1,8 +1,10 @@
-package com.example.imagineria_web_android;
+package com.example.imagineria_web_android.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.imagineria_web_android.R;
 
 public class Register extends AppCompatActivity {
 
