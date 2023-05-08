@@ -46,18 +46,15 @@ public class LoginActivity extends AppCompatActivity {
                 loginViewModel.loginUser(username, password).observe(LoginActivity.this, loginResponse -> {
                     if (loginResponse != null) {
                         if (loginResponse.getToken() != null) {
-                            // Inicio de sesión exitoso, guardar token y navegar a la siguiente pantalla
                             String token = loginResponse.getToken();
                             saveToken(token);
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
                             finish();
                         } else {
-                            // Inicio de sesión fallido, mostrar mensaje
                             Toast.makeText(LoginActivity.this, "Error en el inicio de sesión. Verifique sus credenciales.", Toast.LENGTH_SHORT).show();
                         }
                     } else {
-                        // Inicio de sesión fallido, mostrar mensaje
                         Toast.makeText(LoginActivity.this, "Error en el inicio de sesión. Verifique sus credenciales e intente nuevamente.", Toast.LENGTH_SHORT).show();
                     }
                 });

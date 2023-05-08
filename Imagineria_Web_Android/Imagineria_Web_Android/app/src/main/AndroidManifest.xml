@@ -32,7 +32,6 @@
             </intent-filter>
         </activity>
 
-        <!-- Agrega la declaración de MainActivity aquí -->
         <activity android:name=".MainActivity" />
 
     </application>
