@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/navigatio_home"
+    android:id="@+id/mobile_navigation">
+
+    <fragment
+        android:id="@+id/navigatio_home"
+        android:label="Inicio"
+        tools:layout="@layout/fragment_home"
+        android:name="com.example.imagineria_web_android.Fragments.Home.HomeFragment" />
+
+    <fragment
+        android:id="@+id/navigation_obras"
+        android:label="Obras"
+        tools:layout="@layout/fragment_obras"
+        android:name="com.example.imagineria_web_android.Fragments.Categoria.CategoriaFragment" >
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_imagineros"
+        android:label="Imagineros"
+        tools:layout="@layout/fragment_imagineros"
+        android:name="com.example.imagineria_web_android.Fragments.Imaginero.ImaginerosFragment" />
+
+    <fragment
+        android:id="@+id/navigation_categorias"
+        android:label="Categorias"
+        tools:layout="@layout/fragment_categoria"
+        android:name="com.example.imagineria_web_android.Fragments.Categoria.CategoriaFragment" />
+
+
+
+</navigation>
