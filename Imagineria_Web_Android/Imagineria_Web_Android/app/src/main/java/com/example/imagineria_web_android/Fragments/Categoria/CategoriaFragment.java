@@ -3,45 +3,52 @@ package com.example.imagineria_web_android.Fragments.Categoria;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.imagineria_web_android.Fragments.Obra.ObrasAdapter;
 import com.example.imagineria_web_android.R;
+import com.example.imagineria_web_android.ViewModel.CategoriaViewModel;
+import com.example.imagineria_web_android.ViewModel.ObraViewModel;
+
+import java.util.ArrayList;
 
 public class CategoriaFragment extends Fragment {
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    private String mParam1;
-    private String mParam2;
-
-    public CategoriaFragment() {
-    }
-
-    public static CategoriaFragment newInstance(String param1, String param2) {
-        CategoriaFragment fragment = new CategoriaFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    private CategoriaViewModel categoriaViewModel;
+    private RecyclerView categoriaRecyclerView;
+    private CategoriaAdapter categoriaAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_categoria, container, false);
+        View view = inflater.inflate(R.layout.fragment_categoria, container, false);
+
+        // Inicializar ViewModel
+        categoriaViewModel = new ViewModelProvider(this).get(CategoriaViewModel.class);
+
+        // Inicializar RecyclerView y Adapter
+        categoriaRecyclerView = view.findViewById(R.id.categoriaRecyclerView);
+        categoriaAdapter = new CategoriaAdapter(new ArrayList<>());
+        categoriaRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        categoriaRecyclerView.setAdapter(categoriaAdapter);
+
+        // Cargar obras
+        categoriaViewModel.loadCategoria();
+
+        // Observar cambios
+        categoriaViewModel.getCategoria().observe(getViewLifecycleOwner(), categorias -> {
+            // Actualizar UI
+            categoriaAdapter.updateData(categorias);
+        });
+
+        return view;
+
+
     }
 }

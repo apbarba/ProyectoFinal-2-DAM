@@ -1,20 +1,8 @@
 package com.example.imagineria_web_android.Repository;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-
-import com.example.imagineria_web_android.API.AuthAPI;
-import com.example.imagineria_web_android.Model.LoginRequest;
-import com.example.imagineria_web_android.Model.LoginResponse;
-import com.example.imagineria_web_android.RetrofitInstance;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 public class AuthRepository {
 
-    private AuthAPI authAPI;
+   /* private AuthAPI authAPI;
 
     public AuthRepository() {
         authAPI = RetrofitInstance.getRetrofitInstance().create(AuthAPI.class);
@@ -37,5 +25,5 @@ public class AuthRepository {
         });
 
         return loginResponse;
-    }
+    }*/
 }

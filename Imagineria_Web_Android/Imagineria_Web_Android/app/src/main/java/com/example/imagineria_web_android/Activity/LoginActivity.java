@@ -1,7 +1,6 @@
 package com.example.imagineria_web_android.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 
@@ -10,13 +9,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.example.imagineria_web_android.MainActivity;
-import com.example.imagineria_web_android.Model.LoginResponse;
-import com.example.imagineria_web_android.Model.User;
 import com.example.imagineria_web_android.R;
 import com.example.imagineria_web_android.ViewModel.LoginViewModel;
 import com.google.android.material.textfield.TextInputEditText;

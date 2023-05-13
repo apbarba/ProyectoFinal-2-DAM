@@ -15,7 +15,7 @@
         android:id="@+id/navigation_obras"
         android:label="Obras"
         tools:layout="@layout/fragment_obras"
-        android:name="com.example.imagineria_web_android.Fragments.Categoria.CategoriaFragment" >
+        android:name="com.example.imagineria_web_android.Fragments.Obra.ObrasFragment" >
     </fragment>
 
     <fragment

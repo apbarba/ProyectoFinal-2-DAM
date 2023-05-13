@@ -1,14 +1,16 @@
 package com.example.imagineria_web_android.ViewModel;
 
+import android.app.Application;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 import com.example.imagineria_web_android.API.AuthAPI;
-import com.example.imagineria_web_android.Model.LoginRequest;
-import com.example.imagineria_web_android.Model.LoginResponse;
+import com.example.imagineria_web_android.Model.Auth.LoginRequest;
+import com.example.imagineria_web_android.Model.Auth.LoginResponse;
 import com.example.imagineria_web_android.Repository.AuthRepository;
 import com.example.imagineria_web_android.RetrofitInstance;
 
@@ -16,13 +18,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LoginViewModel extends ViewModel {
+public class LoginViewModel extends AndroidViewModel {
 
     private AuthRepository authRepository;
     private AuthAPI authAPI;
 
-    public LoginViewModel() {
-        authAPI = RetrofitInstance.getRetrofitInstance().create(AuthAPI.class);
+    public LoginViewModel(@NonNull Application application) {
+        super(application);
+        authAPI = RetrofitInstance.getRetrofitInstance(getApplication().getApplicationContext()).create(AuthAPI.class);
     }
 
     public LiveData<LoginResponse> loginUser(String username, String password) {

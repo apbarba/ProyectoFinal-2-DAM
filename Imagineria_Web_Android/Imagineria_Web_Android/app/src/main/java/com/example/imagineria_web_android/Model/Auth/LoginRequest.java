@@ -1,4 +1,4 @@
-package com.example.imagineria_web_android.Model;
+package com.example.imagineria_web_android.Model.Auth;
 
 public class LoginRequest {
 
