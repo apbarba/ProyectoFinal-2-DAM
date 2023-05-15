@@ -19,6 +19,18 @@ import com.example.imagineria_web_android.ViewModel.ImagineroViewModel;
 
 public class PostImagineroFragment extends Fragment {
 
+
+    public PostImagineroFragment() {
+        // Constructor vacío requerido
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflar el diseño del fragmento
+        return inflater.inflate(R.layout.fragment_post_imaginero, container, false);
+    }
+
    /* private ImagineroViewModel imagineroViewModel;
     private EditText nameEditText, edadEditText, localidadEditText;
     private Button createButton;

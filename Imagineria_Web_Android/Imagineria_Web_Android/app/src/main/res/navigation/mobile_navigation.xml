@@ -30,6 +30,12 @@
         tools:layout="@layout/fragment_categoria"
         android:name="com.example.imagineria_web_android.Fragments.Categoria.CategoriaFragment" />
 
+    <fragment
+        android:id="@+id/navigation_post_imaginero"
+        android:name="com.example.imagineria_web_android.Fragments.Imaginero.PostImagineroFragment"
+        android:label="Post Imaginero"
+        tools:layout="@layout/fragment_post_imaginero" />
+
 
 
 </navigation>
