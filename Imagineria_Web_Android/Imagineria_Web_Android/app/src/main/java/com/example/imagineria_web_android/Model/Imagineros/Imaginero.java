@@ -21,6 +21,10 @@ public class Imaginero {
         this.obras = obras;
     }
 
+    public Imaginero() {
+
+    }
+
     public String getId() {
         return id;
     }
