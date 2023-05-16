@@ -49,11 +49,12 @@ public class PostImagineroFragment extends Fragment {
             imaginero.setEdad(edad);
 
             viewModel.createImaginero(imaginero);
-            Navigation.findNavController(v).navigate(R.id.navigation_post_imaginero);
+            Navigation.findNavController(v).navigate(R.id.action_post_imaginero_to_navigation_imagineros);
         });
 
+
         btnCancelar.setOnClickListener(v -> {
-            Navigation.findNavController(v).navigate(R.id.navigation_post_imaginero);
+            Navigation.findNavController(v).navigate(R.id.action_post_imaginero_to_navigation_imagineros);
         });
 
         return view;

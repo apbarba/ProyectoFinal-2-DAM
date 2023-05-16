@@ -23,6 +23,9 @@
         android:label="Imagineros"
         tools:layout="@layout/fragment_imagineros"
         android:name="com.example.imagineria_web_android.Fragments.Imaginero.ImaginerosFragment" />
+         <action
+        android:id="@+id/action_navigation_imagineros_to_post_imaginero"
+        app:destination="@id/navigation_post_imaginero" />
 
     <fragment
         android:id="@+id/navigation_categorias"
@@ -35,7 +38,9 @@
         android:name="com.example.imagineria_web_android.Fragments.Imaginero.PostImagineroFragment"
         android:label="Post Imaginero"
         tools:layout="@layout/fragment_post_imaginero" />
-
+        <action
+        android:id="@+id/action_post_imaginero_to_navigation_imagineros"
+        app:destination="@id/navigation_imagineros" />
 
 
 </navigation>
