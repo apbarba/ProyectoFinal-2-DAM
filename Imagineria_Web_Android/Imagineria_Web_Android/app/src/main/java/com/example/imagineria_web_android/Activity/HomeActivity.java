@@ -2,6 +2,7 @@ package com.example.imagineria_web_android.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -10,6 +11,8 @@ import androidx.navigation.ui.NavigationUI;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
 
 import com.example.imagineria_web_android.Fragments.Categoria.CategoriaFragment;
 import com.example.imagineria_web_android.Fragments.Home.HomeFragment;
@@ -27,6 +30,9 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         bottomNavigationView = findViewById(R.id.nav_view);
 
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
@@ -38,6 +44,16 @@ public class HomeActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
 
         NavigationUI.setupActionBarWithNavController(this, navController);
+
+      /*  ImageButton profileButton = findViewById(R.id.profileButton);
+        profileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Limpia la pila de back stack antes de navegar al fragmento de perfil
+                navController.popBackStack(R.id.navigatio_home, false);
+                navController.navigate(R.id.navigation_profile);
+            }
+        });*/
     }
 
 }

@@ -42,5 +42,21 @@
         android:id="@+id/action_post_imaginero_to_navigation_imagineros"
         app:destination="@id/navigation_imagineros" />
 
+    <fragment
+        android:id="@+id/navigation_put_imaginero"
+        android:name="com.example.imagineria_web_android.Fragments.Imaginero.PutImaginerosFragment"
+        android:label="Put Imaginero"
+        tools:layout="@layout/fragment_put_imagineros" />
+         <action
+        android:id="@+id/action_put_imaginero_to_navigation_imagineros"
+        app:destination="@id/navigation_imagineros" />
+
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.example.imagineria_web_android.Fragments.Profile.ProfileFragment"
+        android:label="Perfil"
+        tools:layout="@layout/fragment_profile"
+        />
+
 
 </navigation>

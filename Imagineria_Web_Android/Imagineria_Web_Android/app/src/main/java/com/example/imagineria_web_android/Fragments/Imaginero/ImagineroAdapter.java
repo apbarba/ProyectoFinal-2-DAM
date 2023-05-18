@@ -53,6 +53,7 @@ public class ImagineroAdapter extends RecyclerView.Adapter<ImagineroAdapter.Imag
             nombreTextViewImaginero = itemView.findViewById(R.id.nombreTextViewImaginero);
         }
     }
+
 }
 
 

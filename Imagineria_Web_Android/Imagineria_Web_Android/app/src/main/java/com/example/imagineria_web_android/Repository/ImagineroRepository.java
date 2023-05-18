@@ -28,4 +28,13 @@ public class ImagineroRepository {
     public Call<Imaginero> createImaginero(Imaginero imaginero) {
         return imagineroApi.createImaginero(imaginero);
     }
+
+    public Call<Imaginero> updateImaginero(int idImaginero, Imaginero imaginero) {
+        return imagineroApi.updateImaginero(idImaginero, imaginero);
+    }
+
+    public Call<Imaginero> getImaginero(int id) {
+        return imagineroApi.getImaginero(id);
+    }
+
 }
