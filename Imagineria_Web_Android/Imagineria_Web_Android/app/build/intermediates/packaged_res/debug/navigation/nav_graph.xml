@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph">
+
+    <fragment
+        android:id="@+id/postImagineroFragment"
+        android:label="Post Imaginero"
+        tools:layout="@layout/fragment_post_imaginero"
+        android:name="com.example.imagineria_web_android.Fragments.Imaginero.PostImagineroFragment" />
+
+    <action
+        android:id="@+id/action_navigation_imaginero_to_postImagineroFragment"
+        app:destination="@id/postImagineroFragment" />
+
+</navigation>

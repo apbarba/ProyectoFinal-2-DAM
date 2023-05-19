@@ -1,0 +1,198 @@
+[
+    {
+        "merged": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-merged_res-40:\\mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-main-42:\\mipmap-mdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-merged_res-40:\\mipmap-anydpi-v33_ic_launcher.xml.flat",
+        "source": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-main-42:\\mipmap-anydpi-v33\\ic_launcher.xml"
+    },
+    {
+        "merged": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-merged_res-40:\\mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-main-42:\\mipmap-xxxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-merged_res-40:\\layout_fragment_profile.xml.flat",
+        "source": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-main-42:\\layout\\fragment_profile.xml"
+    },
+    {
+        "merged": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-merged_res-40:\\drawable-anydpi_penitente.jpeg.flat",
+        "source": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-main-42:\\drawable-anydpi\\penitente.jpeg"
+    },
+    {
+        "merged": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-merged_res-40:\\drawable-anydpi_generatedtext.png.flat",
+        "source": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-main-42:\\drawable-anydpi\\generatedtext.png"
+    },
+    {
+        "merged": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-merged_res-40:\\layout_activity_login.xml.flat",
+        "source": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-main-42:\\layout\\activity_login.xml"
+    },
+    {
+        "merged": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-merged_res-40:\\layout_categoria_item.xml.flat",
+        "source": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-main-42:\\layout\\categoria_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-merged_res-40:\\drawable-mdpi_logotipo_para_marca_personal_profesional_copywriter_cuadrado_moderno_minimalista__1_.png.flat",
+        "source": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-main-42:\\drawable-mdpi\\logotipo_para_marca_personal_profesional_copywriter_cuadrado_moderno_minimalista__1_.png"
+    },
+    {
+        "merged": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-merged_res-40:\\xml_backup_rules.xml.flat",
+        "source": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-main-42:\\xml\\backup_rules.xml"
+    },
+    {
+        "merged": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-merged_res-40:\\layout_activity_main.xml.flat",
+        "source": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-main-42:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-merged_res-40:\\layout_obra_item.xml.flat",
+        "source": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-main-42:\\layout\\obra_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-merged_res-40:\\layout_fragment_post_imaginero.xml.flat",
+        "source": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-main-42:\\layout\\fragment_post_imaginero.xml"
+    },
+    {
+        "merged": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-merged_res-40:\\layout_fragment_categoria.xml.flat",
+        "source": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-main-42:\\layout\\fragment_categoria.xml"
+    },
+    {
+        "merged": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-merged_res-40:\\drawable-anydpi_granpoder.jpg.flat",
+        "source": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-main-42:\\drawable-anydpi\\granpoder.jpg"
+    },
+    {
+        "merged": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-merged_res-40:\\mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-main-42:\\mipmap-xhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-merged_res-40:\\drawable-mdpi_logotipo_para_marca_personal_profesional_copywriter_cuadrado_moderno_minimalista__2_.png.flat",
+        "source": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-main-42:\\drawable-mdpi\\logotipo_para_marca_personal_profesional_copywriter_cuadrado_moderno_minimalista__2_.png"
+    },
+    {
+        "merged": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-merged_res-40:\\mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-main-42:\\mipmap-xhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-merged_res-40:\\drawable_obras.xml.flat",
+        "source": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-main-42:\\drawable\\obras.xml"
+    },
+    {
+        "merged": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-merged_res-40:\\mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-main-42:\\mipmap-xxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-merged_res-40:\\drawable_ic_launcher_background.xml.flat",
+        "source": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-main-42:\\drawable\\ic_launcher_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-merged_res-40:\\navigation_nav_graph.xml.flat",
+        "source": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-main-42:\\navigation\\nav_graph.xml"
+    },
+    {
+        "merged": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-merged_res-40:\\drawable_imaginero.xml.flat",
+        "source": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-main-42:\\drawable\\imaginero.xml"
+    },
+    {
+        "merged": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-merged_res-40:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-main-42:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
+    },
+    {
+        "merged": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-merged_res-40:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-main-42:\\mipmap-anydpi-v26\\ic_launcher.xml"
+    },
+    {
+        "merged": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-merged_res-40:\\mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-main-42:\\mipmap-hdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-merged_res-40:\\layout_fragment_home.xml.flat",
+        "source": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-main-42:\\layout\\fragment_home.xml"
+    },
+    {
+        "merged": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-merged_res-40:\\mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-main-42:\\mipmap-mdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-merged_res-40:\\layout_imaginero_item.xml.flat",
+        "source": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-main-42:\\layout\\imaginero_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-merged_res-40:\\layout_activity_register.xml.flat",
+        "source": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-main-42:\\layout\\activity_register.xml"
+    },
+    {
+        "merged": "com.example.imagineria_web_android.app-merged_res-40:/drawable-anydpi_penitentehome.jpg.flat",
+        "source": "com.example.imagineria_web_android.app-main-42:/drawable-anydpi/penitentehome.jpg"
+    },
+    {
+        "merged": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-merged_res-40:\\menu_menu_nav.xml.flat",
+        "source": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-main-42:\\menu\\menu_nav.xml"
+    },
+    {
+        "merged": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-merged_res-40:\\xml_data_extraction_rules.xml.flat",
+        "source": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-main-42:\\xml\\data_extraction_rules.xml"
+    },
+    {
+        "merged": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-merged_res-40:\\drawable-v24_ic_launcher_foreground.xml.flat",
+        "source": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-main-42:\\drawable-v24\\ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-merged_res-40:\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-main-42:\\mipmap-xxxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-merged_res-40:\\font_bienvenido.otf.flat",
+        "source": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-main-42:\\font\\bienvenido.otf"
+    },
+    {
+        "merged": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-merged_res-40:\\navigation_mobile_navigation.xml.flat",
+        "source": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-main-42:\\navigation\\mobile_navigation.xml"
+    },
+    {
+        "merged": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-merged_res-40:\\font_la_imagineria.ttf.flat",
+        "source": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-main-42:\\font\\la_imagineria.ttf"
+    },
+    {
+        "merged": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-merged_res-40:\\drawable-mdpi_logotipo_para_marca_personal_profesional_copywriter_cuadrado_moderno_minimalista.png.flat",
+        "source": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-main-42:\\drawable-mdpi\\logotipo_para_marca_personal_profesional_copywriter_cuadrado_moderno_minimalista.png"
+    },
+    {
+        "merged": "com.example.imagineria_web_android.app-merged_res-40:/layout_fragment_home.xml.flat",
+        "source": "com.example.imagineria_web_android.app-main-42:/layout/fragment_home.xml"
+    },
+    {
+        "merged": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-merged_res-40:\\layout_fragment_put_imagineros.xml.flat",
+        "source": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-main-42:\\layout\\fragment_put_imagineros.xml"
+    },
+    {
+        "merged": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-merged_res-40:\\drawable_categoria.xml.flat",
+        "source": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-main-42:\\drawable\\categoria.xml"
+    },
+    {
+        "merged": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-merged_res-40:\\mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-main-42:\\mipmap-hdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-merged_res-40:\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-main-42:\\mipmap-xxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-merged_res-40:\\layout_activity_home.xml.flat",
+        "source": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-main-42:\\layout\\activity_home.xml"
+    },
+    {
+        "merged": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-merged_res-40:\\layout_fragment_obras.xml.flat",
+        "source": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-main-42:\\layout\\fragment_obras.xml"
+    },
+    {
+        "merged": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-merged_res-40:\\drawable_home.xml.flat",
+        "source": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-main-42:\\drawable\\home.xml"
+    },
+    {
+        "merged": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-merged_res-40:\\layout_fragment_imagineros.xml.flat",
+        "source": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-main-42:\\layout\\fragment_imagineros.xml"
+    },
+    {
+        "merged": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-merged_res-40:\\drawable-anydpi_penitente2.jpeg.flat",
+        "source": "C:\\Users\\Ana Pilar\\.gradle\\daemon\\7.5\\com.example.imagineria_web_android.app-main-42:\\drawable-anydpi\\penitente2.jpeg"
+    }
+]
