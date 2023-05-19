@@ -21,7 +21,7 @@ public class EditDtoObras {
     //name, precio, titulo, img, estado
 
     @NotEmpty(message = "{obrasEdit.name,notempty}")
-    private String name;
+    private String nombre;
 
     @PositivePrice(message = "{obrasEdit.precio.unique}")
     @Min(value = 0, message = "{obrasEdit.precio.min}")
@@ -36,14 +36,4 @@ public class EditDtoObras {
     @NotEmpty(message = "{obrasEdit.estado.notempty}")
     private String estado;
 
-    public static Obras toObras(EditDtoObras edit){
-
-        return Obras.builder()
-                .name(edit.getName())
-                .precio(edit.getPrecio())
-                .img(edit.getImg())
-                .titulo(edit.getTitulo())
-                .estado(edit.getEstado())
-                .build();
-    }
 }

@@ -1,0 +1,40 @@
+body {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .bg-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://fotografias.antena3.com/clipping/cmsimages02/2022/04/04/11661CF0-6CF0-4461-B6A5-224DC7646EE7/semana-santa-sevilla-2022-programa-pasos-hermandades_98.jpg?crop=1254,706,x0,y0&width=1900&height=1069&optimize=low&format=webply') no-repeat center center fixed;
+    background-size: cover;
+    filter: blur(10px);
+    -webkit-filter: blur(10px);
+    z-index: -1;
+  }
+  
+  .login-card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    margin: 0 auto;
+    max-width: 500px;
+    padding: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .mat-card-title {
+    text-align: center;
+  }
+  
+  .button {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }

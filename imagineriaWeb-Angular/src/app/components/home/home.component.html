@@ -1,0 +1,69 @@
+<mat-toolbar color="black">
+  <span>La Imagineria</span>
+  <button mat-button routerLink="/obras">Obras</button>
+  <button mat-button routerLink="/imagineros">Imagineros</button>
+  <button mat-button routerLink="/categorias">Categorias</button>
+  <span class="spacer"></span>
+  <ng-container>
+    <button mat-button routerLink="/profile">
+      <mat-icon *ngIf="user">person</mat-icon>
+    </button>
+    <button mat-button routerLink="/perfil">Perfil</button>
+  </ng-container>
+
+  <ng-container *ngIf="!isLoggedIn">
+    <button mat-button routerLink="/register">Register</button>
+    <button mat-button routerLink="/login">Login</button>
+  </ng-container>
+</mat-toolbar>
+
+<section class="container">
+  <div class="box">
+    <img src="https://media.gettyimages.com/id/164792129/es/foto/a-woman-wearing-the-traditional-mantilla-walks-under-the-macarena-arch-during-the-holy-week-in.jpg?s=612x612&w=0&k=20&c=HqeGuIkRbkpkd07vSTzIa1i25EcLODUnbOppa-emA2M=" alt="">
+    <div class="overlay">
+      <h2>Categorias</h2>
+      <p>Descubre las categorias que tenemos</p>
+    </div>
+    <div class="content">
+      <h3>Categorias</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut auctor, risus nec sagittis bibendum, elit massa bibendum ante, sit amet malesuada arcu quam id mi. Fusce malesuada mollis leo, a lacinia nisi vestibulum ut.</p>
+    </div>
+  </div>
+  <div class="box">
+    <img src="https://media.gettyimages.com/id/157558894/es/foto/proceso-activo.jpg?s=612x612&w=0&k=20&c=lgPw4jva5f-3YjuiQIGby201Z4Ni6-WSTWp7qQ7P1GU=" alt="">
+    <div class="overlay">
+      <h2>Obras</h2>
+      <p>Descubre las obras que tenemos</p>
+    </div>
+    <div class="content">
+      <h3>Obras</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut auctor, risus nec sagittis bibendum, elit massa bibendum ante, sit amet malesuada arcu quam id mi. Fusce malesuada mollis leo, a lacinia nisi vestibulum ut.</p>
+    </div>
+  </div>
+  <div class="box">
+    <img src="https://i.pinimg.com/originals/36/56/d1/3656d131935c8cf18aadc075d1099999.jpg" alt="">
+    <div class="overlay">
+      <h2>Imagineros</h2>
+      <p>Descubre los imagineros que tenemos</p>
+    </div>
+    <div class="content">
+      <h3>Imagineros</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut auctor, risus nec sagittis bibendum, elit massa bibendum ante, sit amet malesuada arcu quam id mi. Fusce malesuada mollis leo, a lacinia nisi vestibulum ut.</p>
+    </div>
+  </div>
+  <div class="phrases">
+    <div>
+      <p>Frase 1</p>
+    </div>
+    <div>
+      <p>Frase 2</p>
+    </div>
+    <div>
+      <p>Frase 3</p>
+    </div>
+  </div>
+</section>
+
+
+
+  

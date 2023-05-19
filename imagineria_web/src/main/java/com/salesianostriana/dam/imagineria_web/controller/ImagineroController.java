@@ -40,6 +40,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/imaginero")
 @RequiredArgsConstructor
+@CrossOrigin("#")
 public class ImagineroController {
 
     private final ImaginerosService imaginerosService;
@@ -102,7 +103,7 @@ public class ImagineroController {
   })
     @GetMapping("/")
     public ResponseEntity<Page<GetDtoImaginero>> searchImaginero(@RequestParam(value = "search", defaultValue = "")
-                                                                String search, @PageableDefault(size = 5, page = 0) Pageable pageable,
+                                                                String search, @PageableDefault(size = 20, page = 0) Pageable pageable,
                                                                  @NotNull HttpServletRequest request){
 
         Page<GetDtoImaginero> pageImagineros = imaginerosService.findAllImagineros(pageable);
@@ -216,6 +217,7 @@ public class ImagineroController {
                     content = @Content),
             @ApiResponse(responseCode = "401", description = "No está autorizado para realizar esta opción")
     })
+
     @PutMapping("/{id}")
     public GetDtoImaginero edit(@PathVariable UUID id, @Valid @RequestBody EditDtoImaginero edited) {
 

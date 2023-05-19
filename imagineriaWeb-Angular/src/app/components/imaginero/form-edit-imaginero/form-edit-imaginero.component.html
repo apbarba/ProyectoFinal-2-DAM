@@ -1,0 +1,23 @@
+<mat-card>
+    <mat-card-header>
+      <mat-card-title>Editar Imaginero</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+    
+        <form #editForm="ngForm" (ngSubmit)="submitForm(editForm)">
+
+        <mat-form-field>
+          <input matInput placeholder="Edad" name="edad" [(ngModel)]="imaginero.edad" required>
+        </mat-form-field>
+       
+        <mat-form-field>
+          <input matInput placeholder="Localidad" name="localidad" [(ngModel)]="imaginero.localidad" required>
+        </mat-form-field>
+      
+        <button mat-raised-button color="primary" type="submit">Actualizar</button>
+        <button mat-raised-button routerLink="/imagineros">Cancelar</button>
+     
+    </form>
+    </mat-card-content>
+  </mat-card>
+  

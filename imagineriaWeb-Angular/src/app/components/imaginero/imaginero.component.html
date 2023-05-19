@@ -1,0 +1,35 @@
+<mat-toolbar color="primary">
+  <span routerLink="/home">La Imagineria</span>
+  <button mat-button routerLink="/obras">Obras</button>
+  <button mat-button routerLink="/imagineros">Imagineros</button>
+  <button mat-button routerLink="/categorias">Categorias</button>
+  <span class="spacer"></span> 
+  <ng-container>
+    <button mat-button routerLink="/perfil">Perfil</button>
+  </ng-container>
+</mat-toolbar>
+
+
+
+<a routerLink="/imaginero/create">Nuevo Imaginero</a>
+
+<mat-grid-list cols="3" rowHeight="300px">
+  <mat-grid-tile *ngFor="let imagineros of imagineros">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>{{ imagineros.name }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p><strong>Edad:</strong> {{ imagineros.edad }}</p>
+        <p><strong>Localidad:</strong> {{ imagineros.localidad }}</p>
+        <p><strong>Id:</strong>{{ imagineros.id }}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="editar(imagineros.id)">Editar</button>
+        <button mat-raised-button color="warn" (click)="eliminar(imagineros.id)">Eliminar</button>
+      </mat-card-actions>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>
+
+  

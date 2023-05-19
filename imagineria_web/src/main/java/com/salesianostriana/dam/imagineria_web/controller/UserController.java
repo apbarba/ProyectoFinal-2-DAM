@@ -40,6 +40,7 @@ import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin("#")
 public class UserController {
 
     private final  UserService userService;
@@ -289,10 +290,9 @@ public class UserController {
                     content = @Content),
     })
     @PostMapping("user/{userId}/favoritos/{obraId}")
-    public User addFavorito(@PathVariable UUID userId,
-                            @PathVariable UUID obraId){
-
-        return userService.addFavorito(userId, obraId);
+    public ResponseEntity<String> addFavorito(@PathVariable UUID userId, @PathVariable UUID obraId) {
+        userService.addFavorito(userId, obraId);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Obra agregada a favoritos");
     }
     @Operation(summary = "Se obtiene los detalles de la lista de favoritos del usuario")
     @ApiResponses(value = {
@@ -337,7 +337,7 @@ public class UserController {
     @GetMapping("user/{id}/favoritos")
     public List<Obras> getAllFavoritos(@PathVariable UUID id){
 
-     return userService.getFavoritos(id);
+        return userService.getFavoritos(id);
     }
 
     @Operation(summary = "Se obtiene la lista de obras favoritas del usuario logeado")

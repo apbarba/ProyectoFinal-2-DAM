@@ -32,6 +32,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/categoria")
 @RequiredArgsConstructor
+@CrossOrigin("#")
 public class CategoriaController {
     private final CategoriaService categoriaService;
 

@@ -92,6 +92,7 @@ public class ObrasService {
                         .estilo(createDtoObras.getEstilo())
                         .fecha(createDtoObras.getFecha())
                         .img(createDtoObras.getImg())
+                        .precio(createDtoObras.getPrecio())
                         .categoria(categoria.get())
                        // .imaginero(imaginero)
                        // .nombreImaginero(imaginero.getName())
@@ -127,7 +128,7 @@ public class ObrasService {
                     obras.setEstado(edit.getEstado());
                     obras.setPrecio(edit.getPrecio());
                    // obras.setCategoria(edit.getCategoria());
-                    obras.setName(edit.getName());
+                    obras.setName(edit.getNombre());
                     obras.setImg(edit.getImg());
                    // obras.setImaginero(edit.getImaginero());
 

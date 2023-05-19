@@ -1,0 +1,25 @@
+<mat-toolbar color="primary">
+    <span routerLink="/home">La Imagineria</span>
+    <button mat-button routerLink="/obras">Obras</button>
+    <button mat-button routerLink="/imagineros">Imagineros</button>
+    <button mat-button routerLink="/categorias">Categorias</button>
+    <span class="spacer"></span> 
+    <div fxLayout="row" fxLayoutAlign="flex-end">
+      <button mat-button routerLink="/perfil">Perfil</button>
+    </div>
+  </mat-toolbar>
+
+  <div *ngIf="obras">
+    <h2>Mis obras favoritas:</h2>
+    <mat-list>
+      <mat-list-item *ngFor="let obra of obras">
+        <div mat-line>{{ obra.name }}</div>
+        <div mat-line>{{ obra.fecha }}</div>
+        <mat-card-actions>
+          <button mat-raised-button color="warn" (click)="eliminarFavorito(obra)">Eliminar</button>
+        </mat-card-actions>
+      </mat-list-item>
+    </mat-list>
+  </div>
+
+  
