@@ -44,6 +44,7 @@ public class ImaginerosFragment extends Fragment {
 
         imagineroViewModel.getImaginero().observe(getViewLifecycleOwner(), imagineros -> {
             imagineroAdapter.updateData(imagineros);
+            imagineroAdapter.notifyDataSetChanged();
         });
 
         FloatingActionButton fabNavigateToPostImaginero = view.findViewById(R.id.add_imaginero);
