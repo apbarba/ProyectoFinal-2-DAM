@@ -7,29 +7,24 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/imaginerosRecyclerView"
-        android:layout_width="417dp"
-        android:layout_height="600dp"
-        android:paddingLeft="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.404" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="10dp"
+
+        tools:listitem="@layout/imaginero_item" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_imaginero"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
         android:src="@android:drawable/ic_input_add"
-        app:layout_anchor="@id/imaginerosRecyclerView"
-        app:layout_anchorGravity="bottom|end"
-        app:layout_constraintBottom_toBottomOf="@+id/imaginerosRecyclerView"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintHorizontal_bias="0.86"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.98" />
+        app:layout_constraintVertical_bias="0.84000003" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

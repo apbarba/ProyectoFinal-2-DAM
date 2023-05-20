@@ -1,7 +1,6 @@
 package com.example.imagineria_web_android.ViewModel;
 
 import android.app.Application;
-import android.widget.Toast;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -24,14 +23,21 @@ import java.util.List;
 public class ImagineroViewModel extends AndroidViewModel {
 
     private ImagineroRepository repository;
-    private MutableLiveData<List<Imaginero>> imaginero;
+    private MutableLiveData<List<Imaginero>> imagineroList;
+
+    private MutableLiveData<Imaginero> imaginero;
 
     public ImagineroViewModel(@NonNull Application application) {
         super(application);
+        imagineroList = new MutableLiveData<>();
         imaginero = new MutableLiveData<>();
     }
 
-    public LiveData<List<Imaginero>> getImaginero(){
+    public LiveData<List<Imaginero>> getImagineroList(){
+        return imagineroList;
+    }
+
+    public LiveData<Imaginero> getImaginero() {
         return imaginero;
     }
 
@@ -43,7 +49,7 @@ public class ImagineroViewModel extends AndroidViewModel {
             public void onResponse(Call<ImagineroResponse> call, Response<ImagineroResponse> response) {
                 ImagineroResponse imagineroResponse = response.body();
                 if (imagineroResponse != null && imagineroResponse.getContent() != null){
-                    imaginero.postValue(imagineroResponse.getContent());
+                    imagineroList.postValue(imagineroResponse.getContent());
                 }
             }
 
@@ -61,12 +67,30 @@ public class ImagineroViewModel extends AndroidViewModel {
             @Override
             public void onResponse(Call<Imaginero> call, Response<Imaginero> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    List<Imaginero> currentImagineros = imaginero.getValue();
+                    List<Imaginero> currentImagineros = imagineroList.getValue();
                     if (currentImagineros == null) {
                         currentImagineros = new ArrayList<>();
                     }
                     currentImagineros.add(response.body());
-                    imaginero.postValue(currentImagineros);
+                    imagineroList.postValue(currentImagineros);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Imaginero> call, Throwable t) {
+                //Los mensajes o manejo de errores aqui
+            }
+        });
+    }
+
+    public void loadImagineroById(String id){
+        ImagineroApi apiInterface = RetrofitInstance.getRetrofitInstance(getApplication().getApplicationContext()).create(ImagineroApi.class);
+        Call<Imaginero> call = apiInterface.getImagineroById(id);
+        call.enqueue(new Callback<Imaginero>() {
+            @Override
+            public void onResponse(Call<Imaginero> call, Response<Imaginero> response) {
+                if (response.isSuccessful() && response.body() != null){
+                    imaginero.postValue(response.body());
                 }
             }
 
@@ -96,20 +120,4 @@ public class ImagineroViewModel extends AndroidViewModel {
         });
     }
 
-    public void getImaginero(int id) {
-        Call<Imaginero> call = repository.getImaginero(id);
-        call.enqueue(new Callback<Imaginero>() {
-            @Override
-            public void onResponse(Call<Imaginero> call, Response<Imaginero> response) {
-                if (response.isSuccessful()) {
-                    // Aquí puedes manejar la respuesta. Por ejemplo, puedes actualizar los campos en tu formulario con la información del imaginero.
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Imaginero> call, Throwable t) {
-                // Manejo de errores aquí
-            }
-        });
-    }
 }

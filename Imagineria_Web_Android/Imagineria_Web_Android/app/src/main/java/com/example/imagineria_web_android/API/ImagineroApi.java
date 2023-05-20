@@ -19,7 +19,7 @@ public interface ImagineroApi {
     Call<Imaginero> createImaginero(@Body Imaginero imaginero);
 
     @GET("imaginero/{id}")
-    Call<Imaginero> getImaginero(@Path("id") int idImaginero);
+    Call<Imaginero> getImagineroById(@Path("id") String id);
 
     @PUT("imaginero/{id}")
     Call<Imaginero> updateImaginero(@Path("id") int idImaginero, @Body Imaginero imaginero);

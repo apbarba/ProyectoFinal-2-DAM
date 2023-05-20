@@ -8,4 +8,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="toolbarColor">#D8B8FF</color>
+    <color name="btn_elimar">#E10000</color>
+    <color name="btn_editar">#4D7CEB</color>
 </resources>

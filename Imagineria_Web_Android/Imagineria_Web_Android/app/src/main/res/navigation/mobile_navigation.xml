@@ -58,5 +58,19 @@
         tools:layout="@layout/fragment_profile"
         />
 
+    <fragment
+        android:id="@+id/navigation_imaginero_detalle"
+        android:label="Detalle Imaginero"
+        android:name="com.example.imagineria_web_android.Fragments.Imaginero.ImagineroDetalleFragment"
+        tools:layout="@layout/fragment_imaginero_detalle">
+        <argument
+            android:name="id"
+            app:argType="string"/>
+    </fragment>
+
+    <action
+        android:id="@+id/action_navigation_imagineros_to_navigation_imaginero_detalle"
+        app:destination="@id/navigation_imaginero_detalle" />
+
 
 </navigation>

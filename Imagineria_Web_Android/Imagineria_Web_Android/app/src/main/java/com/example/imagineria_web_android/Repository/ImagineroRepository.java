@@ -33,8 +33,8 @@ public class ImagineroRepository {
         return imagineroApi.updateImaginero(idImaginero, imaginero);
     }
 
-    public Call<Imaginero> getImaginero(int id) {
+  /*  public Call<Imaginero> getImaginero(int id) {
         return imagineroApi.getImaginero(id);
-    }
+    }*/
 
 }
