@@ -78,6 +78,20 @@ public class ImagineroDetalleFragment extends Fragment {
             }
         });
 
+        Button btnEliminar = view.findViewById(R.id.btn_eliminar);
+        btnEliminar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Imaginero imaginero = imagineroViewModel.getImaginero().getValue();
+                if (imaginero != null) {
+                    imagineroViewModel.deleteImaginero(imaginero.getId());
+
+                    // Aquí redirige al fragmento "ImaginerosFragment"
+                    Navigation.findNavController(v).navigate(R.id.navigation_imagineros);
+                }
+            }
+        });
+
         return view;
     }
 

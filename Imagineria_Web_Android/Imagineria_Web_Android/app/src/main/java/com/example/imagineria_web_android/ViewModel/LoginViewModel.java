@@ -25,7 +25,7 @@ public class LoginViewModel extends AndroidViewModel {
 
     public LoginViewModel(@NonNull Application application) {
         super(application);
-        authAPI = RetrofitInstance.getRetrofitInstance(getApplication().getApplicationContext()).create(AuthAPI.class);
+        authAPI = RetrofitInstance.getRetrofitInstance(application).create(AuthAPI.class);
     }
 
     public LiveData<LoginResponse> loginUser(String username, String password) {

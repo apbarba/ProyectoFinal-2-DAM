@@ -119,4 +119,22 @@ public class ImagineroViewModel extends AndroidViewModel {
         });
     }
 
+    public void deleteImaginero(String id) {
+        ImagineroApi apiInterface = RetrofitInstance.getRetrofitInstance(getApplication().getApplicationContext()).create(ImagineroApi.class);
+        Call<Void> call = apiInterface.deleteImaginero(id);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    //Aquí puedes hacer algo cuando la eliminación fue exitosa, por ejemplo, actualizar la lista de Imagineros.
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                //Los mensajes o manejo de errores aquí.
+            }
+        });
+    }
+
 }

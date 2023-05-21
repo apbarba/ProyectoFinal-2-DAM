@@ -5,6 +5,7 @@ import com.example.imagineria_web_android.Model.Imagineros.ImagineroResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
@@ -23,4 +24,7 @@ public interface ImagineroApi {
 
     @PUT("imaginero/{id}")
     Call<Imaginero> updateImaginero(@Path("id") String id, @Body Imaginero imaginero);
+
+    @DELETE("imaginero/{id}")
+    Call<Void> deleteImaginero(@Path("id") String id);
 }

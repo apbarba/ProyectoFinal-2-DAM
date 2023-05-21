@@ -2,6 +2,7 @@ package com.example.imagineria_web_android;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -21,6 +22,8 @@ public class RetrofitInstance {
             // Obtenemos el token de las SharedPreferences que tenemos guardadas
             SharedPreferences sharedPreferences = context.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
             String token = sharedPreferences.getString("token", "");
+
+            Log.d("RetrofitInstance", "Token: " + token);
 
             OkHttpClient client = new OkHttpClient.Builder()
                     .addInterceptor(loggingInterceptor)
