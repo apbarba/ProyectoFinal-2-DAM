@@ -22,5 +22,5 @@ public interface ImagineroApi {
     Call<Imaginero> getImagineroById(@Path("id") String id);
 
     @PUT("imaginero/{id}")
-    Call<Imaginero> updateImaginero(@Path("id") int idImaginero, @Body Imaginero imaginero);
+    Call<Imaginero> updateImaginero(@Path("id") String id, @Body Imaginero imaginero);
 }

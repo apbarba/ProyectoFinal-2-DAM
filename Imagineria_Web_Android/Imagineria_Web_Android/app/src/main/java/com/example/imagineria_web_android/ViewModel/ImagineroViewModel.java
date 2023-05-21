@@ -100,22 +100,21 @@ public class ImagineroViewModel extends AndroidViewModel {
             }
         });
     }
-
-    public void updateImaginero(int idImaginero, Imaginero imaginero) {
+    public void updateImaginero(String id, Imaginero updatedImaginero) {
         ImagineroApi apiInterface = RetrofitInstance.getRetrofitInstance(getApplication().getApplicationContext()).create(ImagineroApi.class);
-        Call<Imaginero> call = apiInterface.updateImaginero(idImaginero, imaginero);
+        Call<Imaginero> call = apiInterface.updateImaginero(id, updatedImaginero);
         call.enqueue(new Callback<Imaginero>() {
             @Override
             public void onResponse(Call<Imaginero> call, Response<Imaginero> response) {
-                if (response.isSuccessful()) {
-                    // Recarga la lista de imagineros
-                    loadImaginero();
+                if (response.isSuccessful() && response.body() != null) {
+                    imaginero.postValue(response.body());
+                    //Aquí también puedes actualizar la lista de Imagineros, si es necesario.
                 }
             }
 
             @Override
             public void onFailure(Call<Imaginero> call, Throwable t) {
-                // Manejo de errores aquí
+                //Los mensajes o manejo de errores aqui
             }
         });
     }

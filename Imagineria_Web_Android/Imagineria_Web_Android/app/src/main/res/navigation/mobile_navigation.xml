@@ -48,8 +48,8 @@
         android:label="Put Imaginero"
         tools:layout="@layout/fragment_put_imagineros" />
          <action
-        android:id="@+id/action_put_imaginero_to_navigation_imagineros"
-        app:destination="@id/navigation_imagineros" />
+        android:id="@+id/action_put_imaginero_to_navigation_imaginerosDetalles"
+        app:destination="@id/navigation_imaginero_detalle" />
 
     <fragment
         android:id="@+id/navigation_profile"

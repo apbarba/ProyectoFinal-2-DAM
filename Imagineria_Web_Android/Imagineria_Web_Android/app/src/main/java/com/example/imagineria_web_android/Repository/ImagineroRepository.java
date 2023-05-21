@@ -29,9 +29,9 @@ public class ImagineroRepository {
         return imagineroApi.createImaginero(imaginero);
     }
 
-    public Call<Imaginero> updateImaginero(int idImaginero, Imaginero imaginero) {
+  /*  public Call<Imaginero> updateImaginero(int idImaginero, Imaginero imaginero) {
         return imagineroApi.updateImaginero(idImaginero, imaginero);
-    }
+    }*/
 
   /*  public Call<Imaginero> getImaginero(int id) {
         return imagineroApi.getImaginero(id);

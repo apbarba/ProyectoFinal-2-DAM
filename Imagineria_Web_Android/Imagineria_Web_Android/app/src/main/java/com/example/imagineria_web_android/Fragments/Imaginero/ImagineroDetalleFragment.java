@@ -10,6 +10,7 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -47,6 +48,23 @@ public class ImagineroDetalleFragment extends Fragment {
 
                     TextView localidad = view.findViewById(R.id.localidadImaginero);
                     localidad.setText(imaginero.getLocalidad());
+                }
+            });
+
+            Button btnEditar = view.findViewById(R.id.btn_editar);
+            btnEditar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Imaginero imaginero = imagineroViewModel.getImaginero().getValue();
+                    if (imaginero != null) {
+                        Bundle bundle = new Bundle();
+                        bundle.putString("id", imaginero.getId());
+                        bundle.putString("localidad", imaginero.getLocalidad());
+                        bundle.putInt("edad", imaginero.getEdad());
+
+                        // Aquí debes reemplazar "action_id" por la acción real que lleva al fragmento de edición
+                        Navigation.findNavController(v).navigate(R.id.navigation_put_imaginero, bundle);
+                    }
                 }
             });
         }

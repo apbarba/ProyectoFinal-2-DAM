@@ -25,6 +25,10 @@ public class Imaginero {
 
     }
 
+    public Imaginero( int nuevaEdad, String nuevaLocalidad) {
+    }
+
+
     public String getId() {
         return id;
     }
