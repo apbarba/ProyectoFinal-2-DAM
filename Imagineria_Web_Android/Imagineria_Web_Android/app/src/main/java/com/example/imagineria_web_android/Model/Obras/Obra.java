@@ -3,12 +3,20 @@ package com.example.imagineria_web_android.Model.Obras;
 public class Obra {
 
     private String id;
+    private String name;
+
     private String nombre;
     private String estilo;
     private String fecha;
     private double precio;
     private String estado;
+    private String titulo;
     private String img;
+    private String categoriaId;
+
+    public Obra() {
+        //PARA EL POST
+    }
 
     public String getId() {
         return id;
@@ -18,11 +26,27 @@ public class Obra {
         this.id = id;
     }
 
-    public String getNombre() {
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getNombre(){
         return nombre;
     }
 
-    public void setNombre(String nombre) {
+    public void setNombre(String nombre){
         this.nombre = nombre;
     }
 
@@ -66,13 +90,24 @@ public class Obra {
         this.img = img;
     }
 
-    public Obra(String id, String nombre, String estilo, String fecha, double precio, String estado, String img) {
+    public String getCategoriaId() {
+        return categoriaId;
+    }
+
+    public void setCategoriaId(String categoriaId) {
+        this.categoriaId = categoriaId;
+    }
+
+    public Obra(String id, String name, String nombre, String estilo, String fecha, double precio, String estado, String titulo, String img, String CategoriaId) {
         this.id = id;
+        this.name = name;
         this.nombre = nombre;
         this.estilo = estilo;
         this.fecha = fecha;
         this.precio = precio;
         this.estado = estado;
+        this.titulo = titulo;
         this.img = img;
+        this.categoriaId = categoriaId;
     }
 }

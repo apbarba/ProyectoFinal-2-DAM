@@ -17,18 +17,17 @@ public class RetrofitInstance {
     public static Retrofit getRetrofitInstance(Context context) {
         if (retrofit == null) {
             HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-
-            // Obtenemos el token de las SharedPreferences que tenemos guardadas
-            SharedPreferences sharedPreferences = context.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
-            String token = sharedPreferences.getString("token", "");
-
-            Log.d("RetrofitInstance", "Token: " + token);
+            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.HEADERS);
 
             OkHttpClient client = new OkHttpClient.Builder()
                     .addInterceptor(loggingInterceptor)
                     .addInterceptor(chain -> {
                         Request original = chain.request();
+                        // Obtenemos el token de las SharedPreferences para cada solicitud
+                        SharedPreferences sharedPreferences = context.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+                        String token = sharedPreferences.getString("token", "");
+                        Log.d("RetrofitInstance", "token: " + token);
+
                         Request request = original.newBuilder()
                                 .header("Authorization", "Bearer " + token)
                                 .method(original.method(), original.body())

@@ -94,7 +94,6 @@ public class SecurityConfig {
                         "/categoria/author/{categoria_nombre}",
                         "/obras/{id}",
                         "/categoria/**",
-
                         "/me").hasRole("ADMIN")
                 .antMatchers(HttpMethod.GET, "/obras/{id}").hasRole("ADMIN")
                 .anyRequest().authenticated();

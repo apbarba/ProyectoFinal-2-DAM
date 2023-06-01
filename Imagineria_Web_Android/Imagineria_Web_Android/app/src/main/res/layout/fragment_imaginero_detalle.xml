@@ -4,16 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/detalle_fondo"
     tools:context=".Fragments.Imaginero.ImagineroDetalleFragment">
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="848dp"
-        android:layout_height="767dp"
-        android:layout_marginTop="144dp"
-        android:src="@drawable/curculo"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="-219dp" />
 
     <ImageView
         android:id="@+id/imageView4"

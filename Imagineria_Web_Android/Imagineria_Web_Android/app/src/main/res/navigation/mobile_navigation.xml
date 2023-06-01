@@ -17,6 +17,9 @@
         tools:layout="@layout/fragment_obras"
         android:name="com.example.imagineria_web_android.Fragments.Obra.ObrasFragment" >
     </fragment>
+        <action
+            android:id="@+id/action_navigation_obras_to_post_obra"
+            app:destination="@+id/navigation_post_obra" />
 
     <fragment
         android:id="@+id/navigation_imagineros"
@@ -43,6 +46,15 @@
         app:destination="@id/navigation_imagineros" />
 
     <fragment
+        android:id="@+id/navigation_post_obra"
+        android:name="com.example.imagineria_web_android.Fragments.Obra.PostObraFragment"
+        android:label="Post Obra"
+        tools:layout="@layout/fragment_post_obra" />
+        <action
+            android:id="@+id/action_post_obra_to_navigation_obras"
+            app:destination="@+id/navigation_obras"/>
+
+    <fragment
         android:id="@+id/navigation_put_imaginero"
         android:name="com.example.imagineria_web_android.Fragments.Imaginero.PutImaginerosFragment"
         android:label="Put Imaginero"
@@ -67,10 +79,22 @@
             android:name="id"
             app:argType="string"/>
     </fragment>
+        <action
+            android:id="@+id/action_navigation_imagineros_to_navigation_imaginero_detalle"
+            app:destination="@id/navigation_imaginero_detalle" />
 
-    <action
-        android:id="@+id/action_navigation_imagineros_to_navigation_imaginero_detalle"
-        app:destination="@id/navigation_imaginero_detalle" />
+    <fragment
+        android:id="@+id/navigation_obra_detalle"
+        android:label="Detalle Obra"
+        android:name="com.example.imagineria_web_android.Fragments.Obra.ObraDetalleFragment"
+        tools:layout="@layout/fragment_obra_detalle" >
+        <argument
+            android:name="id"
+            app:argType="string" />
+    </fragment>
+        <action
+            android:id="@+id/action_navigation_obras_to_navigation_obra_detalle"
+            app:destination="@+id/navigation_obra_detalle"/>
 
 
 </navigation>

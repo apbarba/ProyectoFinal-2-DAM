@@ -4,6 +4,8 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,6 +15,7 @@ import android.view.ViewGroup;
 
 import com.example.imagineria_web_android.R;
 import com.example.imagineria_web_android.ViewModel.ObraViewModel;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -40,9 +43,17 @@ public class ObrasFragment extends Fragment {
         obraViewModel.loadObras();
 
         // Observar cambios
-        obraViewModel.getObras().observe(getViewLifecycleOwner(), obras -> {
+        obraViewModel.getObrasList().observe(getViewLifecycleOwner(), obras -> {
             // Actualizar UI
             obraAdapter.updateData(obras);
+        //    obraAdapter.notifyDataSetChanged();
+        });
+
+        FloatingActionButton fabNavigationToPostObra = view.findViewById(R.id.add_obra);
+        fabNavigationToPostObra.setOnClickListener(v -> {
+            NavController navController = NavHostFragment.findNavController(ObrasFragment.this);
+            navController.navigateUp();
+            navController.navigate(R.id.action_navigation_obras_to_post_obra);
         });
 
         return view;
