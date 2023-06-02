@@ -20,4 +20,9 @@
         android:id="@+id/navigation_categorias"
         android:icon="@drawable/categoria"
         android:title="Categorias" />
+
+    <item
+        android:id="@+id/navigation_profile"
+        android:icon="@drawable/profile"
+        android:title="Perfil" />
 </menu>

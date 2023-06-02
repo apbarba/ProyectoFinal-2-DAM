@@ -26,20 +26,6 @@
                 android:text="La Imagineria"
                 android:textSize="20sp" />
 
-            <ImageButton
-                android:id="@+id/profileButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/logo"
-                android:layout_alignBottom="@+id/logo"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="0dp"
-                android:layout_marginEnd="17dp"
-                android:layout_marginBottom="0dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:paddingLeft="20dp"
-                android:src="@drawable/imaginero" />
-
         </RelativeLayout>
 
     </androidx.appcompat.widget.Toolbar>
