@@ -24,9 +24,7 @@ public class PutImaginerosFragment extends Fragment {
     private ImagineroViewModel imagineroViewModel;
     private Imaginero imagineroActual;
 
-    public PutImaginerosFragment() {
-        // Required empty public constructor
-    }
+    public PutImaginerosFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

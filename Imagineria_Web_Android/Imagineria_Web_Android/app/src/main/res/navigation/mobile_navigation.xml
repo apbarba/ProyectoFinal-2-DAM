@@ -64,6 +64,15 @@
         app:destination="@id/navigation_imaginero_detalle" />
 
     <fragment
+        android:id="@+id/navigation_put_obra"
+        android:name="com.example.imagineria_web_android.Fragments.Obra.PutObraFragment"
+        android:label="Put Obra"
+        tools:layout="@layout/fragment_put_obra" />
+        <action
+            android:id="@+id/action_put_obra_to_navigation_obraDetalles"
+            app:destination="@+id/navigation_obra_detalle" />
+
+    <fragment
         android:id="@+id/navigation_profile"
         android:name="com.example.imagineria_web_android.Fragments.Profile.ProfileFragment"
         android:label="Perfil"

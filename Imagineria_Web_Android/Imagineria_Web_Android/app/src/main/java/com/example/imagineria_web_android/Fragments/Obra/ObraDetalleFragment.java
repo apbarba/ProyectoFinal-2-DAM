@@ -5,10 +5,14 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.imagineria_web_android.Model.Obras.Obra;
@@ -47,9 +51,59 @@ public class ObraDetalleFragment extends Fragment {
 
                     TextView precio = view.findViewById(R.id.detalle_obra_precio);
                     precio.setText(String.valueOf(obra.getPrecio()));
+
+                    TextView estado = view.findViewById(R.id.detalle_obra_estado);
+                    estado.setText(obra.getEstado());
+
+                    TextView estilo = view.findViewById(R.id.detalle_obra_estilo);
+                    estilo.setText(obra.getEstilo());
+                }
+            });
+
+            Button btnEditar = view.findViewById(R.id.btn_editar_obra);
+            btnEditar.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    Obra obra = obraViewModel.getObra().getValue();
+                    if (obra != null){
+                        Bundle bundle = new Bundle();
+                        bundle.putString("id", obra.getId());
+                        bundle.putString("nombre", obra.getNombre());
+                        bundle.putString("titulo", obra.getTitulo());
+                        bundle.putDouble("precio", obra.getPrecio());
+                        bundle.putString("estado", obra.getEstado());
+                        bundle.putString("estilo", obra.getEstilo());
+
+                        Navigation.findNavController(v).navigate(R.id.navigation_put_obra, bundle);
+                    }
                 }
             });
         }
+
+        ImageButton imageButton = view.findViewById(R.id.imageButtonObra);
+        imageButton.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigate(R.id.navigation_obras);
+            }
+        });
+
+        Button btnEliminar = view.findViewById(R.id.btn_eliminar_obra_put);
+
+        btnEliminar.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Obra obra = obraViewModel.getObra().getValue();
+                if (obra != null) {
+                    obraViewModel.deleteObra(obra.getId());
+
+                    Navigation.findNavController(v).navigate(R.id.navigation_obras);
+                }
+            }
+        });
 
         return view;
     }
