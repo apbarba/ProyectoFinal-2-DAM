@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.imagineria_web_android.Model.Categoria.Categoria;
@@ -75,6 +76,14 @@ public class CategoriaDetalleFragment extends Fragment {
                 }
             });
         }
+
+        ImageButton imageButton = view.findViewById(R.id.imageButtonAtrasCategoria);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.navigation_categorias);
+            }
+        });
 
         btnEliminar.setOnClickListener(new View.OnClickListener() {
             @Override
