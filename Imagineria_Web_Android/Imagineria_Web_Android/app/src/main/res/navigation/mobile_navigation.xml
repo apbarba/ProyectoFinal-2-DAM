@@ -73,6 +73,15 @@
             app:destination="@+id/navigation_obra_detalle" />
 
     <fragment
+        android:id="@+id/navigation_put_categoria"
+        android:name="com.example.imagineria_web_android.Fragments.Categoria.PutCategoriaFragment"
+        android:label="Put Categoira"
+        tools:layout="@layout/fragment_put_categoria" />
+        <action
+            android:id="@+id/action_put_categoria_to_navigation_categoriaDetalle"
+            app:destination="@+id/navigation_categoria_detalles" />
+
+    <fragment
         android:id="@+id/navigation_profile"
         android:name="com.example.imagineria_web_android.Fragments.Profile.ProfileFragment"
         android:label="Perfil"
@@ -104,6 +113,16 @@
         <action
             android:id="@+id/action_navigation_obras_to_navigation_obra_detalle"
             app:destination="@+id/navigation_obra_detalle"/>
+
+    <fragment
+        android:id="@+id/navigation_categoria_detalles"
+        android:label="Detalle Categoria"
+        android:name="com.example.imagineria_web_android.Fragments.Categoria.CategoriaDetalleFragment"
+        tools:layout="@layout/fragment_categoria_detalle" >
+    </fragment>
+        <action
+            android:id="@+id/action_navigation_categoria_to_navigation_categoria_detalle"
+            app:destination="@+id/navigation_categoria_detalles"/>
 
 
 </navigation>

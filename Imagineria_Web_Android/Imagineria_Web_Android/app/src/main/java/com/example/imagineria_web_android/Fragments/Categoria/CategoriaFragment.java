@@ -11,10 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.imagineria_web_android.Fragments.Obra.ObrasAdapter;
 import com.example.imagineria_web_android.R;
 import com.example.imagineria_web_android.ViewModel.CategoriaViewModel;
-import com.example.imagineria_web_android.ViewModel.ObraViewModel;
 
 import java.util.ArrayList;
 
@@ -42,7 +40,7 @@ public class CategoriaFragment extends Fragment {
         categoriaViewModel.loadCategoria();
 
         // Observar cambios
-        categoriaViewModel.getCategoria().observe(getViewLifecycleOwner(), categorias -> {
+        categoriaViewModel.getCategoriaList().observe(getViewLifecycleOwner(), categorias -> {
             // Actualizar UI
             categoriaAdapter.updateData(categorias);
         });
