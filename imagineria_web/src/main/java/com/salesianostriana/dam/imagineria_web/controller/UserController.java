@@ -1,5 +1,6 @@
 package com.salesianostriana.dam.imagineria_web.controller;
 
+import com.salesianostriana.dam.imagineria_web.files.service.StorageService;
 import com.salesianostriana.dam.imagineria_web.model.Obras;
 import com.salesianostriana.dam.imagineria_web.model.User;
 import com.salesianostriana.dam.imagineria_web.model.dto.UserDTO.ChangePasswordRequest;
@@ -22,6 +23,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -30,6 +32,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.persistence.Access;
@@ -47,6 +50,7 @@ public class UserController {
     private final AuthenticationManager authenticationManager;
 
     private final JwtProvider jwtProvider;
+    private final StorageService storageService;
 
     private final RefreshTokenService refreshTokenService;
     private final ObrasRepository obrasRepository;
@@ -409,5 +413,24 @@ public class UserController {
         return ResponseEntity
                 .noContent()
                 .build();
+    }
+
+    @PutMapping("user/{id}/avatar")
+    public ResponseEntity<User> changeUserAvatar(@PathVariable UUID id, @RequestPart("avatar")MultipartFile avatarFile){
+        Optional<User> optionalUser = userService.findById(id);
+
+        if (!optionalUser.isPresent()){
+            return ResponseEntity
+                    .notFound()
+                    .build();
+        }
+        User user = optionalUser.get();
+        String filename = storageService.store(avatarFile);
+
+        user.setAvatar(filename);
+        userService.save(user);
+
+        return ResponseEntity
+                .ok(user);
     }
 }

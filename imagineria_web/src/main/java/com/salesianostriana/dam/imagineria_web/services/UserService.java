@@ -36,6 +36,7 @@ public class UserService {
                 .password(passwordEncoder.encode(getDtoImaginero.getPassword()))
                 .email(getDtoImaginero.getEmail())
                 .name(getDtoImaginero.getName())
+                .avatar(getDtoImaginero.getAvatar())
                 .rol(roles)
                 .build();
 

@@ -16,12 +16,13 @@
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="-29dp" />
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/imagenperfil"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <ImageView
+        android:id="@+id/profileIcon"
+        android:layout_width="187dp"
+        android:layout_height="182dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/mujerfeliz"
+        app:layout_constraintBottom_toTopOf="@+id/textView7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

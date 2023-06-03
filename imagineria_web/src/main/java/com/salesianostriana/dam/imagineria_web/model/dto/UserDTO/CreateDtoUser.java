@@ -44,6 +44,8 @@ public class CreateDtoUser {
     @NotEmpty(message = "{userDto.verifyPassword.notempty}")
     private String verifyPassword;
 
+    private String avatar;
+
     //@NotBlank(message = "{user.obras.list.blank}"
     //private List<EditDtoObras> obras;
 
