@@ -417,6 +417,8 @@ public class UserController {
 
     @PutMapping("user/{id}/avatar")
     public ResponseEntity<User> changeUserAvatar(@PathVariable UUID id, @RequestPart("avatar")MultipartFile avatarFile){
+
+
         Optional<User> optionalUser = userService.findById(id);
 
         if (!optionalUser.isPresent()){

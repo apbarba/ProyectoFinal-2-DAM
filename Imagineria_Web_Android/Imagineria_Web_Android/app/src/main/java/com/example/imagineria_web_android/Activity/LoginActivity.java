@@ -43,6 +43,8 @@ public class LoginActivity extends AppCompatActivity {
                         if (loginResponse.getToken() != null) {
                             String token = loginResponse.getToken();
                             saveToken(token);
+                            String userId = loginResponse.getId();
+                            saveUserId(userId);
                             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                             startActivity(intent);
                             finish();
@@ -65,11 +67,21 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    //Guarda el token en las Preference
     private void saveToken(String token) {
         SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("token", token);
         editor.apply();
     }
+
+    //Guarda el id del User
+    private void saveUserId(String userId) {
+        SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("user_id", userId);
+        editor.apply();
+    }
+
 }
 

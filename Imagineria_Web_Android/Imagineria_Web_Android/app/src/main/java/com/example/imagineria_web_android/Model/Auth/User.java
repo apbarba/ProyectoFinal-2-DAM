@@ -8,7 +8,16 @@ public class User {
     private String name;
     private String createdAt;
     private String token;
+    private String avatar;
     private String refreshToken;
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
 
     public User(String id, String username, String email, String name, String createdAt, String token, String refreshToken) {
         this.id = id;
