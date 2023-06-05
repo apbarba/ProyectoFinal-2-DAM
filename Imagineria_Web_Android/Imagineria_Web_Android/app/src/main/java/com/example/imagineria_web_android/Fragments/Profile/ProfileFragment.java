@@ -31,6 +31,7 @@ import androidx.navigation.Navigation;
 
 import com.bumptech.glide.Glide;
 import com.example.imagineria_web_android.API.UserApi;
+import com.example.imagineria_web_android.Activity.LoginActivity;
 import com.example.imagineria_web_android.Model.Auth.User;
 import com.example.imagineria_web_android.R;
 import com.example.imagineria_web_android.RetrofitInstance;
@@ -61,6 +62,9 @@ public class ProfileFragment extends Fragment {
     private SharedPreferences sharedPref;
     private UserApi userService;
 
+    private Button logoutButton;
+
+
     public ProfileFragment() {
         // Required empty public constructor
     }
@@ -89,6 +93,14 @@ public class ProfileFragment extends Fragment {
             public void onClick(View v) {
                 NavController navController = Navigation.findNavController(v);
                 navController.navigate(R.id.navigation_put_password);
+            }
+        });
+
+        logoutButton = rootView.findViewById(R.id.btn_logout);
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logout();
             }
         });
 
@@ -214,6 +226,22 @@ public class ProfileFragment extends Fragment {
             }
         });
     }
+
+    private void logout() {
+        // Eliminar el token y otros datos de sesión guardados en SharedPreferences
+        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove("token");
+        editor.remove("user_id");
+        editor.remove("password");
+        editor.apply();
+
+        // Navegar al LoginActivity
+        Intent intent = new Intent(requireContext(), LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
+
 }
 
 

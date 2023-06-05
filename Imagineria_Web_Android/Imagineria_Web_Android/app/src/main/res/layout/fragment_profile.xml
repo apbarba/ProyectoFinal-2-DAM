@@ -33,5 +33,14 @@
         android:layout_marginTop="346dp"
         android:text="Editar Contraseña" />
 
+    <Button
+        android:id="@+id/btn_logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/avatarImageView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="446dp"
+        android:text="Cerrar Sesion" />
+
 
 </RelativeLayout>
