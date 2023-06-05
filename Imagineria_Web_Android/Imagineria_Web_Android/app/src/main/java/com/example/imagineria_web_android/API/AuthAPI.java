@@ -4,6 +4,9 @@ import android.content.Context;
 
 import com.example.imagineria_web_android.Model.Auth.LoginRequest;
 import com.example.imagineria_web_android.Model.Auth.LoginResponse;
+import com.example.imagineria_web_android.Model.Auth.RegisterRequest;
+import com.example.imagineria_web_android.Model.Auth.RegisterResponse;
+import com.example.imagineria_web_android.Model.Auth.User;
 import com.example.imagineria_web_android.RetrofitInstance;
 
 import retrofit2.Call;
@@ -22,4 +25,7 @@ public interface AuthAPI {
             return retrofit.create(AuthAPI.class);
         }
     }
+
+    @POST("auth/register")
+    Call<RegisterResponse> registerUser(@Body RegisterRequest registerRequest);
 }

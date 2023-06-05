@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:padding="15dp"
-    tools:context=".Activity.Register">
+    tools:context=".Activity.RegisterActivity">
 
 
     <com.google.android.material.textfield.TextInputLayout
@@ -79,9 +79,9 @@
         android:id="@+id/btn_register" />
 
     <Button
+        android:id="@+id/cancelarNow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/loginNow"
-        android:text="Login" />
+        android:text="Cancelar" />
 
 </LinearLayout>

@@ -59,11 +59,12 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        Button registerNow = findViewById(R.id.registerNow);
-        registerNow.setOnClickListener(new View.OnClickListener() {
+        Button registerButton = findViewById(R.id.registerNow);
+        registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Navegar a la pantalla de registro
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
             }
         });
     }
