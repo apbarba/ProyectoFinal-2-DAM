@@ -45,6 +45,7 @@ public class LoginActivity extends AppCompatActivity {
                             saveToken(token);
                             String userId = loginResponse.getId();
                             saveUserId(userId);
+                            savePassword(password);
                             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                             startActivity(intent);
                             finish();
@@ -80,6 +81,13 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("user_id", userId);
+        editor.apply();
+    }
+
+    private void savePassword(String password) {
+        SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("password", password);
         editor.apply();
     }
 

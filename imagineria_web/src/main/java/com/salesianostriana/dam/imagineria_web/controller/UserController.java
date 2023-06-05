@@ -5,15 +5,12 @@ import com.salesianostriana.dam.imagineria_web.model.Obras;
 import com.salesianostriana.dam.imagineria_web.model.User;
 import com.salesianostriana.dam.imagineria_web.model.dto.UserDTO.ChangePasswordRequest;
 import com.salesianostriana.dam.imagineria_web.model.dto.UserDTO.CreateDtoUser;
-import com.salesianostriana.dam.imagineria_web.model.dto.UserDTO.EditDtoUser;
 import com.salesianostriana.dam.imagineria_web.model.dto.UserDTO.UserResponse;
 import com.salesianostriana.dam.imagineria_web.model.dto.JwtDto.JwtImagineroResponse;
 import com.salesianostriana.dam.imagineria_web.model.dto.LoginDto.LoginRequest;
 import com.salesianostriana.dam.imagineria_web.repository.ObrasRepository;
 import com.salesianostriana.dam.imagineria_web.security.jwt.access.JwtProvider;
 import com.salesianostriana.dam.imagineria_web.security.jwt.refresh.RefreshToken;
-import com.salesianostriana.dam.imagineria_web.security.jwt.refresh.RefreshTokenException;
-import com.salesianostriana.dam.imagineria_web.security.jwt.refresh.RefreshTokenRequest;
 import com.salesianostriana.dam.imagineria_web.security.jwt.refresh.RefreshTokenService;
 import com.salesianostriana.dam.imagineria_web.services.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -23,7 +20,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -35,8 +31,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.persistence.Access;
+import javax.validation.Path;
 import javax.validation.Valid;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -45,7 +44,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class UserController {
 
-    private final  UserService userService;
+    private final UserService userService;
 
     private final AuthenticationManager authenticationManager;
 
@@ -87,6 +86,7 @@ public class UserController {
                 .status(HttpStatus.CREATED)
                 .body(UserResponse.fromUser(imaginero));
     }
+
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201",
                     description = "Se muestra correctamente el perfil de usuario",
@@ -119,6 +119,7 @@ public class UserController {
                 .status(HttpStatus.CREATED)
                 .body(UserResponse.fromUser(imaginero));
     }
+
     @Operation(summary = "Método para loguear a un usuario ya registrado")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201",
@@ -177,14 +178,14 @@ public class UserController {
                             schema = @Schema(implementation = ChangePasswordRequest.class),
                             examples = {@ExampleObject(
                                     value = """
-                                         {
-                                            "id": "c0a8000d-867f-1abe-8186-7fbac7930000",
-                                            "username": "anabarba",
-                                            "email": "gigante@gmail.com",
-                                            "name": "ana",
-                                            "createdAt": "23/02/2023 20:23:12"
-                                        }
-                                           """
+                                             {
+                                                "id": "c0a8000d-867f-1abe-8186-7fbac7930000",
+                                                "username": "anabarba",
+                                                "email": "gigante@gmail.com",
+                                                "name": "ana",
+                                                "createdAt": "23/02/2023 20:23:12"
+                                            }
+                                               """
                             )}
                     )}),
             @ApiResponse(responseCode = "401",
@@ -218,6 +219,7 @@ public class UserController {
 
         return null;
     }
+
     @Operation(summary = "Usuario eliminado")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204",
@@ -231,7 +233,7 @@ public class UserController {
                     content = @Content),
     })
     @DeleteMapping("/user/{id}")
-    public ResponseEntity<?> delete(@PathVariable User user){
+    public ResponseEntity<?> delete(@PathVariable User user) {
 
         userService.delete(user);
 
@@ -239,6 +241,7 @@ public class UserController {
                 .noContent()
                 .build();
     }
+
     @Operation(summary = "Detalles del usuario activo")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",
@@ -252,10 +255,11 @@ public class UserController {
                     content = @Content),
     })
     @GetMapping("/me")
-    public UserResponse profile(@AuthenticationPrincipal User user){
+    public UserResponse profile(@AuthenticationPrincipal User user) {
 
         return UserResponse.fromUser(user);
     }
+
     @Operation(summary = "Se añade una obra a la lista de favoritos")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",
@@ -294,10 +298,11 @@ public class UserController {
     })
     @PostMapping("user/{userId}/favoritos/{obraId}")
     public User addFavorito(@PathVariable UUID userId,
-                            @PathVariable UUID obraId){
+                            @PathVariable UUID obraId) {
 
         return userService.addFavorito(userId, obraId);
     }
+
     @Operation(summary = "Se obtiene los detalles de la lista de favoritos del usuario")
     @ApiResponses(value = {
             @ApiResponse(
@@ -339,9 +344,9 @@ public class UserController {
                     content = @Content)
     })
     @GetMapping("user/{id}/favoritos")
-    public List<Obras> getAllFavoritos(@PathVariable UUID id){
+    public List<Obras> getAllFavoritos(@PathVariable UUID id) {
 
-     return userService.getFavoritos(id);
+        return userService.getFavoritos(id);
     }
 
     @Operation(summary = "Se obtiene la lista de obras favoritas del usuario logeado")
@@ -406,7 +411,7 @@ public class UserController {
     })
     @DeleteMapping("user/{userId}/favoritos/{obraId}")
     public ResponseEntity<?> removeFav(@PathVariable UUID userId,
-                                       @PathVariable UUID obraId){
+                                       @PathVariable UUID obraId) {
 
         userService.removeFavObra(userId, obraId);
 
@@ -415,13 +420,14 @@ public class UserController {
                 .build();
     }
 
+    //EDITA EL AVATAR DEL USUARIO QUE SE ENCUENTRA LOGEADO
     @PutMapping("user/{id}/avatar")
-    public ResponseEntity<User> changeUserAvatar(@PathVariable UUID id, @RequestPart("avatar")MultipartFile avatarFile){
+    public ResponseEntity<User> changeUserAvatar(@PathVariable UUID id, @RequestPart("avatar") MultipartFile avatarFile) {
 
 
         Optional<User> optionalUser = userService.findById(id);
 
-        if (!optionalUser.isPresent()){
+        if (!optionalUser.isPresent()) {
             return ResponseEntity
                     .notFound()
                     .build();
@@ -434,5 +440,47 @@ public class UserController {
 
         return ResponseEntity
                 .ok(user);
+    }
+
+    //VER EL PERFIL AL COMPLETO DEL USUARIO
+    @GetMapping("user/{id}/profile")
+    public ResponseEntity<Optional<User>> getUserProfile(@PathVariable UUID id) {
+        Optional<User> user = userService.findById(id);
+
+        if (user != null) {
+            return ResponseEntity
+                    .ok(user);
+        } else {
+            return ResponseEntity
+                    .notFound()
+                    .build();
+        }
+    }
+
+    @PostMapping("user/changeAvatar")
+    public ResponseEntity<?> changeAvatar(@RequestParam("avatar") MultipartFile avatar, @RequestParam("userId") UUID userId) {
+        try {
+            // Crear directorio si no existe
+            File directory = new File("avatars");
+            if (!directory.exists()) {
+                directory.mkdir();
+            }
+
+            java.nio.file.Path path = Paths.get("avatars/" + avatar.getOriginalFilename());
+            File file = path.toFile();
+            avatar.transferTo(file);
+
+            Optional<User> optionalUser = userService.findById(userId);
+            if (optionalUser.isPresent()) {
+                User user = optionalUser.get();
+                user.setAvatar(path.toString());
+                userService.save(user);
+            }
+
+            return ResponseEntity.ok().build();
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+
     }
 }
