@@ -38,6 +38,10 @@ public interface ObraApi {
     @GET("user/{userId}/favoritos")
     Call<List<Obra>> getObrasFavoritas(@Path("userId") String userId);
 
+    @DELETE("user/{userId}/favoritos/{obraId}")
+    Call<Void> removeFavObra(@Path("userId") String userId, @Path("obraId") String obraId);
+
+
 
 
 }

@@ -24,7 +24,7 @@ import com.example.imagineria_web_android.ViewModel.ObraViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListaFavFragment extends Fragment {
+public class ListaFavFragment extends Fragment implements AdapaterFavoritos.OnRemoveFavoritoListener{
 
     private RecyclerView favoritosRecyclerView;
     private AdapaterFavoritos favoritosAdapter; // Este es un adaptador personalizado que tendrías que crear
@@ -46,6 +46,7 @@ public class ListaFavFragment extends Fragment {
         favoritosRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         favoritosAdapter = new AdapaterFavoritos(new ArrayList<>());
+        favoritosAdapter.setOnRemoveFavoritoListener(this); // Asignamos el listener aquí
         favoritosRecyclerView.setAdapter(favoritosAdapter);
 
         obraViewModel = new ViewModelProvider(this).get(ObraViewModel.class);
@@ -74,5 +75,12 @@ public class ListaFavFragment extends Fragment {
         });
 
         return view;
+    }
+
+    @Override
+    public void onRemoveFavorito(String obraId) {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+        String userId = sharedPreferences.getString("user_id", "");
+        obraViewModel.removeObraFromFavoritos(userId, obraId);
     }
 }
