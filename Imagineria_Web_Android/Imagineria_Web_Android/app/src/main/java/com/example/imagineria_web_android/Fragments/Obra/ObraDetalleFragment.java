@@ -94,6 +94,8 @@ public class ObraDetalleFragment extends Fragment {
                     String userId = sharedPreferences.getString("user_id", "");
 
                     obraViewModel.addObraToFavoritos(userId, id);
+
+                    heartIconFav.setImageResource(R.drawable.favorite);
                 }
             });
         }
