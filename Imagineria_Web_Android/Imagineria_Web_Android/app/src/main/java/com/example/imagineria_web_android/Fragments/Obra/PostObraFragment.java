@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,7 @@ public class PostObraFragment extends Fragment {
     private List<Categoria> categorias;
     private Categoria categoriaSeleccionada;
     private List<String> nombresCategorias;
+    private Obra obra;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,7 @@ public class PostObraFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_post_obra, container, false);
 
+        obra = new Obra();
         postNameObra = view.findViewById(R.id.post_name_obra);
         postTitleObra = view.findViewById(R.id.post_title_obra);
         postPriceObra = view.findViewById(R.id.post_precio_obra);
@@ -71,8 +74,8 @@ public class PostObraFragment extends Fragment {
         spinnerCategorias.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-               categoriaSeleccionada = categorias.get(position);
-                //SE PUEDE GUARDAR LA CATEGORIA SELECCIONADA AQUI PARA PODER USARLA MAS TARDE
+                categoriaSeleccionada = categorias.get(position);
+                obra.setCategoria(categoriaSeleccionada.getId().toString()); // Aquí asigna el ID como una cadena
             }
 
             @Override
@@ -81,6 +84,7 @@ public class PostObraFragment extends Fragment {
                 categoriaSeleccionada = null;
             }
         });
+
 
         viewModel.getCategorias();
 
@@ -92,13 +96,16 @@ public class PostObraFragment extends Fragment {
             String stile = postStileObra.getText().toString();
 
             Obra obra = new Obra();
-            obra.setName(name);
+            obra.setNombre(name);
             obra.setTitulo(title);
             obra.setPrecio(price);
             obra.setEstado(stade);
             obra.setEstilo(stile);
             if (categoriaSeleccionada != null){
-                obra.setCategoriaId(categoriaSeleccionada.getId());
+                obra.setCategoria(categoriaSeleccionada.getId());
+                Log.d("PostObraFragment", "ID de categoría seleccionada: " + categoriaSeleccionada.getId().toString());
+            } else {
+                Log.d("PostObraFragment", "Ninguna categoría seleccionada.");
             }
 
             viewModel.createObra(obra);

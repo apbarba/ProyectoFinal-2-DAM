@@ -305,16 +305,11 @@ public class ObrasController {
     @PostMapping("/")
     public ResponseEntity<GetDtoObras> createNewObras(@Valid @RequestBody CreateDtoObras obras) {
 
-        Obras created = obrasService.save2(obras);
-
-        URI createdURI = ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(created.getId()).toUri();
+        GetDtoObras created = obrasService.save2(obras);
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .build();
+                .body(created);
 
     }
 

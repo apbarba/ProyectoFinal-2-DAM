@@ -78,28 +78,40 @@ public class ObrasService {
     }
 
     @Transactional
-    public Obras save2(CreateDtoObras createDtoObras/*, MultipartFile file*/){
+    public GetDtoObras save2(CreateDtoObras createDtoObras){
 
-        //String filename = storageService.store(file);
+        String categoriaString = String.valueOf(createDtoObras.getCategoria());
+        if (categoriaString == null) {
+            // La categoría es null. Maneja esta situación.
+            throw new IllegalArgumentException("La categoría no puede ser null");
+        }
 
-      //  Imaginero imaginero = imagineroRepository.getReferenceById(createDtoObras.getImaginero().getId());
-        Optional<Categoria> categoria = categoriaRepository.findById(createDtoObras.getCategoria());
+        UUID categoriaId = UUID.fromString(String.valueOf(createDtoObras.getCategoria()));
+        Optional<Categoria> categoriaOpt = categoriaRepository.findById(categoriaId);
+
+        if (!categoriaOpt.isPresent()) {
+            // La categoría no existe en la base de datos.
+            // Deberías manejar este caso de alguna manera, por ejemplo, lanzando una excepción.
+            throw new RuntimeException("Categoria no encontrada");
+        }
+
+        Categoria categoria = categoriaOpt.get();
+
         Obras obras = obrasRepository.save(
                 Obras.builder()
-                        .name(createDtoObras.getName())
+                        .name(createDtoObras.getNombre())
                         .titulo(createDtoObras.getTitulo())
                         .estado(createDtoObras.getEstado())
                         .estilo(createDtoObras.getEstilo())
                         .fecha(createDtoObras.getFecha())
                         .img(createDtoObras.getImg())
-                        .categoria(categoria.get())
-                       // .imaginero(imaginero)
-                       // .nombreImaginero(imaginero.getName())
+                        .categoria(categoria)
                         .build()
         );
 
-        return obras;
+        return converterDtoObras.obrasToObras(obras);
     }
+
 
     public void delete(UUID id){
 

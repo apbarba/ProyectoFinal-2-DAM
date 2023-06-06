@@ -12,7 +12,7 @@ public class Obra {
     private String estado;
     private String titulo;
     private String img;
-    private String categoriaId;
+    private String categoria;
 
     public Obra() {
         //PARA EL POST
@@ -90,15 +90,15 @@ public class Obra {
         this.img = img;
     }
 
-    public String getCategoriaId() {
-        return categoriaId;
+    public String getCategoria() {
+        return categoria;
     }
 
-    public void setCategoriaId(String categoriaId) {
-        this.categoriaId = categoriaId;
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 
-    public Obra(String id, String name, String nombre, String estilo, String fecha, double precio, String estado, String titulo, String img, String CategoriaId) {
+    public Obra(String id, String name, String nombre, String estilo, String fecha, double precio, String estado, String titulo, String img, String categoria) {
         this.id = id;
         this.name = name;
         this.nombre = nombre;
@@ -108,6 +108,6 @@ public class Obra {
         this.estado = estado;
         this.titulo = titulo;
         this.img = img;
-        this.categoriaId = categoriaId;
+        this.categoria = categoria;
     }
 }
