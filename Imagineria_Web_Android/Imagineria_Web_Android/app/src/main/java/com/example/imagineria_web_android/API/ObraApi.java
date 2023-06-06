@@ -1,5 +1,6 @@
 package com.example.imagineria_web_android.API;
 
+import com.example.imagineria_web_android.Model.Auth.User;
 import com.example.imagineria_web_android.Model.Obras.Obra;
 import com.example.imagineria_web_android.Model.Obras.ObrasResponse;
 
@@ -28,5 +29,9 @@ public interface ObraApi {
 
     @DELETE("obras/{id}")
     Call<Void> deleteObra(@Path("id") String id);
+
+    @POST("user/{userId}/favoritos/{obraId}")
+    Call<User> addFavorito(@Path("userId") String userId, @Path("obraId") String obraId);
+
 
 }

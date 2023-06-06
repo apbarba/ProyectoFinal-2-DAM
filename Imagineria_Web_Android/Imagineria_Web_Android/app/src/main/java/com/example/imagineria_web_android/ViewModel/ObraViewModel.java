@@ -10,6 +10,7 @@ import androidx.navigation.PopUpToBuilder;
 
 import com.example.imagineria_web_android.API.CategoriaApi;
 import com.example.imagineria_web_android.API.ObraApi;
+import com.example.imagineria_web_android.Model.Auth.User;
 import com.example.imagineria_web_android.Model.Categoria.Categoria;
 import com.example.imagineria_web_android.Model.Categoria.CategoriaResponse;
 import com.example.imagineria_web_android.Model.Obras.Obra;
@@ -29,12 +30,18 @@ public class ObraViewModel extends AndroidViewModel {
 
     private MutableLiveData<List<Categoria>> categoriasList;
     private MutableLiveData <Obra> obra;
+    private MutableLiveData<Boolean> isFavorited = new MutableLiveData<>();
+
 
     public ObraViewModel(@NonNull Application application) {
         super(application);
         obrasList = new MutableLiveData<>();
         obra = new MutableLiveData<>();
         categoriasList = new MutableLiveData<>();
+    }
+
+    public LiveData<Boolean> getIsFavorited() {
+        return isFavorited;
     }
 
     public LiveData<List<Obra>> getObrasList() {
@@ -163,4 +170,31 @@ public class ObraViewModel extends AndroidViewModel {
             }
         });
     }
+
+    public void addObraToFavoritos(String userId, String obraId){
+        ObraApi apiInterface = RetrofitInstance.getRetrofitInstance(getApplication().getApplicationContext()).create(ObraApi.class);
+        Call<User> call = apiInterface.addFavorito(userId, obraId);
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.isSuccessful()){
+                    // Aquí puedes hacer algo cuando la adición fue exitosa.
+                    // Actualizar la lista de obras favoritas del usuario en tu ViewModel.
+                    // Asumiendo que si la respuesta es exitosa, se agregó a favoritos.
+                    isFavorited.setValue(true);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                // Manejo de errores o solamente mensajes
+                // Si hay un error, supongamos que no se agregó a favoritos
+                isFavorited.setValue(false);
+            }
+        });
+    }
+
+
+
+
 }

@@ -1,5 +1,7 @@
 package com.example.imagineria_web_android.Fragments.Obra;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,6 +9,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +28,8 @@ import org.w3c.dom.Text;
 public class ObraDetalleFragment extends Fragment {
 
     private ObraViewModel obraViewModel;
-
+    private ImageView heartIconFav;
+    private String obraId;
     public ObraDetalleFragment(){
 
     }
@@ -34,6 +38,9 @@ public class ObraDetalleFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_obra_detalle, container, false);
+
+        heartIconFav = view.findViewById(R.id.no_fav);
+
 
         if (getArguments() != null){
             String id = getArguments().getString("id");
@@ -77,6 +84,16 @@ public class ObraDetalleFragment extends Fragment {
 
                         Navigation.findNavController(v).navigate(R.id.navigation_put_obra, bundle);
                     }
+                }
+            });
+
+            heartIconFav.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+                    String userId = sharedPreferences.getString("user_id", "");
+
+                    obraViewModel.addObraToFavoritos(userId, id);
                 }
             });
         }
