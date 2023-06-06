@@ -29,7 +29,7 @@ public class ObraDetalleFragment extends Fragment {
 
     private ObraViewModel obraViewModel;
     private ImageView heartIconFav;
-    private String obraId;
+
     public ObraDetalleFragment(){
 
     }

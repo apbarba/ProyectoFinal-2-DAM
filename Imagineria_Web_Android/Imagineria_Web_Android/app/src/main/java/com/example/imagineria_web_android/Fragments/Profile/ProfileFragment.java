@@ -104,6 +104,15 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        Button favoritosButton = rootView.findViewById(R.id.btn_ver_fav);
+        favoritosButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavController navController = Navigation.findNavController(v);
+                navController.navigate(R.id.action_profile_to_listaFav); // Cambia "navigation_favoritos" al id de tu FavoritosFragment en el nav_graph
+            }
+        });
+
         String userId = sharedPref.getString("user_id", "");
         getUserProfile(userId);
 

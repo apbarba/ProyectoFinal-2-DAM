@@ -13,6 +13,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="90dp"
         android:src="@drawable/logotipo_para_marca_personal_profesional_copywriter_cuadrado_moderno_minimalista" />
 
     <Button
@@ -21,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/avatarImageView"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="46dp"
         android:text="Change avatar" />
 
     <Button
@@ -30,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/avatarImageView"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="346dp"
+        android:layout_marginTop="146dp"
         android:text="Editar Contraseña" />
 
     <Button
@@ -39,8 +40,17 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/avatarImageView"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="446dp"
+        android:layout_marginTop="246dp"
         android:text="Cerrar Sesion" />
+
+    <Button
+        android:id="@+id/btn_ver_fav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/avatarImageView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="346dp"
+        android:text="Ver favoritos" />
 
 
 </RelativeLayout>

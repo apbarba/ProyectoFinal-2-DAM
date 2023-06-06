@@ -29,8 +29,16 @@ public class ObraViewModel extends AndroidViewModel {
     private MutableLiveData<List<Obra>> obrasList;
 
     private MutableLiveData<List<Categoria>> categoriasList;
+
+    private MutableLiveData<List<Obra>> favoritos;
     private MutableLiveData <Obra> obra;
     private MutableLiveData<Boolean> isFavorited = new MutableLiveData<>();
+    private final MutableLiveData<List<Obra>> favoritosLiveData = new MutableLiveData<>();
+
+
+    public LiveData<List<Obra>> getFavoritos() {
+        return favoritosLiveData;
+    }
 
 
     public ObraViewModel(@NonNull Application application) {
@@ -194,7 +202,24 @@ public class ObraViewModel extends AndroidViewModel {
         });
     }
 
+    //METODO QUE NOS BUSCA EN LA LISTA DE FAV DEL USUARIO , UNA OBRA EN ESPECIFICO
+    public void loadUserFavoritos(String userId) {
+        ObraApi apiInterface = RetrofitInstance.getRetrofitInstance(getApplication().getApplicationContext()).create(ObraApi.class);
+        Call<List<Obra>> call = apiInterface.getObrasFavoritas(userId);
+        call.enqueue(new Callback<List<Obra>>() {
+            @Override
+            public void onResponse(Call<List<Obra>> call, Response<List<Obra>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    favoritosLiveData.postValue(response.body());
+                }
+            }
 
+            @Override
+            public void onFailure(Call<List<Obra>> call, Throwable t) {
+                //MANEJO DE ERRORES
+            }
+        });
+    }
 
 
 }

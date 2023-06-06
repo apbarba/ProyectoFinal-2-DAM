@@ -68,7 +68,7 @@ public class ObrasAdapter extends RecyclerView.Adapter<ObrasAdapter.ObraViewHold
             super(itemView);
             nombreTextView = itemView.findViewById(R.id.nombreTextView);
             fechaTextView = itemView.findViewById(R.id.fechaTextView);
-            btnVerMas = itemView.findViewById(R.id.btn_verMas_Obra);
+            btnVerMas = itemView.findViewById(R.id.btn_eliminar_fav);
 
         }
     }

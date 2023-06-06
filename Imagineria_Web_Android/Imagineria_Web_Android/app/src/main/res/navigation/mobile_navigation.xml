@@ -37,6 +37,15 @@
         android:name="com.example.imagineria_web_android.Fragments.Categoria.CategoriaFragment" />
 
     <fragment
+        android:id="@+id/navigation_favorite"
+        android:label="Lista de Favoritos"
+        tools:layout="@layout/fragment_lista_fav"
+        android:name="com.example.imagineria_web_android.Fragments.Profile.ListaFavFragment" />
+        <action
+            android:id="@+id/action_profile_to_listaFav"
+            app:destination="@+id/navigation_favorite" />
+
+    <fragment
         android:id="@+id/navigation_post_imaginero"
         android:name="com.example.imagineria_web_android.Fragments.Imaginero.PostImagineroFragment"
         android:label="Post Imaginero"

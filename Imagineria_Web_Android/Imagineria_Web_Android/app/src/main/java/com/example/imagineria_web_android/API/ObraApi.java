@@ -4,6 +4,8 @@ import com.example.imagineria_web_android.Model.Auth.User;
 import com.example.imagineria_web_android.Model.Obras.Obra;
 import com.example.imagineria_web_android.Model.Obras.ObrasResponse;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -32,6 +34,10 @@ public interface ObraApi {
 
     @POST("user/{userId}/favoritos/{obraId}")
     Call<User> addFavorito(@Path("userId") String userId, @Path("obraId") String obraId);
+
+    @GET("user/{userId}/favoritos")
+    Call<List<Obra>> getObrasFavoritas(@Path("userId") String userId);
+
 
 
 }
