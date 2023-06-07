@@ -5,14 +5,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.example.imagineria_web_android.GlideApp;
 import com.example.imagineria_web_android.Model.Obras.Obra;
 import com.example.imagineria_web_android.R;
+import com.example.imagineria_web_android.RetrofitInstance;
 
 import java.util.List;
 
@@ -37,6 +41,11 @@ public class ObrasAdapter extends RecyclerView.Adapter<ObrasAdapter.ObraViewHold
 
         holder.nombreTextView.setText(obra.getNombre());
         holder.fechaTextView.setText(obra.getFecha());
+
+        String imageUrl = RetrofitInstance.BASE_URL + obra.getImg();
+        GlideApp.with(holder.itemView.getContext())
+                .load(imageUrl)
+                .into(holder.obrasImg);
         holder.btnVerMas.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -63,11 +72,13 @@ public class ObrasAdapter extends RecyclerView.Adapter<ObrasAdapter.ObraViewHold
     class ObraViewHolder extends RecyclerView.ViewHolder {
         TextView nombreTextView, fechaTextView;
         Button btnVerMas;
+        ImageView obrasImg;
 
         ObraViewHolder(@NonNull View itemView) {
             super(itemView);
             nombreTextView = itemView.findViewById(R.id.nombreTextView);
             fechaTextView = itemView.findViewById(R.id.fechaTextView);
+            obrasImg = itemView.findViewById(R.id.obrasImg);
             btnVerMas = itemView.findViewById(R.id.btn_eliminar_fav);
 
         }
