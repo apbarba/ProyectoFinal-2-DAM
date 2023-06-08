@@ -13,6 +13,10 @@ export class CategoriaService {
   getAllCategorias() {
     return this.http.get(`${environment.apiUrl}/categoria/`);
   }
+
+  getObrasByCategoria(id: string) {
+    return this.http.get(`${environment.apiUrl}/categoria/${id}`);
+  }  
   
   editCategoria(id: string, nombre: string, descripcion: string){
     const body = {

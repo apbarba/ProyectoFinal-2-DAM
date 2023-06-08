@@ -4,6 +4,9 @@ import { Obra } from '../../models/obra.model';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { User } from 'src/app/models/user.model';
+import { Observable, map } from 'rxjs';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-obras',
@@ -14,8 +17,10 @@ export class ObrasComponent implements OnInit {
 
   obras: Obra[] = [];
   private userId: string | undefined;
-  
-  constructor(private obrasService: ObrasService, private router: Router, private authService: AuthService){
+  imageUrls: SafeUrl[] = [];
+  img: string[] = [];
+
+  constructor(private obrasService: ObrasService, private router: Router, private authService: AuthService, private http: HttpClient, private sanitizer: DomSanitizer){
   }
   
   ngOnInit(): void {
@@ -27,6 +32,16 @@ export class ObrasComponent implements OnInit {
    this.authService.currentUser.subscribe(user => {
     this.userId = user.id;
   });
+
+  this.obrasService.getAllObras().subscribe((data: any) => {
+    this.obras = data.content as Obra[];
+
+    // Construir la URL completa de la imagen
+    for (let obra of this.obras) {
+      const imageUrl = `http://localhost:8080/${obra.img}`;
+      this.imageUrls.push(imageUrl);
+    }
+  })
   }
 
   editar(id: string) {
@@ -66,5 +81,12 @@ export class ObrasComponent implements OnInit {
       })
     })
   }
+
+  getImageUrl(img: string): Observable<SafeUrl> {
+    const url = 'http://localhost:8080/' + img;
+    return this.http.get(url, { responseType: 'blob' }).pipe(
+      map((blob: Blob | MediaSource) => this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(blob)))
+    );
   
+}
 }

@@ -32,4 +32,8 @@ export class CategoriaComponent implements OnInit{
     }
   }
 
+  verObras(id: string){
+    this.router.navigate(['/categoria', id, 'obras']);
+  }
+
 }

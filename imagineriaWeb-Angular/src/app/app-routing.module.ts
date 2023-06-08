@@ -15,6 +15,8 @@ import { EditPasswordComponent } from './components/profile/edit-password/edit-p
 import { CategoriaComponent } from './components/categoria/categoria.component';
 import { FormEditCategoriaComponent } from './components/categoria/form-edit-categoria/form-edit-categoria.component';
 import { ListFavComponent } from './components/profile/list-fav/list-fav.component';
+import { combineLatest } from 'rxjs';
+import { ObrasCategoriaComponent } from './components/categoria/obras-categoria/obras-categoria.component';
 
 const routes: Routes = [
   { path: "", redirectTo: "/login", pathMatch: "full" },
@@ -32,7 +34,8 @@ const routes: Routes = [
   { path: 'edit-password', component: EditPasswordComponent},
   { path: 'categorias', component: CategoriaComponent},
   { path: 'categoria/editar/:id', component: FormEditCategoriaComponent},
-  { path: 'favoritos', component: ListFavComponent}
+  { path: 'favoritos', component: ListFavComponent},
+  { path: 'categoria/:id/obras', component: ObrasCategoriaComponent}
 ];
 
 @NgModule({

@@ -1,21 +1,25 @@
 
-<mat-toolbar color="primary">
-  <span routerLink="/home">La Imagineria</span>
+<mat-toolbar color="black">
+  <span>La Imagineria</span>
   <button mat-button routerLink="/obras">Obras</button>
   <button mat-button routerLink="/imagineros">Imagineros</button>
   <button mat-button routerLink="/categorias">Categorias</button>
-  <span class="spacer"></span> 
-  <div fxLayout="row" fxLayoutAlign="flex-end">
+  <span class="spacer"></span>
+  <ng-container>
+    <button mat-button routerLink="/profile"></button>
     <button mat-button routerLink="/perfil">Perfil</button>
-  </div>
+  </ng-container>
 </mat-toolbar>
 
 <a routerLink="/agregar-obra">Agregar Nueva Obra</a>
 
 
-<mat-grid-list cols="4" rowHeight="300px">
-  <mat-grid-tile *ngFor="let obra of obras">
-    <mat-card>
+<div class="grid-container">
+  <div class="card-container" *ngFor="let obra of obras; let i = index">
+    <mat-card class="elegant-card">
+      <div class="card-img-container">
+        <img mat-card-image class="card-img" [src]="imageUrls[i]" alt="{{ obra.nombre }}" />
+      </div>
       <mat-card-header>
         <mat-card-title>{{ obra.nombre }}</mat-card-title>
         <mat-card-subtitle>{{ obra.fecha }}</mat-card-subtitle>
@@ -34,8 +38,10 @@
         </button>
       </mat-card-actions>
     </mat-card>
-  </mat-grid-tile>
-</mat-grid-list>
+  </div>
+</div>
+
+
 
 
 

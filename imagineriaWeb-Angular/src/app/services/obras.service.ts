@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/enviroments';
 import { Obra } from '../models/obra.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -45,5 +46,9 @@ export class ObrasService {
 
   deleteObra(id: string) {
     return this.http.delete(`${environment.apiUrl}/obras/${id}`);
+  }
+
+  getImage(img: string): Observable<Blob> {
+    return this.http.get(img, { responseType: 'blob' });
   }
 }
