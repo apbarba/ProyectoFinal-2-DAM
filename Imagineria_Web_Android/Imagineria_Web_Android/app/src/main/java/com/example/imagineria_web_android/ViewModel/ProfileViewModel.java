@@ -32,30 +32,27 @@ public class ProfileViewModel extends AndroidViewModel {
     }
 
 
-    public void changeAvatar(String userId, Uri imageUri) {
-        File file = new File(imageUri.getPath());
-        RequestBody requestBody = RequestBody.create(
-                MediaType.parse(getApplication().getContentResolver().getType(imageUri)),
-                file
-        );
-        MultipartBody.Part body = MultipartBody.Part.createFormData(
-                "avatar",
-                file.getName(),
-                requestBody
-        );
+    public void changeAvatar(String userId, File file) {
+        RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"), file);
+        MultipartBody.Part body = MultipartBody.Part.createFormData("file", file.getName(), requestBody);
 
-        userService.changeAvatar(userId, body).enqueue(new Callback<User>() {
+        userService.changeAvatar(userId, body).enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
-                // Actualiza el usuario con los nuevos datos
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    // Actualiza el usuario con los nuevos datos
+                } else {
+                    // Manejar la respuesta de error
+                }
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
+            public void onFailure(Call<Void> call, Throwable t) {
                 // Manejar el error
             }
         });
     }
+
 
     public LiveData<Optional<User>> getUserProfile(String userId) {
         MutableLiveData<Optional<User>> userProfileLiveData = new MutableLiveData<>();

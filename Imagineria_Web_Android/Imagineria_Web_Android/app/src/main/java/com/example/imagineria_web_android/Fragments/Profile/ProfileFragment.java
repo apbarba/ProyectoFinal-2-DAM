@@ -26,6 +26,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
@@ -35,6 +36,7 @@ import com.example.imagineria_web_android.Activity.LoginActivity;
 import com.example.imagineria_web_android.Model.Auth.User;
 import com.example.imagineria_web_android.R;
 import com.example.imagineria_web_android.RetrofitInstance;
+import com.example.imagineria_web_android.ViewModel.ProfileViewModel;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -61,8 +63,9 @@ public class ProfileFragment extends Fragment {
     private ImageView avatarImageView;
     private SharedPreferences sharedPref;
     private UserApi userService;
-
+    private String userId;
     private Button logoutButton;
+    private ProfileViewModel viewModel;
 
 
     public ProfileFragment() {
@@ -77,8 +80,8 @@ public class ProfileFragment extends Fragment {
 
         buttonUpload = rootView.findViewById(R.id.changeAvatarButton);
         avatarImageView = rootView.findViewById(R.id.avatarImageView);
-
         userService = RetrofitInstance.getRetrofitInstance(requireContext()).create(UserApi.class);
+        viewModel = new ViewModelProvider((ViewModelStoreOwner) this, (ViewModelProvider.Factory) new ViewModelProvider.AndroidViewModelFactory(getActivity().getApplication())).get(ProfileViewModel.class);
 
         buttonUpload.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,7 +116,7 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        String userId = sharedPref.getString("user_id", "");
+        userId = sharedPref.getString("user_id", "");
         getUserProfile(userId);
 
         String avatarUrl = sharedPref.getString("avatarUrl", "");
@@ -156,9 +159,11 @@ public class ProfileFragment extends Fragment {
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null && data.getData() != null) {
             Uri imageUri = data.getData();
 
-            String userId = sharedPref.getString("user_id", "");
-            changeAvatar(userId, imageUri);
+            userId = sharedPref.getString("user_id", "");
 
+            if (!userId.isEmpty()) {
+                changeAvatar(userId, imageUri);
+            }
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(requireActivity().getContentResolver(), imageUri);
                 avatarImageView.setImageBitmap(bitmap);
@@ -171,18 +176,17 @@ public class ProfileFragment extends Fragment {
     private void changeAvatar(String userId, Uri imageUri) {
         try {
             ContentResolver contentResolver = requireActivity().getContentResolver();
-            AssetFileDescriptor assetFileDescriptor = contentResolver.openAssetFileDescriptor(imageUri, "r");
-            if (assetFileDescriptor != null) {
-                FileInputStream inputStream = assetFileDescriptor.createInputStream();
+            InputStream inputStream = contentResolver.openInputStream(imageUri);
+            if (inputStream != null) {
                 File file = inputStreamToFile(inputStream);
                 if (file != null && file.exists()) {
-                    // Rest of the avatar change code...
+                    viewModel.changeAvatar(userId, file);
                 } else {
                     // Handle the case where the temporary file cannot be created
                 }
-                assetFileDescriptor.close();
+                inputStream.close();
             } else {
-                // Handle the case where the AssetFileDescriptor cannot be obtained
+                // Handle the case where the InputStream cannot be obtained
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -192,7 +196,7 @@ public class ProfileFragment extends Fragment {
 
     private File inputStreamToFile(InputStream inputStream) throws IOException {
         if (inputStream == null) return null;
-        File file = File.createTempFile("avatar", "tmp");
+        File file = File.createTempFile("file", "tmp", requireContext().getCacheDir());
         OutputStream outputStream = new FileOutputStream(file);
         byte[] buffer = new byte[1024];
         int bytesRead;
