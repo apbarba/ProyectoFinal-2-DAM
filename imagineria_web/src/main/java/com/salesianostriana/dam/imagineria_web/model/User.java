@@ -120,4 +120,8 @@ public class User implements UserDetails {
 
         return username;
     }
+
+    public void changeAvatar(String newAvatar) {
+        this.avatar = newAvatar;
+    }
 }

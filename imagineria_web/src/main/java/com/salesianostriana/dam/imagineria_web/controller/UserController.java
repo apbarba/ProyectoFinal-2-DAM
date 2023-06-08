@@ -1,5 +1,7 @@
 package com.salesianostriana.dam.imagineria_web.controller;
 
+import com.salesianostriana.dam.imagineria_web.files.dto.AvatarChangeResponse;
+import com.salesianostriana.dam.imagineria_web.files.service.StorageService;
 import com.salesianostriana.dam.imagineria_web.model.Obras;
 import com.salesianostriana.dam.imagineria_web.model.User;
 import com.salesianostriana.dam.imagineria_web.model.dto.UserDTO.ChangePasswordRequest;
@@ -29,7 +31,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.persistence.Access;
@@ -50,8 +54,7 @@ public class UserController {
     private final JwtProvider jwtProvider;
 
     private final RefreshTokenService refreshTokenService;
-    private final ObrasRepository obrasRepository;
-
+    private final StorageService storageService;
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201",
                     description = "Se muestra correctamente el perfil de usuario",
@@ -409,5 +412,24 @@ public class UserController {
         return ResponseEntity
                 .noContent()
                 .build();
+    }
+
+    @PostMapping("user/{id}/changeAvatar")
+    public ResponseEntity<?> changeAvatar(@PathVariable UUID id,
+                                          @RequestPart("file") MultipartFile file,
+                                          @AuthenticationPrincipal UserDetails userDetails) {
+        User user = userService.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado"));
+
+        // Comprobar si el usuario autenticado es el propietario del avatar
+        if (!userDetails.getUsername().equals(user.getUsername())) {
+            return new ResponseEntity<>("No se encuentra autorizado para cambiar el avatar del usuario", HttpStatus.UNAUTHORIZED);
+        }
+
+        String avatarFilename = storageService.store(file);
+        userService.changeAvatar(id, avatarFilename);
+
+        // Devolver el nombre del archivo como respuesta
+        return ResponseEntity.ok().body(new AvatarChangeResponse(avatarFilename));
     }
 }

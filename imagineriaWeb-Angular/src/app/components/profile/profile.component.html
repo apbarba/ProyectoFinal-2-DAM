@@ -16,14 +16,23 @@
         <mat-card-title>Editar Perfil</mat-card-title>
       </mat-card-header>
       <mat-card-content fxLayoutAlign="center">
+        <!-- Mostrar la imagen de avatar del usuario -->
+        <img *ngIf="user" [src]="user.avatar" class="user-avatar"  alt="Avatar" />
+      </mat-card-content>
+      <mat-card-content fxLayoutAlign="center">
+        <!-- Botón para seleccionar un nuevo archivo de imagen de avatar -->
+        <input type="file" (change)="onFileSelected($event)">
+      </mat-card-content>
+      <mat-card-content fxLayoutAlign="center">
         <button mat-raised-button (click)="onLogout()">Cerrar sesión</button>
       </mat-card-content>
       <mat-card-content fxLayoutAlign="center">
         <button mat-raised-button routerLink="/favoritos">Mis favoritos</button>
-    </mat-card-content>
+      </mat-card-content>
       <mat-card-content fxLayoutAlign="center">
         <button mat-raised-button routerLink="/edit-password">Cambiar Contraseña</button>
-    </mat-card-content>
+      </mat-card-content>
     </mat-card>
   </div>
+  
  

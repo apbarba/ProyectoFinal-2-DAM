@@ -31,11 +31,11 @@ public class Pruebita {
                 .id(UUID.fromString("ac1b036d-865e-108e-8186-5e90eaf30000"))
                 .name("ana").email("gigante@gmail.com")
                 .username("anabarba")
-              //  .password("{noop}soso")
                 .password(passwordEncoder.encode("soso"))
                 .accountNonExpired(false)
                 .enabled(true)
                 .rol(EnumSet.of(ADMIN))
+                .avatar("avatar.jpg")
                 .build();
         userService.save(user);
 

@@ -138,4 +138,10 @@ export class AuthService {
     return this.http.delete<Obra[]>(`${environment.apiUrl}/user/${userId}/favoritos/${obraId}`);
   }
 
+  changeAvatar(id: string, avatar: File): Observable<string> {
+    const formData = new FormData();
+    formData.append('file', avatar);
+    return this.http.post(`${environment.apiUrl}/user/${id}/changeAvatar`, formData, {responseType: 'text'});
+}
+  
 }

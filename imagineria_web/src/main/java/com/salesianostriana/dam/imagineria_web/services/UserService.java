@@ -12,6 +12,7 @@ import com.salesianostriana.dam.imagineria_web.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.webjars.NotFoundException;
 
 import javax.validation.constraints.NotEmpty;
 import java.util.*;
@@ -190,6 +191,15 @@ public class UserService {
                 .orElseThrow(() -> new UserNotFoundException(userId));
 
         user.getFavoritos().removeIf(obras -> obras.getId().equals(obraId));
+
+        imagineroRepository.save(user);
+    }
+
+    public void changeAvatar(UUID userId, String avatarFilename) {
+        User user = imagineroRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException("Usuario no encontrado"));
+
+        user.changeAvatar(avatarFilename);
 
         imagineroRepository.save(user);
     }

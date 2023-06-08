@@ -5,5 +5,5 @@ export interface User {
     refreshToken?: string;
     id: string;
     username: string
-    avatar: string
+    avatar?: string
 }
