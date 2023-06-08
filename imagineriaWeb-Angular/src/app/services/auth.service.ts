@@ -6,6 +6,7 @@ import { environment } from 'src/environments/enviroments';
 import { CookieService } from 'ngx-cookie-service';
 import { User } from '../models/user.model';
 import { Obra } from '../models/obra.model';
+import { LoginResponse } from '../models/LoginResponse.model';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +15,7 @@ export class AuthService {
 
   public currentUserSubject: BehaviorSubject<User>;
 
-  constructor(private http: HttpClient, private cookies: CookieService) {
+  constructor(private http: HttpClient, private cookies: CookieService, private router: Router) {
     this.currentUserSubject = new BehaviorSubject<User>({email: '', id: '', username: '', avatar:''});
     const token = this.getToken();
     if (token) {
@@ -39,8 +40,21 @@ export class AuthService {
     return this.http.post(`${environment.apiUrl}/auth/login`, {
       username,
       password
-    });
+    }).pipe(
+      tap((data: any) => {
+        const user: User = {
+          email: data.email,
+          id: data.id,
+          username: data.username,
+          avatar: data.avatar
+        };
+        this.currentUserSubject.next(user);
+        this.setToken(data.token);
+      })
+    );
   }
+  
+  
 
   register(name: string, username: string, email: string, password: string, verifyPassword: string): Observable<any> {
     return this.http.post(`${environment.apiUrl}/auth/register`, {

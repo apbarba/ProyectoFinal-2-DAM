@@ -20,13 +20,12 @@ export class LoginComponent {
     if (!this.loginForm.controls.username.value || !this.loginForm.controls.password.value) {
       return;
     }
-
+  
     this.userService.login(
       this.loginForm.controls.username.value,
       this.loginForm.controls.password.value
-    ).subscribe(data => {
-      this.userService.setToken(data.token);
-      this.router.navigateByUrl("/home")
+    ).subscribe(() => {
+      this.router.navigateByUrl("/home");
     });
   }
 }
