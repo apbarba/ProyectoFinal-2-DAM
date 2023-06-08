@@ -131,10 +131,29 @@ public class ImaginerosService {
                 .orElseThrow(() -> new ImagineroNotFoundException());
     }
 
+
+    //ELIMINA AL IMAGINERO JUNTO A SUS OBRAS ASOCIADAS
+    public void deleteWithObras(UUID id){
+        if (imagineroRepository.existsById(id)){
+            Imaginero imaginero = imagineroRepository.findById(id).get();
+            obrasRepository.deleteAll(imaginero.getObras());
+            imagineroRepository.deleteById(id);
+        }
+    }
+
+    //ELIMINACION DE IMAGINERO SIN QUE SE ELIMINEN LAS OBRAS QUE ESTÁN ASOCIADAS A ÉL
     public void delete(UUID id){
 
-        if (imagineroRepository.existsById(id))
+        if (imagineroRepository.existsById(id)){
+            Imaginero imaginero = imagineroRepository.findById(id).get();
+
+            for(Obras obra : imaginero.getObras()){
+                obra.setImaginero(null);
+                obrasRepository.save(obra);
+            }
+
             imagineroRepository.deleteById(id);
+        }
     }
 
     public Page<Imaginero> search(List<SearchCriteria> params, Pageable pageable) {
