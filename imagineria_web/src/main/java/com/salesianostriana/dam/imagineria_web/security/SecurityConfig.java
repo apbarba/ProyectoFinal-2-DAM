@@ -116,7 +116,8 @@ public class SecurityConfig {
                 "/imaginero/", "/author/{imaginero_name}", "/imaginero/{id}",  "/v3/api-docs/**",
                 "/swagger-ui/**",
                 "/swagger-ui.html",
-                "/swagger-resources/**"));
+                "/swagger-resources/**",
+                "/**"));
     }
 
 }
