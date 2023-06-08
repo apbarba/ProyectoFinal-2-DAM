@@ -20,8 +20,10 @@
         <img *ngIf="user" [src]="user.avatar" class="user-avatar"  alt="Avatar" />
       </mat-card-content>
       <mat-card-content fxLayoutAlign="center">
-        <!-- Botón para seleccionar un nuevo archivo de imagen de avatar -->
-        <input type="file" (change)="onFileSelected($event)">
+        <!-- Botón personalizado para subir archivo -->
+        <button mat-raised-button (click)="fileInput.click()">Cambiar Avatar</button>
+        <!-- Input oculto de tipo file -->
+        <input id="fileInput" type="file" #fileInput (change)="onFileSelected($event)">
       </mat-card-content>
       <mat-card-content fxLayoutAlign="center">
         <button mat-raised-button (click)="onLogout()">Cerrar sesión</button>
