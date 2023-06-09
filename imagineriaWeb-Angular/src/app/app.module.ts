@@ -28,6 +28,7 @@ import { CategoriaComponent } from './components/categoria/categoria.component';
 import { FormEditCategoriaComponent } from './components/categoria/form-edit-categoria/form-edit-categoria.component';
 import { ListFavComponent } from './components/profile/list-fav/list-fav.component';
 import { ObrasCategoriaComponent } from './components/categoria/obras-categoria/obras-categoria.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -61,7 +62,8 @@ import { ObrasCategoriaComponent } from './components/categoria/obras-categoria/
     MatFormFieldModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    MaterialImportsModule
+    MaterialImportsModule,
+    NgbModule
   ],
   providers: [CookieService, {
     provide: HTTP_INTERCEPTORS, 
