@@ -1,14 +1,15 @@
 
-<mat-toolbar color="primary">
+<mat-toolbar color="black">
   <span routerLink="/home">La Imagineria</span>
-    <button mat-button routerLink="/obras">Obras</button>
-    <button mat-button routerLink="/imagineros">Imagineros</button>
-    <span class="spacer"></span> 
-    <ng-container *ngIf="!isLoggedIn">
-      <button mat-button routerLink="/register">Register</button>
-      <button mat-button routerLink="/login">Login</button>
-    </ng-container>
-  </mat-toolbar>
+  <button mat-button routerLink="/obras">Obras</button>
+  <button mat-button routerLink="/imagineros">Imagineros</button>
+  <button mat-button routerLink="/categorias">Categorias</button>
+  <span class="spacer"></span>
+  <ng-container>
+    <button mat-button routerLink="/profile"></button>
+    <button mat-button routerLink="/perfil">Perfil</button>
+  </ng-container>
+</mat-toolbar>
 
   <div class="center-container">
     <mat-card class="example-card">

@@ -1,10 +1,11 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="black">
   <span routerLink="/home">La Imagineria</span>
   <button mat-button routerLink="/obras">Obras</button>
   <button mat-button routerLink="/imagineros">Imagineros</button>
   <button mat-button routerLink="/categorias">Categorias</button>
-  <span class="spacer"></span> 
+  <span class="spacer"></span>
   <ng-container>
+    <button mat-button routerLink="/profile"></button>
     <button mat-button routerLink="/perfil">Perfil</button>
   </ng-container>
 </mat-toolbar>
@@ -22,7 +23,6 @@
       <mat-card-content>
         <p><strong>Edad:</strong> {{ imagineros.edad }}</p>
         <p><strong>Localidad:</strong> {{ imagineros.localidad }}</p>
-        <p><strong>Id:</strong>{{ imagineros.id }}</p>
       </mat-card-content>
       <mat-card-actions>
         <button mat-raised-button color="primary" (click)="editar(imagineros.id)">Editar</button>
