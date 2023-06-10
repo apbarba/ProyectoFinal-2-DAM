@@ -39,7 +39,7 @@ public class ObrasAdapter extends RecyclerView.Adapter<ObrasAdapter.ObraViewHold
         Obra obra = obras.get(position);
         String id = obra.getId();
 
-        holder.nombreTextView.setText(obra.getNombre());
+        holder.nombreTextView.setText(obra.getName());
         holder.fechaTextView.setText(obra.getFecha());
 
         String imageUrl = RetrofitInstance.BASE_URL + obra.getImg();

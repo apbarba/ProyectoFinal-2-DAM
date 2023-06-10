@@ -16,7 +16,7 @@ public class ConverterDtoObras {
                 .estado(obras.getEstado())
                 .estilo(obras.getEstilo())
                 .fecha(obras.getFecha())
-                .nombre(obras.getName())
+                .name(obras.getName())
                 .precio(obras.getPrecio())
                 .build();
     }
@@ -24,7 +24,7 @@ public class ConverterDtoObras {
     public Obras createObra(CreateDtoObras getDtoObras){
 
         return Obras.builder()
-                .name(getDtoObras.getNombre())
+                .name(getDtoObras.getName())
                 .img(getDtoObras.getImg())
                 .estado(getDtoObras.getEstado())
                 .estilo(getDtoObras.getEstilo())

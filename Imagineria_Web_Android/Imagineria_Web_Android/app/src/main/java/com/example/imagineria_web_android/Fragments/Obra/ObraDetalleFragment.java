@@ -51,7 +51,7 @@ public class ObraDetalleFragment extends Fragment {
                 @Override
                 public void onChanged(Obra obra) {
                     TextView nombre = view.findViewById(R.id.detalle_obra_nombre);
-                    nombre.setText(obra.getNombre());
+                    nombre.setText(obra.getName());
 
                     TextView titulo = view.findViewById(R.id.detalle_obra_titulo);
                     titulo.setText(obra.getTitulo());
@@ -76,7 +76,7 @@ public class ObraDetalleFragment extends Fragment {
                     if (obra != null){
                         Bundle bundle = new Bundle();
                         bundle.putString("id", obra.getId());
-                        bundle.putString("nombre", obra.getNombre());
+                        bundle.putString("nombre", obra.getName());
                         bundle.putString("titulo", obra.getTitulo());
                         bundle.putDouble("precio", obra.getPrecio());
                         bundle.putString("estado", obra.getEstado());

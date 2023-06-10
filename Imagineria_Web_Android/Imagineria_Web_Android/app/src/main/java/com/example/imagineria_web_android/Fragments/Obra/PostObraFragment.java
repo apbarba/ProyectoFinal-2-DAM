@@ -96,7 +96,7 @@ public class PostObraFragment extends Fragment {
             String stile = postStileObra.getText().toString();
 
             Obra obra = new Obra();
-            obra.setNombre(name);
+            obra.setName(name);
             obra.setTitulo(title);
             obra.setPrecio(price);
             obra.setEstado(stade);

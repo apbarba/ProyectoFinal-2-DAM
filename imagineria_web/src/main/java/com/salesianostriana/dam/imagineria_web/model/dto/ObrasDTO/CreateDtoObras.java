@@ -19,7 +19,7 @@ import java.util.UUID;
 public class CreateDtoObras {
 
     @NotEmpty(message = "{obrasEdit.name.notempty}")
-    private String nombre;
+    private String name;
 
     private String estilo;
 

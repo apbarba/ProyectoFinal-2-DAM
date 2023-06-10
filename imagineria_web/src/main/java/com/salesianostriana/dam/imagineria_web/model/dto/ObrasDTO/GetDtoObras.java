@@ -21,7 +21,7 @@ public class GetDtoObras {
 
     private UUID id;
 
-    private String nombre;
+    private String name;
 
     private String estilo;
 

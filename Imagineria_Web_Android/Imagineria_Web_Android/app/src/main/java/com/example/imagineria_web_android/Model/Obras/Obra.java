@@ -4,8 +4,6 @@ public class Obra {
 
     private String id;
     private String name;
-
-    private String nombre;
     private String estilo;
     private String fecha;
     private double precio;
@@ -40,14 +38,6 @@ public class Obra {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getNombre(){
-        return nombre;
-    }
-
-    public void setNombre(String nombre){
-        this.nombre = nombre;
     }
 
     public String getEstilo() {
@@ -98,10 +88,9 @@ public class Obra {
         this.categoria = categoria;
     }
 
-    public Obra(String id, String name, String nombre, String estilo, String fecha, double precio, String estado, String titulo, String img, String categoria) {
+    public Obra(String id, String name,String estilo, String fecha, double precio, String estado, String titulo, String img, String categoria) {
         this.id = id;
         this.name = name;
-        this.nombre = nombre;
         this.estilo = estilo;
         this.fecha = fecha;
         this.precio = precio;

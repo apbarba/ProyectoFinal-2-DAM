@@ -99,7 +99,7 @@ public class ObrasService {
 
         Obras obras = obrasRepository.save(
                 Obras.builder()
-                        .name(createDtoObras.getNombre())
+                        .name(createDtoObras.getName())
                         .titulo(createDtoObras.getTitulo())
                         .estado(createDtoObras.getEstado())
                         .estilo(createDtoObras.getEstilo())
@@ -183,6 +183,11 @@ public class ObrasService {
         }else {
             return obras.map(converterDtoObras::obrasToObras);
         }
+    }
+
+    //METODO QUE REALIZARÁ LA BÚSQUEDA POR NOMBRE DE OBRAS
+    public List<Obras> buscarPorNombre(String name) {
+        return obrasRepository.findByNameContainingIgnoreCase(name);
     }
 
 }

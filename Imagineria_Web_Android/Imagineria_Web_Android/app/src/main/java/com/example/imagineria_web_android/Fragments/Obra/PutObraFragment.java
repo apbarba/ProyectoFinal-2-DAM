@@ -51,7 +51,7 @@ public class PutObraFragment extends Fragment {
         obraViewModel.getObra().observe(getViewLifecycleOwner(), obra -> {
             obraActual = obra;
 
-            putNombre.setText(obra.getNombre());
+            putNombre.setText(obra.getName());
             putTitulo.setText(obra.getTitulo());
           //  Double.parseDouble(putPrecio.setText(obra.getPrecio()));
             putEstado.setText(obra.getEstado());
