@@ -35,7 +35,7 @@ public class Pruebita {
                 .accountNonExpired(false)
                 .enabled(true)
                 .rol(EnumSet.of(ADMIN))
-                .avatar("avatar.jpg")
+                .avatar("perfileIcon.png")
                 .build();
         userService.save(user);
 

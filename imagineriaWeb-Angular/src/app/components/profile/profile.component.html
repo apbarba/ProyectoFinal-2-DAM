@@ -17,13 +17,13 @@
         <mat-card-title>Editar Perfil</mat-card-title>
       </mat-card-header>
       <mat-card-content fxLayoutAlign="center">
-        <!-- Mostrar la imagen de avatar del usuario -->
-        <img *ngIf="user" [src]="user.avatar" class="user-avatar"  alt="Avatar" />
+        <img *ngIf="user && user.avatar; else defaultAvatar" [src]="user.avatar" class="user-avatar"  alt="Avatar" />
+        <ng-template #defaultAvatar>
+          <img src="http://localhost:8080/download/perfileIcon.png" class="user-avatar" alt="Avatar" />
+        </ng-template>
       </mat-card-content>
       <mat-card-content fxLayoutAlign="center">
-        <!-- Botón personalizado para subir archivo -->
         <button mat-raised-button (click)="fileInput.click()">Cambiar Avatar</button>
-        <!-- Input oculto de tipo file -->
         <input id="fileInput" type="file" #fileInput (change)="onFileSelected($event)">
       </mat-card-content>
       <mat-card-content fxLayoutAlign="center">
