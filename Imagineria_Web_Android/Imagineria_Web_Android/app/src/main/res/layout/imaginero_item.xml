@@ -24,22 +24,12 @@
             android:layout_width="match_parent"
             android:layout_height="126dp">
 
-            <ImageView
-                android:id="@+id/idIVCourseImage"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_margin="10dp"
-                android:contentDescription="@string/app_name"
-                android:padding="5dp"
-                android:src="@drawable/penitente" />
-
             <TextView
                 android:id="@+id/nombreTextViewImaginero"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
-                android:layout_toEndOf="@id/idIVCourseImage"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -50,7 +40,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="20dp"
-                android:layout_toEndOf="@id/idIVCourseImage"
                 android:drawablePadding="2dp"
                 android:paddingTop="10dp" />
 

@@ -18,6 +18,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.imagineria_web_android.Model.Obras.Obra;
 import com.example.imagineria_web_android.R;
 import com.example.imagineria_web_android.ViewModel.ObraViewModel;
@@ -44,6 +45,12 @@ public class ObraDetalleFragment extends Fragment {
 
         if (getArguments() != null){
             String id = getArguments().getString("id");
+            String imageUrl = getArguments().getString("imagen"); // Recuperas la URL de la imagen
+
+            ImageView imageView = view.findViewById(R.id.imgObrasDetalles);
+            Glide.with(this)
+                    .load(imageUrl)
+                    .into(imageView);
 
             obraViewModel = new ViewModelProvider(this).get(ObraViewModel.class);
             obraViewModel.loadImagineroById(id);
@@ -52,9 +59,6 @@ public class ObraDetalleFragment extends Fragment {
                 public void onChanged(Obra obra) {
                     TextView nombre = view.findViewById(R.id.detalle_obra_nombre);
                     nombre.setText(obra.getName());
-
-                    TextView titulo = view.findViewById(R.id.detalle_obra_titulo);
-                    titulo.setText(obra.getTitulo());
 
                     TextView precio = view.findViewById(R.id.detalle_obra_precio);
                     precio.setText(String.valueOf(obra.getPrecio()));

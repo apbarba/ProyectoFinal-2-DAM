@@ -52,6 +52,7 @@ public class ObrasAdapter extends RecyclerView.Adapter<ObrasAdapter.ObraViewHold
             public void onClick(View view) {
                 Bundle args = new Bundle();
                 args.putString("id", id);
+                args.putString("imagen", imageUrl);
 
                 Navigation.findNavController(view)
                         .navigate(R.id.action_navigation_obras_to_navigation_obra_detalle, args);
