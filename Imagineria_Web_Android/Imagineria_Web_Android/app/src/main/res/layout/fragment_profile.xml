@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,9 +12,12 @@
         android:id="@+id/avatarImageView"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="90dp"
-        android:src="@drawable/logotipo_para_marca_personal_profesional_copywriter_cuadrado_moderno_minimalista" />
+        android:src="@drawable/logotipo_para_marca_personal_profesional_copywriter_cuadrado_moderno_minimalista"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.060000002" />
 
     <Button
         android:id="@+id/changeAvatarButton"
@@ -22,8 +25,12 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/avatarImageView"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="46dp"
-        android:text="Change avatar" />
+        android:text="Change avatar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/avatarImageView"
+        app:layout_constraintVertical_bias="0.050000012" />
 
     <Button
         android:id="@+id/changeAPassword"
@@ -31,8 +38,12 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/avatarImageView"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="146dp"
-        android:text="Editar Contraseña" />
+        android:text="Editar Contraseña"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_ver_fav"
+        app:layout_constraintVertical_bias="0.19999999" />
 
     <Button
         android:id="@+id/btn_logout"
@@ -40,8 +51,12 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/avatarImageView"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="246dp"
-        android:text="Cerrar Sesion" />
+        android:text="Cerrar Sesion"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/changeAPassword"
+        app:layout_constraintVertical_bias="0.25" />
 
     <Button
         android:id="@+id/btn_ver_fav"
@@ -49,8 +64,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/avatarImageView"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="346dp"
-        android:text="Ver favoritos" />
+        android:text="Ver favoritos"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
