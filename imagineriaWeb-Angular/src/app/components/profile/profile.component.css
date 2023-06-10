@@ -1,0 +1,16 @@
+.center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .user-avatar {
+    max-width: 200px;   /* Cambia este valor según lo que necesites */
+    height: auto;
+}
+
+#fileInput {
+  visibility: hidden;
+  position: absolute;
+}

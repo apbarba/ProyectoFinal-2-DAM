@@ -5,16 +5,16 @@ insert into categoria (categoria_id, nombre, descripcion) values ('c0a8000d-8665
 insert into categoria (categoria_id, nombre, descripcion) values ('c0a8000d-8665-1750-8186-6587bb010014', 'Otros', 'Imágenes de santos');
 insert into categoria (categoria_id, nombre, descripcion) values ('c0a8000d-8665-1750-8186-6587bb010015', 'Mariana', 'Imágenes Marianas de la virgen');
 
-insert into imaginero (imaginero_id, name, edad, localidad) values ('c0a8000d-8665-1750-8186-6587bb010001', 'Antonio Eslava Rubio', 1, 'Sumberbakti');
-insert into imaginero (imaginero_id, name, edad, localidad) values ('c0a8000d-8665-1750-8186-6587bb010002', 'Juan de Mesa', 2, 'Zhaxirabdain');
-insert into imaginero (imaginero_id, name, edad, localidad) values ('c0a8000d-8665-1750-8186-6587bb010003', 'Pedro Roldán', 3, 'Topola');
-insert into imaginero (imaginero_id, name, edad, localidad) values ('c0a8000d-8665-1750-8186-6587bb010004', 'Luisa Roldán', 4, 'Santa Rita Aplaya');
-insert into imaginero (imaginero_id, name, edad, localidad) values ('c0a8000d-8665-1750-8186-6587bb010005', 'Luis Álvarez Duarte', 5, 'Kašperské Hory');
-insert into imaginero (imaginero_id, name, edad, localidad) values ('c0a8000d-8665-1750-8186-6587bb010006', 'Antonio León Ortega', 6, 'Queluz');
-insert into imaginero (imaginero_id, name, edad, localidad) values ('c0a8000d-8665-1750-8186-6587bb010007', 'Martín Nieto', 7, 'Real');
-insert into imaginero (imaginero_id, name, edad, localidad) values ('c0a8000d-8665-1750-8186-6587bb010008', 'Juan Manuel Miñarro', 8, 'Ampelgading');
-insert into imaginero (imaginero_id, name, edad, localidad) values ('c0a8000d-8665-1750-8186-6587bb010009', 'Fernando Aguado', 9, 'Zerok-Alakadari');
-insert into imaginero (imaginero_id, name, edad, localidad) values ('c0a8000d-8665-1750-8186-6587bb010010', 'Francisco Antonio Gijón', 10, 'Verdun');
+insert into imaginero (imaginero_id, name, edad, localidad) values ('c0a8000d-8665-1750-8186-6587bb010001', 'Antonio Eslava Rubio', 23, 'Sevilla');
+insert into imaginero (imaginero_id, name, edad, localidad) values ('c0a8000d-8665-1750-8186-6587bb010002', 'Juan de Mesa', 65, 'Jerez de la Frontera');
+insert into imaginero (imaginero_id, name, edad, localidad) values ('c0a8000d-8665-1750-8186-6587bb010003', 'Pedro Roldán', 34, 'Rota');
+insert into imaginero (imaginero_id, name, edad, localidad) values ('c0a8000d-8665-1750-8186-6587bb010004', 'Luisa Roldán', 56, 'Granada');
+insert into imaginero (imaginero_id, name, edad, localidad) values ('c0a8000d-8665-1750-8186-6587bb010005', 'Luis Álvarez Duarte', 21, 'Córdoba');
+insert into imaginero (imaginero_id, name, edad, localidad) values ('c0a8000d-8665-1750-8186-6587bb010006', 'Antonio León Ortega', 73, 'Huelva');
+insert into imaginero (imaginero_id, name, edad, localidad) values ('c0a8000d-8665-1750-8186-6587bb010007', 'Martín Nieto', 22, 'Real');
+insert into imaginero (imaginero_id, name, edad, localidad) values ('c0a8000d-8665-1750-8186-6587bb010008', 'Juan Manuel Miñarro', 87, 'Sevilla');
+insert into imaginero (imaginero_id, name, edad, localidad) values ('c0a8000d-8665-1750-8186-6587bb010009', 'Fernando Aguado', 55, 'Sevilla');
+insert into imaginero (imaginero_id, name, edad, localidad) values ('c0a8000d-8665-1750-8186-6587bb010010', 'Francisco Antonio Gijón', 29, 'Granada');
 
 insert into obras (obras_id, name, precio, titulo, img, estado, fecha, estilo, categoria_id, imaginero_id) values ('0528bac8-b04b-11ed-afa1-0242ac120002', 'Esperanza Macarena', 12000.00, 'Esperanza Macarena de Madrid', 'macarena_madrid.jpeg', 'Adquirida', '2022-10-07', 'Barroca', 'c0a8000d-8665-1750-8186-6587bb010011', 'c0a8000d-8665-1750-8186-6587bb010001');
 insert into obras (obras_id, name, precio, titulo, img, estado, fecha, estilo, categoria_id, imaginero_id) values ('0528bac8-b04b-11ed-afa1-0242ac120001', 'María Magdalena', 6000.00, 'María Magdalena de las Aguas', 'magdalena_agua.jpg', 'Adquirida', '2022-10-07', 'Barroca', 'c0a8000d-8665-1750-8186-6587bb010014', 'c0a8000d-8665-1750-8186-6587bb010001');

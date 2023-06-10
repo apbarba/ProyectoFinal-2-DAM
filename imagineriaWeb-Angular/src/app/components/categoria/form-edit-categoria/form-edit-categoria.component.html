@@ -1,0 +1,34 @@
+<mat-toolbar color="black">
+  <span>La Imagineria</span>
+  <button mat-button routerLink="/obras">Obras</button>
+  <button mat-button routerLink="/imagineros">Imagineros</button>
+  <button mat-button routerLink="/categorias">Categorias</button>
+  <span class="spacer"></span>
+  <ng-container>
+    <button mat-button routerLink="/profile"></button>
+    <button mat-button routerLink="/perfil">Perfil</button>
+  </ng-container>
+</mat-toolbar>
+
+<mat-card>
+    <mat-card-header>
+      <mat-card-title>Editar Categoria</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+    
+        <form #editForm="ngForm" (ngSubmit)="submitForm(editForm)">
+
+        <mat-form-field>
+          <input matInput placeholder="Nombre" name="nombre" [(ngModel)]="categoria.nombre" required>
+        </mat-form-field>
+       
+        <mat-form-field>
+          <input matInput placeholder="Descripcion" name="descripcion" [(ngModel)]="categoria.descripcion" required>
+        </mat-form-field>
+      
+        <button mat-raised-button color="primary" type="submit">Actualizar</button>
+        <button mat-raised-button routerLink="/categorias">Cancelar</button>
+     
+    </form>
+    </mat-card-content>
+  </mat-card>

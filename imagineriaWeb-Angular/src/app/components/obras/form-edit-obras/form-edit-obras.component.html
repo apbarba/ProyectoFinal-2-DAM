@@ -1,0 +1,40 @@
+<mat-card>
+    <mat-card-header>
+      <mat-card-title>Editar Obra</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+    
+        <form #editForm="ngForm" (ngSubmit)="submitForm(editForm)">
+
+        <mat-form-field>
+          <input matInput placeholder="Nombre" name="name" [(ngModel)]="obra.name" required>
+        </mat-form-field>
+       
+        <mat-form-field>
+          <input matInput placeholder="Precio" name="precio" type="number"  [(ngModel)]="obra.precio" required>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput placeholder="Titulo" name="titulo" [(ngModel)]="obra.titulo" required>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput placeholder="Estado" name="estado" [(ngModel)]="obra.estado" required>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput placeholder="Estilo" name="estilo" [(ngModel)]="obra.estilo" required>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput placeholder="Imagen" name="img" [(ngModel)]="obra.img" required>
+          </mat-form-field>
+      
+        <button mat-raised-button color="primary" type="submit">Actualizar</button>
+        <button mat-raised-button routerLink="/obras">Cancelar</button>
+     
+    </form>
+    </mat-card-content> 
+  </mat-card>
+
+

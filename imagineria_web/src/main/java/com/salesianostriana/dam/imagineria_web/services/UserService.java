@@ -151,7 +151,6 @@ public class UserService {
         return imagineroRepository.existsByEmail(email);
     }
 
-    //AGREGA A UNA OBRA COMO FAV Y LO METE EN UNA LISTA
     public User addFavorito(UUID userId, UUID obraId) {
         User user = imagineroRepository.findById(userId)
                 .orElseThrow(() -> new UserNotFoundException(userId));

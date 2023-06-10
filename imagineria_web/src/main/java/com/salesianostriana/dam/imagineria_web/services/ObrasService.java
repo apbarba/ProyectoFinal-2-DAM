@@ -108,7 +108,6 @@ public class ObrasService {
                         .categoria(categoria)
                         .build()
         );
-
         return converterDtoObras.obrasToObras(obras);
     }
 

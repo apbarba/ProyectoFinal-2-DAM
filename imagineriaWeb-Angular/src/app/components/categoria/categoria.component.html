@@ -1,0 +1,39 @@
+<mat-toolbar color="black">
+  <span routerLink="/home">La Imagineria</span>
+  <button mat-button routerLink="/obras">Obras</button>
+  <button mat-button routerLink="/imagineros">Imagineros</button>
+  <button mat-button routerLink="/categorias">Categorias</button>
+  <span class="spacer"></span>
+  <ng-container>
+    <button mat-button routerLink="/profile"></button>
+    <button mat-button routerLink="/perfil">Perfil</button>
+  </ng-container>
+</mat-toolbar>
+  
+<body> 
+  <div class="bg-image"></div>
+<mat-grid-list cols="3" rowHeight="350px" gutterSize="30px">
+  <mat-grid-tile *ngFor="let categoria of categorias">
+    <mat-card class="category-card">
+      <mat-card-header>
+        <div class="header-content">
+          <mat-card-title>{{ categoria.nombre }}</mat-card-title>
+        </div>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ categoria.descripcion }}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-flat-button color="primary" class="action-button" (click)="editar(categoria.id)">Editar</button>
+        <button mat-flat-button color="warn" class="action-button" (click)="eliminar(categoria.id)">Eliminar</button>
+        <button mat-flat-button color="accent" class="action-button" (click)="verObras(categoria.id)">Ver Obras</button>
+      </mat-card-actions>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>
+</body>
+
+
+
+  
+    

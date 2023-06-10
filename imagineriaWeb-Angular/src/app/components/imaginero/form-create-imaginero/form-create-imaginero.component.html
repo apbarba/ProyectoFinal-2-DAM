@@ -1,0 +1,35 @@
+<mat-card>
+    <mat-card-header>
+      <mat-card-title>Imaginero Nuevo</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+    
+        <form #editForm="ngForm" (ngSubmit)="createImaginero()">
+  
+          <p>
+        <mat-form-field>
+          <input matInput placeholder="Nombre" name="nombre" [(ngModel)]="nuevoImaginero.name" required>
+        </mat-form-field>
+      </p>
+  
+      <p>
+        <mat-form-field>
+          <input matInput placeholder="Edad" name="edad" [(ngModel)]="nuevoImaginero.edad" required>
+        </mat-form-field>
+      </p>
+  
+      <p>
+        <mat-form-field>
+          <input matInput placeholder="Localidad" name="Localidad" [(ngModel)]="nuevoImaginero.localidad" required>
+        </mat-form-field>
+      </p>
+      
+      <div>
+        <button mat-raised-button color="primary" type="submit">Crear</button>
+        <button mat-raised-button color="warning" routerLink="/imaginero">Cancelar</button>
+      </div>
+     
+    </form>
+    </mat-card-content>
+  </mat-card>
+  

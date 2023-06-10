@@ -40,6 +40,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/imaginero")
 @RequiredArgsConstructor
+@CrossOrigin("#")
 public class ImagineroController {
 
     private final ImaginerosService imaginerosService;
@@ -216,6 +217,7 @@ public class ImagineroController {
                     content = @Content),
             @ApiResponse(responseCode = "401", description = "No está autorizado para realizar esta opción")
     })
+
     @PutMapping("/{id}")
     public GetDtoImaginero edit(@PathVariable UUID id, @Valid @RequestBody EditDtoImaginero edited) {
 

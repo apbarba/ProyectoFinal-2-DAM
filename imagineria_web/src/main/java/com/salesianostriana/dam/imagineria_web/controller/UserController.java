@@ -44,6 +44,7 @@ import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin("#")
 public class UserController {
 
     private final UserService userService;
@@ -54,8 +55,6 @@ public class UserController {
     private final StorageService storageService;
 
     private final RefreshTokenService refreshTokenService;
-    private final ObrasRepository obrasRepository;
-
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201",
                     description = "Se muestra correctamente el perfil de usuario",
@@ -422,6 +421,7 @@ public class UserController {
                 .build();
     }
 
+
     //EDITA EL AVATAR DEL USUARIO QUE SE ENCUENTRA LOGEADO
     @PutMapping("user/{id}/avatar")
     public ResponseEntity<User> changeUserAvatar(@PathVariable UUID id, @RequestPart("avatar") MultipartFile avatarFile) {
@@ -458,6 +458,7 @@ public class UserController {
                     .build();
         }
     }
+
 
     @PostMapping("user/{id}/changeAvatar")
     public ResponseEntity<?> changeAvatar(@PathVariable UUID id,

@@ -1,0 +1,26 @@
+.obras-table {
+    margin: 0 auto;
+    width: 80%;
+   margin-top: 10px;
+    border-collapse: collapse;
+  }
+  
+  .obras-table .mat-cell, .obras-table .mat-header-cell {
+    text-align: center;
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .obras-table .mat-header-cell {
+    background-color: rgba(161, 0, 161, 0.856);
+    color: white;
+  }
+  
+  .obras-table .mat-row:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .obras-table .mat-row:hover {
+    background-color: #ddd;
+  }
+  

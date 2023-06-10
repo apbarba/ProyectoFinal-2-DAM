@@ -140,8 +140,10 @@ public class ImaginerosService {
         }
     }
 
+
     //ELIMINACION DE IMAGINERO SIN QUE SE ELIMINEN LAS OBRAS QUE ESTÁN ASOCIADAS A ÉL
     public void delete(UUID id){
+
         if (imagineroRepository.existsById(id)){
             Imaginero imaginero = imagineroRepository.findById(id).get();
 

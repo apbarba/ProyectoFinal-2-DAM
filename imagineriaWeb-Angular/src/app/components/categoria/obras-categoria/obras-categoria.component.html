@@ -1,0 +1,40 @@
+<mat-toolbar color="black">
+    <span>La Imagineria</span>
+    <button mat-button routerLink="/obras">Obras</button>
+    <button mat-button routerLink="/imagineros">Imagineros</button>
+    <button mat-button routerLink="/categorias">Categorias</button>
+    <span class="spacer"></span>
+    <ng-container>
+      <button mat-button routerLink="/profile"></button>
+      <button mat-button routerLink="/perfil">Perfil</button>
+    </ng-container>
+  </mat-toolbar>
+     
+     
+     
+     <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="obras" class="obras-table">
+          
+              <!-- Nombre Column -->
+              <ng-container matColumnDef="nombre">
+                <th mat-header-cell *matHeaderCellDef> Nombre </th>
+                <td mat-cell *matCellDef="let obra"> {{obra.name}} </td>
+              </ng-container>
+          
+              <!-- Fecha Column -->
+              <ng-container matColumnDef="fecha">
+                <th mat-header-cell *matHeaderCellDef> Fecha </th>
+                <td mat-cell *matCellDef="let obra"> {{obra.fecha}} </td>
+              </ng-container>
+          
+              <!-- Titulo Column -->
+              <ng-container matColumnDef="titulo">
+                <th mat-header-cell *matHeaderCellDef> Título </th>
+                <td mat-cell *matCellDef="let obra"> {{obra.titulo}} </td>
+              </ng-container>
+          
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+          </div>
+  

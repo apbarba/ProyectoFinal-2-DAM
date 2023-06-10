@@ -35,6 +35,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/obras")
 @RequiredArgsConstructor
+@CrossOrigin("#")
 public class ObrasController {
 
     private final ObrasService obrasService;
@@ -385,5 +386,4 @@ public class ObrasController {
     public List<Obras> buscarPorNombre(@RequestParam String name) {
         return obrasService.buscarPorNombre(name);
     }
-
 }
