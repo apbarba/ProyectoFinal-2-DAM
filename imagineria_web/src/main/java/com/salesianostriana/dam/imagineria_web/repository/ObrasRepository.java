@@ -18,4 +18,7 @@ public interface ObrasRepository extends JpaRepository<Obras, UUID>, JpaSpecific
     List<Obras> findByTitulo(String titulo);
 
     List<Obras> findByEstado(String estado);
+
+    List<Obras> findByNameContainingIgnoreCase(String name);
+
 }

@@ -12,7 +12,7 @@ export class ObrasService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  getAllObras() {
+  getAllObras(): Observable<any> {
     return this.http.get(`${environment.apiUrl}/obras/`);
   }
 
@@ -20,7 +20,7 @@ export class ObrasService {
     console.log(obra);
     return this.http.post(`${environment.apiUrl}/obras/`, {
       "precio": obra.precio,
-      "name": obra.nombre,
+      "name": obra.name,
       "titulo": obra.titulo,
       "estado": obra.estado,
       "estilo": obra.estilo,
@@ -28,9 +28,9 @@ export class ObrasService {
     });
   }
 
-  editObra(id: string, nombre: string, precio: number, titulo: string, estado: string, estilo: string, img: string){
+  editObra(id: string, name: string, precio: number, titulo: string, estado: string, estilo: string, img: string){
     const body = {
-      nombre: nombre,
+      name: name,
       precio: precio,
       titulo: titulo,
       estado:estado,
@@ -51,4 +51,8 @@ export class ObrasService {
   getImage(img: string): Observable<Blob> {
     return this.http.get(img, { responseType: 'blob' });
   }
+  buscarObraPorNombre(name: string) {
+    return this.http.get<Obra[]>(`${environment.apiUrl}/obras/search?name=${name}`);
+  }
+
 }

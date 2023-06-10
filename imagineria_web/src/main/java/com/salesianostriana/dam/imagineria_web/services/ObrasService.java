@@ -128,7 +128,7 @@ public class ObrasService {
                     obras.setEstado(edit.getEstado());
                     obras.setPrecio(edit.getPrecio());
                    // obras.setCategoria(edit.getCategoria());
-                    obras.setName(edit.getNombre());
+                    obras.setName(edit.getName());
                     obras.setImg(edit.getImg());
                    // obras.setImaginero(edit.getImaginero());
 
@@ -172,6 +172,11 @@ public class ObrasService {
         }else {
             return obras.map(converterDtoObras::obrasToObras);
         }
+    }
+
+    //METODO QUE REALIZARÁ LA BÚSQUEDA POR NOMBRE DE OBRAS
+    public List<Obras> buscarPorNombre(String name) {
+        return obrasRepository.findByNameContainingIgnoreCase(name);
     }
 
 }

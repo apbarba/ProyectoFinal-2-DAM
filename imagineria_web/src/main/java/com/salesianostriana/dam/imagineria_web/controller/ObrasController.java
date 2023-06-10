@@ -29,6 +29,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.net.URI;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -385,5 +386,9 @@ public class ObrasController {
                 .build();
     }
 
-
+    //METODO PARA BUSCAR POR NOMBRE DE OBRAS (/OBRAS/SEARCH?NOMBRE=NOMBREOBRA)
+    @GetMapping("/search")
+    public List<Obras> buscarPorNombre(@RequestParam String name) {
+        return obrasService.buscarPorNombre(name);
+    }
 }

@@ -21,7 +21,6 @@ export class FormCreateObraComponent implements OnInit {
     fecha: '',
     id: '',
     img: '',
-    nombre: '',
     precio: 0,
     categoria: '',
     favorito: false,

@@ -19,6 +19,7 @@ export class ObrasComponent implements OnInit {
   private userId: string | undefined;
   imageUrls: SafeUrl[] = [];
   img: string[] = [];
+  nombreBusqueda: string = '';
 
   constructor(private obrasService: ObrasService, private router: Router, private authService: AuthService, private http: HttpClient, private sanitizer: DomSanitizer){
   }
@@ -48,13 +49,21 @@ export class ObrasComponent implements OnInit {
     this.router.navigate(['/obras/editar', id]);
   }
 
+  cargarObras() {
+    this.obrasService.getAllObras().subscribe(response => {
+      this.obras = response.obras;
+    });
+  }
+
   eliminar(id: string) {
     if (confirm('¿Está seguro de eliminar esta obra?')) {
       this.obrasService.deleteObra(id).subscribe(() => {
-        this.ngOnInit();
+        // Actualizamos el array de obras para excluir la obra que se ha eliminado.
+        this.obras = this.obras.filter(obra => obra.id !== id);
       });
     }
   }
+  
   toggleFavorito(obra: any) {
     obra.favorito = !obra.favorito;
     if (obra.favorito && this.userId) {
@@ -87,6 +96,22 @@ export class ObrasComponent implements OnInit {
     return this.http.get(url, { responseType: 'blob' }).pipe(
       map((blob: Blob | MediaSource) => this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(blob)))
     );
-  
 }
+
+buscarObraPorNombre(nombre: string) {
+  this.obrasService.buscarObraPorNombre(nombre).subscribe((data: Obra[]) => {
+    this.obras = data;
+
+    this.imageUrls = [];
+
+    for (let obra of this.obras) {
+      const imageUrl = `http://localhost:8080/${obra.img}`;
+      this.imageUrls.push(imageUrl);
+    }
+  }, error => {
+    console.log(error);
+  });
+}
+
+
 }
