@@ -1,5 +1,6 @@
 package com.example.imagineria_web_android.API;
 
+import com.example.imagineria_web_android.Model.Auth.AvatarChangeResponse;
 import com.example.imagineria_web_android.Model.Auth.ChangePasswordRequest;
 import com.example.imagineria_web_android.Model.Auth.User;
 
@@ -18,8 +19,10 @@ import retrofit2.http.Path;
 public interface UserApi {
         @Multipart
         @POST("user/{id}/changeAvatar")
-        Call<Void> changeAvatar(@Path("id") String userId, @Part MultipartBody.Part file);
-
+        Call<AvatarChangeResponse> changeAvatar(
+                @Path("id") String id,
+                @Part MultipartBody.Part file
+        );
         @GET("user/{id}/profile")
         Call<Optional<User>> getUserProfile(@Path("id") String userId);
 

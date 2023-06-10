@@ -19,12 +19,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.navigation.NavController;
@@ -33,10 +35,12 @@ import androidx.navigation.Navigation;
 import com.bumptech.glide.Glide;
 import com.example.imagineria_web_android.API.UserApi;
 import com.example.imagineria_web_android.Activity.LoginActivity;
+import com.example.imagineria_web_android.Model.Auth.AvatarChangeResponse;
 import com.example.imagineria_web_android.Model.Auth.User;
 import com.example.imagineria_web_android.R;
 import com.example.imagineria_web_android.RetrofitInstance;
 import com.example.imagineria_web_android.ViewModel.ProfileViewModel;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -58,6 +62,7 @@ public class ProfileFragment extends Fragment {
 
     private static final int PERMISSION_REQUEST_CODE = 1;
     private static final int PICK_IMAGE_REQUEST = 1;
+    private static final int IMAGE_REQUEST = 100;
 
     private Button buttonUpload;
     private ImageView avatarImageView;
@@ -81,12 +86,22 @@ public class ProfileFragment extends Fragment {
         buttonUpload = rootView.findViewById(R.id.changeAvatarButton);
         avatarImageView = rootView.findViewById(R.id.avatarImageView);
         userService = RetrofitInstance.getRetrofitInstance(requireContext()).create(UserApi.class);
-        viewModel = new ViewModelProvider((ViewModelStoreOwner) this, (ViewModelProvider.Factory) new ViewModelProvider.AndroidViewModelFactory(getActivity().getApplication())).get(ProfileViewModel.class);
+        viewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
 
         buttonUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openFileChooser();
+                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intent, IMAGE_REQUEST);
+            }
+        });
+
+        viewModel.getAvatarChangeResponse().observe(getViewLifecycleOwner(), response -> {
+            if (response != null) {
+                String avatarUrl = RetrofitInstance.BASE_URL + "download/" + response.getAvatarFilename();
+                Picasso.get().load(avatarUrl).into(avatarImageView);
+            } else {
+                Toast.makeText(getActivity(), "Error al cambiar el avatar", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -129,13 +144,26 @@ public class ProfileFragment extends Fragment {
         return rootView;
     }
 
-    private void openFileChooser() {
-        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_EXTERNAL_STORAGE)
-                == PackageManager.PERMISSION_GRANTED) {
-            Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-            startActivityForResult(intent, PICK_IMAGE_REQUEST);
-        } else {
-            requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null) {
+            Uri selectedImage = data.getData();
+            String[] filePathColumn = { MediaStore.Images.Media.DATA };
+            Cursor cursor = getActivity().getContentResolver().query(selectedImage, filePathColumn, null, null, null);
+            cursor.moveToFirst();
+
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            String imagePath = cursor.getString(columnIndex);
+            cursor.close();
+
+            File file = new File(imagePath);
+            RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+            MultipartBody.Part body = MultipartBody.Part.createFormData("file", file.getName(), requestFile);
+
+            userId = sharedPref.getString("user_id", "");
+            viewModel.changeAvatar(userId, body); // Asegúrate de obtener el userId correctamente
         }
     }
 
@@ -152,61 +180,6 @@ public class ProfileFragment extends Fragment {
         }
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null && data.getData() != null) {
-            Uri imageUri = data.getData();
-
-            userId = sharedPref.getString("user_id", "");
-
-            if (!userId.isEmpty()) {
-                changeAvatar(userId, imageUri);
-            }
-            try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(requireActivity().getContentResolver(), imageUri);
-                avatarImageView.setImageBitmap(bitmap);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    private void changeAvatar(String userId, Uri imageUri) {
-        try {
-            ContentResolver contentResolver = requireActivity().getContentResolver();
-            InputStream inputStream = contentResolver.openInputStream(imageUri);
-            if (inputStream != null) {
-                File file = inputStreamToFile(inputStream);
-                if (file != null && file.exists()) {
-                    viewModel.changeAvatar(userId, file);
-                } else {
-                    // Handle the case where the temporary file cannot be created
-                }
-                inputStream.close();
-            } else {
-                // Handle the case where the InputStream cannot be obtained
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            // Handle the file not found error
-        }
-    }
-
-    private File inputStreamToFile(InputStream inputStream) throws IOException {
-        if (inputStream == null) return null;
-        File file = File.createTempFile("file", "tmp", requireContext().getCacheDir());
-        OutputStream outputStream = new FileOutputStream(file);
-        byte[] buffer = new byte[1024];
-        int bytesRead;
-        while ((bytesRead = inputStream.read(buffer)) != -1) {
-            outputStream.write(buffer, 0, bytesRead);
-        }
-        outputStream.close();
-        inputStream.close();
-        return file;
-    }
 
     private void getUserProfile(String userId) {
         userService.getUserProfile(userId).enqueue(new Callback<Optional<User>>() {

@@ -1,5 +1,6 @@
 package com.salesianostriana.dam.imagineria_web.controller;
 
+import com.salesianostriana.dam.imagineria_web.files.dto.AvatarChangeResponse;
 import com.salesianostriana.dam.imagineria_web.files.service.StorageService;
 import com.salesianostriana.dam.imagineria_web.model.Obras;
 import com.salesianostriana.dam.imagineria_web.model.User;
@@ -473,6 +474,7 @@ public class UserController {
         String avatarFilename = storageService.store(file);
         userService.changeAvatar(id, avatarFilename);
 
-        return ResponseEntity.ok().build();
+        // Devolver el nombre del archivo como respuesta
+        return ResponseEntity.ok().body(new AvatarChangeResponse(avatarFilename));
     }
 }

@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.imagineria_web_android.API.UserApi;
+import com.example.imagineria_web_android.Model.Auth.AvatarChangeResponse;
 import com.example.imagineria_web_android.Model.Auth.ChangePasswordRequest;
 import com.example.imagineria_web_android.Model.Auth.User;
 import com.example.imagineria_web_android.RetrofitInstance;
@@ -26,33 +27,36 @@ import retrofit2.Retrofit;
 public class ProfileViewModel extends AndroidViewModel {
     private UserApi userService;
 
+    private MutableLiveData<AvatarChangeResponse> avatarChangeResponse;
+
     public ProfileViewModel(Application application) {
         super(application);
         userService = RetrofitInstance.getRetrofitInstance(application.getApplicationContext()).create(UserApi.class);
+        avatarChangeResponse = new MutableLiveData<>();
     }
 
 
-    public void changeAvatar(String userId, File file) {
-        RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"), file);
-        MultipartBody.Part body = MultipartBody.Part.createFormData("file", file.getName(), requestBody);
+    public LiveData<AvatarChangeResponse> getAvatarChangeResponse() {
+        return avatarChangeResponse;
+    }
 
-        userService.changeAvatar(userId, body).enqueue(new Callback<Void>() {
+    public void changeAvatar(String userId, MultipartBody.Part filePart) {
+        userService.changeAvatar(userId, filePart).enqueue(new Callback<AvatarChangeResponse>() {
             @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
+            public void onResponse(Call<AvatarChangeResponse> call, Response<AvatarChangeResponse> response) {
                 if (response.isSuccessful()) {
-                    // Actualiza el usuario con los nuevos datos
+                    avatarChangeResponse.postValue(response.body());
                 } else {
-                    // Manejar la respuesta de error
+                    // Manejar el error de alguna manera
                 }
             }
 
             @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-                // Manejar el error
+            public void onFailure(Call<AvatarChangeResponse> call, Throwable t) {
+                // Manejar el error de alguna manera
             }
         });
     }
-
 
     public LiveData<Optional<User>> getUserProfile(String userId) {
         MutableLiveData<Optional<User>> userProfileLiveData = new MutableLiveData<>();
