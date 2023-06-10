@@ -55,6 +55,8 @@ public class User implements UserDetails {
 
     private String verifyPassword;
 
+    private String avatar;
+
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Obras> favoritos = new ArrayList<>();
 
@@ -117,5 +119,9 @@ public class User implements UserDetails {
     public String getUsername(){
 
         return username;
+    }
+
+    public void changeAvatar(String newAvatar) {
+        this.avatar = newAvatar;
     }
 }

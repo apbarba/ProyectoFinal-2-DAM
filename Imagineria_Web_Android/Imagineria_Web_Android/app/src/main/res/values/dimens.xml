@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="recyclerview_spacing">2dp</dimen>
+    <dimen name="item_width">100dp</dimen> <!-- Ancho de cada elemento del RecyclerView -->
+    <dimen name="recyclerview_width">300dp</dimen>
+    <dimen name="recyclerview_horizontal_spacing">8dp</dimen>
+</resources>

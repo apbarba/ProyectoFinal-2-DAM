@@ -29,6 +29,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.net.URI;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -305,16 +306,11 @@ public class ObrasController {
     @PostMapping("/")
     public ResponseEntity<GetDtoObras> createNewObras(@Valid @RequestBody CreateDtoObras obras) {
 
-        Obras created = obrasService.save2(obras);
-
-        URI createdURI = ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(created.getId()).toUri();
+        GetDtoObras created = obrasService.save2(obras);
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .build();
+                .body(created);
 
     }
 
@@ -384,5 +380,10 @@ public class ObrasController {
                 .build();
     }
 
+    //METODO PARA BUSCAR POR NOMBRE DE OBRAS (/OBRAS/SEARCH?NOMBRE=NOMBREOBRA)
+    @GetMapping("/search")
+    public List<Obras> buscarPorNombre(@RequestParam String name) {
+        return obrasService.buscarPorNombre(name);
+    }
 
 }

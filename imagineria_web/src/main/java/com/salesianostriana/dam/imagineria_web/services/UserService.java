@@ -12,12 +12,10 @@ import com.salesianostriana.dam.imagineria_web.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.webjars.NotFoundException;
 
 import javax.validation.constraints.NotEmpty;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -36,6 +34,7 @@ public class UserService {
                 .password(passwordEncoder.encode(getDtoImaginero.getPassword()))
                 .email(getDtoImaginero.getEmail())
                 .name(getDtoImaginero.getName())
+                .avatar(getDtoImaginero.getAvatar())
                 .rol(roles)
                 .build();
 
@@ -152,18 +151,24 @@ public class UserService {
         return imagineroRepository.existsByEmail(email);
     }
 
-    public User addFavorito(UUID userId, UUID obraId){
-
+    //AGREGA A UNA OBRA COMO FAV Y LO METE EN UNA LISTA
+    public User addFavorito(UUID userId, UUID obraId) {
         User user = imagineroRepository.findById(userId)
                 .orElseThrow(() -> new UserNotFoundException(userId));
 
-        Obras obras = obrasRepository.findById(obraId)
+        Obras obra = obrasRepository.findById(obraId)
                 .orElseThrow(() -> new ObrasNotFoundException(obraId));
 
-        obras.addUser(user);
-        obrasRepository.save(obras);
+        List<Obras> favoritos = user.getFavoritos();
+        if (favoritos == null) {
+            favoritos = new ArrayList<>();
+        }
+        favoritos.add(obra);
+        user.setFavoritos(favoritos);
 
-        return imagineroRepository.save(user);
+        imagineroRepository.save(user);
+
+        return user;
     }
 
     //HACE LO MISMO QUE EL FIND DE ABAJO PERO SIN EL ENTITYFRAPH
@@ -180,13 +185,21 @@ public class UserService {
 
         return imagineroRepository.findByIdWithFavoritos(userId);
     }
-
     public void removeFavObra(UUID userId, UUID obraId){
 
         User user = imagineroRepository.findById(userId)
                 .orElseThrow(() -> new UserNotFoundException(userId));
 
         user.getFavoritos().removeIf(obras -> obras.getId().equals(obraId));
+
+        imagineroRepository.save(user);
+    }
+
+    public void changeAvatar(UUID userId, String avatarFilename) {
+        User user = imagineroRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException("Usuario no encontrado"));
+
+        user.changeAvatar(avatarFilename);
 
         imagineroRepository.save(user);
     }

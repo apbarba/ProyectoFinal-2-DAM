@@ -20,7 +20,7 @@ public class EditDtoObras {
 
     //name, precio, titulo, img, estado
 
-    @NotEmpty(message = "{obrasEdit.name,notempty}")
+    @NotEmpty(message = "{obrasEdit.name.notempty}")
     private String name;
 
     @PositivePrice(message = "{obrasEdit.precio.unique}")
