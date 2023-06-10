@@ -14,6 +14,7 @@ import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ObraApi {
 
@@ -41,7 +42,8 @@ public interface ObraApi {
     @DELETE("user/{userId}/favoritos/{obraId}")
     Call<Void> removeFavObra(@Path("userId") String userId, @Path("obraId") String obraId);
 
-
+    @GET("/obras/search")
+    Call<List<Obra>> getObrasByName(@Query("name") String name);
 
 
 }

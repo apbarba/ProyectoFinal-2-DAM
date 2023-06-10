@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.example.imagineria_web_android.R;
 import com.example.imagineria_web_android.ViewModel.ObraViewModel;
@@ -24,6 +26,8 @@ public class ObrasFragment extends Fragment {
     private ObraViewModel obraViewModel;
     private RecyclerView obraRecyclerView;
     private ObrasAdapter obraAdapter;
+    private EditText searchEditText;
+    private Button searchButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -38,8 +42,16 @@ public class ObrasFragment extends Fragment {
         obraAdapter = new ObrasAdapter(new ArrayList<>());
         obraRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         obraRecyclerView.setAdapter(obraAdapter);
+        searchEditText = view.findViewById(R.id.searchObra);
+        searchButton = view.findViewById(R.id.searchButton);
 
-        // Cargar obras
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String obraName = searchEditText.getText().toString();
+                obraViewModel.loadObrasByName(obraName);
+            }
+        });        // Cargar obras
         obraViewModel.loadObras();
 
         // Observar cambios

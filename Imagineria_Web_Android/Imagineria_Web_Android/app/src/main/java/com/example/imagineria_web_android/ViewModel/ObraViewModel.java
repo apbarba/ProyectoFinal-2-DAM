@@ -241,4 +241,24 @@ public class ObraViewModel extends AndroidViewModel {
         });
     }
 
+    public void loadObrasByName(String name) {
+        ObraApi apiInterface = RetrofitInstance.getRetrofitInstance(getApplication().getApplicationContext()).create(ObraApi.class);
+        Call<List<Obra>> call = apiInterface.getObrasByName(name);
+        call.enqueue(new Callback<List<Obra>>() {
+            @Override
+            public void onResponse(Call<List<Obra>> call, Response<List<Obra>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    obrasList.postValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Obra>> call, Throwable t) {
+                // Manejo de errores
+            }
+        });
+    }
+
+
+
 }
