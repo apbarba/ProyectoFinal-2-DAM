@@ -67,7 +67,14 @@ public class ObrasFragment extends Fragment {
                 String obraName = searchEditText.getText().toString();
                 obraViewModel.loadObrasByName(obraName);
             }
-        });        // Cargar obras
+        });
+
+        obraViewModel.getObrasList().observe(getViewLifecycleOwner(), obras -> {
+            // Actualizar UI
+            obraAdapter.replaceData(obras);
+        });
+
+        // Cargar obras
         obraViewModel.loadObras();
 
         // Observar cambios

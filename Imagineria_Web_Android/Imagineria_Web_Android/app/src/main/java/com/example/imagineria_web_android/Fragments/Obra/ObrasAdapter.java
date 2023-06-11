@@ -70,6 +70,13 @@ public class ObrasAdapter extends RecyclerView.Adapter<ObrasAdapter.ObraViewHold
         notifyDataSetChanged();
     }
 
+    void replaceData(List<Obra> obras) {
+        this.obras.clear();
+        this.obras.addAll(obras);
+        notifyDataSetChanged();
+    }
+
+
     class ObraViewHolder extends RecyclerView.ViewHolder {
         TextView nombreTextView, fechaTextView;
         Button btnVerMas;

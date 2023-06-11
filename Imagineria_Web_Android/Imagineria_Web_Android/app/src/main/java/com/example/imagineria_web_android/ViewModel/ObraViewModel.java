@@ -242,14 +242,16 @@ public class ObraViewModel extends AndroidViewModel {
         });
     }
 
-    public void loadObrasByName(String name) {
+    public void loadObrasByName(String obraName) {
         ObraApi apiInterface = RetrofitInstance.getRetrofitInstance(getApplication().getApplicationContext()).create(ObraApi.class);
-        Call<List<Obra>> call = apiInterface.getObrasByName(name);
+        Call<List<Obra>> call = apiInterface.getObrasByName(obraName);
         call.enqueue(new Callback<List<Obra>>() {
             @Override
             public void onResponse(Call<List<Obra>> call, Response<List<Obra>> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    obrasList.postValue(response.body());
+                List<Obra> obraResponse = response.body();
+                if (obraResponse != null) {
+                    obrasList.postValue(obraResponse);
+                    currentPage = 1; // Resetear la página actual
                 }
             }
 
@@ -259,6 +261,7 @@ public class ObraViewModel extends AndroidViewModel {
             }
         });
     }
+
 
 
 
