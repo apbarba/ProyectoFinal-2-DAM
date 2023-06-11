@@ -66,7 +66,7 @@ public class ObrasAdapter extends RecyclerView.Adapter<ObrasAdapter.ObraViewHold
     }
 
     void updateData(List<Obra> obras) {
-        this.obras = obras;
+        this.obras.addAll(obras);
         notifyDataSetChanged();
     }
 

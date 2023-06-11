@@ -2,6 +2,7 @@ package com.example.imagineria_web_android.Fragments.Obra;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
@@ -44,6 +45,21 @@ public class ObrasFragment extends Fragment {
         obraRecyclerView.setAdapter(obraAdapter);
         searchEditText = view.findViewById(R.id.searchObra);
         searchButton = view.findViewById(R.id.searchButton);
+
+        obraRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                int totalItemCount = layoutManager.getItemCount();
+                int lastVisible = layoutManager.findLastVisibleItemPosition();
+
+                if (lastVisible >= totalItemCount - 1) {
+                    obraViewModel.loadObras();
+                }
+            }
+        });
 
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override

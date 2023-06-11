@@ -19,7 +19,7 @@ import retrofit2.http.Query;
 public interface ObraApi {
 
     @GET("obras/")
-    Call<ObrasResponse> getObras();
+    Call<ObrasResponse> getObras(@Query("page") int page);
 
     @POST("obras/")
     Call<Obra> createObra(@Body Obra obra);

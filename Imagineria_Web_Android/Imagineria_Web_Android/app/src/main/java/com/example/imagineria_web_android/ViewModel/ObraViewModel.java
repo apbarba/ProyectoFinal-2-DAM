@@ -29,7 +29,7 @@ public class ObraViewModel extends AndroidViewModel {
     private MutableLiveData<List<Obra>> obrasList;
 
     private MutableLiveData<List<Categoria>> categoriasList;
-
+    private int currentPage = 0;
     private MutableLiveData <Obra> obra;
     private MutableLiveData<Boolean> isFavorited = new MutableLiveData<>();
     private final MutableLiveData<List<Obra>> favoritosLiveData = new MutableLiveData<>();
@@ -65,13 +65,14 @@ public class ObraViewModel extends AndroidViewModel {
 
     public void loadObras() {
         ObraApi apiInterface = RetrofitInstance.getRetrofitInstance(getApplication().getApplicationContext()).create(ObraApi.class);
-        Call<ObrasResponse> call = apiInterface.getObras();
+        Call<ObrasResponse> call = apiInterface.getObras(currentPage);
         call.enqueue(new Callback<ObrasResponse>() {
             @Override
             public void onResponse(Call<ObrasResponse> call, Response<ObrasResponse> response) {
                 ObrasResponse obraResponse = response.body();
                 if (obraResponse != null && obraResponse.getContent() != null) {
                     obrasList.postValue(obraResponse.getContent());
+                    currentPage++; // Incrementar la página actual
                 }
             }
 
