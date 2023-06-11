@@ -10,11 +10,12 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ImagineroApi {
 
     @GET("imaginero/")
-    Call<ImagineroResponse> getImaginero();
+    Call<ImagineroResponse> getImaginero(@Query("page") int page);
 
     @POST("imaginero/")
     Call<Imaginero> createImaginero(@Body Imaginero imaginero);

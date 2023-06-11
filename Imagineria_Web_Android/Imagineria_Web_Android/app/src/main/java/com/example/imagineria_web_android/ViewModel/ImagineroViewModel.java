@@ -24,7 +24,7 @@ public class ImagineroViewModel extends AndroidViewModel {
 
     private ImagineroRepository repository;
     private MutableLiveData<List<Imaginero>> imagineroList;
-
+    private int currentPage = 0;
     private MutableLiveData<Imaginero> imaginero;
 
     public ImagineroViewModel(@NonNull Application application) {
@@ -43,13 +43,14 @@ public class ImagineroViewModel extends AndroidViewModel {
 
     public void loadImaginero(){
         ImagineroApi apiInterface = RetrofitInstance.getRetrofitInstance(getApplication().getApplicationContext()).create(ImagineroApi.class);
-        Call<ImagineroResponse> call = apiInterface.getImaginero();
+        Call<ImagineroResponse> call = apiInterface.getImaginero(currentPage);
         call.enqueue(new Callback<ImagineroResponse>() {
             @Override
             public void onResponse(Call<ImagineroResponse> call, Response<ImagineroResponse> response) {
                 ImagineroResponse imagineroResponse = response.body();
                 if (imagineroResponse != null && imagineroResponse.getContent() != null){
                     imagineroList.postValue(imagineroResponse.getContent());
+                    currentPage++;
                 }
             }
 

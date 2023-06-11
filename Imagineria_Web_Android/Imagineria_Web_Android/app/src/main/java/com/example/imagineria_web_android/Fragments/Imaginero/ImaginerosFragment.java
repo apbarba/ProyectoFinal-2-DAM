@@ -2,6 +2,7 @@ package com.example.imagineria_web_android.Fragments.Imaginero;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
@@ -37,6 +38,22 @@ public class ImaginerosFragment extends Fragment {
         imagineroAdapter = new ImagineroAdapter(new ArrayList<>());
         imagineroRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         imagineroRecyclerView.setAdapter(imagineroAdapter);
+
+        imagineroRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                int totalItemCount = layoutManager.getItemCount();
+                int lastVisible = layoutManager.findLastCompletelyVisibleItemPosition();
+
+                if (lastVisible >= totalItemCount - 1){
+                    imagineroViewModel.loadImaginero();
+                }
+            }
+        });
 
         imagineroViewModel.loadImaginero();
 

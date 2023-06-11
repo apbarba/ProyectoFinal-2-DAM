@@ -65,8 +65,9 @@ public class ImagineroAdapter extends RecyclerView.Adapter<ImagineroAdapter.Imag
         return imaginero.size();
     }
 
-    void updateData(List<Imaginero> imaginero) {
-        this.imaginero = imaginero;
+    void updateData(List<Imaginero> imagineros) {
+        this.imaginero.addAll(imagineros);
+        notifyDataSetChanged();
     }
 
     class ImagineroViewHolder extends RecyclerView.ViewHolder{
