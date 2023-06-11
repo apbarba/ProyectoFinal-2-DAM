@@ -22,7 +22,7 @@ export class FormCreateImagineroComponent {
 
   createImaginero(){
     this.imagineroSefvice.createImaginero(this.nuevoImaginero).subscribe((response: any) => {
-      console.log(response); // Agregamos la comprobación de la respuesta del servidor
+      console.log(response); 
       this.router.navigateByUrl("/imagineros");
     });
 

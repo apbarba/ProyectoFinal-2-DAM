@@ -8,25 +8,25 @@
   
           <p>
         <mat-form-field>
-          <input matInput placeholder="Nombre" name="nombre" [(ngModel)]="nuevoImaginero.name" required>
+          <input matInput placeholder="Nombre" name="nombre" [(ngModel)]="nuevoImaginero.name">
         </mat-form-field>
       </p>
   
       <p>
         <mat-form-field>
-          <input matInput placeholder="Edad" name="edad" [(ngModel)]="nuevoImaginero.edad" required>
+          <input matInput placeholder="Edad" name="edad" [(ngModel)]="nuevoImaginero.edad">
         </mat-form-field>
       </p>
   
       <p>
         <mat-form-field>
-          <input matInput placeholder="Localidad" name="Localidad" [(ngModel)]="nuevoImaginero.localidad" required>
+          <input matInput placeholder="Localidad" name="Localidad" [(ngModel)]="nuevoImaginero.localidad">
         </mat-form-field>
       </p>
       
       <div>
         <button mat-raised-button color="primary" type="submit">Crear</button>
-        <button mat-raised-button color="warning" routerLink="/imaginero">Cancelar</button>
+        <button mat-raised-button color="warning" routerLink="/imagineros">Cancelar</button>
       </div>
      
     </form>
