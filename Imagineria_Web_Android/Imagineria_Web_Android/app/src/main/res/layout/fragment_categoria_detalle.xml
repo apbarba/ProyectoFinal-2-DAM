@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/detalle_fondo"
     tools:context=".Fragments.Categoria.CategoriaDetalleFragment">
 
 
@@ -69,31 +68,33 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewObras"
-        android:layout_width="match_parent"
-        android:layout_height="140dp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_editar_categoria"
+        android:layout_width="168dp"
+        android:layout_height="180dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView12"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintVertical_bias="0.13" />
 
     <Button
         android:id="@+id/btn_editar_categoria"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Editar"
+        android:backgroundTint="@color/btn_editar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.26"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.72" />
+        app:layout_constraintVertical_bias="0.93" />
 
     <Button
         android:id="@+id/btn_eliminar_categoria"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Eliminar"
+        android:backgroundTint="@color/btn_elimar"
         app:layout_constraintBottom_toBottomOf="@+id/btn_editar_categoria"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.75"
