@@ -20,39 +20,39 @@ export class ObrasComponent implements OnInit {
   imageUrls: SafeUrl[] = [];
   img: string[] = [];
   nombreBusqueda: string = '';
+  page: number = 0;
+
 
   constructor(private obrasService: ObrasService, private router: Router, private authService: AuthService, private http: HttpClient, private sanitizer: DomSanitizer){
   }
   
   ngOnInit(): void {
-   this.obrasService.getAllObras().subscribe((data: any) => {
-    console.log(data);
-    this.obras = data.content as Obra[];
-   });
 
    this.authService.currentUser.subscribe(user => {
     this.userId = user.id;
   });
 
-  this.obrasService.getAllObras().subscribe((data: any) => {
-    this.obras = data.content as Obra[];
+  this.loadMore();
 
-    // Construir la URL completa de la imagen
-    for (let obra of this.obras) {
-      const imageUrl = `http://localhost:8080/${obra.img}`;
-      this.imageUrls.push(imageUrl);
-    }
-  })
+  }
+
+  loadMore(): void {
+    this.obrasService.getAllObras(this.page).subscribe((data: any) => {
+      const newObras = data.content as Obra[];
+
+      // Construir la URL completa de la imagen
+      for (let obra of newObras) {
+        const imageUrl = `http://localhost:8080/${obra.img}`;
+        this.imageUrls.push(imageUrl);
+      }
+
+      this.obras = [...this.obras, ...newObras];
+      this.page++;
+    });
   }
 
   editar(id: string) {
     this.router.navigate(['/obras/editar', id]);
-  }
-
-  cargarObras() {
-    this.obrasService.getAllObras().subscribe(response => {
-      this.obras = response.obras;
-    });
   }
 
   eliminar(id: string) {

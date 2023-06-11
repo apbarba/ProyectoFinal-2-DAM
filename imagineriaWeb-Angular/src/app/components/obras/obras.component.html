@@ -16,7 +16,7 @@
 <input [(ngModel)]="nombreBusqueda" placeholder="Nombre de la obra">
 <button (click)="buscarObraPorNombre(nombreBusqueda)">Buscar</button>
 
-<div class="grid-container">
+<div class="grid-container" infiniteScroll (scrolled)="loadMore()">
   <div class="card-container" *ngFor="let obra of obras; let i = index">
     <mat-card class="elegant-card">
       <div class="card-img-container">

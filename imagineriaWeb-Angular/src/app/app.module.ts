@@ -29,6 +29,7 @@ import { FormEditCategoriaComponent } from './components/categoria/form-edit-cat
 import { ListFavComponent } from './components/profile/list-fav/list-fav.component';
 import { ObrasCategoriaComponent } from './components/categoria/obras-categoria/obras-categoria.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 
 
@@ -63,7 +64,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     MaterialImportsModule,
-    NgbModule
+    NgbModule,
+    InfiniteScrollModule
   ],
   providers: [CookieService, {
     provide: HTTP_INTERCEPTORS, 

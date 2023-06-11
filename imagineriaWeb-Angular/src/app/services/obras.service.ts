@@ -12,9 +12,10 @@ export class ObrasService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  getAllObras(): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/obras/`);
-  }
+  getAllObras(page: number): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/obras/?page=${page}`);
+}
+
 
   createObra(obra: Obra) {
     console.log(obra);
