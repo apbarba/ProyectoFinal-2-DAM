@@ -29,14 +29,12 @@ export class ObrasService {
     });
   }
 
-  editObra(id: string, name: string, precio: number, titulo: string, estado: string, estilo: string, img: string){
+  editObra(id: string, name: string, precio: number, estado: string, estilo: string){
     const body = {
       name: name,
       precio: precio,
-      titulo: titulo,
       estado:estado,
       estilo: estilo,
-      img: img
     };
     return this.http.put(`${environment.apiUrl}/obras/${id}`, body);
   }

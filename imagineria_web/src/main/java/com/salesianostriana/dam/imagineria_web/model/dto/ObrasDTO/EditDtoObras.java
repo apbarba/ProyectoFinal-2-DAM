@@ -26,13 +26,6 @@ public class EditDtoObras {
     @PositivePrice(message = "{obrasEdit.precio.unique}")
     @Min(value = 0, message = "{obrasEdit.precio.min}")
     private double precio;
-
-    @URL(message = "{obrasEdit.img.notempty}")
-    private String img;
-
-    @NotEmpty(message = "{obrasEdit.titulo.notempty}")
-    private String titulo;
-
     @NotEmpty(message = "{obrasEdit.estado.notempty}")
     private String estado;
 

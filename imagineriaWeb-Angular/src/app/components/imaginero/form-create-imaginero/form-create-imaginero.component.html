@@ -1,35 +1,35 @@
-<mat-card>
-    <mat-card-header>
-      <mat-card-title>Imaginero Nuevo</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-    
-        <form #editForm="ngForm" (ngSubmit)="createImaginero()">
-  
-          <p>
-        <mat-form-field>
-          <input matInput placeholder="Nombre" name="nombre" [(ngModel)]="nuevoImaginero.name">
-        </mat-form-field>
-      </p>
-  
-      <p>
-        <mat-form-field>
-          <input matInput placeholder="Edad" name="edad" [(ngModel)]="nuevoImaginero.edad">
-        </mat-form-field>
-      </p>
-  
-      <p>
-        <mat-form-field>
-          <input matInput placeholder="Localidad" name="Localidad" [(ngModel)]="nuevoImaginero.localidad">
-        </mat-form-field>
-      </p>
-      
-      <div>
-        <button mat-raised-button color="primary" type="submit">Crear</button>
-        <button mat-raised-button color="warning" routerLink="/imagineros">Cancelar</button>
-      </div>
-     
-    </form>
-    </mat-card-content>
-  </mat-card>
-  
+<div class="container">
+  <div class="center-container">
+    <mat-card class="card-container">
+      <h2 class="form-title">Imaginero Nuevo</h2>
+      <form #editForm="ngForm" (ngSubmit)="createImaginero()" class="form-container">
+
+        <p>
+          <mat-form-field appearance="fill">
+            <mat-label>Nombre</mat-label>
+            <input matInput placeholder="Nombre" name="nombre" [(ngModel)]="nuevoImaginero.name">
+          </mat-form-field>
+        </p>
+
+        <p>
+          <mat-form-field appearance="fill">
+            <mat-label>Edad</mat-label>
+            <input matInput placeholder="Edad" name="edad" [(ngModel)]="nuevoImaginero.edad">
+          </mat-form-field>
+        </p>
+
+        <p>
+          <mat-form-field appearance="fill">
+            <mat-label>Localidad</mat-label>
+            <input matInput placeholder="Localidad" name="localidad" [(ngModel)]="nuevoImaginero.localidad">
+          </mat-form-field>
+        </p>
+
+        <div class="button-container">
+          <button mat-raised-button color="primary" type="submit">Crear</button>
+          <button mat-raised-button color="warn" routerLink="/imagineros" class="cancel-button">Cancelar</button>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+</div>

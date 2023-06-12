@@ -315,19 +315,6 @@ public class ObrasController {
 
     }
 
-
-
-//    @PostMapping("/new")
-//    public ResponseEntity<Obras> createNewObras(@RequestPart("obras") CreateDtoObras create,
-//                                                @RequestPart("file")MultipartFile file) {
-//
-//        Obras obras = obrasService.save2(create, file);
-//
-//        return ResponseEntity
-//                .status(HttpStatus.CREATED)
-//                .body(obras);
-//
-//    }
    @Operation(summary = "Modifica los datos de las obras")
    @ApiResponses(value = {
            @ApiResponse(responseCode = "200", description = "Categoria modificada correctamente",

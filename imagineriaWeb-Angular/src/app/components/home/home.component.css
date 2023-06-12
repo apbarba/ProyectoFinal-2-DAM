@@ -109,3 +109,35 @@ section img:hover{
   .container2 .box2:last-child {
     margin-right: 0;
   }
+
+
+
+
+
+
+
+  .img-container {
+    height: 400px;  /* Define la altura deseada */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+  
+  .img-wrapper {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .img-wrapper img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: cover;
+  }
+  
+  
+  

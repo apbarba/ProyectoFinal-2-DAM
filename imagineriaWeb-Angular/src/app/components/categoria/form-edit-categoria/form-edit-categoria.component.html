@@ -10,25 +10,31 @@
   </ng-container>
 </mat-toolbar>
 
-<mat-card>
-    <mat-card-header>
-      <mat-card-title>Editar Categoria</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-    
-        <form #editForm="ngForm" (ngSubmit)="submitForm(editForm)">
+<div class="container">
+  <div class="center-container">
+    <mat-card class="card-container">
+      <h2 class="form-title">Editar Categoría</h2>
+      <form #editForm="ngForm" (ngSubmit)="submitForm(editForm)" class="form-container">
 
-        <mat-form-field>
-          <input matInput placeholder="Nombre" name="nombre" [(ngModel)]="categoria.nombre" required>
-        </mat-form-field>
-       
-        <mat-form-field>
-          <input matInput placeholder="Descripcion" name="descripcion" [(ngModel)]="categoria.descripcion" required>
-        </mat-form-field>
-      
-        <button mat-raised-button color="primary" type="submit">Actualizar</button>
-        <button mat-raised-button routerLink="/categorias">Cancelar</button>
-     
-    </form>
-    </mat-card-content>
-  </mat-card>
+        <p>
+          <mat-form-field appearance="fill">
+            <mat-label>Nombre</mat-label>
+            <input matInput placeholder="Nombre" name="nombre" [(ngModel)]="categoria.nombre" required>
+          </mat-form-field>
+        </p>
+
+        <p>
+          <mat-form-field appearance="fill">
+            <mat-label>Descripción</mat-label>
+            <textarea matInput placeholder="Descripción" name="descripcion" [(ngModel)]="categoria.descripcion" required></textarea>
+          </mat-form-field>
+        </p>
+
+        <div class="button-container">
+          <button mat-raised-button color="primary" type="submit">Actualizar</button>
+          <button mat-raised-button color="warn" routerLink="/categorias" class="cancel-button">Cancelar</button>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+</div>

@@ -1,40 +1,34 @@
-<mat-card>
-    <mat-card-header>
-      <mat-card-title>Editar Obra</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-    
-        <form #editForm="ngForm" (ngSubmit)="submitForm(editForm)">
+<div class="container">
+  <div class="center-container">
+    <mat-card class="card-container">
+      <h2 class="form-title">Editar Obra</h2>
+      <form #editForm="ngForm" (ngSubmit)="submitForm(editForm)" class="form-container">
 
-        <mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Nombre</mat-label>
           <input matInput placeholder="Nombre" name="name" [(ngModel)]="obra.name" required>
         </mat-form-field>
-       
-        <mat-form-field>
-          <input matInput placeholder="Precio" name="precio" type="number"  [(ngModel)]="obra.precio" required>
+        
+        <mat-form-field appearance="fill">
+          <mat-label>Precio</mat-label>
+          <input matInput placeholder="Precio" name="precio" type="number" [(ngModel)]="obra.precio" required>
         </mat-form-field>
 
-        <mat-form-field>
-            <input matInput placeholder="Titulo" name="titulo" [(ngModel)]="obra.titulo" required>
-          </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Estado</mat-label>
+          <input matInput placeholder="Estado" name="estado" [(ngModel)]="obra.estado" required>
+        </mat-form-field>
 
-          <mat-form-field>
-            <input matInput placeholder="Estado" name="estado" [(ngModel)]="obra.estado" required>
-          </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Estilo</mat-label>
+          <input matInput placeholder="Estilo" name="estilo" [(ngModel)]="obra.estilo" required>
+        </mat-form-field>
 
-          <mat-form-field>
-            <input matInput placeholder="Estilo" name="estilo" [(ngModel)]="obra.estilo" required>
-          </mat-form-field>
-
-          <mat-form-field>
-            <input matInput placeholder="Imagen" name="img" [(ngModel)]="obra.img" required>
-          </mat-form-field>
-      
-        <button mat-raised-button color="primary" type="submit">Actualizar</button>
-        <button mat-raised-button routerLink="/obras">Cancelar</button>
-     
-    </form>
-    </mat-card-content> 
-  </mat-card>
-
-
+        <div class="button-container">
+          <button mat-raised-button color="primary" type="submit">Actualizar</button>
+          <button mat-raised-button routerLink="/obras" class="cancel-button">Cancelar</button>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+</div>

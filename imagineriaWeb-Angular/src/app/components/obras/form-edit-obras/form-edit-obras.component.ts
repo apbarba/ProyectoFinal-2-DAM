@@ -40,8 +40,8 @@ export class FormEditObrasComponent implements OnInit{
 
   submitForm(form: NgForm){
     const id = this.obra.id;
-    const {name, precio, titulo, estado, estilo, img } = form.value;
-    this.obrasService.editObra(id, name, precio, titulo, estado, estilo, img).subscribe(() => {
+    const {name, precio, estado, estilo } = form.value;
+    this.obrasService.editObra(id, name, precio, estado, estilo).subscribe(() => {
       this.router.navigate(['/obras']);
     })
   }

@@ -134,12 +134,10 @@ public class ObrasService {
 
         return obrasRepository.findById(id)
                 .map(obras -> {
-                    obras.setTitulo(edit.getTitulo());
                     obras.setEstado(edit.getEstado());
                     obras.setPrecio(edit.getPrecio());
                    // obras.setCategoria(edit.getCategoria());
                     obras.setName(edit.getName());
-                    obras.setImg(edit.getImg());
                    // obras.setImaginero(edit.getImaginero());
 
                     return obrasRepository.save(obras);

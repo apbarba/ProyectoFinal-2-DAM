@@ -1,69 +1,72 @@
+<div class="container">
+  <div class="center-container">
+    <mat-card class="card-container">
+      <h2 class="form-title">Nueva Obra</h2>
+      <form #editForm="ngForm" (ngSubmit)="agregarObra()" class="form-container">
 
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>Nueva Obra</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-    
-        <form #editForm="ngForm" (ngSubmit)="agregarObra()">
+        <p>
+          <mat-form-field appearance="fill">
+            <mat-label>Titulo</mat-label>
+            <input matInput placeholder="Titulo" name="titulo" [(ngModel)]="nuevaObra.titulo" required>
+          </mat-form-field>
+        </p>
 
-          <p>
-        <mat-form-field>
-          <input matInput placeholder="Titulo" name="titulo" [(ngModel)]="nuevaObra.titulo" required>
+        <p>
+          <mat-form-field appearance="fill">
+            <mat-label>Nombre</mat-label>
+            <input matInput placeholder="Nombre" name="name" [(ngModel)]="nuevaObra.name" required>
+          </mat-form-field>
+        </p>
+
+        <p>
+          <mat-form-field appearance="fill">
+            <mat-label>Estilo</mat-label>
+            <input matInput placeholder="Estilo" name="estilo" [(ngModel)]="nuevaObra.estilo" required>
+          </mat-form-field>
+        </p>
+
+        <p>
+          <mat-form-field appearance="fill">
+            <mat-label>Estado</mat-label>
+            <input matInput placeholder="Estado" name="estado" [(ngModel)]="nuevaObra.estado" required>
+          </mat-form-field>
+        </p>
+
+        <p>
+          <mat-form-field appearance="fill">
+            <mat-label>Fecha</mat-label>
+            <input matInput placeholder="Fecha" name="fecha" [(ngModel)]="nuevaObra.fecha" required>
+          </mat-form-field>
+        </p>
+
+        <p>
+          <mat-form-field appearance="fill">
+            <mat-label>Img</mat-label>
+            <input matInput placeholder="Img" name="img" [(ngModel)]="nuevaObra.img">
+          </mat-form-field>
+        </p>
+
+        <p>
+          <mat-form-field appearance="fill">
+            <mat-label>Precio</mat-label>
+            <input matInput placeholder="Precio" name="precio" [(ngModel)]="nuevaObra.precio" required>
+          </mat-form-field>
+        </p>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Categoria</mat-label>
+          <mat-select [(ngModel)]="nuevaObra.categoria" name="categoria">
+            <mat-option *ngFor="let c of categorias" [value]="c.id">
+              {{c.nombre}}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
-      </p>
 
-      <p>
-        <mat-form-field>
-          <input matInput placeholder="Nombre" name="name" [(ngModel)]="nuevaObra.name" required>
-        </mat-form-field>
-      </p>
-
-      <p>
-        <mat-form-field>
-          <input matInput placeholder="Estilo" name="estilo" [(ngModel)]="nuevaObra.estilo" required>
-        </mat-form-field>
-      </p>
-
-      <p>
-        <mat-form-field>
-          <input matInput placeholder="Estado" name="estado" [(ngModel)]="nuevaObra.estado" required>
-        </mat-form-field>
-      </p>
-
-      <p>
-        <mat-form-field>
-          <input matInput placeholder="Fecha" name="fecha" [(ngModel)]="nuevaObra.fecha" required>
-        </mat-form-field>
-      </p>
-
-      <p>
-        <mat-form-field>
-          <input matInput placeholder="Img" name="img" [(ngModel)]="nuevaObra.img">
-        </mat-form-field>
-      </p>
-
-      <p>
-        <mat-form-field>
-          <input matInput placeholder="Precio" name="precio" [(ngModel)]="nuevaObra.precio" required>
-        </mat-form-field>
-      </p>
-
-
-      <mat-form-field appearance="fill">
-        <mat-label>Cateroria</mat-label>
-        <mat-select [(ngModel)]="nuevaObra.categoria" name="categoria">
-          <mat-option *ngFor="let c of categorias" [value]="c.id">
-            {{c.nombre}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      
-      <div>
-        <button mat-raised-button color="primary" type="submit">Crear</button>
-        <button mat-raised-button routerLink="/obras">Cancelar</button>
-      </div>
-     
-    </form>
-    </mat-card-content>
-  </mat-card>
+        <div class="button-container">
+          <button mat-raised-button color="primary" type="submit">Crear</button>
+          <button mat-raised-button routerLink="/obras" class="cancel-button">Cancelar</button>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+</div>

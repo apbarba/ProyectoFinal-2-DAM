@@ -13,8 +13,12 @@
 
 <a class="btn-flotante" routerLink="/agregar-obra"><img src="../../../assets/image/nuevaObra.png"> </a>
 
-<input [(ngModel)]="nombreBusqueda" placeholder="Nombre de la obra">
-<button (click)="buscarObraPorNombre(nombreBusqueda)">Buscar</button>
+<div class="search-container">
+  <input [(ngModel)]="nombreBusqueda" class="search-input" placeholder="Buscar obra">
+  <button class="search-button" (click)="buscarObraPorNombre(nombreBusqueda)">
+    <mat-icon>search</mat-icon>
+  </button>
+</div>
 
 <div class="grid-container" infiniteScroll (scrolled)="loadMore()">
   <div class="card-container" *ngFor="let obra of obras; let i = index">

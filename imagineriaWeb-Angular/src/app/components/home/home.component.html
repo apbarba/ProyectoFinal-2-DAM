@@ -17,101 +17,44 @@
   </ng-container>
 </mat-toolbar>
 
-<!--
-<section class="container">
-  <div class="box">
-    <img src="https://media.gettyimages.com/id/164792129/es/foto/a-woman-wearing-the-traditional-mantilla-walks-under-the-macarena-arch-during-the-holy-week-in.jpg?s=612x612&w=0&k=20&c=HqeGuIkRbkpkd07vSTzIa1i25EcLODUnbOppa-emA2M=" alt="">
-    <div class="overlay">
-      <h2>Categorias</h2>
-      <p>Descubre las categorias que tenemos</p>
+
+<ngb-carousel>
+  <ng-template ngbSlide>
+    <div class="img-container">
+      <div class="img-wrapper">
+      <img src="https://cinturondeesparto.com/0.1/wp-content/uploads/2019/06/65150706_383043265896822_3760058368010485760_n-800x402.jpg" alt="Random first slide">
     </div>
-    <div class="content">
-      <h3>Categorias</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut auctor, risus nec sagittis bibendum, elit massa bibendum ante, sit amet malesuada arcu quam id mi. Fusce malesuada mollis leo, a lacinia nisi vestibulum ut.</p>
     </div>
-  </div>
-  <div class="box">
-    <img src="https://media.gettyimages.com/id/157558894/es/foto/proceso-activo.jpg?s=612x612&w=0&k=20&c=lgPw4jva5f-3YjuiQIGby201Z4Ni6-WSTWp7qQ7P1GU=" alt="">
-    <div class="overlay">
-      <h2>Obras</h2>
-      <p>Descubre las obras que tenemos</p>
+    <div class="carousel-caption">
+      <h3>First slide label</h3>
+      <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
     </div>
-    <div class="content">
-      <h3>Obras</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut auctor, risus nec sagittis bibendum, elit massa bibendum ante, sit amet malesuada arcu quam id mi. Fusce malesuada mollis leo, a lacinia nisi vestibulum ut.</p>
+  </ng-template>
+  <ng-template ngbSlide>
+    <div class="img-container">
+      <div class="img-wrapper">
+      <img src="https://fotografias.larazon.es/clipping/cmsimages02/2019/08/07/075EC183-CFA7-42E0-B0A2-6793E86CCB11/60.jpg?crop=1031,580,x0,y53&width=640&height=360&optimize=medium&format=webply" alt="Random second slide">
     </div>
-  </div>
-  <div class="box">
-    <img src="https://i.pinimg.com/originals/36/56/d1/3656d131935c8cf18aadc075d1099999.jpg" alt="">
-    <div class="overlay">
-      <h2>Imagineros</h2>
-      <p>Descubre los imagineros que tenemos</p>
     </div>
-    <div class="content">
-      <h3>Imagineros</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut auctor, risus nec sagittis bibendum, elit massa bibendum ante, sit amet malesuada arcu quam id mi. Fusce malesuada mollis leo, a lacinia nisi vestibulum ut.</p>
+    <div class="carousel-caption">
+      <h3>Second slide label</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
     </div>
-  </div>
-  <div class="phrases">
-    <div>
-      <p>Frase 1</p>
+  </ng-template>
+  <ng-template ngbSlide>
+    <div class="img-container">
+      <div class="img-wrapper">
+      <img src="https://www.diariodesevilla.es/2021/03/26/galerias_graficas/imagenes-Presentacion-Mantilla_1559254696_136102757_1920x1080.jpg" alt="Random third slide">
     </div>
-    <div>
-      <p>Frase 2</p>
     </div>
-    <div>
-      <p>Frase 3</p>
+    <div class="carousel-caption">
+      <h3>Third slide label</h3>
+      <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
     </div>
-  </div>
-</section>-->
+  </ng-template>
+</ngb-carousel>
 
 
-<div id="carouselMaterialStyle" class="carousel slide carousel-fade" data-mdb-ride="carousel">
-  <div class="carousel-indicators">
-    <button type="button" data-mdb-target="#carouselMaterialStyle" data-mdb-slide-to="0" class="active" aria-current="true"
-      aria-label="Slide 1"></button>
-    <button type="button" data-mdb-target="#carouselMaterialStyle" data-mdb-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-mdb-target="#carouselMaterialStyle" data-mdb-slide-to="2" aria-label="Slide 3"></button>
-  </div>
-
-  <div class="carousel-inner rounded-5 shadow-4-strong">
-    <div class="carousel-item active">
-      <img src="https://mdbcdn.b-cdn.net/img/Photos/Slides/img%20(15).webp" class="d-block w-100"
-        alt="Sunset Over the City" />
-      <div class="carousel-caption d-none d-md-block">
-        <h5>First slide label</h5>
-        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-      </div>
-    </div>
-
-    <div class="carousel-item">
-      <img src="https://mdbcdn.b-cdn.net/img/Photos/Slides/img%20(22).webp" class="d-block w-100"
-        alt="Canyon at Nigh" />
-      <div class="carousel-caption d-none d-md-block">
-        <h5>Second slide label</h5>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-      </div>
-    </div>
-
-    <div class="carousel-item">
-      <img src="https://mdbcdn.b-cdn.net/img/Photos/Slides/img%20(23).webp" class="d-block w-100"
-        alt="Cliff Above a Stormy Sea" />
-      <div class="carousel-caption d-none d-md-block">
-        <h5>Third slide label</h5>
-        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-      </div>
-    </div>
-  </div>
-
-  <button class="carousel-control-prev" type="button" data-mdb-target="#carouselMaterialStyle" data-mdb-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-mdb-target="#carouselMaterialStyle" data-mdb-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
 
 
 
