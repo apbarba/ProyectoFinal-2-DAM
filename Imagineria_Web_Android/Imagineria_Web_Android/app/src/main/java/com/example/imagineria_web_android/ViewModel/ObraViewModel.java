@@ -30,10 +30,19 @@ public class ObraViewModel extends AndroidViewModel {
 
     private MutableLiveData<List<Categoria>> categoriasList;
     private int currentPage = 0;
+    private MutableLiveData<List<Obra>> searchResultsList = new MutableLiveData<>();
+    private String lastSearchQuery = "";
+
+    private boolean isLoading = false;
+    private boolean isSearching = false;
+    private String lastSearch = "";
     private MutableLiveData <Obra> obra;
     private MutableLiveData<Boolean> isFavorited = new MutableLiveData<>();
     private final MutableLiveData<List<Obra>> favoritosLiveData = new MutableLiveData<>();
 
+    public LiveData<List<Obra>> getSearchResultsList() {
+        return searchResultsList;
+    }
 
     public LiveData<List<Obra>> getFavoritos() {
         return favoritosLiveData;
@@ -64,24 +73,34 @@ public class ObraViewModel extends AndroidViewModel {
     }
 
     public void loadObras() {
-        ObraApi apiInterface = RetrofitInstance.getRetrofitInstance(getApplication().getApplicationContext()).create(ObraApi.class);
-        Call<ObrasResponse> call = apiInterface.getObras(currentPage);
-        call.enqueue(new Callback<ObrasResponse>() {
-            @Override
-            public void onResponse(Call<ObrasResponse> call, Response<ObrasResponse> response) {
-                ObrasResponse obraResponse = response.body();
-                if (obraResponse != null && obraResponse.getContent() != null) {
-                    obrasList.postValue(obraResponse.getContent());
-                    currentPage++; // Incrementar la página actual
+        if (!isSearching) {
+            ObraApi apiInterface = RetrofitInstance.getRetrofitInstance(getApplication().getApplicationContext()).create(ObraApi.class);
+            Call<ObrasResponse> call = apiInterface.getObras(currentPage);
+            call.enqueue(new Callback<ObrasResponse>() {
+                @Override
+                public void onResponse(Call<ObrasResponse> call, Response<ObrasResponse> response) {
+                    ObrasResponse obraResponse = response.body();
+                    if (obraResponse != null && obraResponse.getContent() != null) {
+                        List<Obra> currentObras = obrasList.getValue();
+                        if (currentObras == null) {
+                            currentObras = new ArrayList<>();
+                        }
+                        currentObras.addAll(obraResponse.getContent());
+                        obrasList.postValue(currentObras);
+                        currentPage++; // Incrementar la página actual
+                        isLoading = false; // Se han cargado las obras, ya no se está cargando
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(Call<ObrasResponse> call, Throwable t) {
-                // Manejo de errores
-            }
-        });
+                @Override
+                public void onFailure(Call<ObrasResponse> call, Throwable t) {
+                    // Manejo de errores
+                    isLoading = false; // Ocurrió un error, ya no se está cargando
+                }
+            });
+        }
     }
+
 
     public void createObra(Obra newObra){
         ObraApi apiInterface = RetrofitInstance.getRetrofitInstance(getApplication().getApplicationContext()).create(ObraApi.class);
@@ -243,6 +262,8 @@ public class ObraViewModel extends AndroidViewModel {
     }
 
     public void loadObrasByName(String obraName) {
+        lastSearchQuery = obraName;
+
         ObraApi apiInterface = RetrofitInstance.getRetrofitInstance(getApplication().getApplicationContext()).create(ObraApi.class);
         Call<List<Obra>> call = apiInterface.getObrasByName(obraName);
         call.enqueue(new Callback<List<Obra>>() {
@@ -250,8 +271,7 @@ public class ObraViewModel extends AndroidViewModel {
             public void onResponse(Call<List<Obra>> call, Response<List<Obra>> response) {
                 List<Obra> obraResponse = response.body();
                 if (obraResponse != null) {
-                    obrasList.postValue(obraResponse);
-                    currentPage = 1; // Resetear la página actual
+                    searchResultsList.postValue(obraResponse);
                 }
             }
 
@@ -263,6 +283,8 @@ public class ObraViewModel extends AndroidViewModel {
     }
 
 
-
-
+    public void clearSearchResults() {
+        lastSearchQuery = "";
+        searchResultsList.postValue(null);
+    }
 }

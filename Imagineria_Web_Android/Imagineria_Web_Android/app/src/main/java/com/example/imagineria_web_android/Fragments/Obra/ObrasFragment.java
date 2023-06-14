@@ -40,7 +40,7 @@ public class ObrasFragment extends Fragment {
 
         // Inicializar RecyclerView y Adapter
         obraRecyclerView = view.findViewById(R.id.obrasRecyclerView);
-        obraAdapter = new ObrasAdapter(new ArrayList<>());
+        obraAdapter = new ObrasAdapter(new ArrayList<>(), obraViewModel);
         obraRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         obraRecyclerView.setAdapter(obraAdapter);
         searchEditText = view.findViewById(R.id.searchObra);
@@ -70,18 +70,23 @@ public class ObrasFragment extends Fragment {
         });
 
         obraViewModel.getObrasList().observe(getViewLifecycleOwner(), obras -> {
-            // Actualizar UI
             obraAdapter.replaceData(obras);
         });
 
-        // Cargar obras
         obraViewModel.loadObras();
 
-        // Observar cambios
         obraViewModel.getObrasList().observe(getViewLifecycleOwner(), obras -> {
-            // Actualizar UI
-            obraAdapter.updateData(obras);
-        //    obraAdapter.notifyDataSetChanged();
+            if (obraViewModel.getSearchResultsList().getValue() == null || obraViewModel.getSearchResultsList().getValue().isEmpty()) {
+                // No hay resultados de búsqueda, mostrar lista completa de obras
+                obraAdapter.replaceData(obras);
+            }
+        });
+
+        obraViewModel.getSearchResultsList().observe(getViewLifecycleOwner(), searchResults -> {
+            if (!searchResults.isEmpty()) {
+                // Mostrar resultados de búsqueda
+                obraAdapter.replaceData(searchResults);
+            }
         });
 
         FloatingActionButton fabNavigationToPostObra = view.findViewById(R.id.add_obra);

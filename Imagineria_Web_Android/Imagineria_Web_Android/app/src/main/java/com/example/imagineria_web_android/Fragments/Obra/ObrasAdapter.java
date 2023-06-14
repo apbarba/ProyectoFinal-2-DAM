@@ -17,14 +17,19 @@ import com.example.imagineria_web_android.GlideApp;
 import com.example.imagineria_web_android.Model.Obras.Obra;
 import com.example.imagineria_web_android.R;
 import com.example.imagineria_web_android.RetrofitInstance;
+import com.example.imagineria_web_android.ViewModel.ObraViewModel;
 
 import java.util.List;
 
 public class ObrasAdapter extends RecyclerView.Adapter<ObrasAdapter.ObraViewHolder>{
     private List<Obra> obras;
+    private ObraViewModel obraViewModel;
+    private boolean isLoading = false;
 
-    ObrasAdapter(List<Obra> obras) {
+
+    ObrasAdapter(List<Obra> obras, ObraViewModel obraViewModel) {
         this.obras = obras;
+        this.obraViewModel = obraViewModel;
     }
 
     @NonNull
@@ -36,6 +41,13 @@ public class ObrasAdapter extends RecyclerView.Adapter<ObrasAdapter.ObraViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ObraViewHolder holder, int position) {
+        if (position == obras.size() - 1 && !isLoading) {
+            // Se ha llegado al final de la lista y no se está cargando
+            // más obras, así que cargamos las siguientes.
+            isLoading = true;
+            obraViewModel.loadObras();
+        }
+
         Obra obra = obras.get(position);
         String id = obra.getId();
 
