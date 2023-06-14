@@ -54,6 +54,7 @@ export class ObrasComponent implements OnInit {
     this.router.navigate(['/obras/editar', id]);
   }
 
+  //Lo que hago aquí es que necesito encontrar el indice de la obra para poder eliminar su imagen también cuando se elimine esta, por lo que utilizo ese indice para eliminar su img
   eliminar(id: string) {
     if (confirm('¿Está seguro de eliminar esta obra?')) {
       this.obrasService.deleteObra(id).subscribe(() => {
