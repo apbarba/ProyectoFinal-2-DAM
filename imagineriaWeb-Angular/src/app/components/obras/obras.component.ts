@@ -40,7 +40,6 @@ export class ObrasComponent implements OnInit {
     this.obrasService.getAllObras(this.page).subscribe((data: any) => {
       const newObras = data.content as Obra[];
 
-      // Construir la URL completa de la imagen
       for (let obra of newObras) {
         const imageUrl = `http://localhost:8080/${obra.img}`;
         this.imageUrls.push(imageUrl);
@@ -58,11 +57,16 @@ export class ObrasComponent implements OnInit {
   eliminar(id: string) {
     if (confirm('¿Está seguro de eliminar esta obra?')) {
       this.obrasService.deleteObra(id).subscribe(() => {
-        // Actualizamos el array de obras para excluir la obra que se ha eliminado.
-        this.obras = this.obras.filter(obra => obra.id !== id);
+        const index = this.obras.findIndex(obra => obra.id === id);
+  
+        if (index !== -1) {
+          this.obras.splice(index, 1);
+          this.imageUrls.splice(index, 1);
+        }
       });
     }
   }
+  
   
   toggleFavorito(obra: any) {
     obra.favorito = !obra.favorito;
