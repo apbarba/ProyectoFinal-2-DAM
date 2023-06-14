@@ -50,7 +50,7 @@ public class PutObraFragment extends Fragment {
             obraActual = obra;
 
             putNombre.setText(obra.getName());
-          //  Double.parseDouble(putPrecio.setText(obra.getPrecio()));
+            putPrecio.setText(String.valueOf(obra.getPrecio()));
             putEstado.setText(obra.getEstado());
             putEstilo.setText(obra.getEstilo());
 
@@ -58,7 +58,17 @@ public class PutObraFragment extends Fragment {
 
         btn_editar.setOnClickListener(v -> {
             String nuevoNombre = putNombre.getText().toString();
+            String nuevoPrecioPor = putPrecio.getText().toString();
+
             double nuevoPrecio = Double.parseDouble(putPrecio.getText().toString());
+            if (!nuevoPrecioPor.isEmpty()) {
+                try {
+                    nuevoPrecio = Double.parseDouble(nuevoPrecioPor);
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                }
+            }
+
             String nuevoEstado = putEstado.getText().toString();
             String nuevoEstilo = putEstilo.getText().toString();
 
@@ -68,7 +78,7 @@ public class PutObraFragment extends Fragment {
             obraActual.setEstilo(nuevoEstilo);
 
             obraViewModel.updateObra(obraActual.getId(), obraActual);
-            Navigation.findNavController(v).navigate(R.id.action_put_obra_to_navigation_obraDetalles);
+            Navigation.findNavController(v).navigate(R.id.navigation_obras);
         });
 
         btn_cancelar.setOnClickListener(v -> {

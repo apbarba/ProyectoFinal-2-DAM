@@ -54,7 +54,7 @@ public class PutCategoriaFragment extends Fragment {
             categoriaActual.setDescripcion(nuevaDescripcion);
 
             categoriaViewModel.updateCategoria(categoriaActual.getId(), categoriaActual);
-            Navigation.findNavController(v).navigate(R.id.action_put_categoria_to_navigation_categoriaDetalle);
+            Navigation.findNavController(v).navigate(R.id.navigation_categorias);
         });
 
         btnCancelar.setOnClickListener(v -> {
