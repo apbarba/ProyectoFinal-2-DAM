@@ -109,13 +109,11 @@ public class ImagineroViewModel extends AndroidViewModel {
             public void onResponse(Call<Imaginero> call, Response<Imaginero> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     imaginero.postValue(response.body());
-                    //Aquí también puedes actualizar la lista de Imagineros, si es necesario.
                 }
             }
 
             @Override
             public void onFailure(Call<Imaginero> call, Throwable t) {
-                //Los mensajes o manejo de errores aqui
             }
         });
     }
@@ -127,13 +125,11 @@ public class ImagineroViewModel extends AndroidViewModel {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    //Aquí puedes hacer algo cuando la eliminación fue exitosa, por ejemplo, actualizar la lista de Imagineros.
                 }
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                //Los mensajes o manejo de errores aquí.
             }
         });
     }

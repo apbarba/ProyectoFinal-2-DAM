@@ -45,15 +45,7 @@ public class HomeActivity extends AppCompatActivity {
 
         NavigationUI.setupActionBarWithNavController(this, navController);
 
-      /*  ImageButton profileButton = findViewById(R.id.profileButton);
-        profileButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Limpia la pila de back stack antes de navegar al fragmento de perfil
-                navController.popBackStack(R.id.navigatio_home, false);
-                navController.navigate(R.id.navigation_profile);
-            }
-        });*/
+
     }
 
 }

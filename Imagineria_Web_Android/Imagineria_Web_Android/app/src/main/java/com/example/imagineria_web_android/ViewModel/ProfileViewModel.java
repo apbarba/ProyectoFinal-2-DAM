@@ -47,13 +47,11 @@ public class ProfileViewModel extends AndroidViewModel {
                 if (response.isSuccessful()) {
                     avatarChangeResponse.postValue(response.body());
                 } else {
-                    // Manejar el error de alguna manera
                 }
             }
 
             @Override
             public void onFailure(Call<AvatarChangeResponse> call, Throwable t) {
-                // Manejar el error de alguna manera
             }
         });
     }
@@ -79,7 +77,6 @@ public class ProfileViewModel extends AndroidViewModel {
                 }
             });
         } else {
-            // Manejar el caso de userService nulo
             userProfileLiveData.setValue(Optional.empty());
         }
 
@@ -97,15 +94,13 @@ public class ProfileViewModel extends AndroidViewModel {
                     User user = response.body();
                     userLiveData.setValue(user);
                 } else {
-                    // La solicitud no fue exitosa
-                    // Manejar el caso de error, por ejemplo, mostrar un mensaje de error al usuario
+
                 }
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                // Ocurrió un error en la comunicación con el servidor
-                // Manejar el caso de error, por ejemplo, mostrar un mensaje de error al usuario
+
             }
         });
 

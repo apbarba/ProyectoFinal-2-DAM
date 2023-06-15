@@ -69,7 +69,6 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    //Guarda el token en las Preference
     private void saveToken(String token) {
         SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -77,7 +76,6 @@ public class LoginActivity extends AppCompatActivity {
         editor.apply();
     }
 
-    //Guarda el id del User
     private void saveUserId(String userId) {
         SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();

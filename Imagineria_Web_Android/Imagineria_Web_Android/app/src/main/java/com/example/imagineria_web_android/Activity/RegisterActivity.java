@@ -78,22 +78,22 @@ public class RegisterActivity extends AppCompatActivity {
 
         private boolean validateInputs(String username, String email, String password, String verifyPassword) {
             if (TextUtils.isEmpty(username)) {
-                usernameEditText.setError("Username is required");
+                usernameEditText.setError("Username es obligatorio");
                 return false;
             }
 
             if (TextUtils.isEmpty(email)) {
-                emailEditText.setError("Email is required");
+                emailEditText.setError("Email es obligatorio");
                 return false;
             }
 
             if (TextUtils.isEmpty(password)) {
-                passwordEditText.setError("Password is required");
+                passwordEditText.setError("Password es obligatorio");
                 return false;
             }
 
             if (!password.equals(verifyPassword)) {
-                verifyPasswordEditText.setError("Passwords do not match");
+                verifyPasswordEditText.setError("");
                 return false;
             }
 
@@ -110,14 +110,11 @@ public class RegisterActivity extends AppCompatActivity {
 
                     if (response.isSuccessful()) {
                         RegisterResponse registerResponse = response.body();
-                        // Registro exitoso, realizar las acciones necesarias (por ejemplo, guardar el token)
 
-                        // Redirigir al LoginActivity
                         Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                         startActivity(intent);
                         finish();
                     } else {
-                        // Error en el registro, mostrar un mensaje de error
                         Toast.makeText(RegisterActivity.this, "Registration failed", Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -125,7 +122,6 @@ public class RegisterActivity extends AppCompatActivity {
                 @Override
                 public void onFailure(Call<RegisterResponse> call, Throwable t) {
                     progressBar.setVisibility(View.GONE);
-                    // Error en la comunicación con el servidor, mostrar un mensaje de error
                     Toast.makeText(RegisterActivity.this, "Registration failed", Toast.LENGTH_SHORT).show();
                 }
             });

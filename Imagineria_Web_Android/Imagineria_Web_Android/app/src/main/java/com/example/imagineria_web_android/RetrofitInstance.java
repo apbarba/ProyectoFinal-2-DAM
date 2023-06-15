@@ -24,7 +24,6 @@ public class RetrofitInstance {
                     .addInterceptor(loggingInterceptor)
                     .addInterceptor(chain -> {
                         Request original = chain.request();
-                        // Obtenemos el token de las SharedPreferences para cada solicitud
                         SharedPreferences sharedPreferences = context.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
                         String token = sharedPreferences.getString("token", "");
                         Log.d("RetrofitInstance", "token: " + token);

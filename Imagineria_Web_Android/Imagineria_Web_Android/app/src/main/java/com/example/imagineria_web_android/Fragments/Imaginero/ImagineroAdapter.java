@@ -52,7 +52,6 @@ public class ImagineroAdapter extends RecyclerView.Adapter<ImagineroAdapter.Imag
                 Bundle args = new Bundle();
                 args.putString("id", id);
 
-                // Navega al fragmento de detalles con el ID como argumento
                 Navigation.findNavController(v)
                         .navigate(R.id.action_navigation_imagineros_to_navigation_imaginero_detalle, args);
             }

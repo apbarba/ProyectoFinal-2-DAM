@@ -62,7 +62,6 @@ public class ImagineroDetalleFragment extends Fragment {
                         bundle.putString("localidad", imaginero.getLocalidad());
                         bundle.putInt("edad", imaginero.getEdad());
 
-                        // Aquí debes reemplazar "action_id" por la acción real que lleva al fragmento de edición
                         Navigation.findNavController(v).navigate(R.id.navigation_put_imaginero, bundle);
                     }
                 }
@@ -73,7 +72,6 @@ public class ImagineroDetalleFragment extends Fragment {
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Aquí redirige al fragmento "ImaginerosFragment"
                 Navigation.findNavController(v).navigate(R.id.navigation_imagineros);
             }
         });
@@ -86,7 +84,6 @@ public class ImagineroDetalleFragment extends Fragment {
                 if (imaginero != null) {
                     imagineroViewModel.deleteImaginero(imaginero.getId());
 
-                    // Aquí redirige al fragmento "ImaginerosFragment"
                     Navigation.findNavController(v).navigate(R.id.navigation_imagineros);
                 }
             }

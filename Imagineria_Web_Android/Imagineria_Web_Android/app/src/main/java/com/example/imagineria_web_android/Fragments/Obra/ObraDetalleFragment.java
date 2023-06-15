@@ -45,8 +45,7 @@ public class ObraDetalleFragment extends Fragment {
 
         if (getArguments() != null){
             String id = getArguments().getString("id");
-            String imageUrl = getArguments().getString("imagen"); // Recuperas la URL de la imagen
-
+            String imageUrl = getArguments().getString("imagen");
             ImageView imageView = view.findViewById(R.id.imgObrasDetalles);
             Glide.with(this)
                     .load(imageUrl)

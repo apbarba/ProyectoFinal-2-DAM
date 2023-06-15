@@ -54,7 +54,6 @@ public class PostObraFragment extends Fragment {
         btnCancelar = view.findViewById(R.id.btn_cancelar_obra);
         Spinner spinnerCategorias = view.findViewById(R.id.spinner_categorias);
 
-      //  ViewModelProvider.Factory factory = (ViewModelProvider.Factory) new ViewModelProvider.NewInstanceFactory();
 
         ObraViewModel viewModel = new ViewModelProvider(this).get(ObraViewModel.class);
 
@@ -75,7 +74,7 @@ public class PostObraFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 categoriaSeleccionada = categorias.get(position);
-                obra.setCategoria(categoriaSeleccionada.getId().toString()); // Aquí asigna el ID como una cadena
+                obra.setCategoria(categoriaSeleccionada.getId().toString());
             }
 
             @Override

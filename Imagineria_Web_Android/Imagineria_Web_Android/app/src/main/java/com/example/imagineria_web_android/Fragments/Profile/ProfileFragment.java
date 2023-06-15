@@ -58,6 +58,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * En este fragmento realizamos el manejo de las peticiones junto con las acciones de los
+ * botones y el que ocurrirá
+ */
 public class ProfileFragment extends Fragment {
 
     private static final int PERMISSION_REQUEST_CODE = 1;
@@ -74,7 +78,6 @@ public class ProfileFragment extends Fragment {
 
 
     public ProfileFragment() {
-        // Required empty public constructor
     }
 
     @Override
@@ -88,6 +91,10 @@ public class ProfileFragment extends Fragment {
         userService = RetrofitInstance.getRetrofitInstance(requireContext()).create(UserApi.class);
         viewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
 
+        /**
+         * Al pulsar el botón de changeAvatar, se nos abrirá la galeria del movil para poder elegir la imagen que
+         * queremos cambiar
+         */
         buttonUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,14 +103,28 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        /**
+         * Aquí llamamos la petición realizada en el viewmodel para la carga de las imágenes en la vista
+         * utilizando la llamada de la api en la que mientras que no se suba nasa, hemos utilizado
+         * la libreria de Picasso para cargar las imágenes y la imagen por defecto
+         */
         viewModel.getAvatarChangeResponse().observe(getViewLifecycleOwner(), response -> {
             if (response != null) {
                 String avatarUrl = RetrofitInstance.BASE_URL + "download/" + response.getAvatarFilename();
-                Picasso.get().load(avatarUrl).into(avatarImageView);
+                Picasso.get().load(avatarUrl).placeholder(R.drawable.perfilmuestra).into(avatarImageView);
+
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putString("avatarUrl", avatarUrl);
+                editor.apply();
             } else {
                 Toast.makeText(getActivity(), "Error al cambiar el avatar", Toast.LENGTH_SHORT).show();
             }
         });
+
+        /**
+         * Al pulsar el botón, nos lleva al fragment donde se hará el cambio de la contraseña
+         * al introducir los campor correctamente
+         */
 
         Button cambiarContrasenaButton = rootView.findViewById(R.id.changeAPassword);
         cambiarContrasenaButton.setOnClickListener(new View.OnClickListener() {
@@ -122,12 +143,16 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        /**
+         * Nos lleva al fragment donde se muestra la lista de las obras favoritas que tiene el usuario
+         * logueaso
+         */
         Button favoritosButton = rootView.findViewById(R.id.btn_ver_fav);
         favoritosButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 NavController navController = Navigation.findNavController(v);
-                navController.navigate(R.id.action_profile_to_listaFav); // Cambia "navigation_favoritos" al id de tu FavoritosFragment en el nav_graph
+                navController.navigate(R.id.action_profile_to_listaFav);
             }
         });
 
@@ -163,7 +188,7 @@ public class ProfileFragment extends Fragment {
             MultipartBody.Part body = MultipartBody.Part.createFormData("file", file.getName(), requestFile);
 
             userId = sharedPref.getString("user_id", "");
-            viewModel.changeAvatar(userId, body); // Asegúrate de obtener el userId correctamente
+            viewModel.changeAvatar(userId, body);
         }
     }
 
@@ -175,12 +200,15 @@ public class ProfileFragment extends Fragment {
                 Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(intent, PICK_IMAGE_REQUEST);
             } else {
-                // handle permission denied case
             }
         }
     }
 
 
+    /**
+     * Nos muestra la información del usuario
+     * @param userId
+     */
     private void getUserProfile(String userId) {
         userService.getUserProfile(userId).enqueue(new Callback<Optional<User>>() {
             @Override
@@ -199,10 +227,8 @@ public class ProfileFragment extends Fragment {
                                 .load(avatarUrl)
                                 .into(avatarImageView);
                     } else {
-                        // handle case when user is not present in the response
                     }
                 } else {
-                    // handle error response
                 }
             }
 
@@ -214,7 +240,6 @@ public class ProfileFragment extends Fragment {
     }
 
     private void logout() {
-        // Eliminar el token y otros datos de sesión guardados en SharedPreferences
         SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.remove("token");
@@ -222,7 +247,6 @@ public class ProfileFragment extends Fragment {
         editor.remove("password");
         editor.apply();
 
-        // Navegar al LoginActivity
         Intent intent = new Intent(requireContext(), LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);

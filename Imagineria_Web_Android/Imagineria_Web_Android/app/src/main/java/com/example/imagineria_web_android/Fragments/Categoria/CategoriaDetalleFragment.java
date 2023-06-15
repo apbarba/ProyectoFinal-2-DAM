@@ -56,7 +56,7 @@ public class CategoriaDetalleFragment extends Fragment {
                 public void onChanged(Categoria categoria) {
                     nombreCategoria.setText(categoria.getNombre());
                     descripcionCategoria.setText(categoria.getDescripcion());
-                    obrasCategoriaAdapter.setObras(categoria.getObras()); //Vamos a probar si funciona esto, que tiene pinta de aparecer solamente el total de obras que tiene
+                    obrasCategoriaAdapter.setObras(categoria.getObras());
                 }
             });
 

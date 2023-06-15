@@ -39,11 +39,17 @@ public class ObrasAdapter extends RecyclerView.Adapter<ObrasAdapter.ObraViewHold
         return new ObraViewHolder(view);
     }
 
+    /**
+     * El método del view holder es para tratar los elementode dentro de un recyclerview, por
+     * lo que se realiza con el isLoading es que cuando se llega al final de la página
+     * se carguen las 10 obras siguiente como indico en la API
+     * @param holder The ViewHolder which should be updated to represent the contents of the
+     *        item at the given position in the data set.
+     * @param position The position of the item within the adapter's data set.
+     */
     @Override
     public void onBindViewHolder(@NonNull ObraViewHolder holder, int position) {
         if (position == obras.size() - 1 && !isLoading) {
-            // Se ha llegado al final de la lista y no se está cargando
-            // más obras, así que cargamos las siguientes.
             isLoading = true;
             obraViewModel.loadObras();
         }

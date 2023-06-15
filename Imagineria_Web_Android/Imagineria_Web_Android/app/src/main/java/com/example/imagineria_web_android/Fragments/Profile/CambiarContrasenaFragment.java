@@ -48,20 +48,16 @@ public class CambiarContrasenaFragment extends Fragment {
                 String newPassword = newPasswordEditText.getText().toString();
                 String verifyPassword = verifyPasswordEditText.getText().toString();
 
-                // Verificar que la contraseña actual coincida con la almacenada
                 if (verifyCurrentPassword(oldPassword)) {
                     profileViewModel.changePassword(oldPassword, newPassword, verifyPassword).observe(getViewLifecycleOwner(), user -> {
                         if (user != null) {
-                            // La contraseña se cambió correctamente
                             Toast.makeText(getContext(), "Contraseña cambiada exitosamente", Toast.LENGTH_SHORT).show();
                             Navigation.findNavController(v).navigate(R.id.action_put_password_to_navigate_profile);
                         } else {
-                            // La solicitud no fue exitosa
                             Toast.makeText(getContext(), "Error al cambiar la contraseña", Toast.LENGTH_SHORT).show();
                         }
                     });
                 } else {
-                    // La contraseña actual no coincide con la almacenada
                     Toast.makeText(getContext(), "Contraseña actual incorrecta", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -76,17 +72,14 @@ public class CambiarContrasenaFragment extends Fragment {
             }
         });
 
-        // Obtener una instancia de ProfileViewModel
         profileViewModel = new ViewModelProvider(requireActivity()).get(ProfileViewModel.class);
 
-        // Obtener la contraseña almacenada desde SharedPreferences
         storedPassword = getStoredPasswordFromPreferences();
 
         return view;
     }
 
     private boolean verifyCurrentPassword(String currentPassword) {
-        // Verificar que la contraseña actual coincida con la almacenada
         return currentPassword.equals(storedPassword);
     }
 

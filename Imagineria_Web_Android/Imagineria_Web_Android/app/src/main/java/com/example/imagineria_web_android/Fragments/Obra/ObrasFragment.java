@@ -32,13 +32,10 @@ public class ObrasFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflar la vista del fragmento
         View view = inflater.inflate(R.layout.fragment_obras, container, false);
 
-        // Inicializar ViewModel
         obraViewModel = new ViewModelProvider(this).get(ObraViewModel.class);
 
-        // Inicializar RecyclerView y Adapter
         obraRecyclerView = view.findViewById(R.id.obrasRecyclerView);
         obraAdapter = new ObrasAdapter(new ArrayList<>(), obraViewModel);
         obraRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -77,14 +74,12 @@ public class ObrasFragment extends Fragment {
 
         obraViewModel.getObrasList().observe(getViewLifecycleOwner(), obras -> {
             if (obraViewModel.getSearchResultsList().getValue() == null || obraViewModel.getSearchResultsList().getValue().isEmpty()) {
-                // No hay resultados de búsqueda, mostrar lista completa de obras
                 obraAdapter.replaceData(obras);
             }
         });
 
         obraViewModel.getSearchResultsList().observe(getViewLifecycleOwner(), searchResults -> {
             if (!searchResults.isEmpty()) {
-                // Mostrar resultados de búsqueda
                 obraAdapter.replaceData(searchResults);
             }
         });

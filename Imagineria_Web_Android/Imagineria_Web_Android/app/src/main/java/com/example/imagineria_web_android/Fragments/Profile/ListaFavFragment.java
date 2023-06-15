@@ -63,7 +63,6 @@ public class ListaFavFragment extends Fragment implements AdapaterFavoritos.OnRe
             }
         });
 
-       // Button btnElimar = view.findViewById(R.id.btn_eliminar_fav);
 
         ImageButton imageButton = view.findViewById(R.id.atras_profile);
         imageButton.setOnClickListener(new View.OnClickListener(){

@@ -67,11 +67,3 @@ public class RegisterResponse {
     }
 }
 
-/*{
-    "id": "ac13d001-888c-1c39-8188-8cbedb6c0001",
-    "username": "apbarba",
-    "email": "pilarbarba03@gmail.com",
-    "name": "Ana Pilar",
-    "avatar": null,
-    "createdAt": "05/06/2023 20:08:18"
-}*/

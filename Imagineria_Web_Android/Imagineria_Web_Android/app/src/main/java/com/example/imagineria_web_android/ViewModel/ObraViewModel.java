@@ -87,15 +87,14 @@ public class ObraViewModel extends AndroidViewModel {
                         }
                         currentObras.addAll(obraResponse.getContent());
                         obrasList.postValue(currentObras);
-                        currentPage++; // Incrementar la página actual
-                        isLoading = false; // Se han cargado las obras, ya no se está cargando
+                        currentPage++;
+                        isLoading = false;
                     }
                 }
 
                 @Override
                 public void onFailure(Call<ObrasResponse> call, Throwable t) {
-                    // Manejo de errores
-                    isLoading = false; // Ocurrió un error, ya no se está cargando
+                    isLoading = false;
                 }
             });
         }
@@ -169,13 +168,11 @@ public class ObraViewModel extends AndroidViewModel {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()){
-                    //Aquí puedes hacer algo cuando la eliminación fue exitosa, por ejemplo, actualizar la lista de Imagineros.
                 }
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                //Manejo de errores o solamente mensajes
             }
         });
     }
@@ -205,17 +202,13 @@ public class ObraViewModel extends AndroidViewModel {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()){
-                    // Aquí puedes hacer algo cuando la adición fue exitosa.
-                    // Actualizar la lista de obras favoritas del usuario en tu ViewModel.
-                    // Asumiendo que si la respuesta es exitosa, se agregó a favoritos.
                     isFavorited.setValue(true);
                 }
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                // Manejo de errores o solamente mensajes
-                // Si hay un error, supongamos que no se agregó a favoritos
+
                 isFavorited.setValue(false);
             }
         });

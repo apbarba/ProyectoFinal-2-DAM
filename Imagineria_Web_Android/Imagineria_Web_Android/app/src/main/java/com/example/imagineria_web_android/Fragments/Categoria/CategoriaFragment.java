@@ -27,21 +27,16 @@ public class CategoriaFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_categoria, container, false);
 
-        // Inicializar ViewModel
         categoriaViewModel = new ViewModelProvider(this).get(CategoriaViewModel.class);
 
-        // Inicializar RecyclerView y Adapter
         categoriaRecyclerView = view.findViewById(R.id.categoriaRecyclerView);
         categoriaAdapter = new CategoriaAdapter(new ArrayList<>());
         categoriaRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         categoriaRecyclerView.setAdapter(categoriaAdapter);
 
-        // Cargar obras
         categoriaViewModel.loadCategoria();
 
-        // Observar cambios
         categoriaViewModel.getCategoriaList().observe(getViewLifecycleOwner(), categorias -> {
-            // Actualizar UI
             categoriaAdapter.updateData(categorias);
         });
 
