@@ -5,7 +5,7 @@
 Proyecto Integrado fin de curso de 2ºDAM en el cual se ha realizado un desarrollo extenso de la API, para también desarrollar la app móvil en Android Studio y la web con Angular.
 El proyecto trata sobre un catálogo cofrade en el cual los usuarios participan abiertamente en la edición y creación de obras nuevas para compartir.
 
-Al iniciar la aplicación tanto en web como en mólvil, el username es: **apbarba y el password **soso
+Al iniciar la aplicación tanto en web como en mólvil, el username es: **apbarba** y el password **soso**
 
 ## Tecnología y lenguaje utilizado:
 Para el desarrollo de la aplicación, se han utilizado los siguientes elementos:
