@@ -1,0 +1,1222 @@
+{
+	"info": {
+		"_postman_id": "355e4a85-f94f-4331-bfff-70a0b8c78fa9",
+		"name": "Imagineria_Web",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23783375"
+	},
+	"item": [
+		{
+			"name": "Obras",
+			"item": [
+				{
+					"name": "getAllObras",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhYzEzZDAwMS04ODk1LTFjZTItODE4OC05NTJjZWFkYTAwMDAiLCJpYXQiOjE2ODYxMjk5NjEsImV4cCI6MTE1NjY5MjM5MDF9.fJN4WmhfmJPLZUF2l6Fo1xDmmHgY7T5GQq-fu_7oyv5p4aAEpEgwicClEtyble5DzXYOe6mUWx2wRBozMc4WHg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/obras/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"obras",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhYzFhZjAwMS04Njk5LTE5NjctODE4Ni05OTM5NzJhODAwMDAiLCJpYXQiOjE2Nzc2MDc5NDYsImV4cCI6MTE1NTgzOTgyODZ9.qV9g0Z3-CiB8kbMqHjlR_z6BhnwgEwT_aFiSs-GNlo2O4Ly_9mYyJinEqMB8AA20jvutHgWqrsupinI4OxL2ww",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/obras/0528bac8-b04b-11ed-afa1-0242ac120002",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"obras",
+								"0528bac8-b04b-11ed-afa1-0242ac120002"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "editObras",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhYzEzZDAwMS04OGE0LTExMTMtODE4OC1hNGMxMWM3ZDAwMDAiLCJpYXQiOjE2ODYzOTE1MDYsImV4cCI6MTE1NjcxODU0NDZ9.fcCuhXrQG8TJWg74Rw3dgQAU-79hbrDotDUmnmZVkeSFeh2C28Zz6NGcbSuOxAMlfev07JDdMa-HAReiMTmqIw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"precio\" : \"14.0000\",\r\n    \"name\" : \"Aurora\",\r\n    \"titulo\":\"Lágrimas de Humildad\",\r\n    \"estado\": \"Adquirida\",\r\n    \"estilo\" : \"Madera Policromada\",\r\n    \"img\": \"http://nadadada\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/obras/0528bac8-b04b-11ed-afa1-0242ac120002",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"obras",
+								"0528bac8-b04b-11ed-afa1-0242ac120002"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteObras",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhYzFhZjAwMS04Njk5LTE5NjctODE4Ni05OTM5NzJhODAwMDAiLCJpYXQiOjE2Nzc2MDc5NDYsImV4cCI6MTE1NTgzOTgyODZ9.qV9g0Z3-CiB8kbMqHjlR_z6BhnwgEwT_aFiSs-GNlo2O4Ly_9mYyJinEqMB8AA20jvutHgWqrsupinI4OxL2ww",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/obras/0528bac8-b04b-11ed-afa1-0242ac120005",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"obras",
+								"0528bac8-b04b-11ed-afa1-0242ac120005"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createNewObra",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhYzEzZDAwMS04ODhmLTFhYmItODE4OC04ZmFhYzgxYTAwMDAiLCJpYXQiOjE2ODYwMzc1NDAsImV4cCI6MTE1NjY4MzE0ODB9.UCtkRmQuI6jUFcnPdlu47InoZDXrB70_SH4FiKxZFm3NpXSXNpDcIEdIQ7JiRe47TBaGTaJUpd49gzXbhETbHw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"precio\" : \"14.0000\",\r\n    \"nombre\" : \"Lágrimas\",\r\n    \"titulo\":\"Lágrimas de Humildad\",\r\n    \"estado\": \"Adquirida\",\r\n    \"estilo\" : \"Madera Policromada\",\r\n    \"categoria\" : \"c0a8000d-8665-1750-8186-6587bb010011\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/obras/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"obras",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "lookImg",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhYzEzZDAwMS04ODlhLTFjZjEtODE4OC05YWFjZmEwMTAwMDAiLCJpYXQiOjE2ODYyMzk5MjEsImV4cCI6MTE1NjcwMzM4NjF9.XV5dX0cTZVLVf530MTOx-Y3vDqNdocSPtzltq95ZY_Xplg_kpeZmwbJymBsuigtOYs79rWGYGGQtSJBYiAffSA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/perfileIcon.png",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"perfileIcon.png"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SearchByName",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhYzEzZDAwMS04OGE0LTEyNDYtODE4OC1hNDkyNGUzMDAwMDAiLCJpYXQiOjE2ODYzODgyNDIsImV4cCI6MTE1NjcxODIxODJ9.kpWoEV6F80I6-XKYWyTnrhNOo1TqLU2sdqRGJomql6X51-GrAJSW4JQdMNnYHpDe1gBVl_2GLCCbOPfOI9TiVQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/obras/search?name=cautivo",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"obras",
+								"search"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "cautivo"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Errores",
+			"item": [
+				{
+					"name": "Get404",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhYzE1NTAwMS04NjdhLTE3NjQtODE4Ni03YWM3NmI2ZDAwMDAiLCJpYXQiOjE2NzcwOTcyNzAsImV4cCI6MTE1NTc4ODc2MTB9.aRz4DFS-2UsaJC_e9yIrSjNOYmD6Ec8hvleOuxLGcs-p_nFyZxVOjhwDsygeDtQMUFEw1VujexmjImJCwOq5jQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Patch_Error_HTTP",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhYzE1NTAwMS04NjdhLTE3NjQtODE4Ni03YWM3NmI2ZDAwMDAiLCJpYXQiOjE2NzcwOTcyNzAsImV4cCI6MTE1NTc4ODc2MTB9.aRz4DFS-2UsaJC_e9yIrSjNOYmD6Ec8hvleOuxLGcs-p_nFyZxVOjhwDsygeDtQMUFEw1VujexmjImJCwOq5jQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/obras/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"obras",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "errorJson",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhYzE1NTAwMS04NjdhLTE3NjQtODE4Ni03YWM3NmI2ZDAwMDAiLCJpYXQiOjE2NzcwOTcyNzAsImV4cCI6MTE1NTc4ODc2MTB9.aRz4DFS-2UsaJC_e9yIrSjNOYmD6Ec8hvleOuxLGcs-p_nFyZxVOjhwDsygeDtQMUFEw1VujexmjImJCwOq5jQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"Lágrimas\",\r\n    \"precio\" : \"12000.00\",\r\n    \"titulo\" : \"Santísima de las Lágrimas\",\r\n    \"img\" : \"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfM9A8DoBZuJYIdOJ8IA-YWhbFcAwC4dAQ4eUxSLEI&s\",\r\n    \"estado\" : \"Finalizada\",\r\n    \"Fecha\" : \"16/02/2023\",\r\n    \"estilo\" : \"Barroco\",\r\n    \"Categoria\" : \"Dolorosa\",\r\n    \"imaginero\" : \"Leandro Ortega\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/obras/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"obras",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "newObra",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjMGE4MDAwZC04NjdhLTE4YjctODE4Ni03YWQ4YzZiNDAwMDAiLCJpYXQiOjE2NzcxMDUzMTIsImV4cCI6MTE1NTc4OTU2NTJ9.BqEdVyWOSUMu8n-du6hUzQXC3MIqBMHkxhlk9DbHuZKfvC3CXYlR4F942TKMPxVsjzDhU3-cSdnokH8-d6xZcQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"Lágrimas\",\r\n    \"precio\" : \"12000.00\",\r\n    \"titulo\" : \"Santísima de las Lágrimas\",\r\n    \"img\" : \"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfM9A8DoBZuJYIdOJ8IA-YWhbFcAwC4dAQ4eUxSLEI&s\",\r\n    \"estado\" : \"Finalizada\",\r\n    \"Fecha\" : \"2023-09-12\",\r\n    \"estilo\" : \"Barroco\",\r\n    \"Categoria\" : \"Dolorosa\",\r\n    \"imaginero\" : \"Leandro Ortega\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/obras/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"obras",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findIdErrorAccept",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/obras/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"obras",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findAllErrorAccept",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/obras/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"obras",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "idErrorBadRequest",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/obras/1asd",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"obras",
+								"1asd"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "createImagineroWithUserRole(Probando solamente)",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n    \"username\": \"lola\",\r\n    \"email\" : \"pilarbarba03@gmail.com\",\r\n    \"password\": \"Anabarba.2003\",\r\n    \"name\": \"Ana Pilar\",\r\n    \"verifyPassword\" : \"Anabarba.2003\"\r\n  \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "editPassword",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhYzEzZDAwMS04ODhjLTFlNTUtODE4OC04YzFlNjA4NDAwMDAiLCJpYXQiOjE2ODU5NzgwNTQsImV4cCI6MTE1NjY3NzE5OTR9.RoBBsmNnYI5dfNXICWGl3a2dS7L-Lk_87KuuOIEiVTxCCcOON8gp78RAiJl7eA1ddmPuVGhyR63stNOC64q12w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"oldPassword\": \"soso\",\r\n    \"newPassword\": \"Anabarba.2002\",\r\n    \"verifyNewPassword\": \"Anabarba.2002\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/user/changePassword",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"changePassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "changeAvatar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjMGE4MDA2OS04ODgyLTFhMTUtODE4OC04MjVhMjA5YzAwMDAiLCJpYXQiOjE2ODU4MTQxOTcsImV4cCI6MTE1NjY2MDgxMzd9.GkIwBS2TCg1XXKA1vFsYS2QErCSaA5xEY4ZIXud6KK8lBQkbAFMPFvjmeJLPg3ytStpo4eJLeyxi09-CQlE9cQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "avatar",
+									"type": "file",
+									"src": "/C:/Users/Ana Pilar Barba/Pictures/FondosPantalla/firewatch-dos.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/user/c0a80069-8882-1a15-8188-825a209c0000/avatar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"c0a80069-8882-1a15-8188-825a209c0000",
+								"avatar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetUserProfile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhYzEzZDAwMS04OGE0LTFlODUtODE4OC1hNDdlOGQxNTAwMDAiLCJpYXQiOjE2ODYzODcyMTcsImV4cCI6MTE1NjcxODExNTd9.v9z6hF96G6F5SEpS7i0cdlWuJSRB3njy1dRDpbcHN4THZt7EPjLRgMaNGDPT4wvwYY9VE3zueuV_oxlbIjSTnw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/user/ac13d001-88a4-1e85-8188-a47e8d150000/profile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"ac13d001-88a4-1e85-8188-a47e8d150000",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PostAvatar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhYzEzZDAwMS04OGE1LTFkNjgtODE4OC1hNWNkNzg5ODAwMDAiLCJpYXQiOjE2ODY0MDg5ODAsImV4cCI6MTE1NjcyMDI5MjB9.PznDl-SWk8848BK8kCNmEslTJoHb4sd3UTkiOubSh6BwBbpVKSrfg0PtA_D45pWypgsA7RMEEDLazCwQncYMMQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Ana Pilar Barba/Pictures/FondosPantalla/feli4.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/user/ac13d001-88a5-1d68-8188-a5cd78980000/changeAvatar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"ac13d001-88a5-1d68-8188-a5cd78980000",
+								"changeAvatar"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "createImagineroWithAdminRole(Verdadero)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjMGE4MDAwZC04NjdmLTFhYmUtODE4Ni03ZmJhYzc5MzAwMDAiLCJpYXQiOjE2NzcxODA3NzcsImV4cCI6MTE1NTc5NzExMTd9.rSXl-GDsBYbcvKUUpcDDzh8vPHWt4LdyLklWL58gms9aU09ogxriutiqhg0GewwgvOexzCDKzDecX66EWG_pig",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\" : \"apbarba2\",\r\n    \"password\" : \"Anapilar.2003\",\r\n    \"email\": \"barba.loana22@triana.salesianos.edu\",\r\n    \"name\" : \"Ana Admin\",\r\n    \"verifyPassword\" : \"Anapilar.2003\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/auth/register/admin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"register",
+								"admin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Imaginero",
+			"item": [
+				{
+					"name": "newImaginero",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwYTU3NGM0NC04NzMxLTEyODgtODE4Ny0zMWMyOGU2NzAwMDAiLCJpYXQiOjE2ODAxNjcwNjMsImV4cCI6MTE1NjA5NjEwMDN9.r0he7jJ7L99E81xRZYc3qew2vILKmhhmYRvhsQfCwIKAOzB32U6iMcpAKnGS-lJRer0ZRA-g6Mt4QRkko1yhkQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"Maria\",\r\n    \"edad\" : 45,\r\n    \"localidad\" : \"Granada\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/imaginero/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"imaginero",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findAll",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhYzEzZDAwMS04ODhmLTFhYmItODE4OC04ZmFhYzgxYTAwMDAiLCJpYXQiOjE2ODYwMzc1NDAsImV4cCI6MTE1NjY4MzE0ODB9.UCtkRmQuI6jUFcnPdlu47InoZDXrB70_SH4FiKxZFm3NpXSXNpDcIEdIQ7JiRe47TBaGTaJUpd49gzXbhETbHw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/imaginero/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"imaginero",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhYzFhZjAwMS04NjlhLTFkOGUtODE4Ni05YTRkOWM3NjAwMDAiLCJpYXQiOjE2Nzc2MjYxMTAsImV4cCI6MTE1NTg0MTY0NTB9.zwaK09BM-LxzjcLRoNgwsx42U-dqKe5CEUOD_njuXEhK6oFyriEu8D4sN1Q8-fx3uTyJpSneErZBjgNQdpgBYA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/imaginero/c0a8000d-8665-1750-8186-6587bb010001",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"imaginero",
+								"c0a8000d-8665-1750-8186-6587bb010001"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteImagineroId",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhYzEzZDAwMS04ODhmLTFiOWQtODE4OC04ZmNiYTdkZjAwMDAiLCJpYXQiOjE2ODYwMzk3MDAsImV4cCI6MTE1NjY4MzM2NDB9.RxotKNs2DUWPvKl4gmQMSThnJFLqfJwD9KR4W05Ri-hbYsnbJl6Nw00IjgYid1wzy97rPG9s55KrvHBZbmZVaQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/imaginero/c0a8000d-8665-1750-8186-6587bb010001",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"imaginero",
+								"c0a8000d-8665-1750-8186-6587bb010001"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "editImaginero",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhYzFhZjAwMS04Njk5LTE5NjctODE4Ni05OTM5NzJhODAwMDAiLCJpYXQiOjE2Nzc2MDc5NDYsImV4cCI6MTE1NTgzOTgyODZ9.qV9g0Z3-CiB8kbMqHjlR_z6BhnwgEwT_aFiSs-GNlo2O4Ly_9mYyJinEqMB8AA20jvutHgWqrsupinI4OxL2ww",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"edad\" : 23,\r\n    \"localidad\" : \"Granada\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/imaginero/c0a8000d-8665-1750-8186-6587bb010001",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"imaginero",
+								"c0a8000d-8665-1750-8186-6587bb010001"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Categoria",
+			"item": [
+				{
+					"name": "findById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhYzEzZDAwMS04ODlhLTFjZjEtODE4OC05YWFjZmEwMTAwMDAiLCJpYXQiOjE2ODYyMjY5MjEsImV4cCI6MTE1NjcwMjA4NjF9.SscKy5OFjBkgAM-XiSRbiWehlEI1X3qTF7wYTebPaKoUohtO1iPo2TkmqoOsL1kpvsLErp_JwgcnXDkc-q-Trw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/categoria/c0a8000d-8665-1750-8186-6587bb010011",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"categoria",
+								"c0a8000d-8665-1750-8186-6587bb010011"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findAll",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhYzFiMDM2ZC04NjljLTFiZWYtODE4Ni05YzNiZjY3YTAwMDAiLCJpYXQiOjE2Nzc2NTg2MTgsImV4cCI6MTE1NTg0NDg5NTh9.9A1xp1DNvPBQ8oH4DyTMIWYxHKjPVe5cU-WDxaVGiRosDx7BKNDmqBmMeasEklk1lXV_wkKRWJokVEmYmS__jA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/categoria/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"categoria",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createNewCategoria",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhYzFhZjAwMS04Njk5LTE5NjctODE4Ni05OTM5NzJhODAwMDAiLCJpYXQiOjE2Nzc2MDc5NDYsImV4cCI6MTE1NTgzOTgyODZ9.qV9g0Z3-CiB8kbMqHjlR_z6BhnwgEwT_aFiSs-GNlo2O4Ly_9mYyJinEqMB8AA20jvutHgWqrsupinI4OxL2ww",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\" : \"Semana Santa\",\r\n    \"descripcion\" : \"Imágenes en especial para la semana más grande\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/categoria/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"categoria",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "editCategoria",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjMGE4MDA2OS04ODgxLTFjMWItODE4OC04MWZjMzQ3ODAwMDAiLCJpYXQiOjE2ODU4MDkwNDQsImV4cCI6MTE1NjY2MDI5ODR9.NZitt_WKOPynUQxfS-982JyMYHCm0TbXV-uG09lBDbyYxYJgYltpAvvWClZms1dP2Kt46XyP_zCdCATcbF9gSA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\" : \"Misterios y Dolorosas\",\r\n    \"descripcion\" : \"Imágenes para la semana más grande\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/categoria/c0a8000d-8665-1750-8186-6587bb010011",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"categoria",
+								"c0a8000d-8665-1750-8186-6587bb010011"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhYzFhZjAwMS04Njk4LTE2N2MtODE4Ni05OGM2ODU1MDAwMDAiLCJpYXQiOjE2Nzc2MDA0MTksImV4cCI6MTE1NTgzOTA3NTl9.4TiP-__UpAbI4eHwZKOgMpKTXdVEH7tg27-Nr43XAvnyNgkF-Qp_sjiyOe2qsfnV43BBtpXxe9d6rgoNROVXQg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/categoria/c0a8000d-8665-1750-8186-6587bb010011",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"categoria",
+								"c0a8000d-8665-1750-8186-6587bb010011"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Favorito",
+			"item": [
+				{
+					"name": "addFavObras",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhYzEzZDAwMS04ODkxLTE2ZTctODE4OC05MTQ2ZjMzODAwMDAiLCJpYXQiOjE2ODYwNjQ1MzQsImV4cCI6MTE1NjY4NTg0NzR9.bLxNV3rxfaYTueWKS8KWWKyKnfpgYsOmlVeNhIBdr0JJeJ6x0anQgKJjtmzeaHSg1_bIg0ujmY_4z_NlKxc_9A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/user/ac13d001-8891-16e7-8188-9146f3380000/favoritos/0528bac8-b04b-11ed-afa1-0242ac120001",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"ac13d001-8891-16e7-8188-9146f3380000",
+								"favoritos",
+								"0528bac8-b04b-11ed-afa1-0242ac120001"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllFavObras",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhYzEzZDAwMS04ODkxLTE2ZTctODE4OC05MTQ2ZjMzODAwMDAiLCJpYXQiOjE2ODYwNjQ1MzQsImV4cCI6MTE1NjY4NTg0NzR9.bLxNV3rxfaYTueWKS8KWWKyKnfpgYsOmlVeNhIBdr0JJeJ6x0anQgKJjtmzeaHSg1_bIg0ujmY_4z_NlKxc_9A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/user/ac13d001-8891-16e7-8188-9146f3380000/favoritos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"ac13d001-8891-16e7-8188-9146f3380000",
+								"favoritos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUserWithFavoritesObras",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhYzFhZjAwMS04Njk5LTE5NjctODE4Ni05OTM5NzJhODAwMDAiLCJpYXQiOjE2Nzc2MDc5NDYsImV4cCI6MTE1NTgzOTgyODZ9.qV9g0Z3-CiB8kbMqHjlR_z6BhnwgEwT_aFiSs-GNlo2O4Ly_9mYyJinEqMB8AA20jvutHgWqrsupinI4OxL2ww",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/user/ac1af001-8699-1967-8186-993972a80000/favorited",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"ac1af001-8699-1967-8186-993972a80000",
+								"favorited"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "removeFav",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhYzFiMDM2ZC04N2VhLTFiNjAtODE4Ny1lYWFiNjg3ZTAwMDAiLCJpYXQiOjE2ODMyNzA5MDMsImV4cCI6MTE1NjQwNjQ4NDN9.eoFOsstpl-BlNkATYaxJUB_L7LmnNugLYRxGWOu9-LZg6034KDKc_vej4ZVNP5yQ9mwDuPizILRz7jq1K94Scg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/user/ac1b036d-87ea-1b60-8187-eaab687e0000/favoritos/0528bac8-b04b-11ed-afa1-0242ac120002",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"ac1b036d-87ea-1b60-8187-eaab687e0000",
+								"favoritos",
+								"0528bac8-b04b-11ed-afa1-0242ac120002"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "login",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\" : \"anabarba\",\r\n    \"password\" : \"soso\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Me",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhYzFhZjAwMS04Njk5LTE5NjctODE4Ni05OTM5NzJhODAwMDAiLCJpYXQiOjE2Nzc2MDc5NDYsImV4cCI6MTE1NTgzOTgyODZ9.qV9g0Z3-CiB8kbMqHjlR_z6BhnwgEwT_aFiSs-GNlo2O4Ly_9mYyJinEqMB8AA20jvutHgWqrsupinI4OxL2ww",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/me",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"me"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
