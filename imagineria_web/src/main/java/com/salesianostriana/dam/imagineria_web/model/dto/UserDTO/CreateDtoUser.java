@@ -23,6 +23,10 @@ import java.util.List;
                 message = "{createUser.password.nomatch}"
         )
 })
+/**
+ * Dto con validaciones unicas para cuando se cree un usuario, atributos
+ * requeridos para la realización de la creación
+ */
 public class CreateDtoUser {
 
     @UniqueUsername(message = "{createUser.username.unique}")
@@ -45,9 +49,6 @@ public class CreateDtoUser {
     private String verifyPassword;
 
     private String avatar;
-
-    //@NotBlank(message = "{user.obras.list.blank}"
-    //private List<EditDtoObras> obras;
 
 
 }

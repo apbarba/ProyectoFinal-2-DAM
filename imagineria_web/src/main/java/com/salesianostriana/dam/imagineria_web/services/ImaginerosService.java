@@ -30,62 +30,39 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
+/**
+ * Servicio de imaginero en el que se realizan los métodos
+ * que tiene nuestra aplicación
+ */
 public class ImaginerosService {
 
     private final ImagineroRepository imagineroRepository;
-    private final UserRepository userRepository;
-    private final StorageService storageService;
     private final ConverterDtoImaginero converterDtoImaginero;
     private final ObrasRepository obrasRepository;
 
 
+    /**
+     * Método que busca a un imaginero por su id, en el caso de que
+     * no se encuentre salta una excepción diciendo que no se ha podido
+     * encontrar
+     * @param id, el id del imaginero que estamos buscando
+     * @return
+     */
     public Imaginero findById(UUID id){
 
         return imagineroRepository.findById(id)
                 .orElseThrow(() -> new ImagineroNotFoundException(id));
     }
 
-    public List<Imaginero> findByName(String name){
-
-        List<Imaginero> imaginero = imagineroRepository.findByName(name);
-
-        if (imaginero.isEmpty()){
-
-            throw new ImagineroNotFoundException(name);
-        }
-
-        return imaginero;
-    }
-
- /*   public Imaginero save(CreateDtoImaginero imaginero, MultipartFile file, User user){
-
-        Optional<User> user1 = userRepository.findById(user.getId());
-
-        if (user1.isEmpty()){
-
-            throw new UserNotFoundException(user.getId().toString());
-        }else {
-
-            String uri = storageService.store(file);
-
-            Imaginero imaginero1 = converterDtoImaginero.createImaginero(imaginero, uri);
-
-            List<Obras> obras = new ArrayList<>();
-
-            for (Obras obras1 : imaginero.getObras()){
-
-                Obras obras2 = obrasRepository.findById(obras1.getId()).get();
-
-                obras.add(obras2);
-            }
-
-            imaginero1.getObras().addAll(obras);
-
-            return imagineroRepository.save(imaginero1);
-        }
-
-    }*/
-
+    /**
+     * Método que realiza la creación de un nuevo imaginero, que en el caso
+     * de que no se pueda realizar, salta una excepción
+     * @param create, utilizamos la clase dto que creamos para la facilitación
+     *                de la creación por las variables que requerimos. También utilizamos
+     *                el método que hicimos en el converter ya que ahí llamamos a las
+     *                variables necesarias
+     * @return
+     */
     public GetDtoImaginero save(CreateDtoImaginero create){
 
         Imaginero imaginero = converterDtoImaginero.createImaginero(create);
@@ -95,6 +72,12 @@ public class ImaginerosService {
 
     }
 
+    /**
+     * Método que nos muestra todos los imagineros existentes con las variables necesarias
+     * que declaramos en el dto método del converter
+     * @param pageable, se muestran los imaginero de forma organizada, paginada
+     * @return todos los imaginero paginados
+     */
     public Page<GetDtoImaginero> findAllImagineros(Pageable pageable){
 
         Page<Imaginero> imaginero = imagineroRepository.findAll(pageable);
@@ -107,18 +90,14 @@ public class ImaginerosService {
         }
     }
 
-    public List<Imaginero> findAll(){
 
-        List<Imaginero> imagineros = imagineroRepository.findAll();
-
-        if (imagineros.isEmpty()){
-
-            throw new EmptyImagineroException();
-        }
-
-        return imagineros;
-    }
-
+    /**
+     * Método que realiza la modificación de datos de un imaginero
+     * @param id, necesitams¡os buscar el imaginero que queremos modificar
+     * @param edit, utulizamos el dto de edición para la facilitación de este y que
+     *              esté más limpio el código
+     * @return, los datos modificados de los imagineros
+     */
     public Imaginero edit(UUID id, EditDtoImaginero edit){
 
         return imagineroRepository.findById(id)
@@ -132,6 +111,11 @@ public class ImaginerosService {
     }
 
     //ELIMINA AL IMAGINERO JUNTO A SUS OBRAS ASOCIADAS
+
+    /**
+     * Método que elimina a un imaginero junto a las obras que tiene asociadas
+     * @param id, necesitamos buscar al imaginero que queremos eliminar
+     */
     public void deleteWithObras(UUID id){
         if (imagineroRepository.existsById(id)){
             Imaginero imaginero = imagineroRepository.findById(id).get();
@@ -141,7 +125,11 @@ public class ImaginerosService {
     }
 
 
-    //ELIMINACION DE IMAGINERO SIN QUE SE ELIMINEN LAS OBRAS QUE ESTÁN ASOCIADAS A ÉL
+    /**
+     * Método que elimina a un imaginero pero a sus obras asociadas no
+     * @param id, necesitamos buscar al imaginero para que
+     *            pueda ser eliminado
+     */
     public void delete(UUID id){
 
         if (imagineroRepository.existsById(id)){
@@ -156,6 +144,13 @@ public class ImaginerosService {
         }
     }
 
+    /**
+     * Método que muestra las obras con el filtrado y paginación. No se utiliza por problemas
+     * del filtrado
+     * @param params
+     * @param pageable
+     * @return
+     */
     public Page<Imaginero> search(List<SearchCriteria> params, Pageable pageable) {
 
         ImagineroSpecificationBuilder imagineroSpecificationBuilder =
@@ -167,8 +162,4 @@ public class ImaginerosService {
         return imagineroRepository.findAll(spec, pageable);
     }
 
-    public Optional<Imaginero> findByObras(UUID id){
-
-        return imagineroRepository.findByIdWithObras(id);
-    }
 }

@@ -20,8 +20,14 @@ import java.util.UUID;
 @Setter
 @Getter
 @Table(name = "obras")
+/**
+ * clase modelo de obras, de las que contenga nuestra aplicación
+ */
 public class Obras {
 
+    /**
+     * Identificador único para cada obra
+     */
     @Id
     @GeneratedValue
     @GenericGenerator(
@@ -37,30 +43,57 @@ public class Obras {
     @Column(columnDefinition = "uuid", name = "obras_id")
     private UUID id;
 
+    /**
+     * Nombre de la obra
+     */
     private String name;
 
+    /**
+     * precio de la obra
+     */
     private double precio;
 
+    /**
+     * titulo descriptivo de la obra
+     */
     private String titulo;
 
+    /**
+     * Una imagen de la obra
+     */
     private String img;
 
-    private String estado; //Finalizado, en proceso, comprado o en venta
+    /**
+     * Estado de como se encuentra la obra, adquirida, desaparecida...
+     */
+    private String estado;
 
+    /**
+     * Fecha de creación de la obra
+     */
    // @DateTimeFormat(pattern = "yyyy/MM/dd")
     private LocalDate fecha;
 
+    /**
+     * Estilo de la obra
+     */
     private String estilo;
 
     @Builder.Default
     private LocalDateTime createdAt = LocalDateTime.now();
 
+    /**
+     * Relación con categoria, ya que cada obra está en una categoria
+     */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "categoria_id")
     @JsonIgnoreProperties("obras")
     @JsonBackReference
     private Categoria categoria;
 
+    /**
+     * Relación con imaginero para saber que imaginero es quién la realizó
+     */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "imaginero_id")
    // @JsonIgnoreProperties("obras")
@@ -78,14 +111,4 @@ public class Obras {
 
     }
 
-    public void removeUser(User u){
-
-        this.user = null;
-        user.getFavoritos().remove(this);
-    }
-
-    public void addCategoriaToObra(Categoria c) {
-        this.categoria=c;
-        c.getObras().add(this);
-    }
 }

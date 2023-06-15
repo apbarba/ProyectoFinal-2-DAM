@@ -4,6 +4,9 @@ import com.salesianostriana.dam.imagineria_web.model.User;
 import org.springframework.stereotype.Component;
 
 @Component
+/**
+ * Clase que no se utiliza
+ */
 public class ConverteDtoImaginero {
 
     public CreateDtoUser getDtoImaginero(User imaginero){
@@ -13,10 +16,7 @@ public class ConverteDtoImaginero {
                 .email(imaginero.getEmail())
                 .password(imaginero.getPassword())
                 .username(imaginero.getUsername())
-              //  .obras(imaginero.getObras()
-              //          .stream()
-              //          .map(ConverterDtoObras::getDtoObras)
-              //          .toList())
+
                 .build();
     }
 
@@ -27,9 +27,6 @@ public class ConverteDtoImaginero {
                 .email(getDtoImaginero.getEmail())
                 .password(getDtoImaginero.getPassword())
                 .username(getDtoImaginero.getUsername())
-              //  .obras(getDtoImaginero.getObras().stream()
-             //           .map(ConvertDtoObras::createObras)
-               //         .toList())
                 .build();
     }
 }

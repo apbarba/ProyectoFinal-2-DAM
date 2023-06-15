@@ -16,6 +16,11 @@ import java.util.UUID;
 @Getter
 @Setter
 @Builder
+/**
+ * Dto con las variables necesarias para la creación de una obra nueva,
+ * en la que declaramos un uuid de categoria para asociar la obra nueva
+ * con una categoria existente por su id
+ */
 public class CreateDtoObras {
 
     @NotEmpty(message = "{obrasEdit.name.notempty}")

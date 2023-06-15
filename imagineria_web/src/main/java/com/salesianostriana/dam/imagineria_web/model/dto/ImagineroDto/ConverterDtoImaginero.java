@@ -10,6 +10,12 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class ConverterDtoImaginero {
 
+    /**
+     * Método para la creación de un Imaginero nuevo a base de nuestras clasesDTO
+     * que nos facilitan las variables que se requiere para realizar esto
+     * @param createDtoImaginero
+     * @return un imaginero nuevo
+     */
     public Imaginero createImaginero(CreateDtoImaginero createDtoImaginero){
 
         return Imaginero.builder()
@@ -18,6 +24,12 @@ public class ConverterDtoImaginero {
                 .localidad(createDtoImaginero.getLocalidad())
                 .build();
     }
+
+    /**
+     * Método para ver limitado detalles del imaginero o de los imaginero
+     * @param i
+     * @return detalles limitados
+     */
     public GetDtoImaginero imagineroToImaginero(Imaginero i){
 
         return GetDtoImaginero.builder()

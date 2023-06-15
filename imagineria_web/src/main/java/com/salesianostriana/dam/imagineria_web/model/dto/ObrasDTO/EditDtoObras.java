@@ -16,10 +16,11 @@ import javax.validation.constraints.NotEmpty;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+/**
+ * Dto con las variables necesarias para la realización de la edición
+ * de la obra
+ */
 public class EditDtoObras {
-
-    //name, precio, titulo, img, estado
-
     @NotEmpty(message = "{obrasEdit.name.notempty}")
     private String name;
 

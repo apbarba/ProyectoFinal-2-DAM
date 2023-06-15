@@ -11,6 +11,11 @@ import javax.validation.constraints.NotEmpty;
 @Setter
 @RequiredArgsConstructor
 @Data
+/**
+ * Clase DTO que se utiliza para facilitar la edición de una categoria
+ * ya que solamente declaramos las variables que solamente se podrán
+ * modificar
+ */
 public class EditDtoCategoria {
 
     @NotEmpty(message = "{categoriaEdit.nombre.notempty}")

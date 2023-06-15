@@ -30,6 +30,10 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
+/**
+ * Servicio de obras en el que se realizan los métodos necesarios
+ * para la creación de las peticiones
+ */
 public class ObrasService {
 
     private final ObrasRepository obrasRepository;
@@ -40,49 +44,32 @@ public class ObrasService {
     private final CategoriaRepository categoriaRepository;
     private final ConverterDtoObras converterDtoObras;
 
-    //  public List<Obras> findByImaginero(Imaginero imaginero){
 
-       // List<Obras> obras = obrasRepository.findByImaginero(imaginero);
-
-       // if (obras.isEmpty()){
-
-     //       throw new EmptyObrasListException();
-     //   }
-
-     //   return obras;
-   // }
-
+    /**
+     * Método que realiza la busqueda de la obra por su id, si no la encunetra
+     * salta una excepción
+     * @param id
+     * @return
+     */
     public Obras findById(UUID id){
 
         return obrasRepository.findById(id)
                 .orElseThrow(() -> new ObrasNotFoundException(id));
     }
 
-    public List<Obras> findByTitulo(String titulo){
-
-        return obrasRepository.findByTitulo(titulo);
-    }
-
-    public List<Obras> findByEstado(String estado){
-
-        return obrasRepository.findByEstado(estado);
-    }
-
-    public GetDtoObras save(CreateDtoObras create){
-
-        Obras obras = converterDtoObras.createObra(create);
-        obrasRepository.save(obras);
-
-        return converterDtoObras.obrasToObras(obras);
-
-    }
-
+    /**
+     * Método en el que realizamos la creación de una obra, y ya que nuestra obra
+     * nueva requiere de ser asignada a una categorias, necesitamos el id de la categoria
+     * que le asignamos para ver si existe en nuestra base de datos, si no es el caso
+     * la obra no se podrá crear por no estar asignada a una categoria
+     * @param createDtoObras
+     * @return la obra creada
+     */
     @Transactional
     public GetDtoObras save2(CreateDtoObras createDtoObras){
 
         String categoriaString = String.valueOf(createDtoObras.getCategoria());
         if (categoriaString == null) {
-            // La categoría es null. Maneja esta situación.
             throw new IllegalArgumentException("La categoría no puede ser null");
         }
 
@@ -90,8 +77,7 @@ public class ObrasService {
         Optional<Categoria> categoriaOpt = categoriaRepository.findById(categoriaId);
 
         if (!categoriaOpt.isPresent()) {
-            // La categoría no existe en la base de datos.
-            // Deberías manejar este caso de alguna manera, por ejemplo, lanzando una excepción.
+            // La categoría no existe en la base de datos
             throw new RuntimeException("Categoria no encontrada");
         }
 
@@ -112,39 +98,44 @@ public class ObrasService {
     }
 
 
+    /**
+     * Método que realiza la eliminnación de una obra
+     * @param id, requerimos de buscarla para ver si existe y si si, la eliminamos
+     */
     public void delete(UUID id){
 
         if (obrasRepository.existsById(id))
             obrasRepository.deleteById(id);
     }
 
-    public List<Obras> findAll(){
-
-        List<Obras> obras = obrasRepository.findAll();
-
-        if (obras.isEmpty()){
-
-            throw new EmptyObrasListException();
-        }
-
-        return obras;
-    }
-
+    /**
+     * Método que realiza la modificación de la obra
+     * @param id, buscamos la obra por el id para poder saber sus atributos
+     *            y poder modificarla. Si no existe, salta una excepción
+     * @param edit, utilizamos la clase dto de edit que creamos
+     *              para la facilitación de esta
+     * @return la obra modificada
+     */
     public Obras edit(UUID id, EditDtoObras edit){
 
         return obrasRepository.findById(id)
                 .map(obras -> {
                     obras.setEstado(edit.getEstado());
                     obras.setPrecio(edit.getPrecio());
-                   // obras.setCategoria(edit.getCategoria());
                     obras.setName(edit.getName());
-                   // obras.setImaginero(edit.getImaginero());
 
                     return obrasRepository.save(obras);
                 })
                 .orElseThrow(() -> new ObrasNotFoundException());
     }
 
+    /**
+     * Método que muestra todas las obras de forma paginada, y con una
+     * búsqueda más intensa y más profunda
+     * @param params
+     * @param pageable
+     * @return
+     */
     public Page<Obras> search(List<SearchCriteria> params, Pageable pageable) {
 
         ObrasSpecificationBuilder obrasSpecificationBuilder =
@@ -156,20 +147,12 @@ public class ObrasService {
         return obrasRepository.findAll(spec, pageable);
     }
 
-    @Transactional
-    public Obras save(EditDtoObras getDtoObras, MultipartFile file) {
-
-        String filename = storageService.store(file);
-
-        Obras obras = obrasRepository.save(
-
-                Obras.builder()
-                        .img(filename)
-                        .build()
-        );
-        return obras;
-    }
-
+    /**
+     * Método que muestra todas las obras que tenemos en la base de datos
+     * de forma paginada, ordenada
+     * @param pageable
+     * @return todas las obras
+     */
     public Page<GetDtoObras> findAllObras(Pageable pageable){
 
         Page<Obras> obras = obrasRepository.findAll(pageable);
@@ -183,6 +166,13 @@ public class ObrasService {
     }
 
     //METODO QUE REALIZARÁ LA BÚSQUEDA POR NOMBRE DE OBRAS
+
+    /**
+     * Método que realiza la búsqueda por nombre de las obras,
+     * ignorando las mayúsculas y las minúsculas
+     * @param name, el nommbre de la obra que queremos buscar
+     * @return, la obra buscada, con sus detalles
+     */
     public List<Obras> buscarPorNombre(String name) {
         return obrasRepository.findByNameContainingIgnoreCase(name);
     }

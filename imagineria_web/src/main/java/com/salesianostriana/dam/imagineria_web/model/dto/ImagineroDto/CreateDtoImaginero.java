@@ -13,6 +13,10 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
+/**
+ * Dto para la creacion de un imaginero en la que solamente se declaran
+ * las variables que se van a requerido para esto
+ */
 public class CreateDtoImaginero {
     @NotEmpty(message = "{imagineroCreate.name.notempty}")
     private String name;

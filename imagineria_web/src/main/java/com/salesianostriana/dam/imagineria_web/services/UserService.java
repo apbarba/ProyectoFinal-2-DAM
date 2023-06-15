@@ -51,35 +51,19 @@ public class UserService {
         return createImaginero(getDtoImaginero, EnumSet.of(UserRole.ADMIN));
     }
 
-    public List<User> findAll(){
-
-        List<User> users = imagineroRepository.findAll();
-
-        if (users.isEmpty()){
-
-            throw new EmptyUserListException();
-        }
-
-        return users;
-    }
 
     public Optional<User> findByUsername(String username){
 
         return  imagineroRepository.findByUsername(username);
     }
 
-    public User edit(User imaginero){
-
-        return imagineroRepository.findById(imaginero.getId())
-                .map(im ->{
-                    im.setName(imaginero.getName());
-                    im.setUsername(im.getUsername());
-
-                    return imagineroRepository.save(im);
-
-                }).orElseThrow(() -> new UserNotFoundException("No se ha encontrado el usuario con este id"));
-    }
-
+    /**
+     * Método que realiza el cambio de la contraseña actual por otra nueva
+     * @param imagineroId, buscamos el id del usuario logeado
+     * @param newPassword, pasamos la nueva contraseña con su validación
+     *                     correspondiente para realizar el cambio
+     * @return, nueva contraseña
+     */
     public Optional<User> changePassword(UUID imagineroId, String newPassword){
 
         return imagineroRepository.findById(imagineroId)
@@ -92,24 +76,20 @@ public class UserService {
                 }).or(() -> Optional.empty());
     }
 
-    public Optional<User> editEmail(User imaginero){
-
-        return imagineroRepository.findById(imaginero.getId())
-                .map(im -> {
-
-                    im.setEmail(im.getEmail());
-
-                    return imagineroRepository.save(im);
-
-                }).or(() -> Optional.empty());
-    }
-
+    /**
+     * Método que elimina al usuario
+     * @param id, buscamos el id del usuario que queremos eliminar
+     */
     public void deleteById(UUID id){
 
         if (imagineroRepository.existsById(id))
             imagineroRepository.deleteById(id);
     }
 
+    /**
+     * Método que elimina al usuario logeado, utilizanado el método del byId
+     * @param imaginero
+     */
     public void delete(User imaginero){
 
         deleteById(imaginero.getId());
@@ -120,21 +100,16 @@ public class UserService {
         return passwordEncoder.matches(clearPassword, imaginero.getPassword());
     }
 
+    /**
+     * Método que realiza la busqueda del id del usuario
+     * @param id
+     * @return
+     */
     public Optional<User> findById(UUID id){
 
         return imagineroRepository.findById(id);
     }
 
-//    public User findById(UUID id){
-//
-//        return imagineroRepository.findById(id)
-//                .orElseThrow(() -> new UserNotFoundException(id));
-//    }
-
-    public List<User> findByName(String name){
-
-        return imagineroRepository.findByName(name);
-    }
 
     public User save(User imaginero){
 
@@ -146,11 +121,15 @@ public class UserService {
         return imagineroRepository.existsByUsername(username);
     }
 
-    public boolean emailExists(String email){
-
-        return imagineroRepository.existsByEmail(email);
-    }
-
+    /**
+     * Método que realiza el añadir una obra a la lista de favoritos
+     * que tiene el usuario.
+     * @param userId, necesitamos el id del usuario que se encuentra logueaso
+     *                para tener su propia lista de favoirtos
+     * @param obraId, necesitamos el id de la obra que guarda como favorito
+     *                para mostrarla en su lista junto con los detalles de esta
+     * @return
+     */
     public User addFavorito(UUID userId, UUID obraId) {
         User user = imagineroRepository.findById(userId)
                 .orElseThrow(() -> new UserNotFoundException(userId));
@@ -184,6 +163,14 @@ public class UserService {
 
         return imagineroRepository.findByIdWithFavoritos(userId);
     }
+
+    /**
+     * Elimina una obra de la lista de favorito del usuario que se encuentra logueado
+     * @param userId, necesitamos el id para saber la lista de favoritos que
+     *                tiene el usuario logueaso
+     * @param obraId, necesitamos saber el id de la obra para eliminarla, ya que
+     *                debe de existir
+     */
     public void removeFavObra(UUID userId, UUID obraId){
 
         User user = imagineroRepository.findById(userId)
@@ -194,6 +181,14 @@ public class UserService {
         imagineroRepository.save(user);
     }
 
+    /**
+     * Método que realiza el cambio del avatar del usuario logueaso,
+     * subimos un archivo nuevo para hacer el cambio
+     * @param userId, necesitmos el id del usuario logueado para saber el
+     *                avatar y asociarlo con el nuevo
+     * @param avatarFilename, es el archivo que vamos a subir para realizar
+     *                        el cambio
+     */
     public void changeAvatar(UUID userId, String avatarFilename) {
         User user = imagineroRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException("Usuario no encontrado"));

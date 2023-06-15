@@ -14,6 +14,10 @@ import javax.validation.constraints.NotEmpty;
 @Setter
 @RequiredArgsConstructor
 @Data
+/**
+ * Dto para la edición de un imaginero en la que solo se declaran
+ * las variables necesarias para la realización de este
+ */
 public class EditDtoImaginero {
 
     @Min(value = 0, message = "{imagineroEdit.edad.notempty}")

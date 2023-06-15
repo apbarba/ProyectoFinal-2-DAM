@@ -17,6 +17,10 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+/**
+ * Dto con las variables que requerimos para mostrar la información
+ * de las obras limitadas
+ */
 public class GetDtoObras {
 
     private UUID id;

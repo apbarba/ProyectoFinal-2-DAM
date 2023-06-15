@@ -28,8 +28,14 @@ import java.util.*;
         name = "user.favoritos",
         attributeNodes = @NamedAttributeNode("favoritos")
 )
+/**
+ * User va a representar a los usuarios de nuestra aplicación
+ */
 public class User implements UserDetails {
 
+    /**
+     * Será el identificador como único usuario, cada uno es único
+     */
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(
@@ -45,18 +51,39 @@ public class User implements UserDetails {
     @Column(columnDefinition = "uuid")
     private UUID id;
 
+    /**
+     * Nombre del usuario
+     */
     private String name;
+    /**
+     * contraseña del usuario
+     */
     private String password;
 
+    /**
+     * email del usuario
+     */
     private String email;
 
+    /**
+     * username identificador unico del usuario
+     */
     @NaturalId
     private String username;
 
+    /**
+     * comprobar el password por si no coinciden
+     */
     private String verifyPassword;
 
+    /**
+     * avatar del usuario
+     */
     private String avatar;
 
+    /**
+     * Relación con obras para marcar como favorito
+     */
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Obras> favoritos = new ArrayList<>();
 

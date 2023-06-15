@@ -22,8 +22,14 @@ import java.util.UUID;
 @Builder
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "obras"})
+/**
+ * Clase imaginero con las variables que tiene cada uno
+ */
 public class Imaginero {
 
+    /**
+     * identificador  unico para cada imaginero existente
+     */
     @Id
     @GeneratedValue
     @GenericGenerator(
@@ -39,12 +45,24 @@ public class Imaginero {
     @Column(columnDefinition = "uuid", name = "imaginero_id")
     private UUID id;
 
+    /**
+     * nombre de imaginero
+     */
     private String name;
 
+    /**
+     * edad del imaginero
+     */
     private int edad;
 
+    /**
+     * lugar de donde es el imaginero
+     */
     private String localidad;
 
+    /**
+     * relacion con obra para saber las obras que ha hecho un imaginero
+     */
     @OneToMany(mappedBy = "imaginero", fetch = FetchType.LAZY)
     private List<Obras> obras;
 }

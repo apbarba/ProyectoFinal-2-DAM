@@ -14,6 +14,9 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+/**
+ * Clase DTO para la visualización
+ */
 public class GetDtoCategoria {
 
     private UUID id;

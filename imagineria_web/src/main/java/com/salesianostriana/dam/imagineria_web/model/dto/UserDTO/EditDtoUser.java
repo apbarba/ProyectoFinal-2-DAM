@@ -12,6 +12,10 @@ import javax.validation.constraints.NotEmpty;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+/**
+ * Dto para facilitar la edición del usuario en caso de que se requiera
+ * con solamente los atributos que se podrán modificar
+ */
 public class EditDtoUser {
 
     @NotEmpty(message = "{userDto.name.notemty}")
