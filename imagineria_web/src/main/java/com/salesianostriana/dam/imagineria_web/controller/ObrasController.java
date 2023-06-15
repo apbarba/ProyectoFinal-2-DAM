@@ -22,13 +22,11 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import java.net.URI;
 import java.util.List;
 import java.util.UUID;
 
@@ -218,13 +216,13 @@ public class ObrasController {
                     description = "No se ha encontrado ninguna obra",
                     content = @Content),
             @ApiResponse(responseCode = "401",
-            description = "No estás loggeado",
-            content = @Content)
+                    description = "No estás loggeado",
+                    content = @Content)
     })
     @GetMapping("/")
     public ResponseEntity<Page<GetDtoObras>> searchObras(@RequestParam(value = "search", defaultValue = "")
-                                                   String search, @PageableDefault(size = 10, page = 0)Pageable pageable,
-                                                         @NotNull HttpServletRequest request){
+                                                         String search, @PageableDefault(size = 10, page = 0) Pageable pageable,
+                                                         @NotNull HttpServletRequest request) {
 
         Page<GetDtoObras> pageObras = obrasService.findAllObras(pageable);
         UriComponentsBuilder uriComponentsBuilder = UriComponentsBuilder.fromHttpUrl(request.getRequestURL().toString());
@@ -272,7 +270,7 @@ public class ObrasController {
                     content = @Content)
     })
     @GetMapping("/{id}")
-    public GetDtoObras getById(@PathVariable UUID id){
+    public GetDtoObras getById(@PathVariable UUID id) {
 
         return converterDtoObras.obrasToObras(obrasService.findById(id));
     }
@@ -315,13 +313,13 @@ public class ObrasController {
 
     }
 
-   @Operation(summary = "Modifica los datos de las obras")
-   @ApiResponses(value = {
-           @ApiResponse(responseCode = "200", description = "Categoria modificada correctamente",
-                   content = {@Content(mediaType = "application/json",
-                           schema = @Schema(implementation = Obras.class),
-                           examples = {@ExampleObject(
-                                   value = """
+    @Operation(summary = "Modifica los datos de las obras")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Categoria modificada correctamente",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Obras.class),
+                            examples = {@ExampleObject(
+                                    value = """
                                                 {
                                                     {
                                                     "id": "0a281c47-4073-4cd6-b5ce-f43b989ccfcc",
@@ -335,17 +333,18 @@ public class ObrasController {
                                                     "createdAt": "2023-02-23T21:46:09.7526577",
                                                 } 
                                             """
-                           )}
-                   )}),
-           @ApiResponse(responseCode = "400", description = "Datos erróneos",
-                   content = @Content),
+                            )}
+                    )}),
+            @ApiResponse(responseCode = "400", description = "Datos erróneos",
+                    content = @Content),
             @ApiResponse(responseCode = "401", description = "No está autorizado para realizar esta opción")
-   })
+    })
     @PutMapping("/{id}")
     public GetDtoObras edit(@PathVariable UUID id, @Valid @RequestBody EditDtoObras edited) {
 
         return converterDtoObras.obrasToObras(obrasService.edit(id, edited));
     }
+
     @Operation(summary = "Obra eliminada")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204",
@@ -359,7 +358,7 @@ public class ObrasController {
                     content = @Content),
     })
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable UUID id){
+    public ResponseEntity<?> delete(@PathVariable UUID id) {
 
         obrasService.delete(id);
 
